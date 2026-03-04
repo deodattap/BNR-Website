@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>About Us | BNR Infrastructure</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+
+<style>:root {
+    --primary: #144bb8;
+    --background-light: #f6f6f8;
+    --background-dark: #111621;
+    --text-main: #0e121b;
+    --text-muted: #6b7280;
+    --white: #ffffff;
+    --font-display: 'Inter', sans-serif;
+    --radius-lg: 1rem;
+    --radius-xl: 1.5rem;
+    --shadow: 0 20px 50px rgba(20, 75, 184, 0.08);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-display);
+    background-color: var(--background-light);
+    color: var(--text-main);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+.container {
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* Navigation */
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.nav-inner {
+    height: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo-box {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.logo-text {
+    font-size: 1.25rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #111827;
+}
+
+.nav-menu {
+    display: none;
+    gap: 2rem;
+}
+
+@media (min-width: 768px) {
+    .nav-menu {
+        display: flex;
+    }
+}
+
+.nav-link {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #374151;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: var(--primary);
+}
+
+.btn-touch {
+    background-color: var(--primary);
+    color: var(--white);
+    padding: 0.625rem 1.5rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 6px -1px rgba(20, 75, 184, 0.2);
+}
+
+/* Hero */
+.hero {
+    position: relative;
+    height: 85vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(0,0,0,0.7), rgba(0,0,0,0.4), transparent);
+    z-index: 10;
+}
+
+.hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.05);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 20;
+    max-width: 48rem;
+}
+
+.badge {
+    display: inline-block;
+    padding: 0.375rem 1rem;
+    border-radius: 9999px;
+    background-color: rgba(20, 75, 184, 0.2);
+    color: var(--primary);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1.5rem;
+    border: 1px solid rgba(20, 75, 184, 0.3);
+    backdrop-filter: blur(4px);
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 2rem;
+    letter-spacing: -0.05em;
+}
+
+@media (min-width: 768px) {
+    .hero-title {
+        font-size: 4.5rem;
+    }
+}
+
+.hero-desc {
+    font-size: 1.125rem;
+    color: #e5e7eb;
+    margin-bottom: 2.5rem;
+    max-width: 40rem;
+    font-weight: 300;
+}
+
+.btn-legacy {
+    background-color: var(--primary);
+    color: var(--white);
+    padding: 1rem 2rem;
+    border-radius: 0.75rem;
+    font-size: 1.125rem;
+    font-weight: 700;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.btn-legacy:hover {
+    transform: scale(1.05);
+}
+
+/* Story Sections */
+.story-section {
+    padding: 6rem 0;
+    background-color: var(--white);
+}
+
+.grid-split {
+    display: grid;
+    gap: 4rem;
+    align-items: center;
+}
+
+@media (min-width: 1024px) {
+    .grid-split {
+        grid-template-cols: 1fr 1fr;
+    }
+}
+
+.section-tag {
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #111827;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+}
+
+.section-desc {
+    font-size: 1.125rem;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+}
+
+.stats-row {
+    display: grid;
+    grid-template-cols: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.stat-item {
+    border-left: 4px solid var(--primary);
+    padding-left: 1rem;
+}
+
+.stat-number {
+    display: block;
+    font-size: 1.875rem;
+    font-weight: 900;
+    color: #111827;
+}
+
+.stat-label {
+    font-size: 0.875rem;
+    color: #9ca3af;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.image-container {
+    position: relative;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.story-img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    transition: transform 0.7s;
+}
+
+.image-container:hover .story-img {
+    transform: scale(1.1);
+}
+
+.feature-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-weight: 500;
+    color: #374151;
+}
+
+.icon-check {
+    color: var(--primary);
+}
+
+/* Timeline */
+.timeline-section {
+    padding: 6rem 0;
+    background-color: var(--background-light);
+}
+
+.section-header-center {
+    text-align: center;
+    margin-bottom: 5rem;
+}
+
+.accent-line {
+    height: 0.375rem;
+    width: 6rem;
+    background-color: var(--primary);
+    margin: 1rem auto;
+    border-radius: 9999px;
+}
+
+.timeline-container {
+    position: relative;
+}
+
+.timeline-vertical-line {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 100%;
+    width: 4px;
+    background: linear-gradient(to bottom, transparent, var(--primary) 15%, var(--primary) 85%, transparent);
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .timeline-vertical-line {
+        display: block;
+    }
+}
+
+.timeline-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 6rem;
+    position: relative;
+}
+
+@media (min-width: 768px) {
+    .timeline-item {
+        flex-direction: row;
+        justify-content: space-between;
+        margin-bottom: 6rem;
+    }
+}
+
+.timeline-content {
+    width: 100%;
+    text-align: left;
+}
+
+@media (min-width: 768px) {
+    .timeline-content {
+        width: 45%;
+    }
+    .timeline-item.even .timeline-content {
+        order: 3;
+        text-align: left;
+    }
+    .timeline-item.odd .timeline-content {
+        order: 1;
+        text-align: right;
+    }
+}
+
+.timeline-year {
+    font-size: 3rem;
+    font-weight: 900;
+    color: rgba(20, 75, 184, 0.2);
+    transition: color 0.5s;
+}
+
+.timeline-item:hover .timeline-year {
+    color: var(--primary);
+}
+
+@media (max-width: 767px) {
+    .timeline-year {
+        font-size: 2rem;
+        color: var(--primary);
+    }
+}
+
+.timeline-dot {
+    z-index: 10;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background-color: var(--primary);
+    border: 4px solid var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    color: var(--white);
+}
+
+@media (min-width: 768px) {
+    .timeline-dot {
+        order: 2;
+        margin-bottom: 0;
+    }
+}
+
+/* Cards Section */
+.cards-section {
+    padding: 6rem 0;
+    background-color: var(--white);
+    position: relative;
+    overflow: hidden;
+}
+
+.grid-cards {
+    display: grid;
+    gap: 2rem;
+}
+
+@media (min-width: 768px) {
+    .grid-cards {
+        grid-template-cols: 1fr 1fr;
+    }
+}
+
+.info-card {
+    background-color: var(--white);
+    padding: 2.5rem;
+    border-radius: 1rem;
+    border: 1px solid #f3f4f6;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s;
+}
+
+.info-card:hover {
+    transform: translateY(-0.5rem);
+}
+
+.card-icon-box {
+    width: 3.5rem;
+    height: 3.5rem;
+    background-color: var(--primary);
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+    color: var(--white);
+    box-shadow: 0 10px 15px -3px rgba(20, 75, 184, 0.3);
+}
+
+/* Footer */
+.footer {
+    background-color: #111827;
+    color: var(--white);
+    padding: 4rem 0 2rem;
+}
+
+.footer-grid {
+    display: grid;
+    gap: 3rem;
+    margin-bottom: 4rem;
+}
+
+@media (min-width: 768px) {
+    .footer-grid {
+        grid-template-cols: 2fr 1fr 1fr;
+    }
+}
+
+.footer-title {
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: #f9fafb;
+}
+
+.footer-links {
+    list-style: none;
+}
+
+.footer-links li {
+    margin-bottom: 1rem;
+}
+
+.footer-link {
+    font-size: 0.875rem;
+    color: #9ca3af;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.footer-link:hover {
+    color: var(--primary);
+}
+
+.footer-bottom {
+    border-top: 1px solid #1f2937;
+    padding-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.75rem;
+    color: #6b7280;
+}
+
+@media (min-width: 768px) {
+    .footer-bottom {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+
+.material-symbols-outlined {
+    font-size: inherit;
+    vertical-align: middle;
+}</style>
+</head>
+<body>
+<!-- Top Navigation Bar -->
+<header class="header">
+<div class="container nav-inner">
+<a class="logo-box" href="#">
+<svg fill="none" height="32" viewbox="0 0 48 48" width="32" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M12.0799 24L4 19.2479L9.95537 8.75216L18.04 13.4961L18.0446 4H29.9554L29.96 13.4961L38.0446 8.75216L44 19.2479L35.92 24L44 28.7521L38.0446 39.2479L29.96 34.5039L29.9554 44H18.0446L18.04 34.5039L9.95537 39.2479L4 28.7521L12.0799 24Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+<h2 class="logo-text">BNR <span style="color: var(--primary)">Infrastructure</span></h2>
+</a>
+<nav class="nav-menu">
+<a class="nav-link" href="#">Home</a>
+<a class="nav-link active" href="#">About</a>
+<a class="nav-link" href="#">Projects</a>
+<a class="nav-link" href="#">Sustainability</a>
+<a class="nav-link" href="#">Careers</a>
+</nav>
+<button class="btn-touch">Get in Touch</button>
+</div>
+</header>
+<!-- Hero Section -->
+<section class="hero">
+<div class="hero-bg">
+<div class="hero-overlay"></div>
+<img alt="Infrastructure Bridge" class="hero-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMWlr6OYamtLsYHnAVgOB2qEMBdMG_4dDsOKx6-m0LPLAkPhR13UkmQam4V08v49IG0VgRpbMYcPvG6YhC9EMLL9huEpuxRpa02RwY-AqOQTFbWraPL24vDBOOzsnY85b9YA4juCk7dK--jBOzAQrfC3GkPZzMS3Z53oNtlPNFZ3tway6cAPJxVsx8au83-yCPLMWlmr18IF2RAGhj5WNN1yDyqbhlIRABc3KWKIC5Q4S6o4CBOY5J2FKs_dBfnL-9FEXveq5Fl0U"/>
+</div>
+<div class="container">
+<div class="hero-content">
+<span class="badge">Established 1995</span>
+<h1 class="hero-title">Building the Foundations of <span style="color: var(--primary)">Tomorrow.</span></h1>
+<p class="hero-desc">BNR Infrastructure delivers world-class engineering solutions that connect communities, power industries, and drive global progress through resilient design.</p>
+<button class="btn-legacy">
+                Explore Our Legacy
+                <span class="material-symbols-outlined">arrow_downward</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Story Section: Split Layouts -->
+<section class="story-section">
+<div class="container">
+<!-- Part 1 -->
+<div class="grid-split" style="margin-bottom: 8rem;">
+<div class="story-text-content" style="order: 2;">
+<h4 class="section-tag">Our Beginnings</h4>
+<h2 class="section-title">A Heritage Built on Integrity and Excellence</h2>
+<p class="section-desc">Founded over three decades ago, BNR began with a singular vision: to redefine the structural landscape of the nation. What started as a small regional engineering firm has evolved into a global powerhouse in heavy civil infrastructure.</p>
+<div class="stats-row">
+<div class="stat-item">
+<span class="stat-number">500+</span>
+<span class="stat-label">Projects Delivered</span>
+</div>
+<div class="stat-item">
+<span class="stat-number">25+</span>
+<span class="stat-label">Countries Reached</span>
+</div>
+</div>
+</div>
+<div class="image-container" style="order: 1;">
+<img alt="Construction Site" class="story-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7ovq_CNlVgNg-vDYcYBqWWmNk8dPnAYgB6uokPGebFwyDZJ5WNb4f6-dIEW5HrbPJoXC86tcCTUNF46ayMY59Ow-YIao_frzH8_0-IIoUsuvNj-Polzg1OQbxAapVIH6Lu1At0CksKdPHV90ISBh6WUev-K6CErs94BJBcPqBUNv9KWn8lL1q66WO-mjPZC3wIRMoAzuheCW3AChTg-tcsQwQeUg48mfVdypL5aACguZg3OEFXUpC4b0Ay83bUoFq8R-X9C6eyws"/>
+</div>
+</div>
+<!-- Part 2 -->
+<div class="grid-split">
+<div class="image-container">
+<img alt="Modern Infrastructure" class="story-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_gDs4nXevIbEklIC1yLyjVMIzoddQnFN2sqrIbE-rfiXGgZeMMbYCRA_xiaYsgC0gSxjLTmPkxxLo0aGtvi4M9-grpMhKS2sB2nZGjBe0Y-1ckVslyguj9bRlsmNAiAylkU7jmuaz7ZW6XF2AoNlKFpyadre1I47_BUOFVd6dSubGpvxdi0p2fnkHFNvLuR-uxSceOoR-nx6dwcS1YW__1EPAelMtyaKrypTyZWeyTteqaSCB3Njn95BBKMNHPpe7BPtIGrMcHSQ"/>
+</div>
+<div class="story-text-content">
+<h4 class="section-tag">Scale &amp; Impact</h4>
+<h2 class="section-title">Future-Ready Infrastructure for Global Needs</h2>
+<p class="section-desc">Today, we manage complex infrastructure ecosystems that support millions of people daily. From high-speed rail systems to sustainable energy grids, we integrate cutting-edge technology with robust engineering to build resilient structures.</p>
+<ul class="feature-list">
+<li class="feature-item"><span class="material-symbols-outlined icon-check">check_circle</span> AI-Driven Smart Grid Integration</li>
+<li class="feature-item"><span class="material-symbols-outlined icon-check">check_circle</span> Carbon-Neutral Construction Materials</li>
+<li class="feature-item"><span class="material-symbols-outlined icon-check">check_circle</span> Urban Resilience Planning</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<!-- Timeline Section -->
+<section class="timeline-section">
+<div class="container">
+<div class="section-header-center">
+<h2 class="section-title">Our Journey</h2>
+<div class="accent-line"></div>
+</div>
+<div class="timeline-container">
+<div class="timeline-vertical-line"></div>
+<!-- 1995 -->
+<div class="timeline-item odd">
+<div class="timeline-content">
+<h3 class="timeline-year">1995</h3>
+<p style="font-weight: 700; font-size: 1.25rem;">Foundation</p>
+<p style="color: var(--text-muted); margin-top: 0.5rem;">BNR Infrastructure is incorporated with a focus on regional bridge repairs.</p>
+</div>
+<div class="timeline-dot"><span class="material-symbols-outlined" style="font-size: 1.25rem">home</span></div>
+<div class="timeline-content" style="opacity: 0"></div>
+</div>
+<!-- 2008 -->
+<div class="timeline-item even">
+<div class="timeline-content">
+<h3 class="timeline-year">2008</h3>
+<p style="font-weight: 700; font-size: 1.25rem;">National Expansion</p>
+<p style="color: var(--text-muted); margin-top: 0.5rem;">Secured the first multi-billion dollar national contract for high-speed rail development.</p>
+</div>
+<div class="timeline-dot"><span class="material-symbols-outlined" style="font-size: 1.25rem">public</span></div>
+<div class="timeline-content" style="opacity: 0"></div>
+</div>
+<!-- 2015 -->
+<div class="timeline-item odd">
+<div class="timeline-content">
+<h3 class="timeline-year">2015</h3>
+<p style="font-weight: 700; font-size: 1.25rem;">Green Tech Initiative</p>
+<p style="color: var(--text-muted); margin-top: 0.5rem;">Pioneered the use of low-carbon concrete in urban infrastructure projects.</p>
+</div>
+<div class="timeline-dot"><span class="material-symbols-outlined" style="font-size: 1.25rem">eco</span></div>
+<div class="timeline-content" style="opacity: 0"></div>
+</div>
+<!-- 2024 -->
+<div class="timeline-item even">
+<div class="timeline-content">
+<h3 class="timeline-year">2024</h3>
+<p style="font-weight: 700; font-size: 1.25rem;">Digital Frontiers</p>
+<p style="color: var(--text-muted); margin-top: 0.5rem;">Launching our first fleet of autonomous construction robots for subterranean projects.</p>
+</div>
+<div class="timeline-dot"><span class="material-symbols-outlined" style="font-size: 1.25rem">rocket_launch</span></div>
+<div class="timeline-content" style="opacity: 0"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Mission & Vision: Elevated Cards -->
+<section class="cards-section">
+<div class="container">
+<div class="grid-cards">
+<div class="info-card">
+<div class="card-icon-box"><span class="material-symbols-outlined" style="font-size: 1.875rem">visibility</span></div>
+<h3 class="section-title" style="font-size: 1.875rem">Our Mission</h3>
+<p class="section-desc">To build the world’s most resilient and efficient infrastructure through innovative engineering, sustainable practices, and an unwavering commitment to safety and quality.</p>
+</div>
+<div class="info-card">
+<div class="card-icon-box"><span class="material-symbols-outlined" style="font-size: 1.875rem">lightbulb</span></div>
+<h3 class="section-title" style="font-size: 1.875rem">Our Vision</h3>
+<p class="section-desc">To lead the global transition toward smart, interconnected, and zero-carbon infrastructure, ensuring a thriving planet for the next century of growth.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="footer">
+<div class="container">
+<div class="footer-grid">
+<div>
+<a class="logo-box" href="#" style="margin-bottom: 1.5rem; color: var(--primary);">
+<svg fill="none" height="32" viewbox="0 0 48 48" width="32" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M12.0799 24L4 19.2479L9.95537 8.75216L18.04 13.4961L18.0446 4H29.9554L29.96 13.4961L38.0446 8.75216L44 19.2479L35.92 24L44 28.7521L38.0446 39.2479L29.96 34.5039L29.9554 44H18.0446L18.04 34.5039L9.95537 39.2479L4 28.7521L12.0799 24Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+<h2 class="logo-text" style="color: white">BNR INFRASTRUCTURE</h2>
+</a>
+<p style="color: #9ca3af; font-size: 0.875rem; max-width: 24rem; line-height: 1.6;">Redefining the standards of global engineering with high-performance, sustainable, and reliable infrastructure solutions since 1995.</p>
+</div>
+<div>
+<h4 class="footer-title">Company</h4>
+<ul class="footer-links">
+<li><a class="footer-link" href="#">Our Projects</a></li>
+<li><a class="footer-link" href="#">Leadership Team</a></li>
+<li><a class="footer-link" href="#">Sustainability Report</a></li>
+<li><a class="footer-link" href="#">Careers</a></li>
+</ul>
+</div>
+<div>
+<h4 class="footer-title">Global Offices</h4>
+<ul class="footer-links">
+<li style="color: #9ca3af; font-size: 0.875rem;"><span class="material-symbols-outlined" style="font-size: 0.875rem">location_on</span> London HQ, United Kingdom</li>
+<li style="color: #9ca3af; font-size: 0.875rem;"><span class="material-symbols-outlined" style="font-size: 0.875rem">location_on</span> Singapore Regional Hub</li>
+<li style="color: #9ca3af; font-size: 0.875rem;"><span class="material-symbols-outlined" style="font-size: 0.875rem">location_on</span> New York City, USA</li>
+</ul>
+</div>
+</div>
+<div class="footer-bottom">
+<p>© 2024 BNR Infrastructure. All Rights Reserved.</p>
+<div style="display: flex; gap: 2rem;">
+<a class="footer-link" href="#">Privacy Policy</a>
+<a class="footer-link" href="#">Terms of Service</a>
+<a class="footer-link" href="#">Cookies</a>
+</div>
+</div>
+</div>
+</footer>
+</body></html>
