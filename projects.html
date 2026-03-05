@@ -1,730 +1,113 @@
 <!DOCTYPE html>
+<html lang="en">
 
-<html class="light" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Projects | BNR Infrastructure</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="css/style.css">
 
-<style>
-        :root {
-            --primary: #144bb8;
-            --background-light: #f6f6f8;
-            --background-dark: #111621;
-            --white: #ffffff;
-            --slate-900: #0f172a;
-            --slate-600: #475569;
-            --slate-500: #64748b;
-            --slate-400: #94a3b8;
-            --slate-300: #cbd5e1;
-            --slate-200: #e2e8f0;
-            --slate-100: #f1f5f9;
-            --border-color: rgba(226, 232, 240, 0.6);
-            --radius-default: 0.5rem;
-            --radius-lg: 1rem;
-            --radius-xl: 1.5rem;
-            --radius-full: 9999px;
-            --transition: all 0.3s ease;
-        }
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=swap" rel="stylesheet">
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--background-light);
-            color: var(--slate-900);
-            line-height: 1.5;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        .container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-        }
-
-        @media (min-width: 1024px) {
-            .container { padding: 0 5rem; }
-        }
-
-        /* Header & Navigation */
-        .site-header {
-            position: sticky;
-            top: 0;
-            z-index: 50;
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border-color);
-            padding: 1rem 0;
-        }
-
-        .header-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .logo-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .logo-icon {
-            width: 2.5rem;
-            height: 2.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--primary);
-            color: var(--white);
-            border-radius: var(--radius-default);
-        }
-
-        .logo-text {
-            font-size: 1.25rem;
-            font-weight: 700;
-            letter-spacing: -0.025em;
-        }
-
-        .logo-text span { font-weight: 400; color: var(--slate-500); }
-
-        .main-nav {
-            display: none;
-            gap: 2rem;
-        }
-
-        @media (min-width: 768px) {
-            .main-nav { display: flex; align-items: center; }
-        }
-
-        .nav-link {
-            font-size: 0.875rem;
-            font-weight: 600;
-            color: var(--slate-600);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .nav-link:hover { color: var(--primary); }
-
-        .nav-link.active {
-            color: var(--primary);
-            border-bottom: 2px solid var(--primary);
-            padding-bottom: 0.25rem;
-        }
-
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .icon-btn {
-            width: 2.5rem;
-            height: 2.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: var(--radius-full);
-            border: none;
-            background: transparent;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .icon-btn:hover { background: var(--slate-100); }
-
-        .btn-contact {
-            display: none;
-            background: var(--slate-900);
-            color: var(--white);
-            padding: 0.625rem 1.25rem;
-            border-radius: var(--radius-full);
-            font-weight: 600;
-            font-size: 0.875rem;
-            border: none;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        @media (min-width: 640px) {
-            .btn-contact { display: block; }
-        }
-
-        .btn-contact:hover { background: #1e293b; }
-
-        /* Page Header */
-        .main-content { padding: 3rem 0; flex: 1; }
-
-        .portfolio-header {
-            margin-bottom: 3rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        @media (min-width: 768px) {
-            .portfolio-header {
-                flex-direction: row;
-                align-items: flex-end;
-                justify-content: space-between;
-            }
-        }
-
-        .header-info {
-            max-width: 42rem;
-        }
-
-        .header-info h2 {
-            font-size: 2.25rem;
-            font-weight: 800;
-            letter-spacing: -0.025em;
-            color: var(--slate-900);
-        }
-
-        @media (min-width: 640px) {
-            .header-info h2 { font-size: 3rem; }
-        }
-
-        .header-info p {
-            margin-top: 1rem;
-            font-size: 1.125rem;
-            color: var(--slate-600);
-            line-height: 1.625;
-        }
-
-        .projects-count {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: var(--slate-500);
-        }
-
-        /* Filters */
-        .filters-container {
-            margin-bottom: 2.5rem;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.75rem;
-        }
-
-        .filter-btn {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.625rem 1.5rem;
-            border-radius: var(--radius-full);
-            font-size: 0.875rem;
-            font-weight: 500;
-            border: 1px solid var(--slate-200);
-            background: var(--white);
-            color: var(--slate-600);
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .filter-btn:hover { background: var(--slate-50); }
-
-        .filter-btn.active {
-            background: var(--primary);
-            color: var(--white);
-            border-color: var(--primary);
-            font-weight: 700;
-            box-shadow: 0 10px 15px -3px rgba(20, 75, 184, 0.25);
-        }
-
-        /* Projects Grid */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-        }
-
-        @media (min-width: 640px) {
-            .projects-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-
-        @media (min-width: 1024px) {
-            .projects-grid { grid-template-columns: repeat(3, 1fr); }
-        }
-
-        .project-card {
-            position: relative;
-            aspect-ratio: 4/5;
-            overflow: hidden;
-            border-radius: var(--radius-lg);
-            background: var(--slate-200);
-            cursor: pointer;
-            transition: var(--transition);
-            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-        }
-
-        .project-card:hover {
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-        }
-
-        .project-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .project-card:hover img {
-            transform: scale(1.05);
-        }
-
-        .project-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, var(--slate-900), rgba(15, 23, 42, 0.4), transparent);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 2rem;
-        }
-
-        .project-card:hover .project-overlay {
-            opacity: 1;
-        }
-
-        .project-tag {
-            width: fit-content;
-            padding: 0.25rem 0.75rem;
-            border-radius: var(--radius-full);
-            background: rgba(20, 75, 184, 0.2);
-            backdrop-filter: blur(4px);
-            color: var(--primary);
-            font-size: 0.625rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 0.5rem;
-        }
-
-        .project-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--white);
-        }
-
-        .project-meta {
-            margin-top: 1rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.25rem;
-        }
-
-        .meta-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.875rem;
-            color: var(--slate-300);
-        }
-
-        .project-footer {
-            margin-top: 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .btn-details {
-            padding: 0.5rem 1.5rem;
-            border-radius: var(--radius-full);
-            background: var(--white);
-            color: var(--slate-900);
-            font-size: 0.875rem;
-            font-weight: 700;
-            border: none;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .btn-details:hover {
-            background: var(--primary);
-            color: var(--white);
-        }
-
-        .icon-arrow { color: var(--white); }
-
-        /* Pagination */
-        .pagination-section {
-            margin-top: 5rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1.5rem;
-        }
-
-        .viewing-text {
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: var(--slate-500);
-        }
-
-        .progress-bar {
-            height: 4px;
-            width: 12rem;
-            border-radius: var(--radius-full);
-            background: var(--slate-200);
-        }
-
-        .progress-fill {
-            height: 100%;
-            width: 25%;
-            border-radius: var(--radius-full);
-            background: var(--primary);
-        }
-
-        .btn-load-more {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 1rem 2.5rem;
-            border-radius: var(--radius-full);
-            border: 2px solid var(--slate-200);
-            background: transparent;
-            color: var(--slate-900);
-            font-size: 1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .btn-load-more:hover {
-            border-color: var(--primary);
-            background: var(--primary);
-            color: var(--white);
-        }
-
-        .btn-load-more span {
-            transition: transform 0.3s ease;
-        }
-
-        .btn-load-more:hover span {
-            transform: rotate(180deg);
-        }
-
-        /* Footer */
-        .site-footer {
-            background: var(--white);
-            border-top: 1px solid var(--slate-200);
-            padding: 3rem 0;
-        }
-
-        .footer-main {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        @media (min-width: 768px) {
-            .footer-main {
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: flex-start;
-            }
-        }
-
-        .footer-brand h4 {
-            font-size: 1.125rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-
-        .footer-brand p {
-            font-size: 0.875rem;
-            color: var(--slate-500);
-            max-width: 20rem;
-        }
-
-        .footer-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
-        }
-
-        .links-column {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .column-title {
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--slate-400);
-        }
-
-        .links-column a {
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: var(--slate-600);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .links-column a:hover { color: var(--primary); }
-
-        .social-icons {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-icons a {
-            color: var(--slate-400);
-            transition: var(--transition);
-        }
-
-        .social-icons a:hover { color: var(--primary); }
-
-        .footer-bottom {
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--slate-100);
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            font-size: 0.75rem;
-            color: var(--slate-400);
-        }
-
-        @media (min-width: 640px) {
-            .footer-bottom {
-                flex-direction: row;
-                justify-content: space-between;
-            }
-        }
-
-        .legal-links {
-            display: flex;
-            gap: 1.5rem;
-        }
-
-        .legal-links a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        .legal-links a:hover { color: var(--primary); }
-    </style>
 </head>
-<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
-<div class="relative flex min-h-screen flex-col">
-<!-- Navigation Header -->
+
+<body>
+
 <header class="site-header">
-<div class="container header-content">
-<div class="logo-wrapper">
+
+<div class="container nav-inner">
+
+<div class="logo-area">
+
 <div class="logo-icon">
 <span class="material-symbols-outlined">architecture</span>
 </div>
-<h1 class="logo-text">BNR <span>Infrastructure</span></h1>
+
+<div class="logo-text">BNR Infrastructure</div>
+
 </div>
+
 <nav class="main-nav">
-<a class="nav-link" href="#">Home</a>
-<a class="nav-link active" href="#">Projects</a>
-<a class="nav-link" href="#">Services</a>
-<a class="nav-link" href="#">Insights</a>
+
+<a class="nav-link" href="index.html">Home</a>
+<a class="nav-link" href="about.html">About</a>
+<a class="nav-link" href="services.html">Services</a>
+<a class="nav-link" href="projects.html">Projects</a>
+<a class="nav-link" href="careers.html">Careers</a>
+<a class="nav-link" href="contact.html">Contact</a>
+
 </nav>
-<div class="header-actions">
-<button class="icon-btn">
-<span class="material-symbols-outlined">search</span>
-</button>
-<button class="btn-contact">Contact Us</button>
+
+<button class="btn-primary">Get Quote</button>
+
 </div>
-</div>
+
 </header>
-<main class="main-content">
+
+
+<section class="section">
+
 <div class="container">
-<!-- Page Header -->
-<div class="portfolio-header">
-<div class="header-info">
-<h2>Global Portfolio</h2>
-<p>Discover how we're redefining modern infrastructure through sustainable engineering, cutting-edge technology, and a commitment to urban evolution.</p>
+
+<h1 class="section-title">Our Projects</h1>
+
+<p class="section-desc">
+Explore our portfolio of infrastructure and engineering achievements.
+</p>
+
+
+<div class="grid">
+
+<div class="card">
+<h3>Azure Gateway Bridge</h3>
+<p>Large scale suspension bridge engineering project.</p>
 </div>
-<div class="projects-count">
-<span class="material-symbols-outlined">filter_list</span>
-<span>Showing 24 Projects</span>
+
+<div class="card">
+<h3>North South Corridor</h3>
+<p>Urban highway network designed for modern cities.</p>
 </div>
+
+<div class="card">
+<h3>Eco Industrial Hub</h3>
+<p>Sustainable industrial infrastructure development.</p>
 </div>
-<!-- Filters -->
-<div class="filters-container">
-<button class="filter-btn active">All Projects</button>
-<button class="filter-btn"><span class="material-symbols-outlined">link</span> Bridges</button>
-<button class="filter-btn"><span class="material-symbols-outlined">add_road</span> Highways</button>
-<button class="filter-btn"><span class="material-symbols-outlined">factory</span> Industrial</button>
-<button class="filter-btn"><span class="material-symbols-outlined">train</span> Railways</button>
-<button class="filter-btn"><span class="material-symbols-outlined">apartment</span> Urban Planning</button>
+
+<div class="card">
+<h3>Velocity Central Station</h3>
+<p>High speed railway station infrastructure project.</p>
 </div>
-<!-- Projects Grid -->
-<div class="projects-grid">
-<!-- Project Card 1 -->
-<div class="project-card">
-<img alt="Suspension Bridge at Dusk" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAp-BmWbT198XDipRGAyrK77vyO6fKIrQY1_1OcClqw2_OKwPZxyWwWX7mYiYlFV6O1b83_txPwxzv4zk79tXyHjeDlx7JZJi-mYAAVfPhaXW7XIfwgKtACnBHlGajCVtrz4EuzayB4JUON4YIVl5EiuO-TQwk8nPV0r0fC88bq690BNlKZ4YZzbh39ECMP9rdfWFituR8bPKtGuZdl1bU2vJkIx_mEcBt-jCR9DWjmIooI9PikA2OJ1iipfRKtR_oVI_DtVAX4HnY"/>
-<div class="project-overlay">
-<span class="project-tag">Bridges</span>
-<h3 class="project-title">The Azure Gateway</h3>
-<div class="project-meta">
-<p class="meta-item"><span class="material-symbols-outlined">location_on</span> San Francisco, CA</p>
-<p class="meta-item"><span class="material-symbols-outlined">calendar_today</span> Completed 2023</p>
+
+<div class="card">
+<h3>Metropolis Green Link</h3>
+<p>Urban public infrastructure with environmental integration.</p>
 </div>
-<div class="project-footer">
-<button class="btn-details">View Details</button>
-<span class="material-symbols-outlined icon-arrow">arrow_forward</span>
+
+<div class="card">
+<h3>Blue Current Dam</h3>
+<p>Hydropower infrastructure and water management system.</p>
 </div>
+
 </div>
+
 </div>
-<!-- Project Card 2 -->
-<div class="project-card">
-<img alt="Multi-level Highway Interchange" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgcev8xkp0pQFfrIejDMbnXm27xzUyNvlQxtqUrugac3x319PIPj92mjvh9swntkP6RqM6cRIf8xjAu45P7AayMLyIS3R8DyJRfFWB8M7Bq6Jp78BegXaHOxTbuRqvc8nQU3RkZuBYzFaxOiiXnA61TfWG4z5pQ70GjUHCq7rew2SZeZ4-i_FtneHP1QQ4H2hSiE3U13DP3CXW0314WonuqzGXrNem4Fmi551jFUuCVTjEu8cTFd8TwiPUfUPasTf858jQ1CbXlj0"/>
-<div class="project-overlay">
-<span class="project-tag">Highways</span>
-<h3 class="project-title">North-South Corridor</h3>
-<div class="project-meta">
-<p class="meta-item"><span class="material-symbols-outlined">location_on</span> Singapore</p>
-<p class="meta-item"><span class="material-symbols-outlined">calendar_today</span> In Progress</p>
-</div>
-<div class="project-footer">
-<button class="btn-details">View Details</button>
-<span class="material-symbols-outlined icon-arrow">arrow_forward</span>
-</div>
-</div>
-</div>
-<!-- Project Card 3 -->
-<div class="project-card">
-<img alt="Sustainable Industrial Complex" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPRu-PE_nF-M6CakSVJ10fuECkj_O-5qtG1X97Hw57rv6n2TjISSqmMnaGNUoxNl1rXK-03PB5mZ0--a_wSS6r6i5emxBhSc8nxJXtg66X3gizFkg4Asl9fQYyL5K37Qn_3EsBNlu3_ZT5GZfN0uoC8vEkr3DQwRXkqRk6pMY1_VjhW80oBH3tNOq7T0mYwCLbNUelz-oXgg_scyPmj62PltQRqnaAtNmQEW4sR9VJmrLRHefdnYO0ba6ADxrXRzQVEdt0xmr_EqU"/>
-<div class="project-overlay">
-<span class="project-tag">Industrial</span>
-<h3 class="project-title">Eco-Industrial Hub</h3>
-<div class="project-meta">
-<p class="meta-item"><span class="material-symbols-outlined">location_on</span> Rotterdam, NL</p>
-<p class="meta-item"><span class="material-symbols-outlined">calendar_today</span> Completed 2022</p>
-</div>
-<div class="project-footer">
-<button class="btn-details">View Details</button>
-<span class="material-symbols-outlined icon-arrow">arrow_forward</span>
-</div>
-</div>
-</div>
-<!-- Project Card 4 -->
-<div class="project-card">
-<img alt="Futuristic Railway Station" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5EwilM-nfc5f2bnx20x6hzb37cYMz-epW73MifvS4P3xZvOfpJ7_a-HZCl9S7bBK2fsww7-OSQvrhukWy3pCdAGHPctDI9o-y1HYGxH5BySKT0zOdt3QJQVVhiad3beYUugHMta_LTS0N8bl4-7f9rv7zgJk6g6Bf93go_rKAiKBujOlN9nAvQvcC7UjImglE0S0zdRzDAPQB4F64h2gPRgJo2ykLIYmnb38WgFeszTeIGcpLAeMWnPGQKGGpuRrWO1O0ZDz84mo"/>
-<div class="project-overlay">
-<span class="project-tag">Railways</span>
-<h3 class="project-title">Velocity Central</h3>
-<div class="project-meta">
-<p class="meta-item"><span class="material-symbols-outlined">location_on</span> Berlin, DE</p>
-<p class="meta-item"><span class="material-symbols-outlined">calendar_today</span> Phase II Complete</p>
-</div>
-<div class="project-footer">
-<button class="btn-details">View Details</button>
-<span class="material-symbols-outlined icon-arrow">arrow_forward</span>
-</div>
-</div>
-</div>
-<!-- Project Card 5 -->
-<div class="project-card">
-<img alt="Urban Plaza with Greenery" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKe4vV4OXd0-q2-NT_YSk7IctG8E4XaraXI0-o0Ne_aQ58FSd7fuC1Te9DIvZIHzO3rr43FnyvyojdIZmS6FwcepYXtx-BeZQULnXsNkktZqjVH8MuLeTs1XaCq5MNRmlajdV1L0G9vQz7Su0PJv5gP2yMbLp3JzZ-QnwTjld1W4-uTGsIlBOOAT4QQRhagp-CcfdxzWjCwYJid_IBc_PG83t4JGEgWbWYFhskR87nAUt349WSlUIkuhOShCYCN02t_v_0PUw_2OY"/>
-<div class="project-overlay">
-<span class="project-tag">Urban Planning</span>
-<h3 class="project-title">Metropolis Green-Link</h3>
-<div class="project-meta">
-<p class="meta-item"><span class="material-symbols-outlined">location_on</span> Toronto, ON</p>
-<p class="meta-item"><span class="material-symbols-outlined">calendar_today</span> Completed 2024</p>
-</div>
-<div class="project-footer">
-<button class="btn-details">View Details</button>
-<span class="material-symbols-outlined icon-arrow">arrow_forward</span>
-</div>
-</div>
-</div>
-<!-- Project Card 6 -->
-<div class="project-card">
-<img alt="Massive Dam Infrastructure" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7nd8ZsCDyJYJ6Ax1AVH1we8ofERjNwUE9edLkhIRwueaFjnlmzXbQ-buLsIflO93oXqUmKP3M8dV_foCC_BKYOjqnoMP15w05Gy1GCVMulaIHEtjQgLD-WQKSfYbE7GZpuzUKIhLNLOzSEPlMpCc2nWvioYttDdqOEEKES6KG7zRccSqX8HsUAI-lTizJ_xa-2tpyGqlhCTeT9S3H4lWw6p_DMmeNM65gBaPF56TlP_fEgngqHcRldvyFFZVWZ_hkZKyhm1CqiR4"/>
-<div class="project-overlay">
-<span class="project-tag">Sustainability</span>
-<h3 class="project-title">Blue Current Reserve</h3>
-<div class="project-meta">
-<p class="meta-item"><span class="material-symbols-outlined">location_on</span> Oslo, NO</p>
-<p class="meta-item"><span class="material-symbols-outlined">calendar_today</span> Completed 2021</p>
-</div>
-<div class="project-footer">
-<button class="btn-details">View Details</button>
-<span class="material-symbols-outlined icon-arrow">arrow_forward</span>
-</div>
-</div>
-</div>
-</div>
-<!-- Load More Section -->
-<div class="pagination-section">
-<p class="viewing-text">Viewing 6 of 24 projects</p>
-<div class="progress-bar">
-<div class="progress-fill"></div>
-</div>
-<button class="btn-load-more">
-Load More Projects
-<span class="material-symbols-outlined">refresh</span>
-</button>
-</div>
-</div>
-</main>
-<!-- Footer -->
+
+</section>
+
+
 <footer class="site-footer">
-<div class="container">
-<div class="footer-main">
-<div class="footer-brand">
-<div class="logo-wrapper" style="margin-bottom: 1rem;">
-<div class="logo-icon" style="width: 2rem; height: 2rem;">
-<span class="material-symbols-outlined" style="font-size: 1.25rem;">architecture</span>
+
+<div class="container footer-bottom">
+
+© 2024 BNR Infrastructure
+
 </div>
-<h4 style="margin: 0;">BNR Infrastructure</h4>
-</div>
-<p>Leading the way in heavy civil engineering and sustainable urban development since 1994.</p>
-</div>
-<div class="footer-links">
-<div class="links-column">
-<p class="column-title">Explore</p>
-<a href="#">Case Studies</a>
-<a href="#">Equipment</a>
-</div>
-<div class="links-column">
-<p class="column-title">Company</p>
-<a href="#">Safety First</a>
-<a href="#">Sustainability</a>
-</div>
-<div class="links-column">
-<p class="column-title">Connect</p>
-<div class="social-icons">
-<a href="#"><span class="material-symbols-outlined">share</span></a>
-<a href="#"><span class="material-symbols-outlined">mail</span></a>
-</div>
-</div>
-</div>
-</div>
-<div class="footer-bottom">
-<p>© 2024 BNR Infrastructure Holdings. All rights reserved.</p>
-<div class="legal-links">
-<a href="#">Privacy Policy</a>
-<a href="#">Terms of Service</a>
-</div>
-</div>
-</div>
+
 </footer>
-</div>
-</body></html>
+
+</body>
+</html>
