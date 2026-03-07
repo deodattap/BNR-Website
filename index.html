@@ -1,144 +1,1098 @@
 <!DOCTYPE html>
-<html lang="en">
 
-<head>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BNR Infrastructure | Building Excellence for 50 Years</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            background-color: #f6f6f8;
+            color: #0f172a;
+            line-height: 1.5;
+            transition: background-color 0.3s, color 0.3s;
+        }
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        :root {
+            --primary: #144bb8;
+            --primary-dark: #0D337B;
+            --bg-light: #f6f6f8;
+            --white: #ffffff;
+            --slate-200: #e2e8f0;
+            --slate-300: #cbd5e1;
+            --slate-400: #94a3b8;
+            --slate-500: #64748b;
+            --slate-600: #475569;
+            --slate-800: #1e293b;
+            --slate-900: #0f172a;
+            --shadow-primary: 0 10px 15px -3px rgba(20, 75, 184, 0.2);
+            --radius: 0.5rem;
+            --radius-lg: 1rem;
+            --radius-xl: 1.5rem;
+            --radius-full: 9999px;
+        }
 
-<title>BNR Infrastructure</title>
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
 
-<link rel="stylesheet" href="css/style.css">
+        /* Navigation */
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--slate-200);
+            height: 80px;
+            display: flex;
+            align-items: center;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=swap" rel="stylesheet">
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--slate-900);
+            font-weight: 800;
+            font-size: 1.25rem;
+            letter-spacing: -0.025em;
+        }
 
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary);
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .nav-links {
+            display: none;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .nav-links { display: flex; }
+        }
+
+        .nav-link {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover { color: var(--primary); }
+
+        .btn-header {
+            display: none;
+            padding: 0.625rem 1.5rem;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 0.5rem;
+            font-weight: 700;
+            font-size: 0.875rem;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-primary);
+            transition: all 0.2s;
+        }
+
+        @media (min-width: 1024px) {
+            .btn-header { display: flex; }
+        }
+
+        .btn-header:hover { background-color: #1d4ed8; }
+
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            height: 85vh;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            color: white;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.3));
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 896px;
+            padding: 0 1.5rem;
+        }
+
+        .badge-hero {
+            display: inline-block;
+            padding: 0.375rem 1rem;
+            background: rgba(20, 75, 184, 0.2);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            border-radius: 9999px;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        @media (min-width: 768px) {
+            .hero-title { font-size: 4.5rem; }
+        }
+
+        .hero-subtitle {
+            font-size: 1.125rem;
+            color: var(--slate-200);
+            max-width: 672px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.6;
+            text-shadow: 0 1px 5px rgba(0,0,0,0.5);
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        @media (min-width: 640px) {
+            .hero-buttons { flex-direction: row; }
+        }
+
+        .btn-primary {
+            padding: 1rem 2rem;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 1rem;
+            font-weight: 700;
+            font-size: 1.125rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            box-shadow: 0 20px 25px -5px rgba(20, 75, 184, 0.3);
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover { background-color: #1d4ed8; transform: translateY(-2px); }
+
+        .btn-secondary {
+            padding: 1rem 2rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 1rem;
+            font-weight: 700;
+            font-size: 1.125rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .btn-secondary:hover { background-color: rgba(255, 255, 255, 0.2); }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            color: rgba(255,255,255,0.5);
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0) translateX(-50%);}
+            40% {transform: translateY(-10px) translateX(-50%);}
+            60% {transform: translateY(-5px) translateX(-50%);}
+        }
+
+        /* Values Section */
+        .section-padding {
+            padding: 6rem 0;
+        }
+
+        .values-header {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 4rem;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .values-header { flex-direction: row; }
+        }
+
+        .section-label {
+            color: var(--primary);
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-size: 0.875rem;
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+
+        .section-title {
+            font-size: 2.25rem;
+            font-weight: 900;
+            line-height: 1.2;
+            margin: 0;
+        }
+
+        @media (min-width: 768px) {
+            .section-title { font-size: 3rem; }
+        }
+
+        .section-desc {
+            color: var(--slate-500);
+            max-width: 448px;
+            font-size: 1.125rem;
+            margin: 0;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .grid-4 { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (min-width: 1024px) {
+            .grid-4 { grid-template-columns: repeat(4, 1fr); }
+        }
+
+        .value-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            border: 1px solid #f1f5f9;
+            transition: all 0.3s;
+            box-shadow: 0 1px 2px 0 rgba(0,0,0,0.05);
+        }
+
+        .value-card:hover {
+            border-color: rgba(20, 75, 184, 0.3);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+        }
+
+        .icon-box {
+            width: 56px;
+            height: 56px;
+            background-color: rgba(20, 75, 184, 0.1);
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .value-card:hover .icon-box {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .value-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .value-text {
+            color: var(--slate-500);
+            line-height: 1.6;
+        }
+
+        /* Services Section */
+        .bg-gray-soft {
+            background-color: #f1f5f9;
+        }
+
+        .text-center { text-align: center; }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .grid-3 { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        .service-card {
+            position: relative;
+            height: 400px;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .service-card:hover { box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); }
+
+        .service-img {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.7s;
+        }
+
+        .service-card:hover .service-img {
+            transform: scale(1.1);
+        }
+
+        .service-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 60%, transparent 100%);
+        }
+
+        .service-icon-top {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            width: 48px;
+            height: 48px;
+            background-color: rgba(20, 75, 184, 0.9);
+            color: white;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+        }
+
+        .service-content {
+            position: absolute;
+            bottom: 0;
+            padding: 2rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .service-card h4 {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .service-card p {
+            color: var(--slate-300);
+            font-size: 0.875rem;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .service-card:hover p { opacity: 1; }
+
+        .service-link {
+            color: var(--primary);
+            font-weight: 700;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .service-link span {
+            transition: transform 0.3s;
+        }
+
+        .service-link:hover span { transform: translateX(8px); }
+
+        /* Portfolio grid system */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 1.5rem;
+            grid-auto-rows: 300px;
+        }
+
+        @media (min-width: 768px) {
+            .portfolio-grid {
+                grid-template-columns: repeat(12, 1fr);
+            }
+            .project-large { grid-column: span 8; grid-row: span 2; }
+            .project-small { grid-column: span 4; }
+        }
+
+        .project-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1rem;
+            cursor: pointer;
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s;
+        }
+
+        .project-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .project-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            opacity: 0.6;
+            transition: opacity 0.3s;
+        }
+
+        .project-card:hover .project-overlay {
+            opacity: 0.9;
+        }
+
+        .project-content {
+            position: absolute;
+            bottom: 0;
+            padding: 2.5rem;
+        }
+
+        .project-badge {
+            color: var(--primary);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            background-color: rgba(255,255,255,0.1);
+            backdrop-filter: blur(8px);
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.25rem;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .project-title {
+            color: white;
+            font-size: 1.875rem;
+            font-weight: 900;
+            margin: 0;
+        }
+
+        .project-desc {
+            color: var(--slate-200);
+            margin-top: 0.5rem;
+            max-width: 32rem;
+            opacity: 0;
+            transform: translateY(1rem);
+            transition: all 0.5s;
+        }
+
+        .project-card:hover .project-desc {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Trust logos */
+        .trust-section {
+            background-color: white;
+            border-top: 1px solid var(--slate-200);
+            border-bottom: 1px solid var(--slate-200);
+            padding: 5rem 0;
+        }
+
+        .trust-label {
+            text-align: center;
+            color: var(--slate-400);
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            margin-bottom: 3rem;
+        }
+
+        .logos-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem;
+            opacity: 0.5;
+            filter: grayscale(100%);
+            transition: all 0.5s;
+        }
+
+        @media (min-width: 768px) {
+            .logos-wrap { gap: 6rem; }
+        }
+
+        .logos-wrap:hover {
+            opacity: 1;
+            filter: grayscale(0%);
+        }
+
+        .partner-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .partner-name {
+            font-weight: 900;
+            font-size: 1.5rem;
+            letter-spacing: -0.05em;
+        }
+
+        /* CTA Section */
+        .cta-box {
+            background-color: #0D337B;
+            border-radius: 2.5rem;
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(20, 75, 184, 0.4);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        @media (min-width: 768px) {
+            .cta-box {
+                flex-direction: row;
+                padding: 5rem;
+                justify-content: space-between;
+                text-align: left;
+            }
+        }
+
+        .cta-content {
+            max-width: 36rem;
+            position: relative;
+            z-index: 10;
+            text-align: center;
+        }
+
+        @media (min-width: 768px) {
+            .cta-content { text-align: left; }
+        }
+
+        .cta-title {
+            font-size: 2.25rem;
+            font-weight: 900;
+            color: white;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .cta-title { font-size: 3rem; }
+        }
+
+        .cta-text {
+            color: #dbeafe;
+            font-size: 1.125rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        @media (min-width: 640px) {
+            .cta-buttons { flex-direction: row; }
+        }
+
+        .btn-cta-main {
+            padding: 1.25rem 2.5rem;
+            background-color: white;
+            color: var(--primary);
+            border-radius: 0.75rem;
+            font-weight: 900;
+            font-size: 1.125rem;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .btn-cta-main:hover { background-color: #eff6ff; transform: scale(0.95); }
+
+        .btn-cta-alt {
+            padding: 1.25rem 2.5rem;
+            background-color: transparent;
+            border: 2px solid rgba(255,255,255,0.3);
+            color: white;
+            border-radius: 0.75rem;
+            font-weight: 900;
+            font-size: 1.125rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-cta-alt:hover { background-color: rgba(255,255,255,0.1); }
+
+        .cta-glow {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 24rem;
+            height: 24rem;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 9999px;
+            transform: translate(50%, -50%);
+            filter: blur(64px);
+        }
+
+        /* Footer */
+        .site-footer {
+            background-color: var(--slate-900);
+            color: var(--slate-400);
+            padding: 4rem 1.5rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+
+        @media (min-width: 768px) {
+            .footer-grid { grid-template-columns: repeat(4, 1fr); }
+        }
+
+        .footer-logo-wrap {
+            grid-column: span 1;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: white;
+            font-weight: 800;
+            font-size: 1.125rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-logo-icon {
+            width: 32px;
+            height: 32px;
+            background-color: var(--primary);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 9999px;
+            border: 1px solid var(--slate-800);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: inherit;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-btn:hover {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+
+        .footer-heading {
+            color: white;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: inherit;
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover { color: var(--primary); }
+
+        .contact-info {
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+
+        .contact-bold {
+            color: white;
+            font-weight: 700;
+            display: block;
+            margin-top: 1rem;
+        }
+
+        .footer-bottom {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--slate-800);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            font-size: 0.75rem;
+        }
+
+        @media (min-width: 768px) {
+            .footer-bottom { flex-direction: row; justify-content: space-between; }
+        }
+
+        .bottom-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .bottom-links a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .bottom-links a:hover { color: white; }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }</style>
 </head>
-
-<body>
-
+<body class="">
+<!-- Top Navigation Bar -->
 <header class="site-header">
-
-<div class="container nav-inner">
-
-<div class="logo-area">
-
+<div class="container header-content">
+<a class="logo" href="index.html">
 <div class="logo-icon">
-
 <span class="material-symbols-outlined">architecture</span>
-
 </div>
-
-<div class="logo-text">BNR Infrastructure</div>
-
-</div>
-
-<nav class="main-nav">
-
+<span>BNR <span style="color: var(--primary)">INFRA</span></span>
+</a>
+<nav class="nav-links">
 <a class="nav-link" href="index.html">Home</a>
 <a class="nav-link" href="about.html">About</a>
 <a class="nav-link" href="services.html">Services</a>
 <a class="nav-link" href="projects.html">Projects</a>
 <a class="nav-link" href="careers.html">Careers</a>
-<a class="nav-link" href="contact.html">Contact</a>
-
 </nav>
-
-<button class="btn-primary">Get Quote</button>
-
+<div class="header-actions">
+<button class="btn-header">Get a Quote</button>
 </div>
-
+</div>
 </header>
-
-
+<!-- Hero Section -->
 <section class="hero-section">
-
-<img class="hero-img" src="https://images.unsplash.com/photo-1503387762-592deb58ef4e" alt="construction">
-
-<div class="hero-overlay"></div>
-
-<div class="container hero-content">
-
-<h1 class="hero-title">
-Building Modern Infrastructure
-</h1>
-
-<p class="hero-description">
-Delivering world class engineering and infrastructure projects with precision,
-innovation and long term sustainability.
-</p>
-
-<button class="btn-primary">View Projects</button>
-
+<div class="hero-bg" style="background-image: url('{{DATA:IMAGE:IMAGE_9}}');"></div>
+<div class="hero-overlay" style="background: rgba(0, 0, 0, 0.4);"></div>
+<div class="hero-content">
+<span class="badge-hero">Established 1974</span>
+<h1 class="hero-title">Building Infrastructure Excellence for Over <span style="color: var(--primary)">50 Years</span></h1>
+<p class="hero-subtitle">From national highways to iconic bridges, we engineer the arteries of the nation with uncompromising safety and innovation.</p>
+<div class="hero-buttons">
+<a class="btn-primary" href="#">View Our Projects <span class="material-symbols-outlined">arrow_forward</span></a>
+<button class="btn-secondary">Our Services</button>
 </div>
-
+</div>
+<div class="scroll-indicator">
+<span class="material-symbols-outlined" style="font-size: 2.5rem;">expand_more</span>
+</div>
 </section>
-
-
-<section class="section">
-
+<!-- Why Choose Us -->
+<section class="section-padding">
 <div class="container">
-
-<h2 class="section-title">Our Services</h2>
-
-<p class="section-desc">
-Comprehensive civil infrastructure solutions for large scale development.
-</p>
-
-<div class="grid">
-
-<div class="card">
-
-<h3>Civil Engineering</h3>
-
-<p>
-Planning and development of large scale infrastructure projects
-including transportation and urban development.
-</p>
-
+<div class="values-header">
+<div style="max-width: 672px;">
+<span class="section-label">Core Values</span>
+<h3 class="section-title">The foundation of our enduring legacy.</h3>
 </div>
-
-
-<div class="card">
-
-<h3>Urban Development</h3>
-
-<p>
-Designing sustainable cities with modern infrastructure
-and integrated systems.
-</p>
-
+<p class="section-desc">We combine traditional expertise with future-ready technology to deliver projects that stand the test of time.</p>
 </div>
-
-
-<div class="card">
-
-<h3>Industrial Projects</h3>
-
-<p>
-Large scale industrial construction and heavy infrastructure
-engineering.
-</p>
-
+<div class="grid-4">
+<div class="value-card">
+<div class="icon-box"><span class="material-symbols-outlined" style="font-size: 1.875rem;">verified_user</span></div>
+<h4 class="value-title">Safety First</h4>
+<p class="value-text">Zero-harm culture integrated into every construction phase and operational protocol.</p>
 </div>
-
+<div class="value-card">
+<div class="icon-box"><span class="material-symbols-outlined" style="font-size: 1.875rem;">engineering</span></div>
+<h4 class="value-title">50+ Years</h4>
+<p class="value-text">A deep portfolio of success across complex civil engineering landscapes.</p>
 </div>
-
+<div class="value-card">
+<div class="icon-box"><span class="material-symbols-outlined" style="font-size: 1.875rem;">tips_and_updates</span></div>
+<h4 class="value-title">Innovation</h4>
+<p class="value-text">Leveraging BIM and advanced pre-cast technologies for precision delivery.</p>
 </div>
-
+<div class="value-card">
+<div class="icon-box"><span class="material-symbols-outlined" style="font-size: 1.875rem;">eco</span></div>
+<h4 class="value-title">Sustainability</h4>
+<p class="value-text">Eco-friendly materials and carbon-efficient methods for a better tomorrow.</p>
+</div>
+</div>
+</div>
 </section>
-
-
-<footer class="site-footer">
-
-<div class="container footer-bottom">
-
-© 2024 BNR Infrastructure
-
+<!-- Services Section -->
+<section class="bg-gray-soft section-padding">
+<div class="container">
+<div class="text-center" style="margin-bottom: 4rem;">
+<span class="section-label">What we do</span>
+<h3 class="section-title">Expert Infrastructure Solutions</h3>
 </div>
-
+<div class="grid-3">
+<div class="service-card">
+<div class="service-img" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBcF_sqBCLJ0MnnU7OdL82Q875-bdN_pwFls7FpIBIHlR5eePfjIe13jPh8A6D0-bH5e_WhySELLKshaqPut9jH2TalULUqpwrr5-4Q33Fp1BTgo9cYYneBoWjeqSYcyw24Tu93PZ7z6kqWcmLhho1_xo80pLp8yAjTOzHklqyQVClWrw6Y3nGB9EeDJE21cbG4DHfVFgFpMa305vVv9aUyIY4CkHb5P7ZVz3zwRZgQsikt2miX3yb81i0lLvOSYmr3HadlBbRkCFM');"></div>
+<div class="service-overlay"></div>
+<div class="service-icon-top"><span class="material-symbols-outlined">road</span></div>
+<div class="service-content">
+<h4>Highway Development</h4>
+<p>Constructing high-speed expressways and arterial road networks with international quality standards.</p>
+<a class="service-link" href="#">Learn More <span class="material-symbols-outlined">trending_flat</span></a>
+</div>
+</div>
+<div class="service-card">
+<div class="service-img" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCpOTzwtx9ctZVgEWUvs_Sk6hTtTh-hEf5CJADylOgfA6Rn2zBzBSDqrRW0qMBM7cLjzIzCJerQHmkhy0ocyvle_BP1vlILaEgFGgPDXgpGeTYsynDbHOVxXjo9aJ6u1A7pzzL19lIw_PNLgAyt0M9LuI4SuieL5vPwm_Z_A52mOZyTVws9D6se7mNMedb4YiuZod7pyUN-Cj3owKwv2a0pjeksxUqOk1Mb-ueGXeN6wjtWa8RGF-8MNB0J5RcQmzaGs84NBb-KQmg');"></div>
+<div class="service-overlay"></div>
+<div class="service-icon-top"><span class="material-symbols-outlined">link</span></div>
+<div class="service-content">
+<h4>Bridge Engineering</h4>
+<p>Specializing in flyovers, viaducts, and river bridges utilizing cantilever and cable-stay designs.</p>
+<a class="service-link" href="#">Learn More <span class="material-symbols-outlined">trending_flat</span></a>
+</div>
+</div>
+<div class="service-card">
+<div class="service-img" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC-vI8x-pgDWNi_znYU_y12xNflPXFPZYAqICZaBtwPERS2xbEBo8qdBRhm98W0Zw0xxkZP9c852VsNqP0o5iSTKAlTJdKc48PtJ7eoLlEUb3W037PYq8uJ9VQYp_AkCljCPX9hsKhJBfSXwxxPUTl3fFbS_tMbXZ0CibRtrltRDdCQ6hbNqQWbp_Qu_EciHMFiRBMGU-i_X7fcrHah1JtrmlGETcZFuQEyFIlCVZEVTOGqhJsKdyL84ZE-E6AjZgPt-Q22mK1U2Ww');"></div>
+<div class="service-overlay"></div>
+<div class="service-icon-top"><span class="material-symbols-outlined">directions_subway</span></div>
+<div class="service-content">
+<h4>Urban Transit</h4>
+<p>Developing integrated metro rail networks and multi-modal transport hubs for smart cities.</p>
+<a class="service-link" href="#">Learn More <span class="material-symbols-outlined">trending_flat</span></a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Featured Projects -->
+<section class="section-padding">
+<div class="container">
+<div class="values-header" style="align-items: center;">
+<div>
+<span class="section-label">Portfolio</span>
+<h3 class="section-title">Landmark Projects</h3>
+</div>
+<a href="#" style="color: inherit; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                View All <span class="material-symbols-outlined">chevron_right</span>
+</a>
+</div>
+<div class="portfolio-grid">
+<div class="project-card project-large">
+<img alt="Central City Overpass" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxv6BX_-T9gbg-GjHJ2i7gbB5SsKjUYePEbN8pyLZZdQyg-YX6km_SKUuoJZNeQEspBW70fuIKcuGzOdYbdUqM00bDfycpOOyEXul5NReWtQHlt7F2SloDbVIh3p2OFpuQhD40TI1UE0Nm15i0ePZL9SnWx5PayAXa-wQt42pbNUa9OM9OOPrKPuUQaZbpfx-aaOvs0DXj7UsMIpKiDEE7TPdFSLAIXdgwKYtDL_9gv1K7nxfdAJHzz7XGazln27gohIWGZaABFT4"/>
+<div class="project-overlay"></div>
+<div class="project-content">
+<span class="project-badge">Metro Connectivity</span>
+<h4 class="project-title">Central City Overpass</h4>
+<p class="project-desc">A flagship 8km elevated corridor reducing transit time by 60% in the metropolitan core.</p>
+</div>
+</div>
+<div class="project-card project-small">
+<img alt="Skyline Bridge" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDj5sSjecnQsazlUqwqdK5vks4iFweBYuNzhpAmdFrDdkRgVRrWgchnkK7xX_u1o2IduAoCKhxSNN5lGFV5caeHDode148z8t55tVmHmHMqGGQz7IhGjn7KX1pDqa6plBgQYkPK5oYIXZ6t_gLrJlwGmSg3wlamB5ZdG52uKltyYeWsMYrZ6v7Fkbjbf1U962xBZMZfW1jr0w6CEO5VuMc-BYCiFm4USk13aqtQIpWKG4_OPqMCnfIjlimAz6wT8wOXzkXbB7YllOI"/>
+<div class="project-overlay" style="background: rgba(0,0,0,0.4)"></div>
+<div class="project-content" style="padding: 1.5rem;">
+<h4 class="project-title" style="font-size: 1.25rem;">Skyline Bridge</h4>
+<p style="color: var(--slate-300); margin: 0; font-size: 0.875rem;">Structurally Innovative</p>
+</div>
+</div>
+<div class="project-card project-small">
+<img alt="Northern Expressway" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJcNRORd5pXrzRAVJFG4UwhmL84_Ina_rH8ooVNdzgVXAdsRkxz5zcQfO9lQ2V6PkX9QnCmFdB6IvGli0MmwONXId4L5mspYqEt6wtk2snIGU6pY9olmZUiUMh0cOHlp9TGK7_PKkF4fPzJdbwav34dyCubhWa9-y7enW7APgBfXxspFmHTD9oe7gCvgKHegu7ffRGUwgVpGGdHFqUkOABcZQSJpm_HBgc9a1oVigCsbR_i7ZzZAJku-c0PPtar4zmo2AiZ2nv728"/>
+<div class="project-overlay" style="background: rgba(0,0,0,0.4)"></div>
+<div class="project-content" style="padding: 1.5rem;">
+<h4 class="project-title" style="font-size: 1.25rem;">Northern Expressway</h4>
+<p style="color: var(--slate-300); margin: 0; font-size: 0.875rem;">Industrial Scale</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Trust Section -->
+<section class="trust-section">
+<div class="container">
+<p class="trust-label">Trusted by Global &amp; National Partners</p>
+<div class="logos-wrap">
+<div class="partner-logo">
+<span class="material-symbols-outlined" style="font-size: 2.25rem;">domain</span>
+<span class="partner-name">CITYGOV</span>
+</div>
+<div class="partner-logo">
+<span class="material-symbols-outlined" style="font-size: 2.25rem;">travel_explore</span>
+<span class="partner-name">TRANSITLINK</span>
+</div>
+<div class="partner-logo">
+<span class="material-symbols-outlined" style="font-size: 2.25rem;">factory</span>
+<span class="partner-name">INDUSCORP</span>
+</div>
+<div class="partner-logo">
+<span class="material-symbols-outlined" style="font-size: 2.25rem;">apartment</span>
+<span class="partner-name">URBANBUILD</span>
+</div>
+<div class="partner-logo">
+<span class="material-symbols-outlined" style="font-size: 2.25rem;">landscape</span>
+<span class="partner-name">NATROADS</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Call to Action -->
+<section class="section-padding">
+<div class="container">
+<div class="cta-box">
+<div class="cta-glow"></div>
+<div class="cta-content">
+<h2 class="cta-title">Ready to build the future with us?</h2>
+<p class="cta-text">Partner with a team that values precision, heritage, and innovation. Let's discuss your next infrastructure project.</p>
+</div>
+<div class="cta-buttons">
+<button class="btn-cta-main">Start a Project</button>
+<button class="btn-cta-alt">Contact Sales</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="site-footer">
+<div class="container">
+<div class="footer-grid">
+<div class="footer-logo-wrap">
+<div class="footer-logo">
+<div class="footer-logo-icon">
+<span class="material-symbols-outlined" style="font-size: 0.875rem;">architecture</span>
+</div>
+<span>BNR <span style="color: var(--primary)">INFRA</span></span>
+</div>
+<p style="font-size: 0.875rem; line-height: 1.6; margin-bottom: 1.5rem;">Defining structural engineering excellence since 1974. Headquartered in New York, operating globally.</p>
+<div class="social-links">
+<a class="social-btn" href="#"><span class="material-symbols-outlined">share</span></a>
+<a class="social-btn" href="#"><span class="material-symbols-outlined">public</span></a>
+</div>
+</div>
+<div>
+<h5 class="footer-heading">Quick Links</h5>
+<ul class="footer-links">
+<li><a href="#">Our Story</a></li>
+<li><a href="#">Safety Protocols</a></li>
+<li><a href="#">Project Portfolio</a></li>
+<li><a href="#">Equipment Fleet</a></li>
+</ul>
+</div>
+<div>
+<h5 class="footer-heading">Expertise</h5>
+<ul class="footer-links">
+<li><a href="#">Structural Design</a></li>
+<li><a href="#">Asphalt &amp; Paving</a></li>
+<li><a href="#">Foundation Work</a></li>
+<li><a href="#">Tunnelling</a></li>
+</ul>
+</div>
+<div>
+<h5 class="footer-heading">Headquarters</h5>
+<div class="contact-info">
+                    1200 Infrastructure Plaza,<br/>Manhattan, NY 10001
+                    <span class="contact-bold">T: +1 (555) 902-1234</span>
+<span class="contact-bold">E: contact@bnr-infra.com</span>
+</div>
+</div>
+</div>
+<div class="footer-bottom">
+<p>© 2024 BNR Infrastructure Excellence. All rights reserved.</p>
+<div class="bottom-links">
+<a href="#">Privacy Policy</a>
+<a href="#">Terms of Service</a>
+<a href="#">Sitemap</a>
+</div>
+</div>
+</div>
 </footer>
-
-</body>
-</html>
+</body></html>
