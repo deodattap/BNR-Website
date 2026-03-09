@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Request a Quote | BNR Infrastructure</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<style>
+    :root {
+        --primary: #144bb8;
+        --primary-dark: #0d337b;
+        --bg-light: #f6f6f8;
+        --text-dark: #0e121b;
+        --text-muted: #64748b;
+        --white: #ffffff;
+        --border: rgba(20, 75, 184, 0.15);
+        --slate-200: #e2e8f0;
+        --slate-100: #f1f5f9;
+        --radius: 0.75rem;
+        --transition: all 0.3s ease;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+        font-family: 'Inter', sans-serif;
+        background: var(--bg-light);
+        color: var(--text-dark);
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+    }
+
+    /* ── HEADER ── */
+    .site-header {
+        position: sticky; top: 0; z-index: 50;
+        background: rgba(255,255,255,0.85);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border);
+        padding: 1rem 0;
+    }
+    .header-content {
+        display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo-wrapper { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: var(--text-dark); }
+    .logo-icon {
+        width: 2.5rem; height: 2.5rem;
+        display: flex; align-items: center; justify-content: center;
+        background: var(--primary); color: var(--white);
+        border-radius: 0.5rem;
+    }
+    .logo-text { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.025em; }
+    .logo-text span { font-weight: 400; color: var(--text-muted); }
+    .main-nav { display: none; gap: 2rem; }
+    @media (min-width: 768px) { .main-nav { display: flex; align-items: center; } }
+    .nav-link { font-size: 0.875rem; font-weight: 600; color: var(--text-muted); text-decoration: none; transition: var(--transition); }
+    .nav-link:hover { color: var(--primary); }
+    .nav-link.active { color: var(--primary); border-bottom: 2px solid var(--primary); padding-bottom: 0.25rem; }
+    .btn-quote {
+        background: var(--primary); color: var(--white);
+        padding: 0.625rem 1.25rem; border-radius: 9999px;
+        font-weight: 600; font-size: 0.875rem; border: none; cursor: pointer;
+        transition: var(--transition); text-decoration: none; display: inline-block;
+    }
+    .btn-quote:hover { background: var(--primary-dark); }
+
+    /* ── HERO ── */
+    .hero {
+        position: relative;
+        background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 60%, #1e5fd4 100%);
+        padding: 5rem 0 4rem;
+        overflow: hidden;
+        color: var(--white);
+        text-align: center;
+    }
+    .hero::before {
+        content: '';
+        position: absolute; inset: 0;
+        background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.08) 1px, transparent 0);
+        background-size: 36px 36px;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 42rem; margin: 0 auto; }
+    .hero-badge {
+        display: inline-flex; align-items: center; gap: 0.5rem;
+        background: rgba(255,255,255,0.15); backdrop-filter: blur(8px);
+        color: var(--white); border: 1px solid rgba(255,255,255,0.25);
+        padding: 0.35rem 1rem; border-radius: 9999px;
+        font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
+        margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+        font-size: 2.5rem; font-weight: 900; line-height: 1.1;
+        margin-bottom: 1.25rem;
+        text-shadow: 0 2px 12px rgba(0,0,0,0.25);
+    }
+    @media (min-width: 768px) { .hero h1 { font-size: 3.5rem; } }
+    .hero p { font-size: 1.125rem; opacity: 0.85; max-width: 36rem; margin: 0 auto; }
+
+    /* ── FORM SECTION ── */
+    .form-section { padding: 4rem 0 6rem; }
+    .form-card {
+        max-width: 760px; margin: 0 auto;
+        background: var(--white);
+        border-radius: 1.5rem;
+        box-shadow: 0 20px 60px -12px rgba(20,75,184,0.12), 0 4px 16px -4px rgba(0,0,0,0.06);
+        padding: 2.5rem 2rem;
+        border: 1px solid var(--border);
+    }
+    @media (min-width: 640px) { .form-card { padding: 3rem; } }
+
+    .form-section-title {
+        font-size: 1.125rem; font-weight: 700; color: var(--primary);
+        margin-bottom: 1.5rem; padding-bottom: 0.75rem;
+        border-bottom: 2px solid var(--bg-light);
+        display: flex; align-items: center; gap: 0.5rem;
+    }
+
+    .form-row {
+        display: grid; grid-template-columns: 1fr;
+        gap: 1.25rem; margin-bottom: 1.25rem;
+    }
+    @media (min-width: 640px) { .form-row.two-col { grid-template-columns: 1fr 1fr; } }
+
+    .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+    .form-group label {
+        font-size: 0.875rem; font-weight: 600; color: var(--text-dark);
+    }
+    .form-group label .optional {
+        font-weight: 400; color: var(--text-muted); font-size: 0.8rem; margin-left: 0.35rem;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border: 1.5px solid var(--slate-200);
+        border-radius: var(--radius);
+        font-family: 'Inter', sans-serif;
+        font-size: 0.9375rem;
+        color: var(--text-dark);
+        background: var(--white);
+        transition: var(--transition);
+        outline: none;
+        appearance: none;
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: #94a3b8; }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(20,75,184,0.1);
+    }
+    .form-group select {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='%2364748b'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 0.75rem center;
+        padding-right: 2.5rem;
+        cursor: pointer;
+    }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+
+    .divider { border: none; border-top: 2px solid var(--bg-light); margin: 2rem 0; }
+
+    /* ── BUTTONS ── */
+    .form-actions {
+        display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem;
+    }
+    @media (min-width: 480px) { .form-actions { flex-direction: row; justify-content: space-between; align-items: center; } }
+
+    .btn-submit {
+        display: inline-flex; align-items: center; gap: 0.5rem;
+        background: var(--primary); color: var(--white);
+        padding: 0.875rem 2.5rem; border-radius: 9999px;
+        font-weight: 700; font-size: 1rem; border: none; cursor: pointer;
+        transition: var(--transition); box-shadow: 0 4px 15px rgba(20,75,184,0.3);
+    }
+    .btn-submit:hover { background: var(--primary-dark); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(20,75,184,0.4); }
+    .btn-submit .material-symbols-outlined { font-size: 1.25rem; }
+
+    .btn-back {
+        display: inline-flex; align-items: center; gap: 0.5rem;
+        color: var(--text-muted); text-decoration: none;
+        font-size: 0.9rem; font-weight: 600; transition: var(--transition);
+    }
+    .btn-back:hover { color: var(--primary); }
+
+    /* ── SUCCESS STATE ── */
+    .success-state {
+        display: none;
+        text-align: center;
+        padding: 3rem 1.5rem;
+    }
+    .success-icon {
+        width: 5rem; height: 5rem; margin: 0 auto 1.5rem;
+        background: rgba(20,75,184,0.1); border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+    }
+    .success-icon .material-symbols-outlined { font-size: 2.5rem; color: var(--primary); }
+    .success-state h2 { font-size: 1.75rem; font-weight: 800; margin-bottom: 1rem; }
+    .success-state p { color: var(--text-muted); font-size: 1.05rem; max-width: 32rem; margin: 0 auto 2rem; }
+    .btn-go-contact {
+        display: inline-flex; align-items: center; gap: 0.5rem;
+        background: var(--primary); color: var(--white);
+        padding: 0.75rem 2rem; border-radius: 9999px;
+        font-weight: 700; text-decoration: none;
+        transition: var(--transition);
+    }
+    .btn-go-contact:hover { background: var(--primary-dark); }
+
+    /* ── TRUST STRIP ── */
+    .trust-strip {
+        display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem;
+        margin: -1rem auto 3rem;
+        max-width: 760px; padding: 0 1.5rem;
+    }
+    .trust-item {
+        display: flex; align-items: center; gap: 0.5rem;
+        color: var(--text-muted); font-size: 0.875rem; font-weight: 500;
+    }
+    .trust-item .material-symbols-outlined { color: var(--primary); font-size: 1.25rem; }
+
+    /* ── FOOTER ── */
+    .site-footer {
+        background: var(--white);
+        border-top: 1px solid var(--slate-200);
+        padding: 3rem 0 2rem;
+    }
+    .footer-grid {
+        display: grid; gap: 2.5rem;
+    }
+    @media (min-width: 768px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr; } }
+    .footer-brand p { font-size: 0.875rem; color: var(--text-muted); margin-top: 1rem; max-width: 22rem; }
+    .footer-title { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #94a3b8; margin-bottom: 1rem; }
+    .footer-links-list { list-style: none; display: flex; flex-direction: column; gap: 0.625rem; }
+    .footer-links-list a { font-size: 0.875rem; font-weight: 500; color: var(--text-muted); text-decoration: none; transition: var(--transition); }
+    .footer-links-list a:hover { color: var(--primary); }
+    .footer-bottom {
+        margin-top: 3rem; padding-top: 1.5rem;
+        border-top: 1px solid var(--slate-100);
+        display: flex; flex-direction: column; gap: 0.75rem;
+        font-size: 0.75rem; color: #94a3b8;
+    }
+    @media (min-width: 640px) { .footer-bottom { flex-direction: row; justify-content: space-between; } }
+    .footer-legal { display: flex; gap: 1.5rem; }
+    .footer-legal a { color: inherit; text-decoration: none; }
+    .footer-legal a:hover { color: var(--primary); }
+</style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header class="site-header">
+<div class="container header-content">
+    <a class="logo-wrapper" href="index.html">
+        <div class="logo-icon">
+            <span class="material-symbols-outlined">architecture</span>
+        </div>
+        <span class="logo-text">BNR <span>Infrastructure</span></span>
+    </a>
+    <nav class="main-nav">
+        <a class="nav-link" href="index.html">Home</a>
+        <a class="nav-link" href="projects.html">Projects</a>
+        <a class="nav-link" href="services.html">Services</a>
+        <a class="nav-link" href="about.html">About</a>
+        <a class="nav-link" href="contact.html">Contact</a>
+    </nav>
+    <a class="btn-quote active" href="quote.html">Get a Quote</a>
+</div>
+</header>
+
+<!-- ── HERO ── -->
+<section class="hero">
+    <div class="hero-content container">
+        <div class="hero-badge">
+            <span class="material-symbols-outlined" style="font-size:0.875rem;">request_quote</span>
+            Project Estimation
+        </div>
+        <h1>Request a Project Quote</h1>
+        <p>Tell us about your infrastructure or construction project and our team will provide a customized estimate.</p>
+    </div>
+</section>
+
+<!-- ── TRUST STRIP ── -->
+<div class="trust-strip">
+    <div class="trust-item">
+        <span class="material-symbols-outlined">verified</span>
+        Free Consultation
+    </div>
+    <div class="trust-item">
+        <span class="material-symbols-outlined">schedule</span>
+        Response within 24 hrs
+    </div>
+    <div class="trust-item">
+        <span class="material-symbols-outlined">lock</span>
+        Confidential & Secure
+    </div>
+    <div class="trust-item">
+        <span class="material-symbols-outlined">handshake</span>
+        No Obligation
+    </div>
+</div>
+
+<!-- ── FORM SECTION ── -->
+<section class="form-section">
+<div class="container">
+<div class="form-card">
+
+    <!-- Form View -->
+    <div id="formView">
+        <form id="quoteForm" onsubmit="handleSubmit(event)" novalidate>
+
+            <!-- Contact Details -->
+            <div class="form-section-title">
+                <span class="material-symbols-outlined">person</span>
+                Your Details
+            </div>
+            <div class="form-row two-col">
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" name="fullName" placeholder="Rahul Sharma" required/>
+                </div>
+                <div class="form-group">
+                    <label for="company">Company / Organisation <span class="optional">(optional)</span></label>
+                    <input type="text" id="company" name="company" placeholder="ABC Constructions Pvt. Ltd."/>
+                </div>
+            </div>
+            <div class="form-row two-col">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="rahul@company.com" required/>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" placeholder="+91 98765-43210" required/>
+                </div>
+            </div>
+
+            <hr class="divider"/>
+
+            <!-- Project Details -->
+            <div class="form-section-title">
+                <span class="material-symbols-outlined">construction</span>
+                Project Details
+            </div>
+            <div class="form-row two-col">
+                <div class="form-group">
+                    <label for="projectType">Project Type</label>
+                    <select id="projectType" name="projectType" required>
+                        <option value="" disabled selected>Select project type</option>
+                        <option>Highway / Road Construction</option>
+                        <option>Bridge Engineering</option>
+                        <option>Urban Infrastructure Development</option>
+                        <option>Utility Infrastructure (Water / Sewer / Electrical)</option>
+                        <option>Industrial Site Development</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="location">Project Location</label>
+                    <input type="text" id="location" name="location" placeholder="City / State in India" required/>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="budget">Estimated Budget</label>
+                    <select id="budget" name="budget" required>
+                        <option value="" disabled selected>Select budget range</option>
+                        <option>Under ₹10 Lakhs</option>
+                        <option>₹10 Lakhs – ₹50 Lakhs</option>
+                        <option>₹50 Lakhs – ₹1 Crore</option>
+                        <option>₹1 Crore – ₹5 Crore</option>
+                        <option>Above ₹5 Crore</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="description">Project Description</label>
+                    <textarea id="description" name="description" placeholder="Briefly describe your project requirements, timeline, and any specific needs..." rows="5"></textarea>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="form-actions">
+                <a class="btn-back" href="contact.html">
+                    <span class="material-symbols-outlined" style="font-size:1.1rem;">arrow_back</span>
+                    Back to Contact
+                </a>
+                <button class="btn-submit" type="submit">
+                    Submit Request
+                    <span class="material-symbols-outlined">send</span>
+                </button>
+            </div>
+
+        </form>
+    </div>
+
+    <!-- Success View -->
+    <div class="success-state" id="successView">
+        <div class="success-icon">
+            <span class="material-symbols-outlined">check_circle</span>
+        </div>
+        <h2>Quote Request Submitted!</h2>
+        <p>Thank you! Your project details have been submitted. Our team will review your requirements and contact you within <strong>24 hours</strong>.</p>
+        <a class="btn-go-contact" href="contact.html">
+            <span class="material-symbols-outlined" style="font-size:1.1rem;">call</span>
+            Talk to Our Team
+        </a>
+    </div>
+
+</div>
+</div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer class="site-footer">
+<div class="container">
+    <div class="footer-grid">
+        <div class="footer-brand">
+            <div class="logo-wrapper" style="margin-bottom:1rem;">
+                <div class="logo-icon" style="width:2rem;height:2rem;">
+                    <span class="material-symbols-outlined" style="font-size:1.25rem;">architecture</span>
+                </div>
+                <span class="logo-text" style="font-size:1.1rem;">BNR <span>Infrastructure</span></span>
+            </div>
+            <p>Leading the way in heavy civil engineering and sustainable urban development since 1995.</p>
+        </div>
+        <div>
+            <p class="footer-title">Quick Links</p>
+            <ul class="footer-links-list">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+        <div>
+            <p class="footer-title">Our Offices</p>
+            <ul class="footer-links-list">
+                <li style="color:#9ca3af;font-size:0.875rem;">
+                    <span class="material-symbols-outlined" style="font-size:0.875rem;vertical-align:middle;">location_on</span>
+                    Chennai HQ, Tamil Nadu
+                </li>
+                <li style="color:#9ca3af;font-size:0.875rem;">
+                    <span class="material-symbols-outlined" style="font-size:0.875rem;vertical-align:middle;">location_on</span>
+                    Mumbai Regional Office
+                </li>
+                <li style="color:#9ca3af;font-size:0.875rem;">
+                    <span class="material-symbols-outlined" style="font-size:0.875rem;vertical-align:middle;">location_on</span>
+                    Delhi Project Hub
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2024 BNR Infrastructure Holdings. All rights reserved.</p>
+        <div class="footer-legal">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+        </div>
+    </div>
+</div>
+</footer>
+
+<script>
+function handleSubmit(e) {
+    e.preventDefault();
+    const form = document.getElementById('quoteForm');
+    const required = form.querySelectorAll('[required]');
+    let valid = true;
+    required.forEach(el => {
+        el.style.borderColor = '';
+        if (!el.value.trim()) {
+            el.style.borderColor = '#ef4444';
+            valid = false;
+        }
+    });
+    if (!valid) {
+        required[0].focus();
+        return;
+    }
+    document.getElementById('formView').style.display = 'none';
+    document.getElementById('successView').style.display = 'block';
+    window.scrollTo({ top: document.querySelector('.form-card').offsetTop - 100, behavior: 'smooth' });
+}
+</script>
+
+</body>
+</html>
