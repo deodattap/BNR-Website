@@ -131,7 +131,7 @@
         .hero-bg {
             position: absolute;
             inset: 0;
-            z-index: -1;
+            z-index: 0;
             background-size: cover;
             background-position: center;
         }
@@ -139,10 +139,13 @@
         .hero-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(to right, rgba(0,0,0,0.7), rgba(0,0,0,0.4), transparent);
+            z-index: 1;
+            background: rgba(0, 0, 0, 0.58);
         }
 
         .hero-content {
+            position: relative;
+            z-index: 2;
             max-width: 42rem;
         }
 
@@ -164,6 +167,8 @@
             font-weight: 900;
             line-height: 1.1;
             margin-bottom: 1.5rem;
+            color: #ffffff;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.6), 0 0px 40px rgba(0,0,0,0.3);
         }
 
         @media (min-width: 768px) {
@@ -579,7 +584,7 @@
 <main>
 <!-- Hero Section -->
 <section class="hero">
-<div class="hero-bg" style="background-image: url('{{DATA:IMAGE:SCREEN_6_HERO_BG}}');"></div>
+<div class="hero-bg" style="background-image: url('images/proj-highway.jpg');"></div>
 <div class="hero-overlay"></div>
 <div class="container">
 <div class="hero-content">
@@ -599,21 +604,22 @@
 <div class="service-grid">
 <div class="image-wrapper">
 <div class="image-accent"></div>
-<div class="service-image" style="background-image: url('{{DATA:IMAGE:SCREEN_6_SERVICE_1}}');"></div>
+<div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=900&q=80');"></div>
 </div>
 <div class="service-content">
 <div class="service-label">
-<span class="material-symbols-outlined">architecture</span>
-<span>Core Service</span>
+<span class="material-symbols-outlined">add_road</span>
+<span>Road & Highway</span>
 </div>
-<h2>Civil Engineering &amp; Site Development</h2>
-<p class="service-description">Precision earthmoving and site preparation for large-scale industrial projects. Our team utilizes advanced GPS-guided machinery to ensure absolute accuracy in grading and excavation.</p>
+<h2>Road &amp; Highway Construction</h2>
+<p class="service-description">We design and build state-of-the-art highway systems that connect communities and drive economic growth. Our expertise includes everything from rural roads to major interstate highways.</p>
+<p style="font-weight:700; margin-bottom:0.75rem;">Key Capabilities:</p>
 <ul class="feature-list">
-<li class="feature-item"><span class="material-symbols-outlined">check_circle</span> Industrial Land Clearing</li>
-<li class="feature-item"><span class="material-symbols-outlined">check_circle</span> Precision Grading &amp; Earthmoving</li>
-<li class="feature-item"><span class="material-symbols-outlined">check_circle</span> Soil Stabilization &amp; Retaining Structures</li>
+<li class="feature-item"><span class="material-symbols-outlined">check_circle</span> Highway planning and design</li>
+<li class="feature-item"><span class="material-symbols-outlined">check_circle</span> Asphalt and concrete paving</li>
+<li class="feature-item"><span class="material-symbols-outlined">check_circle</span> Traffic management systems</li>
+<li class="feature-item"><span class="material-symbols-outlined">check_circle</span> Road maintenance and rehabilitation</li>
 </ul>
-<button class="btn-secondary">Learn More</button>
 </div>
 </div>
 </div>
@@ -624,21 +630,22 @@
 <div class="service-grid">
 <div class="image-wrapper">
 <div class="image-accent"></div>
-<div class="service-image" style="background-image: url('{{DATA:IMAGE:SCREEN_6_SERVICE_2}}');"></div>
+<div class="service-image" style="background-image: url('images/proj-bridge.jpg');"></div>
 </div>
 <div class="service-content">
 <div class="service-label">
-<span class="material-symbols-outlined">settings_input_component</span>
-<span>Specialized Service</span>
+<span class="material-symbols-outlined">link</span>
+<span>Bridge Engineering</span>
 </div>
-<h2>Utility Infrastructure</h2>
-<p class="service-description">Specialized installation of critical utilities. We manage the complexity of wet and dry utility systems, ensuring long-term durability and regulatory compliance for municipal and private sectors.</p>
+<h2>Bridge Engineering</h2>
+<p class="service-description">Our bridge engineering division creates innovative structural solutions that span rivers, valleys, and urban landscapes. We combine aesthetic design with robust engineering principles.</p>
+<p style="font-weight:700; margin-bottom:0.75rem;">Key Capabilities:</p>
 <ul class="feature-list">
-<li class="feature-item"><span class="material-symbols-outlined">check_circle</span> Water &amp; Sewer Main Installation</li>
-<li class="feature-item"><span class="material-symbols-outlined">check_circle</span> Stormwater Management Systems</li>
-<li class="feature-item"><span class="material-symbols-outlined">check_circle</span> Underground Electrical Conduits</li>
+<li class="feature-item"><span class="material-symbols-outlined">check_circle</span> Cable-stayed and suspension bridges</li>
+<li class="feature-item"><span class="material-symbols-outlined">check_circle</span> Pedestrian and vehicular bridges</li>
+<li class="feature-item"><span class="material-symbols-outlined">check_circle</span> Bridge inspection and retrofitting</li>
+<li class="feature-item"><span class="material-symbols-outlined">check_circle</span> Seismic engineering solutions</li>
 </ul>
-<button class="btn-secondary">Request Consultation</button>
 </div>
 </div>
 </div>
@@ -649,26 +656,23 @@
 <div class="service-grid">
 <div class="image-wrapper">
 <div class="image-accent"></div>
-<div class="service-image" style="background-image: url('{{DATA:IMAGE:SCREEN_6_SERVICE_3}}');"></div>
+<div class="service-image" style="background-image: url('images/proj-tunnel.jpg');"></div>
 </div>
 <div class="service-content">
 <div class="service-label">
-<span class="material-symbols-outlined">edit_road</span>
-<span>Heavy Paving</span>
+<span class="material-symbols-outlined">directions_subway</span>
+<span>Urban Transit</span>
 </div>
-<h2>Commercial Paving &amp; Roadwork</h2>
-<p class="service-description">Delivering high-performance asphalt and concrete solutions for highways, parking structures, and industrial complexes. Built to withstand extreme loads and high-frequency traffic.</p>
-<div class="stats-grid">
-<div class="stat-card">
-<h4>Durability</h4>
-<p>Engineered for long life cycles.</p>
-</div>
-<div class="stat-card">
-<h4>Precision</h4>
-<p>Smooth finishes and drainage.</p>
-</div>
-</div>
-<button class="btn-primary">View Paving Projects</button>
+<h2>Urban Transit &amp; Metro Rail</h2>
+<p class="service-description">Developing integrated metro rail networks and tunnelling solutions for smart cities. We bring world-class engineering to underground and elevated transit systems across India.</p>
+<p style="font-weight:700; margin-bottom:0.75rem;">Key Capabilities:</p>
+<ul class="feature-list">
+<li class="feature-item"><span class="material-symbols-outlined">check_circle</span> Metro tunnel boring and lining</li>
+<li class="feature-item"><span class="material-symbols-outlined">check_circle</span> Elevated viaduct construction</li>
+<li class="feature-item"><span class="material-symbols-outlined">check_circle</span> Station design and build</li>
+<li class="feature-item"><span class="material-symbols-outlined">check_circle</span> Rail track and signalling systems</li>
+</ul>
+<button class="btn-primary">View Transit Projects</button>
 </div>
 </div>
 </div>
@@ -721,11 +725,11 @@
 <ul class="contact-info">
 <li class="contact-item">
 <span class="material-symbols-outlined">location_on</span>
-<span>1200 Industrial Pkwy,<br/>Chicago, IL 60601</span>
+<span>12 Anna Salai, Nandanam,<br/>Chennai, Tamil Nadu 600 035</span>
 </li>
 <li class="contact-item">
 <span class="material-symbols-outlined">call</span>
-<span>+1 (555) 890-4421</span>
+<span>+91 98765-43210</span>
 </li>
 </ul>
 </div>

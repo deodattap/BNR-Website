@@ -216,7 +216,7 @@ body {
 
 @media (min-width: 1024px) {
     .grid-split {
-        grid-template-cols: 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
     }
 }
 
@@ -245,7 +245,7 @@ body {
 
 .stats-row {
     display: grid;
-    grid-template-cols: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
 }
 
@@ -369,13 +369,23 @@ body {
     .timeline-content {
         width: 45%;
     }
-    .timeline-item.even .timeline-content {
+    /* ODD items (1995, 2015): real content on LEFT, placeholder on RIGHT */
+    .timeline-item.odd .timeline-content:first-child {
+        order: 1;
+        text-align: right;
+    }
+    .timeline-item.odd .timeline-dot { order: 2; }
+    .timeline-item.odd .timeline-content:last-child {
+        order: 3;
+    }
+    /* EVEN items (2008, 2024): placeholder on LEFT, real content on RIGHT */
+    .timeline-item.even .timeline-content:first-child {
         order: 3;
         text-align: left;
     }
-    .timeline-item.odd .timeline-content {
+    .timeline-item.even .timeline-dot { order: 2; }
+    .timeline-item.even .timeline-content:last-child {
         order: 1;
-        text-align: right;
     }
 }
 
@@ -433,7 +443,7 @@ body {
 
 @media (min-width: 768px) {
     .grid-cards {
-        grid-template-cols: 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
     }
 }
 
@@ -478,7 +488,7 @@ body {
 
 @media (min-width: 768px) {
     .footer-grid {
-        grid-template-cols: 2fr 1fr 1fr;
+        grid-template-columns: 2fr 1fr 1fr;
     }
 }
 
@@ -702,11 +712,11 @@ body {
 </ul>
 </div>
 <div>
-<h4 class="footer-title">Global Offices</h4>
+<h4 class="footer-title">Our Offices</h4>
 <ul class="footer-links">
-<li style="color: #9ca3af; font-size: 0.875rem;"><span class="material-symbols-outlined" style="font-size: 0.875rem">location_on</span> London HQ, United Kingdom</li>
-<li style="color: #9ca3af; font-size: 0.875rem;"><span class="material-symbols-outlined" style="font-size: 0.875rem">location_on</span> Singapore Regional Hub</li>
-<li style="color: #9ca3af; font-size: 0.875rem;"><span class="material-symbols-outlined" style="font-size: 0.875rem">location_on</span> New York City, USA</li>
+<li style="color: #9ca3af; font-size: 0.875rem;"><span class="material-symbols-outlined" style="font-size: 0.875rem">location_on</span> Chennai HQ, Tamil Nadu</li>
+<li style="color: #9ca3af; font-size: 0.875rem;"><span class="material-symbols-outlined" style="font-size: 0.875rem">location_on</span> Mumbai Regional Office</li>
+<li style="color: #9ca3af; font-size: 0.875rem;"><span class="material-symbols-outlined" style="font-size: 0.875rem">location_on</span> Delhi Project Hub</li>
 </ul>
 </div>
 </div>
