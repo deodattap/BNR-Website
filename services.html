@@ -8,7 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-
+<link rel="stylesheet" href="css/animations.css">
 <style>
         :root {
             --primary-color: #144bb8;
@@ -606,7 +606,7 @@
 </header>
 <main>
 <!-- Hero Section -->
-<section class="hero">
+<section class="hero reveal">
 <div class="hero-bg" style="background-image: url('images/proj-highway.jpg');"></div>
 <div class="hero-overlay"></div>
 <div class="container">
@@ -622,7 +622,7 @@
 </div>
 </section>
 <!-- Service Section 1: Image Left -->
-<section class="service-section">
+<section class="service-section reveal">
 <div class="container">
 <div class="service-grid">
 <div class="image-wrapper">
@@ -648,7 +648,7 @@
 </div>
 </section>
 <!-- Service Section 2: Image Right -->
-<section class="service-section alt reverse">
+<section class="service-section alt reverse reveal">
 <div class="container">
 <div class="service-grid">
 <div class="image-wrapper">
@@ -674,7 +674,7 @@
 </div>
 </section>
 <!-- Service Section 3: Image Left -->
-<section class="service-section">
+<section class="service-section reveal">
 <div class="container">
 <div class="service-grid">
 <div class="image-wrapper">
@@ -695,13 +695,13 @@
 <li class="feature-item"><span class="material-symbols-outlined">check_circle</span> Station design and build</li>
 <li class="feature-item"><span class="material-symbols-outlined">check_circle</span> Rail track and signalling systems</li>
 </ul>
-<button class="btn-primary">View Transit Projects</button>
+<a href="projects.html" style="text-decoration: none;"><button class="btn-primary">View Transit Projects</button></a>
 </div>
 </div>
 </div>
 </section>
 <!-- Final CTA Section -->
-<section class="cta-section">
+<section class="cta-section reveal">
 <div class="container">
 <div class="cta-card">
 <div class="cta-pattern"></div>
@@ -709,8 +709,8 @@
 <h2>Ready to Start Your Infrastructure Project?</h2>
 <p>Partner with BNR Infrastructure for engineering excellence that stands the test of time. Let's build your vision together.</p>
 <div class="cta-buttons">
-<a class="btn-white" href="#">Request a Quote</a>
-<a class="btn-outline-white" href="#">Contact Our Team</a>
+<a class="btn-white" href="quote.html">Request a Quote</a>
+<a class="btn-outline-white" href="contact.html">Contact Our Team</a>
 </div>
 </div>
 </div>
@@ -718,17 +718,17 @@
 </section>
 </main>
 <!-- Footer -->
-<footer class="site-footer">
+<footer class="site-footer reveal">
 <div class="container">
 <div class="footer-grid">
 <div class="footer-brand">
-<div class="logo" style="margin-bottom: 1.5rem;">
-<svg fill="currentColor" viewbox="0 0 48 48">
-<path clip-rule="evenodd" d="M12.0799 24L4 19.2479L9.95537 8.75216L18.04 13.4961L18.0446 4H29.9554L29.96 13.4961L38.0446 8.75216L44 19.2479L35.92 24L44 28.7521L38.0446 39.2479L29.96 34.5039L29.9554 44H18.0446L18.04 34.5039L9.95537 39.2479L4 28.7521L12.0799 24Z" fill-rule="evenodd"></path>
-</svg>
-<h2 style="margin:0">BNR Infrastructure</h2>
+<div class="logo" style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem;">
+<div class="logo-icon">
+<span class="material-symbols-outlined">architecture</span>
 </div>
-<p class="footer-desc">Setting the standard in modern civil engineering and large-scale infrastructure development across North America.</p>
+<h2 style="margin:0">BNR INFRA</h2>
+</div>
+<p class="footer-desc">Setting the standard in modern civil engineering and large-scale infrastructure development since 1971.</p>
 <div class="social-links">
 <a class="social-btn" href="#"><span class="material-symbols-outlined">language</span></a>
 <a class="social-btn" href="#"><span class="material-symbols-outlined">share</span></a>
@@ -737,9 +737,9 @@
 <div>
 <h4 class="footer-heading">Services</h4>
 <ul class="footer-nav">
-<li><a href="services.html">Site Preparation</a></li>
-<li><a href="services.html">Utility Infrastructure</a></li>
-<li><a href="services.html">Asphalt Paving</a></li>
+<li><a href="services.html">Road & Highway</a></li>
+<li><a href="services.html">Bridge Engineering</a></li>
+<li><a href="services.html">Urban Transit</a></li>
 <li><a href="services.html">Civil Engineering</a></li>
 </ul>
 </div>
@@ -748,17 +748,21 @@
 <ul class="contact-info">
 <li class="contact-item">
 <span class="material-symbols-outlined">location_on</span>
-<span>12 Anna Salai, Nandanam,<br/>Chennai, Tamil Nadu 600 035</span>
+<span>1018, 42nd Street TVS Colony,<br/>Anna Nagar West Extn, Chennai – 600101</span>
 </li>
 <li class="contact-item">
 <span class="material-symbols-outlined">call</span>
-<span>+91 98765-43210</span>
+<span>(044) – 43838511</span>
+</li>
+<li class="contact-item">
+<span class="material-symbols-outlined">mail</span>
+<span>mail@bnrinfra.com</span>
 </li>
 </ul>
 </div>
 </div>
 <div class="footer-bottom">
-<p>© 2024 BNR Infrastructure. All rights reserved.</p>
+<p>© 2024 BNR Infrastructure Projects (P) Ltd. All rights reserved.</p>
 <div class="footer-legal">
 <a href="#">Privacy Policy</a>
 <a href="#">Terms of Service</a>
@@ -766,4 +770,5 @@
 </div>
 </div>
 </footer>
+<script src="js/script.js"></script>
 </body></html>

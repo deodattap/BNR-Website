@@ -8,7 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-
+<link rel="stylesheet" href="css/animations.css">
 <style>:root {
     --primary: #144bb8;
     --background-light: #f6f6f8;
@@ -334,87 +334,98 @@ body {
     color: var(--primary);
 }
 
-/* Timeline */
+/* Timeline Improvements */
 .timeline-section {
     padding: 6rem 0;
     background-color: var(--background-light);
-}
-
-.section-header-center {
-    text-align: center;
-    margin-bottom: 5rem;
-}
-
-.accent-line {
-    height: 0.375rem;
-    width: 6rem;
-    background-color: var(--primary);
-    margin: 1rem auto;
-    border-radius: 9999px;
+    overflow-x: hidden;
 }
 
 .timeline-container {
     position: relative;
+    padding: 2rem 0;
 }
 
-.timeline-vertical-line {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    height: 100%;
-    width: 4px;
-    background: linear-gradient(to bottom, transparent, var(--primary) 15%, var(--primary) 85%, transparent);
-    display: none;
-}
-
-@media (min-width: 768px) {
-    .timeline-vertical-line {
-        display: block;
-    }
-}
-
-.timeline-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 6rem;
-    position: relative;
-}
-
-@media (min-width: 768px) {
-    .timeline-item {
-        flex-direction: row;
+@media (min-width: 1024px) {
+    .timeline-container {
+        display: flex;
         justify-content: space-between;
-        margin-bottom: 6rem;
+        align-items: flex-start;
+        gap: 2rem;
+        padding-bottom: 4rem;
+    }
+    
+    .timeline-vertical-line {
+        display: none;
+    }
+    
+    .timeline-horizontal-line {
+        position: absolute;
+        top: 2.5rem;
+        left: 5%;
+        width: 90%;
+        height: 4px;
+        background: linear-gradient(to right, transparent, var(--primary) 15%, var(--primary) 85%, transparent);
+        z-index: 1;
+    }
+
+    .timeline-item {
+        flex: 1;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        margin-bottom: 0 !important;
+    }
+
+    .timeline-item .timeline-content {
+        width: 100% !important;
+        text-align: center !important;
+        padding: 1rem;
+        order: 2 !important;
+    }
+
+    .timeline-item .timeline-dot {
+        order: 1 !important;
+        margin-bottom: 2rem !important;
+        position: relative;
+        z-index: 2;
+    }
+
+    .timeline-item .timeline-content:last-child {
+        display: none;
     }
 }
 
-.timeline-content {
-    width: 100%;
-    text-align: left;
-}
+@media (max-width: 1023px) {
+    .timeline-vertical-line {
+        position: absolute;
+        left: 1.5rem;
+        height: 100%;
+        width: 4px;
+        background: var(--primary);
+        opacity: 0.2;
+    }
+    
+    .timeline-item {
+        display: flex;
+        flex-direction: row !important;
+        align-items: flex-start !important;
+        gap: 2rem;
+        margin-bottom: 4rem;
+        padding-left: 0.5rem;
+    }
 
-@media (min-width: 768px) {
+    .timeline-dot {
+        flex-shrink: 0;
+        margin-bottom: 0 !important;
+    }
+
     .timeline-content {
-        width: 45%;
+        text-align: left !important;
     }
-    /* ODD items (1995, 2015): real content on LEFT, placeholder on RIGHT */
-    .timeline-item.odd .timeline-content:first-child {
-        order: 1;
-        text-align: right;
-    }
-    .timeline-item.odd .timeline-dot { order: 2; }
-    .timeline-item.odd .timeline-content:last-child {
-        order: 3;
-    }
-    /* EVEN items (2008, 2024): placeholder on LEFT, real content on RIGHT */
-    .timeline-item.even .timeline-content:first-child {
-        order: 3;
-        text-align: left;
-    }
-    .timeline-item.even .timeline-dot { order: 2; }
-    .timeline-item.even .timeline-content:last-child {
-        order: 1;
+
+    .timeline-item .timeline-content:last-child {
+        display: none;
     }
 }
 
@@ -570,14 +581,11 @@ body {
 }</style>
 </head>
 <body>
-<!-- Top Navigation Bar -->
+<!-- Navigation -->
 <header class="site-header">
 <div class="container header-content">
 <a class="logo" href="index.html">
-<div class="logo-icon">
-<span class="material-symbols-outlined">architecture</span>
-</div>
-<span>BNR <span style="color: #144bb8">INFRA</span></span>
+<img src="https://www.bnrinfra.com/wp-content/uploads/2021/05/logo.png" alt="BNR Infrastructure Logo" style="max-height: 50px; width: auto;">
 </a>
 <nav class="nav-links">
 <a class="nav-link" href="index.html">Home</a>
@@ -653,59 +661,70 @@ body {
 </div>
 </section>
 <!-- Timeline Section -->
-<section class="timeline-section">
+<section class="timeline-section reveal">
 <div class="container">
 <div class="section-header-center">
-<h2 class="section-title">Our Journey</h2>
+<h2 class="section-title">Our Journey Through the Years</h2>
 <div class="accent-line"></div>
 </div>
 <div class="timeline-container">
+<div class="timeline-horizontal-line"></div>
 <div class="timeline-vertical-line"></div>
-<!-- 1995 -->
-<div class="timeline-item odd">
+<!-- 1971 -->
+<div class="timeline-item odd reveal">
 <div class="timeline-content">
-<h3 class="timeline-year">1995</h3>
-<p style="font-weight: 700; font-size: 1.25rem;">Foundation</p>
-<p style="color: var(--text-muted); margin-top: 0.5rem;">BNR Infrastructure is incorporated with a focus on regional bridge repairs.</p>
+<h3 class="timeline-year">1971</h3>
+<p style="font-weight: 700; font-size: 1.25rem;">Company Founded</p>
+<p style="color: var(--text-muted); margin-top: 0.5rem;">BNR Infrastructure Projects (P) Ltd is established with a vision to build excellence.</p>
 </div>
 <div class="timeline-dot"><span class="material-symbols-outlined" style="font-size: 1.25rem">home</span></div>
 <div class="timeline-content" style="opacity: 0"></div>
 </div>
-<!-- 2008 -->
-<div class="timeline-item even">
+<!-- 1995 -->
+<div class="timeline-item even reveal">
 <div class="timeline-content">
-<h3 class="timeline-year">2008</h3>
-<p style="font-weight: 700; font-size: 1.25rem;">National Expansion</p>
-<p style="color: var(--text-muted); margin-top: 0.5rem;">Secured the first multi-billion dollar national contract for high-speed rail development.</p>
+<h3 class="timeline-year">1995</h3>
+<p style="font-weight: 700; font-size: 1.25rem;">First Major Highway Project</p>
+<p style="color: var(--text-muted); margin-top: 0.5rem;">Marked our entry into large-scale national infrastructure development.</p>
+</div>
+<div class="timeline-dot"><span class="material-symbols-outlined" style="font-size: 1.25rem">engineering</span></div>
+<div class="timeline-content" style="opacity: 0"></div>
+</div>
+<!-- 2005 -->
+<div class="timeline-item odd reveal">
+<div class="timeline-content">
+<h3 class="timeline-year">2005</h3>
+<p style="font-weight: 700; font-size: 1.25rem;">Expansion to South India</p>
+<p style="color: var(--text-muted); margin-top: 0.5rem;">Strategic growth into key southern markets, strengthening our national presence.</p>
 </div>
 <div class="timeline-dot"><span class="material-symbols-outlined" style="font-size: 1.25rem">public</span></div>
 <div class="timeline-content" style="opacity: 0"></div>
 </div>
-<!-- 2015 -->
-<div class="timeline-item odd">
+<!-- 2020 -->
+<div class="timeline-item even reveal">
 <div class="timeline-content">
-<h3 class="timeline-year">2015</h3>
-<p style="font-weight: 700; font-size: 1.25rem;">Green Tech Initiative</p>
-<p style="color: var(--text-muted); margin-top: 0.5rem;">Pioneered the use of low-carbon concrete in urban infrastructure projects.</p>
+<h3 class="timeline-year">2020</h3>
+<p style="font-weight: 700; font-size: 1.25rem;">Smart Infrastructure Projects</p>
+<p style="color: var(--text-muted); margin-top: 0.5rem;">Pioneering technology-driven and sustainable infrastructure solutions.</p>
 </div>
-<div class="timeline-dot"><span class="material-symbols-outlined" style="font-size: 1.25rem">eco</span></div>
+<div class="timeline-dot"><span class="material-symbols-outlined" style="font-size: 1.25rem">lightbulb</span></div>
 <div class="timeline-content" style="opacity: 0"></div>
 </div>
 <!-- 2024 -->
-<div class="timeline-item even">
+<div class="timeline-item odd reveal">
 <div class="timeline-content">
 <h3 class="timeline-year">2024</h3>
-<p style="font-weight: 700; font-size: 1.25rem;">Digital Frontiers</p>
-<p style="color: var(--text-muted); margin-top: 0.5rem;">Launching our first fleet of autonomous construction robots for subterranean projects.</p>
+<p style="font-weight: 700; font-size: 1.25rem;">50+ Years of Excellence</p>
+<p style="color: var(--text-muted); margin-top: 0.5rem;">Celebrating a half-century of engineering foundations for a better tomorrow.</p>
 </div>
-<div class="timeline-dot"><span class="material-symbols-outlined" style="font-size: 1.25rem">rocket_launch</span></div>
+<div class="timeline-dot"><span class="material-symbols-outlined" style="font-size: 1.25rem">military_tech</span></div>
 <div class="timeline-content" style="opacity: 0"></div>
 </div>
 </div>
 </div>
 </section>
 <!-- Mission & Vision: Elevated Cards -->
-<section class="cards-section">
+<section class="cards-section reveal">
 <div class="container">
 <div class="grid-cards">
 <div class="info-card">
@@ -722,17 +741,14 @@ body {
 </div>
 </section>
 <!-- Footer -->
-<footer class="footer">
+<footer class="footer reveal">
 <div class="container">
 <div class="footer-grid">
 <div>
-<a class="logo-box" href="#" style="margin-bottom: 1.5rem; color: var(--primary);">
-<svg fill="none" height="32" viewbox="0 0 48 48" width="32" xmlns="http://www.w3.org/2000/svg">
-<path clip-rule="evenodd" d="M12.0799 24L4 19.2479L9.95537 8.75216L18.04 13.4961L18.0446 4H29.9554L29.96 13.4961L38.0446 8.75216L44 19.2479L35.92 24L44 28.7521L38.0446 39.2479L29.96 34.5039L29.9554 44H18.0446L18.04 34.5039L9.95537 39.2479L4 28.7521L12.0799 24Z" fill="currentColor" fill-rule="evenodd"></path>
-</svg>
-<h2 class="logo-text" style="color: white">BNR INFRASTRUCTURE</h2>
+<a class="logo-box" href="index.html" style="margin-bottom: 1.5rem;">
+<img src="https://www.bnrinfra.com/wp-content/uploads/2021/05/logo.png" alt="BNR Infrastructure Logo" style="max-height: 40px; width: auto; filter: brightness(0) invert(1);">
 </a>
-<p style="color: #9ca3af; font-size: 0.875rem; max-width: 24rem; line-height: 1.6;">Redefining the standards of global engineering with high-performance, sustainable, and reliable infrastructure solutions since 1995.</p>
+<p style="color: #9ca3af; font-size: 0.875rem; max-width: 24rem; line-height: 1.6;">Redefining the standards of global engineering with high-performance, sustainable, and reliable infrastructure solutions since 1971.</p>
 </div>
 <div>
 <h4 class="footer-title">Company</h4>
@@ -746,14 +762,14 @@ body {
 <div>
 <h4 class="footer-title">Our Offices</h4>
 <ul class="footer-links">
-<li style="color: #9ca3af; font-size: 0.875rem;"><span class="material-symbols-outlined" style="font-size: 0.875rem">location_on</span> Chennai HQ, Tamil Nadu</li>
-<li style="color: #9ca3af; font-size: 0.875rem;"><span class="material-symbols-outlined" style="font-size: 0.875rem">location_on</span> Mumbai Regional Office</li>
-<li style="color: #9ca3af; font-size: 0.875rem;"><span class="material-symbols-outlined" style="font-size: 0.875rem">location_on</span> Delhi Project Hub</li>
+<li style="color: #9ca3af; font-size: 0.875rem;"><span class="material-symbols-outlined" style="font-size: 0.875rem">location_on</span> Chennai HQ, 1018, 42nd Street TVS Colony, Anna Nagar West Extn, Chennai – 600101</li>
+<li style="color: #9ca3af; font-size: 0.875rem;"><span class="material-symbols-outlined" style="font-size: 0.875rem">mail</span> mail@bnrinfra.com</li>
+<li style="color: #9ca3af; font-size: 0.875rem;"><span class="material-symbols-outlined" style="font-size: 0.875rem">call</span> (044) – 43838511</li>
 </ul>
 </div>
 </div>
 <div class="footer-bottom">
-<p>© 2024 BNR Infrastructure. All Rights Reserved.</p>
+<p>© 2024 BNR Infrastructure Projects (P) Ltd. All Rights Reserved.</p>
 <div style="display: flex; gap: 2rem;">
 <a class="footer-link" href="#">Privacy Policy</a>
 <a class="footer-link" href="#">Terms of Service</a>
@@ -762,4 +778,5 @@ body {
 </div>
 </div>
 </footer>
+<script src="js/script.js"></script>
 </body></html>

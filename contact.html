@@ -6,6 +6,7 @@
 <title>Contact BNR Infrastructure</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="css/animations.css">
 <style>
 :root {
     --primary: #144bb8;
@@ -478,10 +479,7 @@ body {
 <header class="site-header">
 <div class="container header-content">
 <a class="logo" href="index.html">
-<div class="logo-icon">
-<span class="material-symbols-outlined">architecture</span>
-</div>
-<span>BNR <span style="color: #144bb8">INFRA</span></span>
+<img src="https://www.bnrinfra.com/wp-content/uploads/2021/05/logo.png" alt="BNR Infrastructure Logo" style="max-height: 50px; width: auto;">
 </a>
 <nav class="nav-links">
 <a class="nav-link" href="index.html">Home</a>
@@ -507,23 +505,23 @@ body {
 </div>
 </section>
 <!-- Form & Info Section -->
-<section class="contact-grid-section container">
+<section class="contact-grid-section container reveal">
 <div class="contact-grid">
 <!-- Contact Form Card -->
 <div class="contact-card">
 <div class="form-header">
 <h3>Send us a Message</h3>
-<p>Fill out the form below and our regional directors will respond within 24 hours.</p>
+<p>Fill out the form below and our team will respond within 24 hours.</p>
 </div>
 <form class="contact-form">
 <div class="form-group-row">
 <div class="input-field">
 <label>Full Name</label>
-<input placeholder="Rahul Sharma" type="text"/>
+<input placeholder="Your Name" type="text"/>
 </div>
 <div class="input-field">
 <label>Email Address</label>
-<input placeholder="rahul@company.com" type="email"/>
+<input placeholder="your@email.com" type="email"/>
 </div>
 </div>
 <div class="form-group-row">
@@ -561,21 +559,21 @@ Send Project Inquiry
 <p>Visit our central office</p>
 </div>
 </div>
-<p style="font-weight: 500; margin-top: 1rem;">12 Anna Salai, Nandanam<br/>Chennai, Tamil Nadu 600 035, India</p>
+<p style="font-weight: 500; margin-top: 1rem;">BNR Infrastructure Projects (P) Ltd.,<br/>1018, 42nd Street TVS Colony,<br/>Anna Nagar West Extn, Chennai – 600101</p>
 </div>
 <div class="info-box">
 <div class="info-item">
 <div class="icon-circle"><span class="material-symbols-outlined">call</span></div>
 <div class="info-text">
 <h4>Phone Support</h4>
-<p style="color: var(--text-dark); font-weight: 500;">+91 98765-43210</p>
+<p style="color: var(--text-dark); font-weight: 500;">(044) – 43838511<br/>(044) – 43838577</p>
 </div>
 </div>
 <div class="info-item">
 <div class="icon-circle"><span class="material-symbols-outlined">mail</span></div>
 <div class="info-text">
 <h4>Email Inquiries</h4>
-<p style="color: var(--text-dark); font-weight: 500;">contact@bnr-infra.com</p>
+<p style="color: var(--text-dark); font-weight: 500;">mail@bnrinfra.com</p>
 </div>
 </div>
 <div class="info-item">
@@ -600,37 +598,26 @@ Send Project Inquiry
 </div>
 </section>
 <!-- Map Section -->
-<section class="map-section">
+<section class="map-section reveal">
 <div class="container">
 <div class="section-header">
-<h3>Our Regional Presence</h3>
-<p>Strategically located to serve major markets.</p>
+<h3>Our Location</h3>
+<p>Visit our headquarters in Chennai.</p>
 </div>
-<div class="map-container">
-<div class="map-marker" style="top: 33%; left: 25%;">
-<span class="material-symbols-outlined" style="color: var(--primary); font-size: 2.5rem;">location_on</span>
-</div>
-<div class="map-marker" style="bottom: 25%; right: 33%;">
-<span class="material-symbols-outlined" style="color: rgba(20, 75, 184, 0.6); font-size: 2rem;">location_on</span>
-</div>
-<div class="map-controls">
-<button class="control-btn"><span class="material-symbols-outlined">add</span></button>
-<button class="control-btn"><span class="material-symbols-outlined">remove</span></button>
-</div>
+<div class="map-container" style="height: 450px;">
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3886.130386266099!2d80.1873723!3d13.0847222!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a52641040404041%3A0x4040404040404040!2s1018%2C%2042nd%20St%2C%20TVS%20Colony%2C%20Anna%20Nagar%20West%20Extension%2C%20Chennai%2C%20Tamil%20Nadu%20600101!5e0!3m2!1sen!2sin!4v1710500000000!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 </div>
 </div>
 </section>
 </main>
 <!-- Simple Footer -->
-<footer class="main-footer">
+<footer class="main-footer reveal">
 <div class="container footer-content">
 <div style="display: flex; align-items: center; gap: 0.75rem;">
-<div style="width: 1.5rem; height: 1.5rem; color: var(--primary);">
-<svg fill="currentColor" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-<path clip-rule="evenodd" d="M12.0799 24L4 19.2479L9.95537 8.75216L18.04 13.4961L18.0446 4H29.9554L29.96 13.4961L38.0446 8.75216L44 19.2479L35.92 24L44 28.7521L38.0446 39.2479L29.96 34.5039L29.9554 44H18.0446L18.04 34.5039L9.95537 39.2479L4 28.7521L12.0799 24Z" fill-rule="evenodd"></path>
-</svg>
+<div style="width: auto; height: 1.5rem;">
+<img src="https://www.bnrinfra.com/wp-content/uploads/2021/05/logo.png" alt="BNR Infrastructure Logo" style="max-height: 30px; width: auto; filter: brightness(0);">
 </div>
-<p style="font-size: 0.875rem; font-weight: 700; color: #4b5563;">© 2024 BNR Infrastructure. All rights reserved.</p>
+<p style="font-size: 0.875rem; font-weight: 700; color: #4b5563;">© 2024 BNR Infrastructure Projects (P) Ltd. All rights reserved.</p>
 </div>
 <nav class="footer-links">
 <a href="#">Privacy Policy</a>
@@ -639,4 +626,5 @@ Send Project Inquiry
 </nav>
 </div>
 </footer>
+<script src="js/script.js"></script>
 </body></html>

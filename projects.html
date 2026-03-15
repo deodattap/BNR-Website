@@ -8,7 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-
+<link rel="stylesheet" href="css/animations.css">
 <style>
         :root {
             --primary: #144bb8;
@@ -517,14 +517,11 @@
 </head>
 <body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
 <div class="relative flex min-h-screen flex-col">
-<!-- Navigation Header -->
+<!-- Navigation -->
 <header class="site-header">
 <div class="container header-content">
 <a class="logo" href="index.html">
-<div class="logo-icon">
-<span class="material-symbols-outlined">architecture</span>
-</div>
-<span>BNR <span style="color: #144bb8">INFRA</span></span>
+<img src="https://www.bnrinfra.com/wp-content/uploads/2021/05/logo.png" alt="BNR Infrastructure Logo" style="max-height: 50px; width: auto;">
 </a>
 <nav class="nav-links">
 <a class="nav-link" href="index.html">Home</a>
@@ -539,7 +536,7 @@
 </div>
 </div>
 </header>
-<main class="main-content">
+<main class="main-content reveal">
 <div class="container">
 <!-- Page Header -->
 <div class="portfolio-header">
@@ -564,8 +561,8 @@
 <!-- Projects Grid -->
 <div class="projects-grid">
 <!-- Project Card 1 -->
-<div class="project-card">
-<img alt="Bridge pillars with rebar under construction" src="images/proj-bridge.jpg"/>
+<div class="project-card reveal">
+<img alt="Bridge pillars with rebar under construction" class="project-img" src="images/proj-bridge.jpg"/>
 <div class="project-overlay">
 <span class="project-tag">Bridges</span>
 <h3 class="project-title">Tapi River Viaduct</h3>
@@ -580,8 +577,8 @@
 </div>
 </div>
 <!-- Project Card 2 -->
-<div class="project-card">
-<img alt="Elevated highway viaduct with heavy machinery" src="images/proj-highway.jpg"/>
+<div class="project-card reveal">
+<img alt="Elevated highway viaduct with heavy machinery" class="project-img" src="images/proj-highway.jpg"/>
 <div class="project-overlay">
 <span class="project-tag">Highways</span>
 <h3 class="project-title">Mumbai Coastal Expressway</h3>
@@ -596,8 +593,8 @@
 </div>
 </div>
 <!-- Project Card 3 -->
-<div class="project-card">
-<img alt="Multi-storey industrial building under construction with cranes" src="images/proj-industrial.jpg"/>
+<div class="project-card reveal">
+<img alt="Multi-storey industrial building under construction with cranes" class="project-img" src="images/proj-industrial.jpg"/>
 <div class="project-overlay">
 <span class="project-tag">Industrial</span>
 <h3 class="project-title">Chennai Port Logistics Hub</h3>
@@ -612,8 +609,8 @@
 </div>
 </div>
 <!-- Project Card 4 -->
-<div class="project-card">
-<img alt="Underground metro tunnel excavation with workers" src="images/proj-tunnel.jpg"/>
+<div class="project-card reveal">
+<img alt="Underground metro tunnel excavation with workers" class="project-img" src="images/proj-tunnel.jpg"/>
 <div class="project-overlay">
 <span class="project-tag">Railways</span>
 <h3 class="project-title">Hyderabad Metro Phase III</h3>
@@ -628,8 +625,8 @@
 </div>
 </div>
 <!-- Project Card 5 -->
-<div class="project-card">
-<img alt="Glass skyscraper under construction with cranes" src="images/proj-urban-building.jpg"/>
+<div class="project-card reveal">
+<img alt="Glass skyscraper under construction with cranes" class="project-img" src="images/proj-urban-building.jpg"/>
 <div class="project-overlay">
 <span class="project-tag">Urban Planning</span>
 <h3 class="project-title">Kochi Smart Tower</h3>
@@ -644,8 +641,8 @@
 </div>
 </div>
 <!-- Project Card 6 -->
-<div class="project-card">
-<img alt="Dam with open floodgates and rushing water, Pune" src="images/proj-dam.jpg"/>
+<div class="project-card reveal">
+<img alt="Dam with open floodgates and rushing water, Pune" class="project-img" src="images/proj-dam.jpg"/>
 <div class="project-overlay">
 <span class="project-tag">Water Infrastructure</span>
 <h3 class="project-title">Pavana Dam Expansion</h3>
@@ -661,7 +658,7 @@
 </div>
 </div>
 <!-- Load More Section -->
-<div class="pagination-section">
+<div class="pagination-section reveal">
 <p class="viewing-text">Viewing 6 of 24 projects</p>
 <div class="progress-bar">
 <div class="progress-fill"></div>
@@ -674,17 +671,14 @@ Load More Projects
 </div>
 </main>
 <!-- Footer -->
-<footer class="site-footer">
+<footer class="site-footer reveal">
 <div class="container">
 <div class="footer-main">
 <div class="footer-brand">
-<div class="logo-wrapper" style="margin-bottom: 1rem;">
-<div class="logo-icon" style="width: 2rem; height: 2rem;">
-<span class="material-symbols-outlined" style="font-size: 1.25rem;">architecture</span>
+<div class="logo-wrapper" style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+<img src="https://www.bnrinfra.com/wp-content/uploads/2021/05/logo.png" alt="BNR Infrastructure Logo" style="max-height: 40px; width: auto; filter: brightness(0) invert(1);">
 </div>
-<h4 style="margin: 0;">BNR Infrastructure</h4>
-</div>
-<p>Leading the way in heavy civil engineering and sustainable urban development since 1994.</p>
+<p>Leading the way in heavy civil engineering and sustainable urban development since 1971.</p>
 </div>
 <div class="footer-links">
 <div class="links-column">
@@ -707,7 +701,7 @@ Load More Projects
 </div>
 </div>
 <div class="footer-bottom">
-<p>© 2024 BNR Infrastructure Holdings. All rights reserved.</p>
+<p>© 2024 BNR Infrastructure Projects (P) Ltd. All rights reserved.</p>
 <div class="legal-links">
 <a href="#">Privacy Policy</a>
 <a href="#">Terms of Service</a>
@@ -716,4 +710,5 @@ Load More Projects
 </div>
 </footer>
 </div>
+<script src="js/script.js"></script>
 </body></html>

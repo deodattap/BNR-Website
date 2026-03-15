@@ -1,0 +1,129 @@
+/* 
+   BNR Infrastructure - Professional UI Animations 
+   Theme: Inter, #144bb8 (Primary), #0D337B (Dark)
+*/
+
+/* A) Card Hover Lift & B) Image Zoom Animation */
+.service-card, .value-card, .project-card, .stat-card, .job-card {
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+}
+
+.service-card:hover, .value-card:hover, .project-card:hover, .stat-card:hover, .job-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Image Zoom */
+.project-card .project-img, .service-card img, .hero-bg {
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.project-card:hover .project-img, .service-card:hover img {
+    transform: scale(1.08);
+}
+
+/* D) Button Hover Lift */
+.btn-primary, .btn-secondary, .btn-header, .btn-submit, .btn-quote, .btn-apply, .btn-touch {
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.btn-primary:hover, .btn-secondary:hover, .btn-header:hover, .btn-submit:hover, .btn-quote:hover, .btn-apply:hover, .btn-touch:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 15px -3px rgba(20, 75, 184, 0.4);
+}
+
+/* E) Navbar Underline Animation */
+.nav-link {
+    position: relative;
+    padding-bottom: 4px;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #144bb8;
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after, .nav-link.active::after {
+    width: 100%;
+}
+
+/* C) Fade-In On Scroll */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Statistics Counter Animation */
+.stat-number {
+    display: inline-block;
+    min-width: 2ch;
+}
+
+/* Timeline Animations */
+.timeline-item {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease-out;
+}
+
+.timeline-item.reveal-active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Client Logo Animations */
+.client-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    align-items: center;
+    justify-items: center;
+}
+
+@media (min-width: 768px) {
+    .client-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .client-grid {
+        grid-template-columns: repeat(6, 1fr);
+    }
+}
+
+.client-logo-box {
+    width: 100%;
+    max-width: 160px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s ease;
+    filter: grayscale(100%);
+    opacity: 0.6;
+}
+
+.client-logo-box img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.client-logo-box:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+    transform: scale(1.1);
+}

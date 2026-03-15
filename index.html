@@ -7,6 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="css/animations.css">
 <style>body {
             font-family: 'Inter', sans-serif;
             margin: 0;
@@ -858,14 +859,11 @@
         }</style>
 </head>
 <body class="">
-<!-- Top Navigation Bar -->
+<!-- Navigation -->
 <header class="site-header">
 <div class="container header-content">
 <a class="logo" href="index.html">
-<div class="logo-icon">
-<span class="material-symbols-outlined">architecture</span>
-</div>
-<span>BNR <span style="color: #144bb8">INFRA</span></span>
+<img src="https://www.bnrinfra.com/wp-content/uploads/2021/05/logo.png" alt="BNR Infrastructure Logo" style="max-height: 50px; width: auto;">
 </a>
 <nav class="nav-links">
 <a class="nav-link active" href="index.html">Home</a>
@@ -897,8 +895,43 @@
 <span class="material-symbols-outlined" style="font-size: 2.5rem;">expand_more</span>
 </div>
 </section>
+
+<!-- Statistics Section -->
+<section class="section-padding reveal" style="background-color: var(--white);">
+<div class="container">
+<div class="values-header" style="text-align: center; margin-bottom: 4rem;">
+<div style="width: 100%;">
+<span class="section-label">Our Impact in Numbers</span>
+<h3 class="section-title">Built on a Legacy of Excellence</h3>
+</div>
+</div>
+<div class="grid-4">
+<div class="stat-card" style="text-align: center; padding: 2rem; background: var(--bg-light); border-radius: 1.5rem; transition: all 0.3s ease;">
+<div class="icon-box" style="margin: 0 auto 1.5rem;"><span class="material-symbols-outlined" style="font-size: 2.5rem;">history</span></div>
+<h4 style="font-size: 2.5rem; font-weight: 800; color: var(--primary); margin-bottom: 0.5rem;"><span class="stat-number" data-target="50">0</span></h4>
+<p style="font-weight: 600; color: var(--slate-600);">Years of Experience</p>
+</div>
+<div class="stat-card" style="text-align: center; padding: 2rem; background: var(--bg-light); border-radius: 1.5rem; transition: all 0.3s ease;">
+<div class="icon-box" style="margin: 0 auto 1.5rem;"><span class="material-symbols-outlined" style="font-size: 2.5rem;">engineering</span></div>
+<h4 style="font-size: 2.5rem; font-weight: 800; color: var(--primary); margin-bottom: 0.5rem;"><span class="stat-number" data-target="120">0</span></h4>
+<p style="font-weight: 600; color: var(--slate-600);">Projects Completed</p>
+</div>
+<div class="stat-card" style="text-align: center; padding: 2rem; background: var(--bg-light); border-radius: 1.5rem; transition: all 0.3s ease;">
+<div class="icon-box" style="margin: 0 auto 1.5rem;"><span class="material-symbols-outlined" style="font-size: 2.5rem;">location_city</span></div>
+<h4 style="font-size: 2.5rem; font-weight: 800; color: var(--primary); margin-bottom: 0.5rem;"><span class="stat-number" data-target="15">0</span></h4>
+<p style="font-weight: 600; color: var(--slate-600);">Cities Served</p>
+</div>
+<div class="stat-card" style="text-align: center; padding: 2rem; background: var(--bg-light); border-radius: 1.5rem; transition: all 0.3s ease;">
+<div class="icon-box" style="margin: 0 auto 1.5rem;"><span class="material-symbols-outlined" style="font-size: 2.5rem;">groups</span></div>
+<h4 style="font-size: 2.5rem; font-weight: 800; color: var(--primary); margin-bottom: 0.5rem;"><span class="stat-number" data-target="1000">0</span></h4>
+<p style="font-weight: 600; color: var(--slate-600);">Engineers & Workforce</p>
+</div>
+</div>
+</div>
+</section>
+
 <!-- Why Choose Us -->
-<section class="section-padding">
+<section class="section-padding reveal">
 <div class="container">
 <div class="values-header">
 <div style="max-width: 672px;">
@@ -932,7 +965,7 @@
 </div>
 </section>
 <!-- Services Section -->
-<section class="bg-gray-soft section-padding">
+<section class="bg-gray-soft section-padding reveal">
 <div class="container">
 <div class="text-center" style="margin-bottom: 4rem;">
 <span class="section-label">What we do</span>
@@ -1013,36 +1046,39 @@
 </div>
 </div>
 </section>
-<!-- Trust Section -->
-<section class="trust-section">
+<!-- Clients Section -->
+<section class="section-padding reveal" style="background-color: var(--bg-light);">
 <div class="container">
-<p class="trust-label">Trusted by Global &amp; National Partners</p>
-<div class="logos-wrap">
-<div class="partner-logo">
-<span class="material-symbols-outlined" style="font-size: 2.25rem;">domain</span>
-<span class="partner-name">CITYGOV</span>
+<div class="values-header" style="text-align: center; margin-bottom: 4rem;">
+<div style="width: 100%;">
+<span class="section-label">Our Partners</span>
+<h2 class="section-title">Trusted By Leading Organizations</h2>
 </div>
-<div class="partner-logo">
-<span class="material-symbols-outlined" style="font-size: 2.25rem;">travel_explore</span>
-<span class="partner-name">TRANSITLINK</span>
 </div>
-<div class="partner-logo">
-<span class="material-symbols-outlined" style="font-size: 2.25rem;">factory</span>
-<span class="partner-name">INDUSCORP</span>
+<div class="client-grid">
+<div class="client-logo-box">
+<img src="https://www.bnrinfra.com/wp-content/uploads/2021/05/l1.png" alt="L&T Logo">
 </div>
-<div class="partner-logo">
-<span class="material-symbols-outlined" style="font-size: 2.25rem;">apartment</span>
-<span class="partner-name">URBANBUILD</span>
+<div class="client-logo-box">
+<img src="https://www.bnrinfra.com/wp-content/uploads/2021/05/l2.png" alt="NHAI Logo">
 </div>
-<div class="partner-logo">
-<span class="material-symbols-outlined" style="font-size: 2.25rem;">landscape</span>
-<span class="partner-name">NATROADS</span>
+<div class="client-logo-box">
+<img src="https://www.bnrinfra.com/wp-content/uploads/2021/05/l3.png" alt="Reliance Logo">
+</div>
+<div class="client-logo-box">
+<img src="https://www.bnrinfra.com/wp-content/uploads/2021/05/l4.png" alt="Adani Logo">
+</div>
+<div class="client-logo-box">
+<img src="https://www.bnrinfra.com/wp-content/uploads/2021/05/l5.png" alt="Tata Projects Logo">
+</div>
+<div class="client-logo-box">
+<img src="https://www.bnrinfra.com/wp-content/uploads/2021/05/l6.png" alt="GMR Logo">
 </div>
 </div>
 </div>
 </section>
 <!-- Call to Action -->
-<section class="section-padding">
+<section class="section-padding reveal">
 <div class="container">
 <div class="cta-box">
 <div class="cta-glow"></div>
@@ -1051,24 +1087,21 @@
 <p class="cta-text">Partner with a team that values precision, heritage, and innovation. Let's discuss your next infrastructure project.</p>
 </div>
 <div class="cta-buttons">
-<button class="btn-cta-main">Start a Project</button>
-<button class="btn-cta-alt">Contact Sales</button>
+<a href="quote.html" class="btn-cta-main" style="text-decoration: none;">Start a Project</a>
+<a href="contact.html" class="btn-cta-alt" style="text-decoration: none;">Contact Sales</a>
 </div>
 </div>
 </div>
 </section>
 <!-- Footer -->
-<footer class="site-footer">
+<footer class="site-footer reveal">
 <div class="container">
 <div class="footer-grid">
 <div class="footer-logo-wrap">
 <div class="footer-logo">
-<div class="footer-logo-icon">
-<span class="material-symbols-outlined" style="font-size: 0.875rem;">architecture</span>
+<img src="https://www.bnrinfra.com/wp-content/uploads/2021/05/logo.png" alt="BNR Infrastructure Logo" style="max-height: 40px; width: auto; filter: brightness(0) invert(1);">
 </div>
-<span>BNR <span style="color: var(--primary)">INFRA</span></span>
-</div>
-<p style="font-size: 0.875rem; line-height: 1.6; margin-bottom: 1.5rem;">Defining structural engineering excellence since 1974. Headquartered in New York, operating globally.</p>
+<p style="font-size: 0.875rem; line-height: 1.6; margin-bottom: 1.5rem;">Defining structural engineering excellence since 1974. Headquartered in Chennai, operating globally.</p>
 <div class="social-links">
 <a class="social-btn" href="#"><span class="material-symbols-outlined">share</span></a>
 <a class="social-btn" href="#"><span class="material-symbols-outlined">public</span></a>
@@ -1095,14 +1128,14 @@
 <div>
 <h5 class="footer-heading">Headquarters</h5>
 <div class="contact-info">
-                    1200 Infrastructure Plaza,<br/>Manhattan, NY 10001
-                    <span class="contact-bold">T: +1 (555) 902-1234</span>
-<span class="contact-bold">E: contact@bnr-infra.com</span>
+                    1018, 42nd Street TVS Colony,<br/>Anna Nagar West Extn, Chennai – 600101
+                    <span class="contact-bold">T: (044) – 43838511</span>
+<span class="contact-bold">E: mail@bnrinfra.com</span>
 </div>
 </div>
 </div>
 <div class="footer-bottom">
-<p>┬⌐ 2024 BNR Infrastructure Excellence. All rights reserved.</p>
+<p>© 2024 BNR Infrastructure Excellence. All rights reserved.</p>
 <div class="bottom-links">
 <a href="#">Privacy Policy</a>
 <a href="#">Terms of Service</a>
@@ -1111,4 +1144,5 @@
 </div>
 </div>
 </footer>
+<script src="js/script.js"></script>
 </body></html>

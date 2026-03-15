@@ -6,6 +6,7 @@
 <title>Request a Quote | BNR Infrastructure</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="css/animations.css">
 <style>
     :root {
         --primary: #144bb8;
@@ -342,7 +343,7 @@
 </header>
 
 <!-- ── HERO ── -->
-<section class="hero">
+<section class="hero reveal">
     <div class="hero-content container">
         <div class="hero-badge">
             <span class="material-symbols-outlined" style="font-size:0.875rem;">request_quote</span>
@@ -354,7 +355,7 @@
 </section>
 
 <!-- ── TRUST STRIP ── -->
-<div class="trust-strip">
+<div class="trust-strip reveal">
     <div class="trust-item">
         <span class="material-symbols-outlined">verified</span>
         Free Consultation
@@ -374,7 +375,7 @@
 </div>
 
 <!-- ── FORM SECTION ── -->
-<section class="form-section">
+<section class="form-section reveal">
 <div class="container">
 <div class="form-card">
 
@@ -486,17 +487,17 @@
 </section>
 
 <!-- ── FOOTER ── -->
-<footer class="site-footer">
+<footer class="site-footer reveal">
 <div class="container">
     <div class="footer-grid">
         <div class="footer-brand">
-            <div class="logo-wrapper" style="margin-bottom:1rem;">
-                <div class="logo-icon" style="width:2rem;height:2rem;">
+            <div class="logo-wrapper" style="display: flex; align-items: center; gap: 0.75rem; margin-bottom:1rem;">
+                <div class="logo-icon" style="width:2rem;height:2rem; background-color: var(--primary); border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; color: white;">
                     <span class="material-symbols-outlined" style="font-size:1.25rem;">architecture</span>
                 </div>
-                <span class="logo-text" style="font-size:1.1rem;">BNR <span>Infrastructure</span></span>
+                <span class="logo-text" style="font-size:1.1rem; font-weight: 800; color: #0f172a;">BNR <span style="color: var(--primary)">INFRA</span></span>
             </div>
-            <p>Leading the way in heavy civil engineering and sustainable urban development since 1995.</p>
+            <p>Leading the way in heavy civil engineering and sustainable urban development since 1971.</p>
         </div>
         <div>
             <p class="footer-title">Quick Links</p>
@@ -509,25 +510,25 @@
             </ul>
         </div>
         <div>
-            <p class="footer-title">Our Offices</p>
+            <p class="footer-title">Contact</p>
             <ul class="footer-links-list">
                 <li style="color:#9ca3af;font-size:0.875rem;">
                     <span class="material-symbols-outlined" style="font-size:0.875rem;vertical-align:middle;">location_on</span>
-                    Chennai HQ, Tamil Nadu
+                    1018, 42nd Street TVS Colony,<br/>Anna Nagar West Extn, Chennai – 600101
                 </li>
                 <li style="color:#9ca3af;font-size:0.875rem;">
-                    <span class="material-symbols-outlined" style="font-size:0.875rem;vertical-align:middle;">location_on</span>
-                    Mumbai Regional Office
+                    <span class="material-symbols-outlined" style="font-size:0.875rem;vertical-align:middle;">call</span>
+                    (044) – 43838511
                 </li>
                 <li style="color:#9ca3af;font-size:0.875rem;">
-                    <span class="material-symbols-outlined" style="font-size:0.875rem;vertical-align:middle;">location_on</span>
-                    Delhi Project Hub
+                    <span class="material-symbols-outlined" style="font-size:0.875rem;vertical-align:middle;">mail</span>
+                    mail@bnrinfra.com
                 </li>
             </ul>
         </div>
     </div>
     <div class="footer-bottom">
-        <p>© 2024 BNR Infrastructure Holdings. All rights reserved.</p>
+        <p>© 2024 BNR Infrastructure Projects (P) Ltd. All rights reserved.</p>
         <div class="footer-legal">
             <a href="#">Privacy Policy</a>
             <a href="#">Terms of Service</a>
@@ -535,7 +536,7 @@
     </div>
 </div>
 </footer>
-
+<script src="js/script.js"></script>
 <script>
 function handleSubmit(e) {
     e.preventDefault();
