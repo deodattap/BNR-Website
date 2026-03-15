@@ -45,76 +45,97 @@
         .site-header {
             position: sticky;
             top: 0;
-            z-index: 50;
-            background: rgba(255, 255, 255, 0.8);
+            z-index: 100;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border-color);
-            padding: 1rem 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            height: 80px;
+            display: flex;
+            align-items: center;
         }
 
         .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            width: 100%;
         }
 
         .logo {
             display: flex;
             align-items: center;
             gap: 0.75rem;
+            text-decoration: none;
+            color: #0f172a;
             font-weight: 800;
             font-size: 1.25rem;
-            color: var(--text-dark);
-            text-decoration: none;
+            letter-spacing: -0.025em;
         }
 
-        .logo svg {
-            width: 32px;
-            height: 32px;
-            color: var(--primary-color);
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #144bb8;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
         }
 
-        .main-nav {
+        .nav-links {
             display: none;
-            gap: 2.5rem;
+            gap: 0.5rem;
         }
 
         @media (min-width: 768px) {
-            .main-nav {
-                display: flex;
-            }
+            .nav-links { display: flex; align-items: center; }
         }
 
         .nav-link {
             font-size: 0.875rem;
             font-weight: 600;
+            color: #475569;
             text-decoration: none;
-            color: var(--text-dark);
-            transition: color 0.3s;
+            transition: all 0.2s;
+            padding: 0.5rem 0.875rem;
+            border-radius: 0.5rem;
         }
 
-        .nav-link:hover, .nav-link.active {
-            color: var(--primary-color);
+        .nav-link:hover { 
+            color: #144bb8;
+            background-color: rgba(20, 75, 184, 0.05);
         }
 
         .nav-link.active {
-            border-bottom: 2px solid var(--primary-color);
+            color: #144bb8;
+            background-color: rgba(20, 75, 184, 0.1);
         }
 
-        .btn-primary {
-            background-color: var(--primary-color);
-            color: var(--white);
-            padding: 0.625rem 1.5rem;
-            border-radius: 0.75rem;
+        .btn-header {
+            display: none;
+            padding: 0.625rem 1.25rem;
+            background-color: #144bb8;
+            color: white !important;
+            border-radius: 0.5rem;
             font-weight: 700;
+            font-size: 0.875rem;
+            text-decoration: none;
             border: none;
             cursor: pointer;
             box-shadow: 0 4px 6px -1px rgba(20, 75, 184, 0.2);
-            transition: all 0.3s;
+            transition: all 0.2s;
         }
 
-        .btn-primary:hover {
-            opacity: 0.9;
+        @media (min-width: 1024px) {
+            .btn-header { display: flex; }
+        }
+
+        .btn-header:hover { 
+            background-color: #0d337b;
+            transform: translateY(-1px);
+            box-shadow: 0 10px 15px -3px rgba(20, 75, 184, 0.3);
         }
 
         /* Hero */
@@ -563,21 +584,23 @@
 <body class="bg-background-light dark:bg-background-dark text-[#0e121b]">
 <!-- Navigation -->
 <header class="site-header">
-<div class="container">
-<div class="header-content">
+<div class="container header-content">
 <a class="logo" href="index.html">
-<svg fill="currentColor" viewbox="0 0 48 48">
-<path clip-rule="evenodd" d="M12.0799 24L4 19.2479L9.95537 8.75216L18.04 13.4961L18.0446 4H29.9554L29.96 13.4961L38.0446 8.75216L44 19.2479L35.92 24L44 28.7521L38.0446 39.2479L29.96 34.5039L29.9554 44H18.0446L18.04 34.5039L9.95537 39.2479L4 28.7521L12.0799 24Z" fill-rule="evenodd"></path>
-</svg>
-<span>BNR Infrastructure</span>
+<div class="logo-icon">
+<span class="material-symbols-outlined">architecture</span>
+</div>
+<span>BNR <span style="color: #144bb8">INFRA</span></span>
 </a>
-<nav class="main-nav">
+<nav class="nav-links">
 <a class="nav-link" href="index.html">Home</a>
-<a class="nav-link active" href="services.html">Services</a>
 <a class="nav-link" href="projects.html">Projects</a>
+<a class="nav-link active" href="services.html">Services</a>
 <a class="nav-link" href="about.html">About</a>
+<a class="nav-link" href="careers.html">Careers</a>
+<a class="nav-link" href="contact.html">Contact</a>
 </nav>
-<a href="quote.html" class="btn-quote" style="display:inline-block;background:#144bb8;color:#fff;padding:0.625rem 1.25rem;border-radius:9999px;font-weight:600;font-size:0.875rem;text-decoration:none;">Get a Quote</a>
+<div class="header-actions">
+<a href="quote.html" class="btn-header">Get a Quote</a>
 </div>
 </div>
 </header>

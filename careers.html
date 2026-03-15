@@ -54,30 +54,38 @@
         .site-header {
             position: sticky;
             top: 0;
-            z-index: 50;
+            z-index: 100;
             width: 100%;
-            background-color: rgba(255, 255, 255, 0.8);
+            background-color: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--slate-200);
-        }
-
-        .nav-inner {
-            height: 5rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            height: 80px;
             display: flex;
             align-items: center;
-            justify-content: space-between;
         }
 
-        .logo-area {
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .logo {
             display: flex;
             align-items: center;
             gap: 0.75rem;
+            text-decoration: none;
+            color: #0f172a;
+            font-weight: 800;
+            font-size: 1.25rem;
+            letter-spacing: -0.025em;
         }
 
         .logo-icon {
-            width: 2.5rem;
-            height: 2.5rem;
-            background-color: var(--primary);
+            width: 40px;
+            height: 40px;
+            background-color: #144bb8;
             border-radius: 0.5rem;
             display: flex;
             align-items: center;
@@ -85,78 +93,58 @@
             color: white;
         }
 
-        .logo-text {
-            font-size: 1.25rem;
-            font-weight: 700;
-            letter-spacing: -0.025em;
-        }
-
-        .main-nav {
+        .nav-links {
             display: none;
-            align-items: center;
-            gap: 2rem;
+            gap: 0.5rem;
         }
 
         @media (min-width: 768px) {
-            .main-nav {
-                display: flex;
-            }
+            .nav-links { display: flex; align-items: center; }
         }
 
         .nav-link {
             font-size: 0.875rem;
             font-weight: 600;
+            color: #475569;
             text-decoration: none;
-            color: inherit;
-            transition: color 0.2s;
+            transition: all 0.2s;
+            padding: 0.5rem 0.875rem;
+            border-radius: 0.5rem;
         }
 
-        .nav-link:hover {
-            color: var(--primary);
+        .nav-link:hover { 
+            color: #144bb8;
+            background-color: rgba(20, 75, 184, 0.05);
         }
 
-        .nav-actions {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
+        .nav-link.active {
+            color: #144bb8;
+            background-color: rgba(20, 75, 184, 0.1);
         }
 
-        .btn-contact {
+        .btn-header {
             display: none;
             padding: 0.625rem 1.25rem;
-            background-color: var(--primary);
-            color: white;
-            font-size: 0.875rem;
+            background-color: #144bb8;
+            color: white !important;
+            border-radius: 0.5rem;
             font-weight: 700;
-            border-radius: var(--radius-lg);
+            font-size: 0.875rem;
+            text-decoration: none;
             border: none;
             cursor: pointer;
-            transition: background-color 0.2s;
+            box-shadow: 0 4px 6px -1px rgba(20, 75, 184, 0.2);
+            transition: all 0.2s;
         }
 
-        @media (min-width: 640px) {
-            .btn-contact {
-                display: block;
-            }
+        @media (min-width: 1024px) {
+            .btn-header { display: flex; }
         }
 
-        .btn-contact:hover {
-            background-color: var(--primary-dark);
-        }
-
-        .user-profile {
-            width: 2.5rem;
-            height: 2.5rem;
-            border-radius: var(--radius-full);
-            border: 2px solid rgba(20, 75, 184, 0.2);
-            padding: 2px;
-        }
-
-        .user-profile img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: var(--radius-full);
+        .btn-header:hover { 
+            background-color: #0d337b;
+            transform: translateY(-1px);
+            box-shadow: 0 10px 15px -3px rgba(20, 75, 184, 0.3);
         }
 
         /* Hero Section */
@@ -905,24 +893,23 @@
 <body>
 <!-- Navigation -->
 <header class="site-header">
-<div class="container nav-inner">
-<a href="index.html" style="display:flex;align-items:center;gap:0.75rem;text-decoration:none;color:inherit;">
+<div class="container header-content">
+<a class="logo" href="index.html">
 <div class="logo-icon">
 <span class="material-symbols-outlined">architecture</span>
 </div>
-<h1 class="logo-text">BNR Infrastructure</h1>
+<span>BNR <span style="color: #144bb8">INFRA</span></span>
 </a>
-<nav class="main-nav">
+<nav class="nav-links">
 <a class="nav-link" href="index.html">Home</a>
-<a class="nav-link" href="about.html">About Us</a>
-<a class="nav-link" href="#jobs">Open Roles</a>
+<a class="nav-link" href="projects.html">Projects</a>
+<a class="nav-link" href="services.html">Services</a>
+<a class="nav-link" href="about.html">About</a>
 <a class="nav-link active" href="careers.html">Careers</a>
+<a class="nav-link" href="contact.html">Contact</a>
 </nav>
-<div class="nav-actions">
-<button class="btn-contact">Contact HR</button>
-<div class="user-profile">
-<img alt="User profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCV6OAC2k3-3vHqGMtd7PK10xA3WHNznmCUlLW7FdXGdodFwc_I-RGmT12FyGlnrpxWLYQkCO1LpEHojsUgSKk96m_AkswkeQtjFJxlgjOf1lvnIomLH4BgtEwT9O4Xox43Zyvyk1GR47nG2KDEVHm3S_V-Ms5mdkcHcwzwD39HYkMqZsdoJCNVpQFVdRK2qPErAociEEA3NxMcZkR4p_WZaUZYL0yJ0QGjum7mMBknF74cXhnVqj26mJHG5zeJ2lufWIhOyu0czDc"/>
-</div>
+<div class="header-actions">
+<a href="quote.html" class="btn-header">Get a Quote</a>
 </div>
 </div>
 </header>

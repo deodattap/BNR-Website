@@ -41,71 +41,102 @@ body {
     padding: 0 1.5rem;
 }
 
-/* Header */
-.main-header {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border-color);
-    height: 80px;
-}
+        /* Navigation */
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            height: 80px;
+            display: flex;
+            align-items: center;
+        }
 
-.nav-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 100%;
-}
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
 
-.logo-box {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    text-decoration: none;
-    color: var(--text-dark);
-}
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: #0f172a;
+            font-weight: 800;
+            font-size: 1.25rem;
+            letter-spacing: -0.025em;
+        }
 
-.logo-icon {
-    width: 32px;
-    height: 32px;
-    color: var(--primary);
-}
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #144bb8;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
 
-.nav-links {
-    display: none;
-    gap: 2rem;
-}
+        .nav-links {
+            display: none;
+            gap: 0.5rem;
+        }
 
-.nav-links a {
-    text-decoration: none;
-    font-size: 0.875rem;
-    font-weight: 600;
-    color: var(--text-dark);
-    transition: color 0.2s;
-}
+        @media (min-width: 768px) {
+            .nav-links { display: flex; align-items: center; }
+        }
 
-.nav-links a:hover, .nav-links a.active {
-    color: var(--primary);
-}
+        .nav-link {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #475569;
+            text-decoration: none;
+            transition: all 0.2s;
+            padding: 0.5rem 0.875rem;
+            border-radius: 0.5rem;
+        }
 
-.btn-quote {
-    background: var(--primary);
-    color: var(--white);
-    padding: 0.625rem 1.5rem;
-    border-radius: var(--radius);
-    font-weight: 700;
-    font-size: 0.875rem;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    transition: all 0.2s;
-}
+        .nav-link:hover { 
+            color: #144bb8;
+            background-color: rgba(20, 75, 184, 0.05);
+        }
 
-.btn-quote:hover {
-    background: var(--primary-hover);
-}
+        .nav-link.active {
+            color: #144bb8;
+            background-color: rgba(20, 75, 184, 0.1);
+        }
+
+        .btn-header {
+            display: none;
+            padding: 0.625rem 1.25rem;
+            background-color: #144bb8;
+            color: white !important;
+            border-radius: 0.5rem;
+            font-weight: 700;
+            font-size: 0.875rem;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 6px -1px rgba(20, 75, 184, 0.2);
+            transition: all 0.2s;
+        }
+
+        @media (min-width: 1024px) {
+            .btn-header { display: flex; }
+        }
+
+        .btn-header:hover { 
+            background-color: #0d337b;
+            transform: translateY(-1px);
+            box-shadow: 0 10px 15px -3px rgba(20, 75, 184, 0.3);
+        }
 
 /* Hero */
 .hero-section {
@@ -444,25 +475,24 @@ body {
 </head>
 <body class="bg-background-light dark:bg-background-dark text-[#0e121b] antialiased">
 <!-- Navigation -->
-<header class="main-header">
-<div class="container nav-container">
-<a class="logo-box" href="index.html">
+<header class="site-header">
+<div class="container header-content">
+<a class="logo" href="index.html">
 <div class="logo-icon">
-<svg fill="currentColor" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-<path clip-rule="evenodd" d="M12.0799 24L4 19.2479L9.95537 8.75216L18.04 13.4961L18.0446 4H29.9554L29.96 13.4961L38.0446 8.75216L44 19.2479L35.92 24L44 28.7521L38.0446 39.2479L29.96 34.5039L29.9554 44H18.0446L18.04 34.5039L9.95537 39.2479L4 28.7521L12.0799 24Z" fill-rule="evenodd"></path>
-</svg>
+<span class="material-symbols-outlined">architecture</span>
 </div>
-<h2 style="font-size: 1.25rem; font-weight: 800; letter-spacing: -0.025em;">BNR Infrastructure</h2>
+<span>BNR <span style="color: #144bb8">INFRA</span></span>
 </a>
 <nav class="nav-links">
-<a href="index.html">Home</a>
-<a href="projects.html">Projects</a>
-<a href="services.html">Services</a>
-<a href="about.html">About</a>
-<a class="active" href="contact.html">Contact</a>
+<a class="nav-link" href="index.html">Home</a>
+<a class="nav-link" href="projects.html">Projects</a>
+<a class="nav-link" href="services.html">Services</a>
+<a class="nav-link" href="about.html">About</a>
+<a class="nav-link" href="careers.html">Careers</a>
+<a class="nav-link active" href="contact.html">Contact</a>
 </nav>
-<div class="nav-actions">
-<a href="quote.html" class="btn-quote">Get a Quote</a>
+<div class="header-actions">
+<a href="quote.html" class="btn-header">Get a Quote</a>
 </div>
 </div>
 </header>

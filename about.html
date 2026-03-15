@@ -42,73 +42,102 @@ body {
     padding: 0 1.5rem;
 }
 
-/* Navigation */
-.header {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    width: 100%;
-    background-color: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid #e5e7eb;
-}
+        /* Navigation */
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            height: 80px;
+            display: flex;
+            align-items: center;
+        }
 
-.nav-inner {
-    height: 5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
 
-.logo-box {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    color: var(--primary);
-    text-decoration: none;
-}
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: #0f172a;
+            font-weight: 800;
+            font-size: 1.25rem;
+            letter-spacing: -0.025em;
+        }
 
-.logo-text {
-    font-size: 1.25rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    color: #111827;
-}
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #144bb8;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
 
-.nav-menu {
-    display: none;
-    gap: 2rem;
-}
+        .nav-links {
+            display: none;
+            gap: 0.5rem;
+        }
 
-@media (min-width: 768px) {
-    .nav-menu {
-        display: flex;
-    }
-}
+        @media (min-width: 768px) {
+            .nav-links { display: flex; align-items: center; }
+        }
 
-.nav-link {
-    font-size: 0.875rem;
-    font-weight: 600;
-    color: #374151;
-    text-decoration: none;
-    transition: color 0.2s;
-}
+        .nav-link {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #475569;
+            text-decoration: none;
+            transition: all 0.2s;
+            padding: 0.5rem 0.875rem;
+            border-radius: 0.5rem;
+        }
 
-.nav-link:hover, .nav-link.active {
-    color: var(--primary);
-}
+        .nav-link:hover { 
+            color: #144bb8;
+            background-color: rgba(20, 75, 184, 0.05);
+        }
 
-.btn-touch {
-    background-color: var(--primary);
-    color: var(--white);
-    padding: 0.625rem 1.5rem;
-    border-radius: 0.5rem;
-    font-size: 0.875rem;
-    font-weight: 700;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 4px 6px -1px rgba(20, 75, 184, 0.2);
-}
+        .nav-link.active {
+            color: #144bb8;
+            background-color: rgba(20, 75, 184, 0.1);
+        }
+
+        .btn-header {
+            display: none;
+            padding: 0.625rem 1.25rem;
+            background-color: #144bb8;
+            color: white !important;
+            border-radius: 0.5rem;
+            font-weight: 700;
+            font-size: 0.875rem;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 6px -1px rgba(20, 75, 184, 0.2);
+            transition: all 0.2s;
+        }
+
+        @media (min-width: 1024px) {
+            .btn-header { display: flex; }
+        }
+
+        .btn-header:hover { 
+            background-color: #0d337b;
+            transform: translateY(-1px);
+            box-shadow: 0 10px 15px -3px rgba(20, 75, 184, 0.3);
+        }
 
 /* Hero */
 .hero {
@@ -542,22 +571,25 @@ body {
 </head>
 <body>
 <!-- Top Navigation Bar -->
-<header class="header">
-<div class="container nav-inner">
-<a class="logo-box" href="index.html">
-<svg fill="none" height="32" viewbox="0 0 48 48" width="32" xmlns="http://www.w3.org/2000/svg">
-<path clip-rule="evenodd" d="M12.0799 24L4 19.2479L9.95537 8.75216L18.04 13.4961L18.0446 4H29.9554L29.96 13.4961L38.0446 8.75216L44 19.2479L35.92 24L44 28.7521L38.0446 39.2479L29.96 34.5039L29.9554 44H18.0446L18.04 34.5039L9.95537 39.2479L4 28.7521L12.0799 24Z" fill="currentColor" fill-rule="evenodd"></path>
-</svg>
-<h2 class="logo-text">BNR <span style="color: var(--primary)">Infrastructure</span></h2>
+<header class="site-header">
+<div class="container header-content">
+<a class="logo" href="index.html">
+<div class="logo-icon">
+<span class="material-symbols-outlined">architecture</span>
+</div>
+<span>BNR <span style="color: #144bb8">INFRA</span></span>
 </a>
-<nav class="nav-menu">
+<nav class="nav-links">
 <a class="nav-link" href="index.html">Home</a>
-<a class="nav-link active" href="about.html">About</a>
 <a class="nav-link" href="projects.html">Projects</a>
-<a class="nav-link" href="services.html">Sustainability</a>
+<a class="nav-link" href="services.html">Services</a>
+<a class="nav-link active" href="about.html">About</a>
 <a class="nav-link" href="careers.html">Careers</a>
+<a class="nav-link" href="contact.html">Contact</a>
 </nav>
-<button class="btn-touch">Get in Touch</button>
+<div class="header-actions">
+<a href="quote.html" class="btn-header">Get a Quote</a>
+</div>
 </div>
 </header>
 <!-- Hero Section -->
