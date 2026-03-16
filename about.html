@@ -334,97 +334,115 @@ body {
     color: var(--primary);
 }
 
-/* Timeline Improvements */
+/* Timeline Layout - Alternating Vertical */
 .timeline-section {
-    padding: 6rem 0;
+    padding: 8rem 0;
     background-color: var(--background-light);
-    overflow-x: hidden;
+    position: relative;
 }
 
 .timeline-container {
     position: relative;
-    padding: 2rem 0;
+    max-width: 64rem;
+    margin: 0 auto;
 }
 
-@media (min-width: 1024px) {
-    .timeline-container {
-        display: flex;
-        justify-content: space-between;
+.timeline-vertical-line {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 100%;
+    background: var(--primary);
+    opacity: 0.2;
+}
+
+.timeline-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 4rem;
+    position: relative;
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-content {
+    flex: 0 0 45%;
+    padding: 2rem;
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease;
+}
+
+.timeline-item:hover .timeline-content {
+    transform: translateY(-5px);
+}
+
+.timeline-dot {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 3.5rem;
+    height: 3.5rem;
+    background: var(--primary);
+    border: 4px solid var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    z-index: 10;
+}
+
+/* Alternating logic */
+.timeline-item.odd .timeline-content {
+    order: 1;
+    text-align: left;
+}
+
+.timeline-item.odd .timeline-placeholder {
+    order: 2;
+}
+
+.timeline-item.even .timeline-content {
+    order: 2;
+    text-align: left;
+}
+
+.timeline-item.even .timeline-placeholder {
+    order: 1;
+}
+
+/* Empty space for the other side */
+.timeline-placeholder {
+    flex: 0 0 45%;
+}
+
+@media (max-width: 768px) {
+    .timeline-vertical-line {
+        left: 2rem;
+    }
+    .timeline-item {
+        flex-direction: column;
         align-items: flex-start;
-        gap: 2rem;
-        padding-bottom: 4rem;
+        padding-left: 4rem;
+        margin-bottom: 3rem;
     }
-    
-    .timeline-vertical-line {
-        display: none;
-    }
-    
-    .timeline-horizontal-line {
-        position: absolute;
-        top: 2.5rem;
-        left: 5%;
-        width: 90%;
-        height: 4px;
-        background: linear-gradient(to right, transparent, var(--primary) 15%, var(--primary) 85%, transparent);
-        z-index: 1;
-    }
-
-    .timeline-item {
-        flex: 1;
-        flex-direction: column !important;
-        align-items: center !important;
-        text-align: center !important;
-        margin-bottom: 0 !important;
-    }
-
-    .timeline-item .timeline-content {
-        width: 100% !important;
-        text-align: center !important;
-        padding: 1rem;
-        order: 2 !important;
-    }
-
-    .timeline-item .timeline-dot {
-        order: 1 !important;
-        margin-bottom: 2rem !important;
-        position: relative;
-        z-index: 2;
-    }
-
-    .timeline-item .timeline-content:last-child {
-        display: none;
-    }
-}
-
-@media (max-width: 1023px) {
-    .timeline-vertical-line {
-        position: absolute;
-        left: 1.5rem;
-        height: 100%;
-        width: 4px;
-        background: var(--primary);
-        opacity: 0.2;
-    }
-    
-    .timeline-item {
-        display: flex;
-        flex-direction: row !important;
-        align-items: flex-start !important;
-        gap: 2rem;
-        margin-bottom: 4rem;
-        padding-left: 0.5rem;
-    }
-
     .timeline-dot {
-        flex-shrink: 0;
-        margin-bottom: 0 !important;
+        left: 2rem;
+        width: 2.5rem;
+        height: 2.5rem;
     }
-
     .timeline-content {
+        width: 100% !important;
         text-align: left !important;
     }
-
-    .timeline-item .timeline-content:last-child {
+    .timeline-placeholder {
         display: none;
     }
 }
@@ -627,16 +645,6 @@ body {
 <h4 class="section-tag">Our Beginnings</h4>
 <h2 class="section-title">A Heritage Built on Integrity and Excellence</h2>
 <p class="section-desc">Founded over three decades ago, BNR began with a singular vision: to redefine the structural landscape of the nation. What started as a small regional engineering firm has evolved into a global powerhouse in heavy civil infrastructure.</p>
-<div class="stats-row">
-<div class="stat-item">
-<span class="stat-number">500+</span>
-<span class="stat-label">Projects Delivered</span>
-</div>
-<div class="stat-item">
-<span class="stat-number">25+</span>
-<span class="stat-label">Countries Reached</span>
-</div>
-</div>
 </div>
 <div class="image-container" style="order: 1;">
 <img alt="Construction Site" class="story-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7ovq_CNlVgNg-vDYcYBqWWmNk8dPnAYgB6uokPGebFwyDZJ5WNb4f6-dIEW5HrbPJoXC86tcCTUNF46ayMY59Ow-YIao_frzH8_0-IIoUsuvNj-Polzg1OQbxAapVIH6Lu1At0CksKdPHV90ISBh6WUev-K6CErs94BJBcPqBUNv9KWn8lL1q66WO-mjPZC3wIRMoAzuheCW3AChTg-tcsQwQeUg48mfVdypL5aACguZg3OEFXUpC4b0Ay83bUoFq8R-X9C6eyws"/>
@@ -668,57 +676,56 @@ body {
 <div class="accent-line"></div>
 </div>
 <div class="timeline-container">
-<div class="timeline-horizontal-line"></div>
 <div class="timeline-vertical-line"></div>
 <!-- 1971 -->
-<div class="timeline-item odd reveal">
+<div class="timeline-item even reveal">
+<div class="timeline-placeholder"></div>
+<div class="timeline-dot"><span class="material-symbols-outlined" style="font-size: 1.25rem">home</span></div>
 <div class="timeline-content">
 <h3 class="timeline-year">1971</h3>
 <p style="font-weight: 700; font-size: 1.25rem;">Company Founded</p>
 <p style="color: var(--text-muted); margin-top: 0.5rem;">BNR Infrastructure Projects (P) Ltd is established with a vision to build excellence.</p>
 </div>
-<div class="timeline-dot"><span class="material-symbols-outlined" style="font-size: 1.25rem">home</span></div>
-<div class="timeline-content" style="opacity: 0"></div>
 </div>
 <!-- 1995 -->
-<div class="timeline-item even reveal">
+<div class="timeline-item odd reveal">
 <div class="timeline-content">
 <h3 class="timeline-year">1995</h3>
 <p style="font-weight: 700; font-size: 1.25rem;">First Major Highway Project</p>
 <p style="color: var(--text-muted); margin-top: 0.5rem;">Marked our entry into large-scale national infrastructure development.</p>
 </div>
 <div class="timeline-dot"><span class="material-symbols-outlined" style="font-size: 1.25rem">engineering</span></div>
-<div class="timeline-content" style="opacity: 0"></div>
+<div class="timeline-placeholder"></div>
 </div>
 <!-- 2005 -->
-<div class="timeline-item odd reveal">
+<div class="timeline-item even reveal">
+<div class="timeline-placeholder"></div>
+<div class="timeline-dot"><span class="material-symbols-outlined" style="font-size: 1.25rem">public</span></div>
 <div class="timeline-content">
 <h3 class="timeline-year">2005</h3>
 <p style="font-weight: 700; font-size: 1.25rem;">Expansion to South India</p>
 <p style="color: var(--text-muted); margin-top: 0.5rem;">Strategic growth into key southern markets, strengthening our national presence.</p>
 </div>
-<div class="timeline-dot"><span class="material-symbols-outlined" style="font-size: 1.25rem">public</span></div>
-<div class="timeline-content" style="opacity: 0"></div>
 </div>
 <!-- 2020 -->
-<div class="timeline-item even reveal">
+<div class="timeline-item odd reveal">
 <div class="timeline-content">
 <h3 class="timeline-year">2020</h3>
 <p style="font-weight: 700; font-size: 1.25rem;">Smart Infrastructure Projects</p>
 <p style="color: var(--text-muted); margin-top: 0.5rem;">Pioneering technology-driven and sustainable infrastructure solutions.</p>
 </div>
 <div class="timeline-dot"><span class="material-symbols-outlined" style="font-size: 1.25rem">lightbulb</span></div>
-<div class="timeline-content" style="opacity: 0"></div>
+<div class="timeline-placeholder"></div>
 </div>
 <!-- 2024 -->
-<div class="timeline-item odd reveal">
+<div class="timeline-item even reveal">
+<div class="timeline-placeholder"></div>
+<div class="timeline-dot"><span class="material-symbols-outlined" style="font-size: 1.25rem">military_tech</span></div>
 <div class="timeline-content">
 <h3 class="timeline-year">2024</h3>
 <p style="font-weight: 700; font-size: 1.25rem;">50+ Years of Excellence</p>
 <p style="color: var(--text-muted); margin-top: 0.5rem;">Celebrating a half-century of engineering foundations for a better tomorrow.</p>
 </div>
-<div class="timeline-dot"><span class="material-symbols-outlined" style="font-size: 1.25rem">military_tech</span></div>
-<div class="timeline-content" style="opacity: 0"></div>
 </div>
 </div>
 </div>
