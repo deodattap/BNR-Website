@@ -4,6 +4,11 @@ const cors = require('cors');
 const path = require('path');
 require('dotenv').config();
 
+// Ensure JWT_SECRET is always set
+if (!process.env.JWT_SECRET) {
+  process.env.JWT_SECRET = 'bnr_infra_secret_key_2024';
+}
+
 const app = express();
 
 // Middleware
@@ -24,24 +29,26 @@ app.use('/api/quote', require('./routes/quote'));
 app.use('/api/projects', require('./routes/projects'));
 app.use('/api/clients', require('./routes/clients'));
 app.use('/api/admin', require('./routes/admin'));
+app.use('/api/careers', require('./routes/careers'));
 
 // Health check
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', message: 'BNR Infrastructure API is running' });
+  res.json({ status: 'ok', message: 'BNR Infrastructure API is running', db: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected' });
 });
 
-// Connect MongoDB and start server
+// Start server first — DB connection in background
 const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on http://localhost:${PORT}`);
+  console.log(`🔑 Admin: ${process.env.ADMIN_USERNAME || 'admin'} / ${process.env.ADMIN_PASSWORD || 'bnr@admin2024'}`);
+});
 
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => {
-    console.log('✅ MongoDB connected successfully');
-    app.listen(PORT, () => {
-      console.log(`🚀 Server running on http://localhost:${PORT}`);
-    });
-  })
-  .catch(err => {
-    console.error('❌ MongoDB connection error:', err.message);
-    console.log('\n👉 If using local MongoDB, set: MONGO_URI=mongodb://localhost:27017/bnrinfra');
-    process.exit(1);
-  });
+// Connect MongoDB (non-blocking)
+const MONGO_URI = process.env.MONGO_URI;
+if (MONGO_URI && !MONGO_URI.includes('<username>') && !MONGO_URI.includes('<password>')) {
+  mongoose.connect(MONGO_URI)
+    .then(() => console.log('✅ MongoDB connected'))
+    .catch(err => console.error('⚠️ MongoDB error (DB features disabled):', err.message));
+} else {
+  console.log('⚠️ No valid MONGO_URI set. DB features disabled, but admin login still works.');
+}

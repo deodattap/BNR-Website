@@ -7,135 +7,116 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <style>
-:root { --primary:#144bb8; --primary-dark:#0D337B; --bg:#f6f6f8; --white:#fff; --slate-50:#f8fafc; --slate-100:#f1f5f9; --slate-200:#e2e8f0; --slate-400:#94a3b8; --slate-500:#64748b; --slate-600:#475569; --slate-700:#334155; --slate-800:#1e293b; --slate-900:#0f172a; --sidebar-w:260px; }
-* { margin:0; padding:0; box-sizing:border-box; }
-body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--slate-900); min-height:100vh; display:flex; }
-.material-symbols-outlined { font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; }
-@keyframes spin { to { transform:rotate(360deg); } }
-@keyframes fadeIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:none} }
+:root{--primary:#144bb8;--primary-dark:#0D337B;--bg:#f6f6f8;--white:#fff;--sl50:#f8fafc;--sl100:#f1f5f9;--sl200:#e2e8f0;--sl400:#94a3b8;--sl500:#64748b;--sl600:#475569;--sl700:#334155;--sl800:#1e293b;--sl900:#0f172a;--sw:260px;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--sl900);min-height:100vh;display:flex;}
+.material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 
-/* ── SIDEBAR ── */
-.sidebar {
-  width:var(--sidebar-w);
-  background:var(--slate-900);
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  position:fixed;
-  left:0; top:0; bottom:0;
-  z-index:100;
-  overflow-y:auto;
-}
-.sidebar-logo { padding:1.75rem 1.5rem; border-bottom:1px solid rgba(255,255,255,0.07); }
-.sidebar-logo img { max-height:40px; filter:brightness(0) invert(1); }
-.sidebar-nav { flex:1; padding:1rem 0.75rem; }
-.nav-section-label { font-size:0.6875rem; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; color:var(--slate-400); padding:1.25rem 0.75rem 0.5rem; }
-.nav-item {
-  display:flex; align-items:center; gap:0.75rem;
-  padding:0.75rem 0.875rem; border-radius:0.625rem;
-  color:var(--slate-400); text-decoration:none;
-  font-size:0.875rem; font-weight:600;
-  cursor:pointer; border:none; background:none;
-  width:100%; text-align:left;
-  transition:all 0.2s; margin-bottom:0.25rem;
-}
-.nav-item:hover { background:rgba(255,255,255,0.06); color:white; }
-.nav-item.active { background:rgba(20,75,184,0.3); color:white; }
-.nav-item .material-symbols-outlined { font-size:1.25rem; }
-.nav-badge { margin-left:auto; background:var(--primary); color:white; border-radius:9999px; font-size:0.6875rem; font-weight:700; padding:0.125rem 0.5rem; min-width:20px; text-align:center; }
-.sidebar-footer { padding:1rem 1.5rem; border-top:1px solid rgba(255,255,255,0.07); }
-.sidebar-user { display:flex; align-items:center; gap:0.75rem; }
-.user-avatar { width:36px; height:36px; border-radius:9999px; background:var(--primary); display:flex; align-items:center; justify-content:center; color:white; font-size:0.875rem; font-weight:700; }
-.user-info { flex:1; }
-.user-name { font-size:0.875rem; font-weight:700; color:white; }
-.user-role { font-size:0.75rem; color:var(--slate-400); }
-.btn-logout { background:none; border:none; cursor:pointer; color:var(--slate-400); transition:color 0.2s; padding:0.25rem; }
-.btn-logout:hover { color:#f87171; }
+/* SIDEBAR */
+.sidebar{width:var(--sw);background:var(--sl900);min-height:100vh;display:flex;flex-direction:column;position:fixed;left:0;top:0;bottom:0;z-index:100;overflow-y:auto;}
+.sidebar-logo{padding:1.5rem;border-bottom:1px solid rgba(255,255,255,0.07);}
+.sidebar-logo img{max-height:38px;filter:brightness(0) invert(1);}
+.sidebar-nav{flex:1;padding:1rem 0.75rem;}
+.nav-section-label{font-size:0.6875rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--sl400);padding:1.25rem 0.75rem 0.5rem;}
+.nav-item{display:flex;align-items:center;gap:0.75rem;padding:0.75rem 0.875rem;border-radius:0.625rem;color:var(--sl400);text-decoration:none;font-size:0.875rem;font-weight:600;cursor:pointer;border:none;background:none;width:100%;text-align:left;transition:all 0.2s;margin-bottom:0.25rem;}
+.nav-item:hover{background:rgba(255,255,255,0.06);color:white;}
+.nav-item.active{background:rgba(20,75,184,0.35);color:white;}
+.nav-item .material-symbols-outlined{font-size:1.25rem;}
+.nav-badge{margin-left:auto;background:var(--primary);color:white;border-radius:9999px;font-size:0.6875rem;font-weight:700;padding:0.125rem 0.5rem;min-width:20px;text-align:center;}
+.sidebar-footer{padding:1rem 1.25rem;border-top:1px solid rgba(255,255,255,0.07);}
+.sidebar-user{display:flex;align-items:center;gap:0.75rem;}
+.user-avatar{width:36px;height:36px;border-radius:50%;background:var(--primary);display:flex;align-items:center;justify-content:center;color:white;font-size:0.875rem;font-weight:700;flex-shrink:0;}
+.user-info{flex:1;min-width:0;}
+.user-name{font-size:0.875rem;font-weight:700;color:white;}
+.user-role{font-size:0.75rem;color:var(--sl400);}
+.btn-logout{background:none;border:none;cursor:pointer;color:var(--sl400);transition:color 0.2s;padding:0.25rem;display:flex;}
+.btn-logout:hover{color:#f87171;}
 
-/* ── MAIN ── */
-.main-content { margin-left:var(--sidebar-w); flex:1; min-height:100vh; display:flex; flex-direction:column; }
-.topbar {
-  background:white; border-bottom:1px solid var(--slate-200);
-  padding:0 2rem; height:72px;
-  display:flex; align-items:center; justify-content:space-between;
-  position:sticky; top:0; z-index:50;
-}
-.page-title { font-size:1.25rem; font-weight:800; }
-.topbar-right { display:flex; align-items:center; gap:1rem; }
-.btn-visit { display:inline-flex; align-items:center; gap:0.375rem; padding:0.5rem 1rem; background:var(--bg); border:1.5px solid var(--slate-200); border-radius:0.5rem; font-size:0.8125rem; font-weight:600; color:var(--slate-600); text-decoration:none; transition:all 0.2s; }
-.btn-visit:hover { border-color:var(--primary); color:var(--primary); }
+/* MAIN */
+.main-content{margin-left:var(--sw);flex:1;display:flex;flex-direction:column;}
+.topbar{background:white;border-bottom:1px solid var(--sl200);padding:0 2rem;height:72px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;}
+.page-title{font-size:1.25rem;font-weight:800;}
+.topbar-right{display:flex;align-items:center;gap:0.75rem;}
+.btn-topbar{display:inline-flex;align-items:center;gap:0.375rem;padding:0.5rem 1rem;border:1.5px solid var(--sl200);border-radius:0.5rem;font-size:0.8125rem;font-weight:600;color:var(--sl600);text-decoration:none;background:var(--bg);transition:all 0.2s;cursor:pointer;}
+.btn-topbar:hover{border-color:var(--primary);color:var(--primary);}
 
-/* PAGE CONTENT */
-.page-body { padding:2rem; flex:1; }
-.section-panel { display:none; animation:fadeIn 0.3s ease; }
-.section-panel.active { display:block; }
+/* PAGE BODY */
+.page-body{padding:2rem;flex:1;}
+.section-panel{display:none;animation:fadeIn 0.3s ease;}
+.section-panel.active{display:block;}
 
-/* CARDS row */
-.stat-cards { display:grid; grid-template-columns:repeat(2,1fr); gap:1.25rem; margin-bottom:2rem; }
-@media (min-width:1200px) { .stat-cards { grid-template-columns:repeat(4,1fr); } }
-.stat-card { background:white; border-radius:1rem; padding:1.5rem; border:1px solid var(--slate-200); display:flex; align-items:center; gap:1rem; }
-.stat-icon { width:48px; height:48px; border-radius:0.75rem; background:rgba(20,75,184,0.1); display:flex; align-items:center; justify-content:center; color:var(--primary); flex-shrink:0; }
-.stat-value { font-size:1.75rem; font-weight:900; color:var(--slate-900); }
-.stat-label { font-size:0.8125rem; color:var(--slate-500); font-weight:500; }
+/* STAT CARDS */
+.stat-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem;margin-bottom:2rem;}
+@media(min-width:1200px){.stat-cards{grid-template-columns:repeat(5,1fr);}}
+.stat-card{background:white;border-radius:1rem;padding:1.25rem 1.5rem;border:1px solid var(--sl200);display:flex;align-items:center;gap:1rem;}
+.stat-icon{width:44px;height:44px;border-radius:0.625rem;background:rgba(20,75,184,0.1);display:flex;align-items:center;justify-content:center;color:var(--primary);flex-shrink:0;}
+.stat-value{font-size:1.75rem;font-weight:900;color:var(--sl900);}
+.stat-label{font-size:0.8125rem;color:var(--sl500);font-weight:500;}
 
 /* SECTION HEADER */
-.sec-hdr { display:flex; align-items:center; justify-content:space-between; margin-bottom:1.5rem; flex-wrap:wrap; gap:1rem; }
-.sec-hdr h2 { font-size:1.25rem; font-weight:800; }
-.btn-add { display:inline-flex; align-items:center; gap:0.5rem; padding:0.625rem 1.25rem; background:var(--primary); color:white; border:none; border-radius:0.625rem; font-weight:700; font-size:0.875rem; cursor:pointer; transition:all 0.2s; }
-.btn-add:hover { background:var(--primary-dark); transform:translateY(-1px); }
-.btn-sm { padding:0.375rem 0.875rem; font-size:0.8125rem; border-radius:0.5rem; border:none; cursor:pointer; font-weight:600; transition:all 0.2s; }
-.btn-danger { background:#fef2f2; color:#dc2626; }
-.btn-danger:hover { background:#fee2e2; }
-.btn-sec { background:var(--slate-100); color:var(--slate-700); }
-.btn-sec:hover { background:var(--slate-200); }
+.sec-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem;}
+.sec-hdr h2{font-size:1.25rem;font-weight:800;}
+.db-warning{background:#fef9c3;border:1px solid #fde047;color:#854d0e;padding:0.75rem 1rem;border-radius:0.625rem;font-size:0.8125rem;font-weight:600;margin-bottom:1.5rem;display:none;align-items:center;gap:0.5rem;}
 
-/* ADD FORM MODAL */
-.modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:200; align-items:center; justify-content:center; }
-.modal-overlay.open { display:flex; }
-.modal { background:white; border-radius:1.25rem; padding:2rem; width:100%; max-width:500px; max-height:90vh; overflow-y:auto; box-shadow:0 25px 50px rgba(0,0,0,0.25); animation:fadeIn 0.25s ease; position:relative; }
-.modal h3 { font-size:1.25rem; font-weight:800; margin-bottom:1.5rem; }
-.form-group { margin-bottom:1.25rem; }
-.form-group label { display:block; font-size:0.8125rem; font-weight:600; margin-bottom:0.4rem; color:var(--slate-800); }
-.form-group input, .form-group textarea, .form-group select { width:100%; padding:0.75rem 1rem; border:1.5px solid var(--slate-200); border-radius:0.625rem; font-family:'Inter',sans-serif; font-size:0.9375rem; color:var(--slate-900); outline:none; transition:all 0.2s; background:var(--bg); }
-.form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color:var(--primary); box-shadow:0 0 0 3px rgba(20,75,184,0.1); background:white; }
-.form-group textarea { resize:vertical; min-height:100px; }
-.modal-actions { display:flex; gap:0.75rem; justify-content:flex-end; margin-top:1.5rem; }
-.btn-close-modal { position:absolute; top:1rem; right:1rem; background:none; border:none; cursor:pointer; color:var(--slate-400); font-size:1.5rem; line-height:1; transition:color 0.2s; padding:0.25rem; }
-.btn-close-modal:hover { color:var(--slate-900); }
+/* BUTTONS */
+.btn-add{display:inline-flex;align-items:center;gap:0.5rem;padding:0.625rem 1.25rem;background:var(--primary);color:white;border:none;border-radius:0.625rem;font-weight:700;font-size:0.875rem;cursor:pointer;transition:all 0.2s;}
+.btn-add:hover{background:var(--primary-dark);transform:translateY(-1px);}
+.btn-sm{padding:0.375rem 0.875rem;font-size:0.8125rem;border-radius:0.5rem;border:none;cursor:pointer;font-weight:600;transition:all 0.2s;display:inline-flex;align-items:center;gap:0.25rem;}
+.btn-danger{background:#fef2f2;color:#dc2626;}
+.btn-danger:hover{background:#fee2e2;}
+.btn-sec{background:var(--sl100);color:var(--sl700);}
+.btn-sec:hover{background:var(--sl200);}
+
+/* MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:200;align-items:center;justify-content:center;}
+.modal-overlay.open{display:flex;}
+.modal{background:white;border-radius:1.25rem;padding:2rem;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;box-shadow:0 25px 50px rgba(0,0,0,0.25);animation:fadeIn 0.25s ease;position:relative;}
+.modal h3{font-size:1.25rem;font-weight:800;margin-bottom:1.5rem;}
+.fg{margin-bottom:1.25rem;}
+.fg label{display:block;font-size:0.8125rem;font-weight:600;margin-bottom:0.4rem;color:var(--sl800);}
+.fg input,.fg textarea,.fg select{width:100%;padding:0.75rem 1rem;border:1.5px solid var(--sl200);border-radius:0.625rem;font-family:'Inter',sans-serif;font-size:0.9375rem;color:var(--sl900);outline:none;transition:all 0.2s;background:var(--bg);}
+.fg input:focus,.fg textarea:focus,.fg select:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(20,75,184,0.1);background:white;}
+.fg textarea{resize:vertical;min-height:90px;}
+.row-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.modal-actions{display:flex;gap:0.75rem;justify-content:flex-end;margin-top:1.5rem;}
+.btn-close-modal{position:absolute;top:1rem;right:1rem;background:none;border:none;cursor:pointer;color:var(--sl400);font-size:1.5rem;line-height:1;padding:0.25rem;transition:color 0.2s;}
+.btn-close-modal:hover{color:var(--sl900);}
+.img-preview{width:100%;height:160px;object-fit:cover;border-radius:0.625rem;margin-top:0.5rem;display:none;border:1.5px solid var(--sl200);}
 
 /* TABLES */
-.table-wrap { background:white; border-radius:1rem; border:1px solid var(--slate-200); overflow:hidden; }
-table { width:100%; border-collapse:collapse; }
-th { background:var(--slate-50); padding:0.875rem 1.25rem; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; color:var(--slate-500); text-align:left; border-bottom:1px solid var(--slate-200); }
-td { padding:1rem 1.25rem; font-size:0.875rem; border-bottom:1px solid var(--slate-100); vertical-align:middle; color:var(--slate-700); }
-tr:last-child td { border-bottom:none; }
-tr:hover td { background:var(--slate-50); }
-.td-name { font-weight:700; color:var(--slate-900); }
-.badge { display:inline-block; padding:0.2rem 0.625rem; border-radius:9999px; font-size:0.75rem; font-weight:600; }
-.badge-blue { background:rgba(20,75,184,0.1); color:var(--primary); }
-.badge-green { background:#f0fdf4; color:#16a34a; }
+.table-wrap{background:white;border-radius:1rem;border:1px solid var(--sl200);overflow:hidden;overflow-x:auto;}
+table{width:100%;border-collapse:collapse;}
+th{background:var(--sl50);padding:0.875rem 1.25rem;font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:var(--sl500);text-align:left;border-bottom:1px solid var(--sl200);}
+td{padding:0.875rem 1.25rem;font-size:0.875rem;border-bottom:1px solid var(--sl100);vertical-align:middle;color:var(--sl700);}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:var(--sl50);}
+.td-name{font-weight:700;color:var(--sl900);}
+.badge{display:inline-block;padding:0.2rem 0.625rem;border-radius:9999px;font-size:0.75rem;font-weight:600;}
+.badge-blue{background:rgba(20,75,184,0.1);color:var(--primary);}
+.badge-green{background:#f0fdf4;color:#16a34a;}
+.proj-img{width:64px;height:48px;border-radius:0.5rem;object-fit:cover;}
+
+/* CLIENTS GRID */
+.clients-admin-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:1rem;}
+.client-admin-card{background:white;border:1.5px solid var(--sl200);border-radius:0.875rem;padding:1.25rem;display:flex;flex-direction:column;align-items:center;gap:0.75rem;position:relative;transition:border-color 0.2s;}
+.client-admin-card:hover{border-color:var(--primary);}
+.client-admin-card img{max-height:48px;max-width:110px;object-fit:contain;}
+.c-name{font-size:0.8125rem;font-weight:600;color:var(--sl700);text-align:center;}
+.card-del{position:absolute;top:0.5rem;right:0.5rem;background:#fef2f2;border:none;color:#dc2626;border-radius:0.375rem;cursor:pointer;width:28px;height:28px;display:flex;align-items:center;justify-content:center;transition:background 0.2s;}
+.card-del:hover{background:#fee2e2;}
+.card-del .material-symbols-outlined{font-size:1rem;}
 
 /* EMPTY STATE */
-.empty-state { text-align:center; padding:4rem 1.5rem; color:var(--slate-500); }
-.empty-state .material-symbols-outlined { font-size:3rem; color:var(--slate-300); display:block; margin-bottom:1rem; }
-
-/* CLIENTS GRID (admin) */
-.clients-admin-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:1rem; }
-.client-admin-card { background:white; border:1.5px solid var(--slate-200); border-radius:0.875rem; padding:1.25rem; display:flex; flex-direction:column; align-items:center; gap:0.75rem; position:relative; }
-.client-admin-card img { max-height:50px; max-width:120px; object-fit:contain; }
-.client-admin-card .c-name { font-size:0.8125rem; font-weight:600; color:var(--slate-700); text-align:center; }
-.client-del-btn { position:absolute; top:0.5rem; right:0.5rem; background:#fef2f2; border:none; color:#dc2626; border-radius:0.375rem; cursor:pointer; width:28px; height:28px; display:flex; align-items:center; justify-content:center; transition:background 0.2s; }
-.client-del-btn:hover { background:#fee2e2; }
-.client-del-btn .material-symbols-outlined { font-size:1rem; }
+.empty-state{text-align:center;padding:4rem 1.5rem;color:var(--sl500);}
+.empty-state .material-symbols-outlined{font-size:3rem;color:var(--sl300);display:block;margin-bottom:1rem;}
 
 /* TOAST */
-.toast { position:fixed; bottom:2rem; right:2rem; background:var(--slate-900); color:white; padding:0.875rem 1.5rem; border-radius:0.75rem; font-size:0.875rem; font-weight:600; z-index:999; display:none; align-items:center; gap:0.5rem; box-shadow:0 10px 30px rgba(0,0,0,0.3); animation:fadeIn 0.3s ease; }
-.toast.success { background:#166534; }
-.toast.error { background:#991b1b; }
-
-/* PROJECT IMG in table */
-.proj-img { width:64px; height:48px; border-radius:0.5rem; object-fit:cover; }
-.proj-img-placeholder { width:64px; height:48px; border-radius:0.5rem; background:var(--slate-100); display:flex; align-items:center; justify-content:center; }
+.toast{position:fixed;bottom:2rem;right:2rem;color:white;padding:0.875rem 1.5rem;border-radius:0.75rem;font-size:0.875rem;font-weight:600;z-index:999;display:none;align-items:center;gap:0.5rem;box-shadow:0 10px 30px rgba(0,0,0,0.3);animation:fadeIn 0.3s ease;}
+.toast.success{background:#166534;}
+.toast.error{background:#991b1b;}
+.toast.info{background:var(--primary-dark);}
 </style>
 </head>
 <body>
@@ -149,28 +130,26 @@ tr:hover td { background:var(--slate-50); }
 <!-- SIDEBAR -->
 <aside class="sidebar">
   <div class="sidebar-logo">
-    <img src="https://www.bnrinfra.com/wp-content/uploads/2021/05/logo.png" alt="BNR Infrastructure">
+    <img src="https://www.bnrinfra.com/wp-content/uploads/2021/05/logo.png" alt="BNR">
   </div>
   <nav class="sidebar-nav">
-    <div class="nav-section-label">Overview</div>
-    <button class="nav-item active" onclick="showSection('projects', this)">
-      <span class="material-symbols-outlined">construction</span>
-      Projects
+    <div class="nav-section-label">Content</div>
+    <button class="nav-item active" onclick="showSection('projects',this)">
+      <span class="material-symbols-outlined">construction</span> Projects
     </button>
-    <button class="nav-item" onclick="showSection('clients', this)">
-      <span class="material-symbols-outlined">groups</span>
-      Clients
+    <button class="nav-item" onclick="showSection('clients',this)">
+      <span class="material-symbols-outlined">groups</span> Clients
     </button>
-
+    <button class="nav-item" onclick="showSection('careers',this)">
+      <span class="material-symbols-outlined">work</span> Job Openings
+    </button>
     <div class="nav-section-label">Inquiries</div>
-    <button class="nav-item" onclick="showSection('messages', this)" id="nav-messages">
-      <span class="material-symbols-outlined">mail</span>
-      Messages
+    <button class="nav-item" onclick="showSection('messages',this)" id="nav-messages">
+      <span class="material-symbols-outlined">mail</span> Messages
       <span class="nav-badge" id="msgBadge" style="display:none">0</span>
     </button>
-    <button class="nav-item" onclick="showSection('quotes', this)" id="nav-quotes">
-      <span class="material-symbols-outlined">request_quote</span>
-      Quotes
+    <button class="nav-item" onclick="showSection('quotes',this)" id="nav-quotes">
+      <span class="material-symbols-outlined">request_quote</span> Quotes
       <span class="nav-badge" id="qtBadge" style="display:none">0</span>
     </button>
   </nav>
@@ -193,33 +172,43 @@ tr:hover td { background:var(--slate-50); }
   <header class="topbar">
     <div class="page-title" id="pageTitle">Projects</div>
     <div class="topbar-right">
-      <a href="index.html" class="btn-visit" target="_blank">
-        <span class="material-symbols-outlined" style="font-size:1rem;">open_in_new</span>
-        View Website
+      <div id="dbStatus" class="btn-topbar" style="pointer-events:none;gap:0.4rem;">
+        <span class="material-symbols-outlined" style="font-size:1rem;">circle</span>
+        <span id="dbStatusText">Checking...</span>
+      </div>
+      <a href="index.html" class="btn-topbar" target="_blank">
+        <span class="material-symbols-outlined" style="font-size:1rem;">open_in_new</span> View Site
       </a>
     </div>
   </header>
 
   <div class="page-body">
 
+    <!-- DB WARNING BANNER -->
+    <div class="db-warning" id="dbWarning">
+      <span class="material-symbols-outlined" style="font-size:1rem;">warning</span>
+      <span>MongoDB not connected. Content changes will not be saved until you add a valid <b>MONGO_URI</b> in <code>backend/.env</code> and restart the server. Admin login still works.</span>
+    </div>
+
+    <!-- STATS ROW -->
+    <div class="stat-cards reveal" id="dashStats">
+      <div class="stat-card"><div class="stat-icon"><span class="material-symbols-outlined">construction</span></div><div><div class="stat-value" id="statProj">–</div><div class="stat-label">Projects</div></div></div>
+      <div class="stat-card"><div class="stat-icon"><span class="material-symbols-outlined">groups</span></div><div><div class="stat-value" id="statClients">–</div><div class="stat-label">Clients</div></div></div>
+      <div class="stat-card"><div class="stat-icon"><span class="material-symbols-outlined">work</span></div><div><div class="stat-value" id="statCareers">–</div><div class="stat-label">Job Openings</div></div></div>
+      <div class="stat-card"><div class="stat-icon"><span class="material-symbols-outlined">mail</span></div><div><div class="stat-value" id="statMsg">–</div><div class="stat-label">Messages</div></div></div>
+      <div class="stat-card"><div class="stat-icon"><span class="material-symbols-outlined">request_quote</span></div><div><div class="stat-value" id="statQt">–</div><div class="stat-label">Quotes</div></div></div>
+    </div>
+
     <!-- ── PROJECTS ── -->
     <div class="section-panel active" id="sec-projects">
-      <div class="stat-cards" id="dashStats">
-        <div class="stat-card"><div class="stat-icon"><span class="material-symbols-outlined">construction</span></div><div><div class="stat-value" id="statProj">–</div><div class="stat-label">Total Projects</div></div></div>
-        <div class="stat-card"><div class="stat-icon"><span class="material-symbols-outlined">groups</span></div><div><div class="stat-value" id="statClients">–</div><div class="stat-label">Clients</div></div></div>
-        <div class="stat-card"><div class="stat-icon"><span class="material-symbols-outlined">mail</span></div><div><div class="stat-value" id="statMsg">–</div><div class="stat-label">Messages</div></div></div>
-        <div class="stat-card"><div class="stat-icon"><span class="material-symbols-outlined">request_quote</span></div><div><div class="stat-value" id="statQt">–</div><div class="stat-label">Quotes</div></div></div>
-      </div>
       <div class="sec-hdr">
         <h2>Projects</h2>
-        <button class="btn-add" onclick="openModal('project')">
-          <span class="material-symbols-outlined">add</span> Add Project
-        </button>
+        <button class="btn-add" onclick="openModal('project')"><span class="material-symbols-outlined">add</span> Add Project</button>
       </div>
       <div class="table-wrap">
         <table>
-          <thead><tr><th>Image</th><th>Title</th><th>Category</th><th>Location</th><th>Year</th><th>Actions</th></tr></thead>
-          <tbody id="projectsTable"><tr><td colspan="6" class="empty-state"><span class="material-symbols-outlined">hourglass_empty</span>Loading...</td></tr></tbody>
+          <thead><tr><th>Image</th><th>Title</th><th>Category</th><th>Location</th><th>Year</th><th style="min-width:110px">Actions</th></tr></thead>
+          <tbody id="projectsTable"><tr><td colspan="6"><div class="empty-state"><span class="material-symbols-outlined">hourglass_empty</span>Loading...</div></td></tr></tbody>
         </table>
       </div>
     </div>
@@ -228,11 +217,24 @@ tr:hover td { background:var(--slate-50); }
     <div class="section-panel" id="sec-clients">
       <div class="sec-hdr">
         <h2>Clients</h2>
-        <button class="btn-add" onclick="openModal('client')">
-          <span class="material-symbols-outlined">add</span> Add Client
-        </button>
+        <button class="btn-add" onclick="openModal('client')"><span class="material-symbols-outlined">add</span> Add Client</button>
       </div>
-      <div class="clients-admin-grid" id="clientsGrid"></div>
+      <div class="clients-admin-grid" id="clientsGrid"><div class="empty-state" style="grid-column:1/-1"><span class="material-symbols-outlined">hourglass_empty</span>Loading...</div></div>
+    </div>
+
+    <!-- ── CAREERS ── -->
+    <div class="section-panel" id="sec-careers">
+      <div class="sec-hdr">
+        <h2>Job Openings</h2>
+        <button class="btn-add" onclick="openModal('career')"><span class="material-symbols-outlined">add</span> Add Opening</button>
+      </div>
+      <p style="color:var(--sl500);font-size:0.875rem;margin-bottom:1.25rem;">Job openings listed here are shown on the Careers page. Add/remove them to update what applicants see.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Title</th><th>Department</th><th>Location</th><th>Type</th><th style="min-width:90px">Actions</th></tr></thead>
+          <tbody id="careersTable"><tr><td colspan="5"><div class="empty-state"><span class="material-symbols-outlined">hourglass_empty</span>Loading...</div></td></tr></tbody>
+        </table>
+      </div>
     </div>
 
     <!-- ── MESSAGES ── -->
@@ -240,8 +242,8 @@ tr:hover td { background:var(--slate-50); }
       <div class="sec-hdr"><h2>Contact Messages</h2></div>
       <div class="table-wrap">
         <table>
-          <thead><tr><th>Date</th><th>Name</th><th>Email</th><th>Phone</th><th>Project Type</th><th>Message</th><th>Actions</th></tr></thead>
-          <tbody id="messagesTable"><tr><td colspan="7" class="empty-state"><span class="material-symbols-outlined">hourglass_empty</span>Loading...</td></tr></tbody>
+          <thead><tr><th>Date</th><th>Name</th><th>Email</th><th>Phone</th><th>Project Type</th><th>Message</th><th>Del</th></tr></thead>
+          <tbody id="messagesTable"><tr><td colspan="7"><div class="empty-state"><span class="material-symbols-outlined">hourglass_empty</span>Loading...</div></td></tr></tbody>
         </table>
       </div>
     </div>
@@ -251,8 +253,8 @@ tr:hover td { background:var(--slate-50); }
       <div class="sec-hdr"><h2>Quote Requests</h2></div>
       <div class="table-wrap">
         <table>
-          <thead><tr><th>Date</th><th>Name</th><th>Email</th><th>Project Type</th><th>Location</th><th>Budget</th><th>Actions</th></tr></thead>
-          <tbody id="quotesTable"><tr><td colspan="7" class="empty-state"><span class="material-symbols-outlined">hourglass_empty</span>Loading...</td></tr></tbody>
+          <thead><tr><th>Date</th><th>Name</th><th>Email</th><th>Project Type</th><th>Location</th><th>Budget</th><th>Del</th></tr></thead>
+          <tbody id="quotesTable"><tr><td colspan="7"><div class="empty-state"><span class="material-symbols-outlined">hourglass_empty</span>Loading...</div></td></tr></tbody>
         </table>
       </div>
     </div>
@@ -260,29 +262,28 @@ tr:hover td { background:var(--slate-50); }
   </div>
 </div>
 
-<!-- ── ADD PROJECT MODAL ── -->
+<!-- ADD PROJECT MODAL -->
 <div class="modal-overlay" id="modal-project">
   <div class="modal">
     <button class="btn-close-modal" onclick="closeModal('project')">&times;</button>
     <h3>Add New Project</h3>
     <form id="projectForm" onsubmit="submitProject(event)">
-      <div class="form-group"><label>Project Title *</label><input type="text" name="title" placeholder="e.g. National Highway Widening" required></div>
-      <div class="form-group"><label>Description</label><textarea name="description" placeholder="Brief project description..."></textarea></div>
-      <div class="form-group"><label>Image URL</label><input type="url" name="image" placeholder="https://..."></div>
-      <div class="form-group"><label>Category</label>
+      <div class="fg"><label>Project Title *</label><input type="text" name="title" placeholder="e.g. National Highway Widening" required></div>
+      <div class="fg"><label>Description</label><textarea name="description" placeholder="Brief project description..."></textarea></div>
+      <div class="fg">
+        <label>Image URL (paste a direct image link)</label>
+        <input type="url" name="image" placeholder="https://..." oninput="previewImg(this,'projImgPrev')">
+        <img id="projImgPrev" class="img-preview" alt="Preview">
+      </div>
+      <div class="fg"><label>Category</label>
         <select name="category">
-          <option value="">Select category</option>
-          <option>Highway & Roads</option>
-          <option>Bridge Engineering</option>
-          <option>Urban Transit</option>
-          <option>Industrial</option>
-          <option>Railway</option>
-          <option>Water Infrastructure</option>
+          <option>Highway & Roads</option><option>Bridge Engineering</option><option>Urban Transit</option>
+          <option>Industrial</option><option>Railway</option><option>Water Infrastructure</option>
         </select>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
-        <div class="form-group"><label>Location</label><input type="text" name="location" placeholder="City, State"></div>
-        <div class="form-group"><label>Year</label><input type="text" name="year" placeholder="2023"></div>
+      <div class="row-2">
+        <div class="fg"><label>Location</label><input type="text" name="location" placeholder="City, State"></div>
+        <div class="fg"><label>Year</label><input type="text" name="year" placeholder="2024"></div>
       </div>
       <div class="modal-actions">
         <button type="button" class="btn-sm btn-sec" onclick="closeModal('project')">Cancel</button>
@@ -292,14 +293,18 @@ tr:hover td { background:var(--slate-50); }
   </div>
 </div>
 
-<!-- ── ADD CLIENT MODAL ── -->
+<!-- ADD CLIENT MODAL -->
 <div class="modal-overlay" id="modal-client">
   <div class="modal">
     <button class="btn-close-modal" onclick="closeModal('client')">&times;</button>
     <h3>Add New Client</h3>
     <form id="clientForm" onsubmit="submitClient(event)">
-      <div class="form-group"><label>Client / Organization Name *</label><input type="text" name="name" placeholder="e.g. L&T Construction" required></div>
-      <div class="form-group"><label>Logo URL *</label><input type="url" name="logo" placeholder="https://..." required></div>
+      <div class="fg"><label>Client / Organization Name *</label><input type="text" name="name" placeholder="e.g. L&T Construction" required></div>
+      <div class="fg">
+        <label>Logo URL *</label>
+        <input type="url" name="logo" placeholder="https://..." required oninput="previewImg(this,'clientImgPrev')">
+        <img id="clientImgPrev" class="img-preview" alt="Logo Preview">
+      </div>
       <div class="modal-actions">
         <button type="button" class="btn-sm btn-sec" onclick="closeModal('client')">Cancel</button>
         <button type="submit" class="btn-add"><span class="material-symbols-outlined">save</span> Save Client</button>
@@ -308,23 +313,75 @@ tr:hover td { background:var(--slate-50); }
   </div>
 </div>
 
+<!-- ADD CAREER MODAL -->
+<div class="modal-overlay" id="modal-career">
+  <div class="modal">
+    <button class="btn-close-modal" onclick="closeModal('career')">&times;</button>
+    <h3>Add Job Opening</h3>
+    <form id="careerForm" onsubmit="submitCareer(event)">
+      <div class="fg"><label>Job Title *</label><input type="text" name="title" placeholder="e.g. Senior Structural Engineer" required></div>
+      <div class="row-2">
+        <div class="fg"><label>Department</label>
+          <select name="department">
+            <option>Engineering</option><option>Project Management</option><option>Architecture</option>
+            <option>Sustainability</option><option>Operations</option><option>Finance</option><option>HR</option>
+          </select>
+        </div>
+        <div class="fg"><label>Type</label>
+          <select name="type">
+            <option>Full-time</option><option>Part-time</option><option>Contract</option><option>Internship</option>
+          </select>
+        </div>
+      </div>
+      <div class="fg"><label>Location</label><input type="text" name="location" placeholder="e.g. Chennai, TN"></div>
+      <div class="fg"><label>Description</label><textarea name="description" placeholder="Role responsibilities and requirements..."></textarea></div>
+      <div class="modal-actions">
+        <button type="button" class="btn-sm btn-sec" onclick="closeModal('career')">Cancel</button>
+        <button type="submit" class="btn-add"><span class="material-symbols-outlined">save</span> Post Opening</button>
+      </div>
+    </form>
+  </div>
+</div>
+
 <script src="js/api.js"></script>
 <script>
 // ── AUTH GUARD ──
-if (!localStorage.getItem('bnr_admin_token')) {
-  window.location.href = 'admin-login.html';
-}
+if (!localStorage.getItem('bnr_admin_token')) window.location.href = 'admin-login.html';
 
 // ── TOAST ──
-function showToast(msg, type = 'success') {
-  const toast = document.getElementById('toast');
-  const icon = document.getElementById('toastIcon');
-  const msgEl = document.getElementById('toastMsg');
-  toast.className = 'toast ' + type;
-  icon.textContent = type === 'success' ? 'check_circle' : 'error';
-  msgEl.textContent = msg;
-  toast.style.display = 'flex';
-  setTimeout(() => { toast.style.display = 'none'; }, 3500);
+function showToast(msg, type='success') {
+  const t = document.getElementById('toast'), i = document.getElementById('toastIcon'), m = document.getElementById('toastMsg');
+  t.className = 'toast ' + type;
+  i.textContent = type === 'success' ? 'check_circle' : type === 'error' ? 'error' : 'info';
+  m.textContent = msg;
+  t.style.display = 'flex';
+  setTimeout(() => t.style.display = 'none', 3500);
+}
+
+// ── DB STATUS ──
+async function checkDbStatus() {
+  try {
+    const res = await fetch(`${API_BASE}/health`);
+    const data = await res.json();
+    const el = document.getElementById('dbStatus');
+    const txt = document.getElementById('dbStatusText');
+    const warn = document.getElementById('dbWarning');
+    if (data.db === 'connected') {
+      el.style.color = '#16a34a'; el.style.borderColor = '#bbf7d0';
+      txt.textContent = 'DB Connected';
+      el.querySelector('.material-symbols-outlined').style.color = '#16a34a';
+      warn.style.display = 'none';
+    } else {
+      el.style.color = '#d97706'; el.style.borderColor = '#fde68a';
+      txt.textContent = 'DB Offline';
+      el.querySelector('.material-symbols-outlined').style.color = '#d97706';
+      warn.style.display = 'flex';
+    }
+  } catch {
+    document.getElementById('dbStatusText').textContent = 'Server Offline';
+    document.getElementById('dbWarning').style.display = 'flex';
+    document.getElementById('dbWarning').querySelector('span:last-child').textContent = '⚠️ Backend server is not running. Start it with: cd backend && node server.js';
+  }
 }
 
 // ── NAVIGATION ──
@@ -333,216 +390,178 @@ function showSection(name, btn) {
   document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
   document.getElementById('sec-' + name).classList.add('active');
   btn.classList.add('active');
-  document.getElementById('pageTitle').textContent = btn.textContent.trim().split('\n')[0];
+  document.getElementById('pageTitle').textContent = btn.textContent.trim().split('\n')[0].trim();
   if (name === 'messages') loadMessages();
   if (name === 'quotes') loadQuotes();
   if (name === 'clients') loadClients();
+  if (name === 'careers') loadCareers();
 }
 
 // ── MODAL ──
-function openModal(name) {
-  document.getElementById('modal-' + name).classList.add('open');
+function openModal(name) { document.getElementById('modal-' + name).classList.add('open'); }
+function closeModal(name) { document.getElementById('modal-' + name).classList.remove('open'); }
+document.querySelectorAll('.modal-overlay').forEach(m => m.addEventListener('click', e => { if (e.target === m) m.classList.remove('open'); }));
+
+// ── IMAGE PREVIEW ──
+function previewImg(input, previewId) {
+  const prev = document.getElementById(previewId);
+  if (input.value && input.value.startsWith('http')) {
+    prev.src = input.value;
+    prev.style.display = 'block';
+    prev.onerror = () => prev.style.display = 'none';
+  } else {
+    prev.style.display = 'none';
+  }
 }
-function closeModal(name) {
-  document.getElementById('modal-' + name).classList.remove('open');
-}
-// Close on overlay click
-document.querySelectorAll('.modal-overlay').forEach(m => {
-  m.addEventListener('click', e => { if (e.target === m) m.classList.remove('open'); });
-});
 
 // ── FORMAT DATE ──
-function fmtDate(d) {
-  return new Date(d).toLocaleDateString('en-IN', { day:'2-digit', month:'short', year:'numeric' });
-}
+function fmtDate(d) { return new Date(d).toLocaleDateString('en-IN', { day:'2-digit', month:'short', year:'numeric' }); }
 
 // ── PROJECTS ──
-let projectsData = [];
 async function loadProjects() {
-  try {
-    projectsData = await fetchProjects();
-    renderProjects();
-    document.getElementById('statProj').textContent = projectsData.length;
-  } catch {
-    document.getElementById('projectsTable').innerHTML = `<tr><td colspan="6"><div class="empty-state"><span class="material-symbols-outlined">cloud_off</span>Could not load projects. Is the backend running?</div></td></tr>`;
-  }
-}
-function renderProjects() {
+  const data = await fetchProjects();
+  document.getElementById('statProj').textContent = data.length;
   const tbody = document.getElementById('projectsTable');
-  if (projectsData.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="6"><div class="empty-state"><span class="material-symbols-outlined">construction</span>No projects yet. Click "Add Project" to start.</div></td></tr>`;
-    return;
-  }
-  tbody.innerHTML = projectsData.map(p => `
-    <tr>
-      <td>${p.image ? `<img class="proj-img" src="${p.image}" alt="${p.title}" onerror="this.style.display='none'">` : `<div class="proj-img-placeholder"><span class="material-symbols-outlined" style="color:var(--slate-300)">image</span></div>`}</td>
-      <td class="td-name">${p.title}</td>
-      <td><span class="badge badge-blue">${p.category || '–'}</span></td>
-      <td>${p.location || '–'}</td>
-      <td>${p.year || '–'}</td>
-      <td><button class="btn-sm btn-danger" onclick="delProject('${p._id}')"><span class="material-symbols-outlined" style="font-size:1rem;vertical-align:middle">delete</span> Delete</button></td>
-    </tr>`).join('');
+  if (!data.length) { tbody.innerHTML = `<tr><td colspan="6"><div class="empty-state"><span class="material-symbols-outlined">construction</span>No projects yet. Click "Add Project" to start.</div></td></tr>`; return; }
+  tbody.innerHTML = data.map(p => `<tr>
+    <td>${p.image ? `<img class="proj-img" src="${p.image}" alt="" onerror="this.style.opacity=0.3">` : `<div style="width:64px;height:48px;background:var(--sl100);border-radius:0.5rem;display:flex;align-items:center;justify-content:center"><span class="material-symbols-outlined" style="color:var(--sl300)">image</span></div>`}</td>
+    <td class="td-name">${p.title}</td>
+    <td><span class="badge badge-blue">${p.category||'–'}</span></td>
+    <td>${p.location||'–'}</td>
+    <td>${p.year||'–'}</td>
+    <td><button class="btn-sm btn-danger" onclick="delProject('${p._id}')"><span class="material-symbols-outlined" style="font-size:0.9rem">delete</span> Del</button></td>
+  </tr>`).join('');
 }
 async function submitProject(e) {
   e.preventDefault();
-  const fd = new FormData(e.target);
-  const data = Object.fromEntries(fd.entries());
+  const data = Object.fromEntries(new FormData(e.target).entries());
   try {
     const res = await createProject(data);
-    if (res.success) {
-      showToast('Project added successfully!');
-      closeModal('project');
-      e.target.reset();
-      await loadProjects();
-    } else {
-      showToast(res.error || 'Failed to add project.', 'error');
-    }
-  } catch { showToast('Server error.', 'error'); }
+    if (res.success || res._id || res.title) { showToast('Project added!'); closeModal('project'); e.target.reset(); document.getElementById('projImgPrev').style.display='none'; await loadProjects(); }
+    else showToast(res.error || 'Failed. Is MongoDB connected?', 'error');
+  } catch { showToast('Network error.', 'error'); }
 }
 async function delProject(id) {
   if (!confirm('Delete this project?')) return;
-  try {
-    await deleteProject(id);
-    showToast('Project deleted.');
-    await loadProjects();
-  } catch { showToast('Failed to delete.', 'error'); }
+  await deleteProject(id); showToast('Deleted.'); loadProjects();
 }
 
 // ── CLIENTS ──
-let clientsData = [];
 async function loadClients() {
-  try {
-    clientsData = await fetchClients();
-    renderClients();
-    document.getElementById('statClients').textContent = clientsData.length;
-  } catch {
-    document.getElementById('clientsGrid').innerHTML = `<div class="empty-state"><span class="material-symbols-outlined">cloud_off</span>Could not load clients.</div>`;
-  }
-}
-function renderClients() {
+  const data = await fetchClients();
+  document.getElementById('statClients').textContent = data.length;
   const grid = document.getElementById('clientsGrid');
-  if (clientsData.length === 0) {
-    grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><span class="material-symbols-outlined">groups</span>No clients yet. Click "Add Client" to start.</div>`;
-    return;
-  }
-  grid.innerHTML = clientsData.map(c => `
-    <div class="client-admin-card">
-      <button class="client-del-btn" onclick="delClient('${c._id}')" title="Delete"><span class="material-symbols-outlined">delete</span></button>
-      <img src="${c.logo}" alt="${c.name}" onerror="this.replaceWith(document.createTextNode(''))">
-      <span class="c-name">${c.name}</span>
-    </div>`).join('');
+  if (!data.length) { grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><span class="material-symbols-outlined">groups</span>No clients yet. Click "Add Client" to start.</div>`; return; }
+  grid.innerHTML = data.map(c => `<div class="client-admin-card">
+    <button class="card-del" onclick="delClient('${c._id}')" title="Delete"><span class="material-symbols-outlined">delete</span></button>
+    <img src="${c.logo}" alt="${c.name}" onerror="this.replaceWith(document.createTextNode(''))">
+    <span class="c-name">${c.name}</span>
+  </div>`).join('');
 }
 async function submitClient(e) {
   e.preventDefault();
-  const fd = new FormData(e.target);
-  const data = Object.fromEntries(fd.entries());
+  const data = Object.fromEntries(new FormData(e.target).entries());
   try {
     const res = await createClient(data);
-    if (res.success) {
-      showToast('Client added!');
-      closeModal('client');
-      e.target.reset();
-      await loadClients();
-    } else {
-      showToast(res.error || 'Failed.', 'error');
-    }
-  } catch { showToast('Server error.', 'error'); }
+    if (res.success || res._id) { showToast('Client added!'); closeModal('client'); e.target.reset(); document.getElementById('clientImgPrev').style.display='none'; await loadClients(); }
+    else showToast(res.error || 'Failed. Is MongoDB connected?', 'error');
+  } catch { showToast('Network error.', 'error'); }
 }
 async function delClient(id) {
-  if (!confirm('Delete this client?')) return;
+  if (!confirm('Remove client?')) return;
+  await deleteClient(id); showToast('Removed.'); loadClients();
+}
+
+// ── CAREERS ──
+async function loadCareers() {
+  const data = await fetchCareers(true);
+  document.getElementById('statCareers').textContent = data.length;
+  const tbody = document.getElementById('careersTable');
+  if (!data.length) { tbody.innerHTML = `<tr><td colspan="5"><div class="empty-state"><span class="material-symbols-outlined">work</span>No job openings yet. Click "Add Opening" to post roles.</div></td></tr>`; return; }
+  tbody.innerHTML = data.map(j => `<tr>
+    <td class="td-name">${j.title}</td>
+    <td><span class="badge badge-blue">${j.department||'Engineering'}</span></td>
+    <td>${j.location||'–'}</td>
+    <td>${j.type||'Full-time'}</td>
+    <td><button class="btn-sm btn-danger" onclick="delJob('${j._id}')"><span class="material-symbols-outlined" style="font-size:0.9rem">delete</span> Del</button></td>
+  </tr>`).join('');
+}
+async function submitCareer(e) {
+  e.preventDefault();
+  const data = Object.fromEntries(new FormData(e.target).entries());
   try {
-    await deleteClient(id);
-    showToast('Client removed.');
-    await loadClients();
-  } catch { showToast('Failed.', 'error'); }
+    const res = await createCareer(data);
+    if (res.success || res._id || res.job) { showToast('Job opening posted!'); closeModal('career'); e.target.reset(); await loadCareers(); }
+    else showToast(res.error || 'Failed. Is MongoDB connected?', 'error');
+  } catch { showToast('Network error.', 'error'); }
+}
+async function delJob(id) {
+  if (!confirm('Delete this job opening?')) return;
+  await deleteCareer(id); showToast('Deleted.'); loadCareers();
 }
 
 // ── MESSAGES ──
-let messagesData = [];
 async function loadMessages() {
-  try {
-    messagesData = await fetchMessages();
-    document.getElementById('statMsg').textContent = messagesData.length;
-    const badge = document.getElementById('msgBadge');
-    if (messagesData.length > 0) { badge.style.display = 'inline'; badge.textContent = messagesData.length; }
-    const tbody = document.getElementById('messagesTable');
-    if (messagesData.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="7"><div class="empty-state"><span class="material-symbols-outlined">mark_email_read</span>No messages yet.</div></td></tr>`;
-      return;
-    }
-    tbody.innerHTML = messagesData.map(m => `<tr>
-      <td>${fmtDate(m.createdAt)}</td>
-      <td class="td-name">${m.name}</td>
-      <td><a href="mailto:${m.email}" style="color:var(--primary)">${m.email}</a></td>
-      <td>${m.phone || '–'}</td>
-      <td><span class="badge badge-blue">${m.projectType || '–'}</span></td>
-      <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${m.message}">${m.message}</td>
-      <td><button class="btn-sm btn-danger" onclick="delMsg('${m._id}')"><span class="material-symbols-outlined" style="font-size:1rem;vertical-align:middle">delete</span></button></td>
-    </tr>`).join('');
-  } catch {
-    document.getElementById('messagesTable').innerHTML = `<tr><td colspan="7"><div class="empty-state"><span class="material-symbols-outlined">cloud_off</span>Could not load messages.</div></td></tr>`;
-  }
+  const data = await fetchMessages();
+  document.getElementById('statMsg').textContent = data.length;
+  if (data.length > 0) { const b = document.getElementById('msgBadge'); b.style.display='inline'; b.textContent=data.length; }
+  const tbody = document.getElementById('messagesTable');
+  if (!data.length) { tbody.innerHTML = `<tr><td colspan="7"><div class="empty-state"><span class="material-symbols-outlined">mark_email_read</span>No messages yet.</div></td></tr>`; return; }
+  tbody.innerHTML = data.map(m => `<tr>
+    <td>${fmtDate(m.createdAt)}</td>
+    <td class="td-name">${m.name}</td>
+    <td><a href="mailto:${m.email}" style="color:var(--primary)">${m.email}</a></td>
+    <td>${m.phone||'–'}</td>
+    <td><span class="badge badge-blue">${m.projectType||'–'}</span></td>
+    <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${m.message}">${m.message}</td>
+    <td><button class="btn-sm btn-danger" onclick="delMsg('${m._id}')"><span class="material-symbols-outlined" style="font-size:0.9rem">delete</span></button></td>
+  </tr>`).join('');
 }
 async function delMsg(id) {
-  if (!confirm('Delete this message?')) return;
-  try {
-    const res = await fetch(`${API_BASE}/contact/${id}`, { method:'DELETE', headers:{'Authorization':`Bearer ${getToken()}`} });
-    showToast('Message deleted.');
-    await loadMessages();
-  } catch { showToast('Failed.', 'error'); }
+  if (!confirm('Delete message?')) return;
+  await fetch(`${API_BASE}/contact/${id}`, { method:'DELETE', headers:{'Authorization':`Bearer ${getToken()}`} });
+  showToast('Deleted.'); loadMessages();
 }
 
 // ── QUOTES ──
-let quotesData = [];
 async function loadQuotes() {
-  try {
-    quotesData = await fetchQuotes();
-    document.getElementById('statQt').textContent = quotesData.length;
-    const badge = document.getElementById('qtBadge');
-    if (quotesData.length > 0) { badge.style.display = 'inline'; badge.textContent = quotesData.length; }
-    const tbody = document.getElementById('quotesTable');
-    if (quotesData.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="7"><div class="empty-state"><span class="material-symbols-outlined">request_quote</span>No quote requests yet.</div></td></tr>`;
-      return;
-    }
-    tbody.innerHTML = quotesData.map(q => `<tr>
-      <td>${fmtDate(q.createdAt)}</td>
-      <td class="td-name">${q.name}${q.company ? `<br><span style="font-size:0.75rem;color:var(--slate-400)">${q.company}</span>` : ''}</td>
-      <td><a href="mailto:${q.email}" style="color:var(--primary)">${q.email}</a></td>
-      <td><span class="badge badge-blue">${q.projectType}</span></td>
-      <td>${q.location}</td>
-      <td><span class="badge badge-green">${q.budget}</span></td>
-      <td><button class="btn-sm btn-danger" onclick="delQuote('${q._id}')"><span class="material-symbols-outlined" style="font-size:1rem;vertical-align:middle">delete</span></button></td>
-    </tr>`).join('');
-  } catch {
-    document.getElementById('quotesTable').innerHTML = `<tr><td colspan="7"><div class="empty-state"><span class="material-symbols-outlined">cloud_off</span>Could not load quotes.</div></td></tr>`;
-  }
+  const data = await fetchQuotes();
+  document.getElementById('statQt').textContent = data.length;
+  if (data.length > 0) { const b = document.getElementById('qtBadge'); b.style.display='inline'; b.textContent=data.length; }
+  const tbody = document.getElementById('quotesTable');
+  if (!data.length) { tbody.innerHTML = `<tr><td colspan="7"><div class="empty-state"><span class="material-symbols-outlined">request_quote</span>No quote requests yet.</div></td></tr>`; return; }
+  tbody.innerHTML = data.map(q => `<tr>
+    <td>${fmtDate(q.createdAt)}</td>
+    <td class="td-name">${q.name}${q.company?`<br><span style="font-size:0.75rem;color:var(--sl400)">${q.company}</span>`:''}</td>
+    <td><a href="mailto:${q.email}" style="color:var(--primary)">${q.email}</a></td>
+    <td><span class="badge badge-blue">${q.projectType}</span></td>
+    <td>${q.location}</td>
+    <td><span class="badge badge-green">${q.budget}</span></td>
+    <td><button class="btn-sm btn-danger" onclick="delQuote('${q._id}')"><span class="material-symbols-outlined" style="font-size:0.9rem">delete</span></button></td>
+  </tr>`).join('');
 }
 async function delQuote(id) {
-  if (!confirm('Delete this quote?')) return;
-  try {
-    await fetch(`${API_BASE}/quote/${id}`, { method:'DELETE', headers:{'Authorization':`Bearer ${getToken()}`} });
-    showToast('Quote deleted.');
-    await loadQuotes();
-  } catch { showToast('Failed.', 'error'); }
+  if (!confirm('Delete quote?')) return;
+  await fetch(`${API_BASE}/quote/${id}`, { method:'DELETE', headers:{'Authorization':`Bearer ${getToken()}`} });
+  showToast('Deleted.'); loadQuotes();
 }
 
 // ── LOGOUT ──
-function logout() {
-  if (confirm('Sign out of admin panel?')) {
-    localStorage.removeItem('bnr_admin_token');
-    window.location.href = 'admin-login.html';
-  }
-}
+function logout() { if (confirm('Sign out?')) { localStorage.removeItem('bnr_admin_token'); window.location.href = 'admin-login.html'; } }
 
 // ── INIT ──
+checkDbStatus();
 loadProjects();
 loadClients();
-// Pre-fetch counts for badges
-setTimeout(async () => {
-  try { messagesData = await fetchMessages(); document.getElementById('statMsg').textContent = messagesData.length; const b = document.getElementById('msgBadge'); if (messagesData.length > 0) { b.style.display='inline'; b.textContent=messagesData.length; } } catch {}
-  try { quotesData = await fetchQuotes(); document.getElementById('statQt').textContent = quotesData.length; const b = document.getElementById('qtBadge'); if (quotesData.length > 0) { b.style.display='inline'; b.textContent=quotesData.length; } } catch {}
-}, 100);
+loadCareers();
+// Pre-fetch counts
+(async () => {
+  const [msgs, qts] = await Promise.all([fetchMessages(), fetchQuotes()]);
+  document.getElementById('statMsg').textContent = msgs.length;
+  document.getElementById('statQt').textContent = qts.length;
+  if (msgs.length > 0) { const b = document.getElementById('msgBadge'); b.style.display='inline'; b.textContent=msgs.length; }
+  if (qts.length > 0) { const b = document.getElementById('qtBadge'); b.style.display='inline'; b.textContent=qts.length; }
+})();
 </script>
 </body>
 </html>
