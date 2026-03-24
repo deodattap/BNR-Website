@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Our Clients | BNR Infrastructure</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="css/animations.css">
+<style>
+:root {
+  --primary: #144bb8;
+  --primary-dark: #0D337B;
+  --bg-light: #f6f6f8;
+  --white: #ffffff;
+  --slate-200: #e2e8f0;
+  --slate-300: #cbd5e1;
+  --slate-400: #94a3b8;
+  --slate-500: #64748b;
+  --slate-600: #475569;
+  --slate-800: #1e293b;
+  --slate-900: #0f172a;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: var(--bg-light); color: var(--slate-900); line-height: 1.5; }
+.container { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; }
+
+/* NAV */
+.site-header { position: sticky; top: 0; z-index: 100; width: 100%; background-color: rgba(255,255,255,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,0,0,0.05); height: 80px; display: flex; align-items: center; }
+.header-content { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+.logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: var(--slate-900); font-weight: 800; font-size: 1.25rem; }
+.nav-links { display: none; gap: 0.5rem; }
+@media (min-width: 768px) { .nav-links { display: flex; align-items: center; } }
+.nav-link { font-size: 0.875rem; font-weight: 600; color: var(--slate-600); text-decoration: none; padding: 0.5rem 0.875rem; border-radius: 0.5rem; transition: all 0.2s; }
+.nav-link:hover { color: var(--primary); background-color: rgba(20,75,184,0.05); }
+.nav-link.active { color: var(--primary); background-color: rgba(20,75,184,0.1); }
+.header-actions { display: flex; align-items: center; gap: 0.75rem; }
+.btn-header { display: none; padding: 0.625rem 1.25rem; background-color: var(--primary); color: white!important; border-radius: 0.5rem; font-weight: 700; font-size: 0.875rem; text-decoration: none; transition: all 0.2s; }
+@media (min-width: 1024px) { .btn-header { display: flex; align-items: center; } }
+.btn-header:hover { background-color: var(--primary-dark); transform: translateY(-1px); }
+.btn-admin { display: none; padding: 0.5rem 1rem; border: 1.5px solid var(--slate-300); color: var(--slate-600); border-radius: 0.5rem; font-weight: 600; font-size: 0.8rem; text-decoration: none; transition: all 0.2s; }
+@media (min-width: 1024px) { .btn-admin { display: flex; align-items: center; gap: 0.3rem; } }
+.btn-admin:hover { border-color: var(--primary); color: var(--primary); }
+
+/* HERO */
+.page-hero { background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%); padding: 5rem 0 4rem; color: white; text-align: center; position: relative; overflow: hidden; }
+.page-hero::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.07) 1px, transparent 0); background-size: 36px 36px; }
+.page-hero-content { position: relative; z-index: 1; }
+.section-label { color: var(--primary); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.875rem; margin-bottom: 0.75rem; display: block; }
+.page-hero .section-label { color: rgba(255,255,255,0.7); }
+.page-hero h1 { font-size: 2.5rem; font-weight: 900; margin-bottom: 1rem; }
+@media (min-width: 768px) { .page-hero h1 { font-size: 3.5rem; } }
+.page-hero p { font-size: 1.125rem; opacity: 0.85; max-width: 40rem; margin: 0 auto; }
+
+/* Clients Grid */
+.clients-section { padding: 6rem 0; }
+.section-header { text-align: center; margin-bottom: 4rem; }
+.section-title { font-size: 2.25rem; font-weight: 900; line-height: 1.2; margin: 0; }
+@media (min-width: 768px) { .section-title { font-size: 3rem; } }
+.section-desc { color: var(--slate-500); font-size: 1.125rem; margin: 1rem auto 0; max-width: 40rem; }
+
+.clients-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+@media (min-width: 640px) { .clients-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 1024px) { .clients-grid { grid-template-columns: repeat(4, 1fr); } }
+
+.client-card {
+  background: white;
+  border-radius: 1rem;
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  border: 1px solid var(--slate-200);
+  transition: all 0.35s;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+.client-card:hover { border-color: rgba(20,75,184,0.3); transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+.client-card img { max-height: 60px; max-width: 150px; object-fit: contain; filter: grayscale(100%) opacity(0.5); transition: filter 0.35s; }
+.client-card:hover img { filter: grayscale(0%) opacity(1); }
+.client-card .client-name { font-size: 0.8125rem; font-weight: 600; color: var(--slate-500); text-align: center; transition: color 0.3s; }
+.client-card:hover .client-name { color: var(--primary); }
+
+/* Loading/Error states */
+.state-message { text-align: center; padding: 4rem 1.5rem; color: var(--slate-500); }
+.state-message .material-symbols-outlined { font-size: 3rem; display: block; margin-bottom: 1rem; color: var(--slate-300); }
+
+/* Stats strip */
+.stats-strip { background: var(--primary-dark); color: white; padding: 4rem 0; }
+.stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; text-align: center; }
+@media (min-width: 768px) { .stats-grid { grid-template-columns: repeat(4, 1fr); } }
+.stat-val { font-size: 2.5rem; font-weight: 900; color: white; }
+.stat-lbl { font-size: 0.9rem; color: rgba(255,255,255,0.7); margin-top: 0.25rem; }
+
+/* CTA */
+.cta-section { background: var(--bg-light); padding: 6rem 0; }
+.cta-box { background: var(--primary-dark); border-radius: 2.5rem; padding: 4rem 3rem; text-align: center; position: relative; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(20,75,184,0.4); }
+.cta-box::after { content: ''; position: absolute; width: 24rem; height: 24rem; background: rgba(255,255,255,0.08); border-radius: 50%; top: 0; right: 0; transform: translate(40%, -40%); filter: blur(40px); }
+.cta-title { font-size: 2.25rem; font-weight: 900; color: white; margin-bottom: 1rem; }
+.cta-text { color: #dbeafe; font-size: 1.125rem; margin-bottom: 2rem; }
+.btn-cta { display: inline-flex; align-items: center; gap: 0.5rem; padding: 1rem 2.5rem; background: white; color: var(--primary); border-radius: 0.75rem; font-weight: 800; font-size: 1rem; text-decoration: none; transition: all 0.3s; }
+.btn-cta:hover { background: #eff6ff; transform: translateY(-2px); }
+
+/* FOOTER */
+.site-footer { background-color: var(--slate-900); color: var(--slate-400); padding: 4rem 1.5rem; }
+.footer-grid { display: grid; grid-template-columns: 1fr; gap: 3rem; }
+@media (min-width: 768px) { .footer-grid { grid-template-columns: repeat(4, 1fr); } }
+.footer-logo { display: flex; align-items: center; gap: 0.75rem; color: white; font-weight: 800; font-size: 1.125rem; margin-bottom: 1.5rem; }
+.footer-heading { color: white; font-weight: 700; margin-bottom: 1.5rem; }
+.footer-links { list-style: none; padding: 0; margin: 0; }
+.footer-links li { margin-bottom: 1rem; }
+.footer-links a { color: inherit; text-decoration: none; font-size: 0.875rem; transition: color 0.2s; }
+.footer-links a:hover { color: var(--primary); }
+.contact-info { font-size: 0.875rem; line-height: 1.6; }
+.contact-bold { color: white; font-weight: 700; display: block; margin-top: 1rem; }
+.footer-bottom { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--slate-800); display: flex; flex-direction: column; gap: 1rem; font-size: 0.75rem; }
+@media (min-width: 768px) { .footer-bottom { flex-direction: row; justify-content: space-between; } }
+.bottom-links { display: flex; gap: 1.5rem; }
+.bottom-links a { color: inherit; text-decoration: none; }
+.bottom-links a:hover { color: white; }
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<header class="site-header">
+<div class="container header-content">
+  <a class="logo" href="index.html">
+    <img src="https://www.bnrinfra.com/wp-content/uploads/2021/05/logo.png" alt="BNR Infrastructure Logo" style="max-height:50px;width:auto;">
+  </a>
+  <nav class="nav-links">
+    <a class="nav-link" href="index.html">Home</a>
+    <a class="nav-link" href="projects.html">Projects</a>
+    <a class="nav-link" href="services.html">Services</a>
+    <a class="nav-link" href="about.html">About</a>
+    <a class="nav-link active" href="clients.html">Clients</a>
+    <a class="nav-link" href="careers.html">Careers</a>
+    <a class="nav-link" href="contact.html">Contact</a>
+  </nav>
+  <div class="header-actions">
+    <a href="admin-login.html" class="btn-admin"><span class="material-symbols-outlined" style="font-size:0.9rem;">admin_panel_settings</span> Admin</a>
+    <a href="quote.html" class="btn-header">Get a Quote</a>
+  </div>
+</div>
+</header>
+
+<!-- Page Hero -->
+<section class="page-hero">
+  <div class="container page-hero-content">
+    <span class="section-label">Our Partners</span>
+    <h1>Trusted By Industry Leaders</h1>
+    <p>We are proud to partner with India's most respected government bodies, infrastructure giants, and private enterprises.</p>
+  </div>
+</section>
+
+<!-- Clients Grid Section -->
+<section class="clients-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label">Clientele</span>
+      <h2 class="section-title">Who We Work With</h2>
+      <p class="section-desc">Our portfolio spans government authorities, public-sector undertakings, and leading private developers across India.</p>
+    </div>
+    <div class="clients-grid reveal" id="clientsGrid">
+      <!-- Loaded by JS; static fallbacks below -->
+    </div>
+  </div>
+</section>
+
+<!-- Stats Strip -->
+<section class="stats-strip reveal">
+  <div class="container">
+    <div class="stats-grid">
+      <div>
+        <div class="stat-val">50+</div>
+        <div class="stat-lbl">Years of Excellence</div>
+      </div>
+      <div>
+        <div class="stat-val">120+</div>
+        <div class="stat-lbl">Projects Completed</div>
+      </div>
+      <div>
+        <div class="stat-val">25+</div>
+        <div class="stat-lbl">Major Clients</div>
+      </div>
+      <div>
+        <div class="stat-val">15+</div>
+        <div class="stat-lbl">States Covered</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section reveal">
+  <div class="container">
+    <div class="cta-box">
+      <h2 class="cta-title">Ready to Join Our Esteemed Clientele?</h2>
+      <p class="cta-text">Partner with BNR Infrastructure for your next landmark project.</p>
+      <a href="quote.html" class="btn-cta">
+        <span class="material-symbols-outlined">request_quote</span>
+        Request a Quote
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer reveal">
+<div class="container">
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo">
+        <img src="https://www.bnrinfra.com/wp-content/uploads/2021/05/logo.png" alt="BNR Infrastructure" style="max-height:40px;width:auto;filter:brightness(0) invert(1);">
+      </div>
+      <p style="font-size:0.875rem;line-height:1.6;margin-bottom:1.5rem;">Defining structural engineering excellence since 1974. Headquartered in Chennai, operating Pan-India.</p>
+    </div>
+    <div>
+      <h5 class="footer-heading">Quick Links</h5>
+      <ul class="footer-links">
+        <li><a href="about.html">Our Story</a></li>
+        <li><a href="policy.html">Safety Policy</a></li>
+        <li><a href="projects.html">Project Portfolio</a></li>
+        <li><a href="clients.html">Our Clients</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5 class="footer-heading">Expertise</h5>
+      <ul class="footer-links">
+        <li><a href="services.html">Highway Development</a></li>
+        <li><a href="services.html">Bridge Engineering</a></li>
+        <li><a href="services.html">Urban Transit</a></li>
+        <li><a href="services.html">Foundation Work</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5 class="footer-heading">Headquarters</h5>
+      <div class="contact-info">
+        1018, 42nd Street TVS Colony,<br>Anna Nagar West Extn, Chennai – 600101
+        <span class="contact-bold">T: (044) – 43838511</span>
+        <span class="contact-bold">E: mail@bnrinfra.com</span>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2024 BNR Infrastructure Projects (P) Ltd. All rights reserved.</p>
+    <div class="bottom-links">
+      <a href="policy.html">Privacy Policy</a>
+      <a href="policy.html">Terms of Service</a>
+      <a href="#">Sitemap</a>
+    </div>
+  </div>
+</div>
+</footer>
+
+<script src="js/script.js"></script>
+<script src="js/api.js"></script>
+<script>
+// Static fallback client logos from BNR site
+const STATIC_CLIENTS = [
+  { name: 'L&T Construction', logo: 'https://www.bnrinfra.com/wp-content/uploads/2021/05/l1.png' },
+  { name: 'NHAI', logo: 'https://www.bnrinfra.com/wp-content/uploads/2021/05/l2.png' },
+  { name: 'Reliance Industries', logo: 'https://www.bnrinfra.com/wp-content/uploads/2021/05/l3.png' },
+  { name: 'Adani Group', logo: 'https://www.bnrinfra.com/wp-content/uploads/2021/05/l4.png' },
+  { name: 'Tata Projects', logo: 'https://www.bnrinfra.com/wp-content/uploads/2021/05/l5.png' },
+  { name: 'GMR Group', logo: 'https://www.bnrinfra.com/wp-content/uploads/2021/05/l6.png' },
+  { name: 'RITES Ltd.', logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/6/6e/RITES_Limited_logo.svg/200px-RITES_Limited_logo.svg.png' },
+  { name: 'IRCON International', logo: 'https://upload.wikimedia.org/wikipedia/en/7/7d/Ircon_International.png' },
+  { name: 'NITI Aayog', logo: '' },
+  { name: 'PWD Tamil Nadu', logo: '' },
+  { name: 'MMRDA', logo: '' },
+  { name: 'HDFC Infrastructure', logo: '' }
+];
+
+function renderClientCard(client) {
+  if (!client.logo) {
+    return `<div class="client-card">
+      <div style="width:60px;height:60px;background:rgba(20,75,184,0.1);border-radius:0.75rem;display:flex;align-items:center;justify-content:center;">
+        <span class="material-symbols-outlined" style="color:var(--primary);font-size:2rem;">apartment</span>
+      </div>
+      <span class="client-name">${client.name}</span>
+    </div>`;
+  }
+  return `<div class="client-card">
+    <img src="${client.logo}" alt="${client.name} Logo" onerror="this.style.display='none'">
+    <span class="client-name">${client.name}</span>
+  </div>`;
+}
+
+async function loadClients() {
+  const grid = document.getElementById('clientsGrid');
+  try {
+    const clients = await fetchClients();
+    if (clients.length === 0) throw new Error('empty');
+    grid.innerHTML = clients.map(renderClientCard).join('');
+  } catch {
+    // Fallback to static logos
+    grid.innerHTML = STATIC_CLIENTS.map(renderClientCard).join('');
+  }
+}
+
+loadClients();
+</script>
+</body>
+</html>

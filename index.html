@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 
 <html lang="en"><head>
 <meta charset="utf-8"/>
@@ -870,10 +870,12 @@
 <a class="nav-link" href="projects.html">Projects</a>
 <a class="nav-link" href="services.html">Services</a>
 <a class="nav-link" href="about.html">About</a>
+<a class="nav-link" href="clients.html">Clients</a>
 <a class="nav-link" href="careers.html">Careers</a>
 <a class="nav-link" href="contact.html">Contact</a>
 </nav>
-<div class="header-actions">
+<div class="header-actions" style="display:flex;align-items:center;gap:0.75rem;">
+<a href="admin-login.html" style="display:none;padding:0.5rem 1rem;border:1.5px solid #cbd5e1;color:#475569;border-radius:0.5rem;font-weight:600;font-size:0.8rem;text-decoration:none;align-items:center;gap:0.3rem;transition:all 0.2s;" id="adminNavBtn"><span class="material-symbols-outlined" style="font-size:0.9rem;">admin_panel_settings</span> Admin</a>
 <a href="quote.html" class="btn-header">Get a Quote</a>
 </div>
 </div>
@@ -1055,25 +1057,11 @@
 <h2 class="section-title">Trusted By Leading Organizations</h2>
 </div>
 </div>
-<div class="client-grid">
-<div class="client-logo-box">
-<img src="https://www.bnrinfra.com/wp-content/uploads/2021/05/l1.png" alt="L&T Logo">
+<div id="clientLogosWrap" style="display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:3rem;">
+<!-- loaded by JS -->
 </div>
-<div class="client-logo-box">
-<img src="https://www.bnrinfra.com/wp-content/uploads/2021/05/l2.png" alt="NHAI Logo">
-</div>
-<div class="client-logo-box">
-<img src="https://www.bnrinfra.com/wp-content/uploads/2021/05/l3.png" alt="Reliance Logo">
-</div>
-<div class="client-logo-box">
-<img src="https://www.bnrinfra.com/wp-content/uploads/2021/05/l4.png" alt="Adani Logo">
-</div>
-<div class="client-logo-box">
-<img src="https://www.bnrinfra.com/wp-content/uploads/2021/05/l5.png" alt="Tata Projects Logo">
-</div>
-<div class="client-logo-box">
-<img src="https://www.bnrinfra.com/wp-content/uploads/2021/05/l6.png" alt="GMR Logo">
-</div>
+<div style="text-align:center;margin-top:2.5rem;">
+<a href="clients.html" style="color:var(--primary);font-weight:700;text-decoration:none;font-size:0.9375rem;display:inline-flex;align-items:center;gap:0.4rem;">View All Clients <span class="material-symbols-outlined">chevron_right</span></a>
 </div>
 </div>
 </section>
@@ -1101,7 +1089,7 @@
 <div class="footer-logo">
 <img src="https://www.bnrinfra.com/wp-content/uploads/2021/05/logo.png" alt="BNR Infrastructure Logo" style="max-height: 40px; width: auto; filter: brightness(0) invert(1);">
 </div>
-<p style="font-size: 0.875rem; line-height: 1.6; margin-bottom: 1.5rem;">Defining structural engineering excellence since 1974. Headquartered in Chennai, operating globally.</p>
+<p style="font-size: 0.875rem; line-height: 1.6; margin-bottom: 1.5rem;">Defining structural engineering excellence since 1974. Headquartered in Chennai, operating Pan-India.</p>
 <div class="social-links">
 <a class="social-btn" href="#"><span class="material-symbols-outlined">share</span></a>
 <a class="social-btn" href="#"><span class="material-symbols-outlined">public</span></a>
@@ -1111,18 +1099,18 @@
 <h5 class="footer-heading">Quick Links</h5>
 <ul class="footer-links">
 <li><a href="about.html">Our Story</a></li>
-<li><a href="#">Safety Protocols</a></li>
+<li><a href="policy.html">Safety Policy</a></li>
 <li><a href="projects.html">Project Portfolio</a></li>
-<li><a href="#">Equipment Fleet</a></li>
+<li><a href="clients.html">Our Clients</a></li>
 </ul>
 </div>
 <div>
 <h5 class="footer-heading">Expertise</h5>
 <ul class="footer-links">
-<li><a href="#">Structural Design</a></li>
-<li><a href="#">Asphalt &amp; Paving</a></li>
-<li><a href="#">Foundation Work</a></li>
-<li><a href="#">Tunnelling</a></li>
+<li><a href="services.html">Highway Development</a></li>
+<li><a href="services.html">Bridge Engineering</a></li>
+<li><a href="services.html">Urban Transit</a></li>
+<li><a href="services.html">Foundation Work</a></li>
 </ul>
 </div>
 <div>
@@ -1137,12 +1125,52 @@
 <div class="footer-bottom">
 <p>© 2024 BNR Infrastructure Excellence. All rights reserved.</p>
 <div class="bottom-links">
-<a href="#">Privacy Policy</a>
-<a href="#">Terms of Service</a>
+<a href="policy.html">Privacy Policy</a>
+<a href="policy.html">Terms of Service</a>
 <a href="#">Sitemap</a>
 </div>
 </div>
 </div>
 </footer>
+<script src="js/api.js"></script>
 <script src="js/script.js"></script>
+<script>
+// Show admin button on desktop
+document.addEventListener('DOMContentLoaded', () => {
+  if (window.innerWidth >= 1024) { const btn = document.getElementById('adminNavBtn'); if (btn) btn.style.display = 'flex'; }
+});
+
+// Static fallback client logos
+const STATIC_CLIENT_LOGOS = [
+  { name: 'L&T', logo: 'https://www.bnrinfra.com/wp-content/uploads/2021/05/l1.png' },
+  { name: 'NHAI', logo: 'https://www.bnrinfra.com/wp-content/uploads/2021/05/l2.png' },
+  { name: 'Reliance', logo: 'https://www.bnrinfra.com/wp-content/uploads/2021/05/l3.png' },
+  { name: 'Adani', logo: 'https://www.bnrinfra.com/wp-content/uploads/2021/05/l4.png' },
+  { name: 'Tata Projects', logo: 'https://www.bnrinfra.com/wp-content/uploads/2021/05/l5.png' },
+  { name: 'GMR Group', logo: 'https://www.bnrinfra.com/wp-content/uploads/2021/05/l6.png' },
+];
+
+(async () => {
+  const wrap = document.getElementById('clientLogosWrap');
+  if (!wrap) return;
+  try {
+    const clients = await fetchClients();
+    const src = clients.length > 0 ? clients : STATIC_CLIENT_LOGOS;
+    wrap.style.opacity = '0.55';
+    wrap.style.filter = 'grayscale(100%)';
+    wrap.style.transition = 'all 0.5s';
+    wrap.addEventListener('mouseover', () => { wrap.style.opacity='1'; wrap.style.filter='grayscale(0%)'; });
+    wrap.addEventListener('mouseleave', () => { wrap.style.opacity='0.55'; wrap.style.filter='grayscale(100%)'; });
+    wrap.innerHTML = src.slice(0, 6).map(c => c.logo
+      ? `<img src="${c.logo}" alt="${c.name}" style="max-height:48px;max-width:130px;object-fit:contain;" onerror="this.style.display='none'">`
+      : ''
+    ).join('');
+  } catch {
+    wrap.style.opacity = '0.55';
+    wrap.style.filter = 'grayscale(100%)';
+    wrap.style.transition = 'all 0.5s';
+    wrap.innerHTML = STATIC_CLIENT_LOGOS.map(c => `<img src="${c.logo}" alt="${c.name}" style="max-height:48px;max-width:130px;object-fit:contain;">`).join('');
+  }
+})();
+</script>
 </body></html>

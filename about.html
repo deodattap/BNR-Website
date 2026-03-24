@@ -610,10 +610,12 @@ body {
 <a class="nav-link" href="projects.html">Projects</a>
 <a class="nav-link" href="services.html">Services</a>
 <a class="nav-link active" href="about.html">About</a>
+<a class="nav-link" href="clients.html">Clients</a>
 <a class="nav-link" href="careers.html">Careers</a>
 <a class="nav-link" href="contact.html">Contact</a>
 </nav>
-<div class="header-actions">
+<div class="header-actions" style="display:flex;align-items:center;gap:0.75rem;">
+<a href="admin-login.html" style="display:none;padding:0.5rem 1rem;border:1.5px solid #cbd5e1;color:#475569;border-radius:0.5rem;font-weight:600;font-size:0.8rem;text-decoration:none;align-items:center;gap:0.3rem;" class="btn-adm"><span class="material-symbols-outlined" style="font-size:0.9rem;">admin_panel_settings</span> Admin</a>
 <a href="quote.html" class="btn-header">Get a Quote</a>
 </div>
 </div>
@@ -778,12 +780,13 @@ body {
 <div class="footer-bottom">
 <p>© 2024 BNR Infrastructure Projects (P) Ltd. All Rights Reserved.</p>
 <div style="display: flex; gap: 2rem;">
-<a class="footer-link" href="#">Privacy Policy</a>
-<a class="footer-link" href="#">Terms of Service</a>
-<a class="footer-link" href="#">Cookies</a>
+<a class="footer-link" href="policy.html">Privacy Policy</a>
+<a class="footer-link" href="policy.html">Terms of Service</a>
+<a class="footer-link" href="clients.html">Our Clients</a>
 </div>
 </div>
 </div>
 </footer>
 <script src="js/script.js"></script>
+<script>document.addEventListener('DOMContentLoaded',()=>{document.querySelectorAll('.btn-adm').forEach(el=>{if(window.innerWidth>=1024)el.style.display='flex';});});</script>
 </body></html>

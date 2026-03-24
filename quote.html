@@ -330,10 +330,12 @@
 <a class="nav-link" href="projects.html">Projects</a>
 <a class="nav-link" href="services.html">Services</a>
 <a class="nav-link" href="about.html">About</a>
+<a class="nav-link" href="clients.html">Clients</a>
 <a class="nav-link" href="careers.html">Careers</a>
 <a class="nav-link" href="contact.html">Contact</a>
 </nav>
-<div class="header-actions">
+<div class="header-actions" style="display:flex;align-items:center;gap:0.75rem;">
+<a href="admin-login.html" style="display:none;padding:0.5rem 1rem;border:1.5px solid #cbd5e1;color:#475569;border-radius:0.5rem;font-weight:600;font-size:0.8rem;text-decoration:none;transition:all 0.2s;" class="btn-admin-lnk"><span class="material-symbols-outlined" style="font-size:0.9rem;vertical-align:middle;">admin_panel_settings</span> Admin</a>
 <a href="quote.html" class="btn-header">Get a Quote</a>
 </div>
 </div>
@@ -457,10 +459,13 @@
                     <span class="material-symbols-outlined" style="font-size:1.1rem;">arrow_back</span>
                     Back to Contact
                 </a>
-                <button class="btn-submit" type="submit">
-                    Submit Request
-                    <span class="material-symbols-outlined">send</span>
-                </button>
+                <div style="display:flex;flex-direction:column;gap:0.75rem;align-items:flex-end;">
+                  <div id="quoteError" style="display:none;color:#dc2626;font-size:0.875rem;font-weight:600;text-align:right;"></div>
+                  <button class="btn-submit" type="submit" id="quoteBtn">
+                      Submit Request
+                      <span class="material-symbols-outlined">send</span>
+                  </button>
+                </div>
             </div>
 
         </form>
@@ -530,29 +535,64 @@
     </div>
 </div>
 </footer>
+<script src="js/api.js"></script>
 <script src="js/script.js"></script>
 <script>
-function handleSubmit(e) {
+// Show admin link on desktop
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.btn-admin-lnk').forEach(el => {
+    if (window.innerWidth >= 1024) el.style.display = 'inline-flex';
+  });
+});
+
+async function handleSubmit(e) {
     e.preventDefault();
     const form = document.getElementById('quoteForm');
+    const btn = document.getElementById('quoteBtn');
+    const errDiv = document.getElementById('quoteError');
     const required = form.querySelectorAll('[required]');
     let valid = true;
     required.forEach(el => {
         el.style.borderColor = '';
-        if (!el.value.trim()) {
-            el.style.borderColor = '#ef4444';
-            valid = false;
-        }
+        if (!el.value.trim()) { el.style.borderColor = '#ef4444'; valid = false; }
     });
-    if (!valid) {
-        required[0].focus();
-        return;
+    if (!valid) { required[0].focus(); return; }
+
+    const data = {
+        name: form.fullName.value.trim(),
+        company: form.company.value.trim(),
+        email: form.email.value.trim(),
+        phone: form.phone.value.trim(),
+        projectType: form.projectType.value,
+        location: form.location.value.trim(),
+        budget: form.budget.value,
+        description: form.description.value.trim()
+    };
+
+    btn.disabled = true;
+    btn.innerHTML = '<span class="material-symbols-outlined" style="animation:spin 1s linear infinite;">progress_activity</span> Submitting...';
+    errDiv.style.display = 'none';
+
+    try {
+        const res = await postQuote(data);
+        if (res.success) {
+            document.getElementById('formView').style.display = 'none';
+            document.getElementById('successView').style.display = 'block';
+            window.scrollTo({ top: document.querySelector('.form-card').offsetTop - 100, behavior: 'smooth' });
+        } else {
+            errDiv.textContent = res.error || 'Submission failed. Please try again.';
+            errDiv.style.display = 'block';
+        }
+    } catch {
+        errDiv.textContent = 'Network error. Please check your connection and try again.';
+        errDiv.style.display = 'block';
+    } finally {
+        btn.disabled = false;
+        btn.innerHTML = 'Submit Request <span class="material-symbols-outlined">send</span>';
     }
-    document.getElementById('formView').style.display = 'none';
-    document.getElementById('successView').style.display = 'block';
-    window.scrollTo({ top: document.querySelector('.form-card').offsetTop - 100, behavior: 'smooth' });
 }
 </script>
+<style>@keyframes spin{to{transform:rotate(360deg)}}</style>
 
 </body>
 </html>

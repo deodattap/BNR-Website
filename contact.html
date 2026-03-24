@@ -486,10 +486,12 @@ body {
 <a class="nav-link" href="projects.html">Projects</a>
 <a class="nav-link" href="services.html">Services</a>
 <a class="nav-link" href="about.html">About</a>
+<a class="nav-link" href="clients.html">Clients</a>
 <a class="nav-link" href="careers.html">Careers</a>
 <a class="nav-link active" href="contact.html">Contact</a>
 </nav>
-<div class="header-actions">
+<div class="header-actions" style="display:flex;align-items:center;gap:0.75rem;">
+<a href="admin-login.html" style="display:none;padding:0.5rem 1rem;border:1.5px solid #cbd5e1;color:#475569;border-radius:0.5rem;font-weight:600;font-size:0.8rem;text-decoration:none;align-items:center;gap:0.3rem;transition:all 0.2s;" class="btn-admin-link"><span class="material-symbols-outlined" style="font-size:0.9rem;">admin_panel_settings</span> Admin</a>
 <a href="quote.html" class="btn-header">Get a Quote</a>
 </div>
 </div>
@@ -513,37 +515,47 @@ body {
 <h3>Send us a Message</h3>
 <p>Fill out the form below and our team will respond within 24 hours.</p>
 </div>
-<form class="contact-form">
+<div id="contactSuccess" style="display:none;text-align:center;padding:2.5rem 1rem;">
+  <div style="width:64px;height:64px;background:rgba(20,75,184,0.1);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;">
+    <span class="material-symbols-outlined" style="font-size:2.5rem;color:var(--primary);">check_circle</span>
+  </div>
+  <h3 style="font-size:1.5rem;font-weight:800;margin-bottom:0.75rem;">Message Sent!</h3>
+  <p style="color:var(--text-muted);">Thank you! We'll get back to you within 24 hours.</p>
+  <button onclick="document.getElementById('contactSuccess').style.display='none';document.getElementById('contactForm').style.display='block';" style="margin-top:1.5rem;padding:0.625rem 1.5rem;background:var(--primary);color:white;border:none;border-radius:0.5rem;font-weight:700;cursor:pointer;">Send Another</button>
+</div>
+<form class="contact-form" id="contactForm" onsubmit="handleContactSubmit(event)">
 <div class="form-group-row">
 <div class="input-field">
-<label>Full Name</label>
-<input placeholder="Your Name" type="text"/>
+<label>Full Name *</label>
+<input placeholder="Your Name" type="text" name="name" required/>
 </div>
 <div class="input-field">
-<label>Email Address</label>
-<input placeholder="your@email.com" type="email"/>
+<label>Email Address *</label>
+<input placeholder="your@email.com" type="email" name="email" required/>
 </div>
 </div>
 <div class="form-group-row">
 <div class="input-field">
 <label>Phone Number</label>
-<input placeholder="+91 00000-00000" type="tel"/>
+<input placeholder="+91 00000-00000" type="tel" name="phone"/>
 </div>
 <div class="input-field">
 <label>Project Type</label>
-<select>
+<select name="projectType">
 <option>Bridge &amp; Highway</option>
 <option>Urban Development</option>
 <option>Water Infrastructure</option>
 <option>Energy Systems</option>
+<option>Other</option>
 </select>
 </div>
 </div>
 <div class="input-field">
-<label>Message</label>
-<textarea placeholder="How can we help with your next project?" rows="5"></textarea>
+<label>Message *</label>
+<textarea placeholder="How can we help with your next project?" rows="5" name="message" required></textarea>
 </div>
-<button class="btn-submit" type="submit">
+<div id="contactError" style="display:none;background:#fef2f2;border:1px solid #fecaca;color:#dc2626;padding:0.75rem 1rem;border-radius:0.5rem;font-size:0.875rem;font-weight:600;margin-top:1rem;"></div>
+<button class="btn-submit" type="submit" id="contactBtn">
 <span class="material-symbols-outlined">send</span>
 Send Project Inquiry
 </button>
@@ -620,11 +632,54 @@ Send Project Inquiry
 <p style="font-size: 0.875rem; font-weight: 700; color: #4b5563;">© 2024 BNR Infrastructure Projects (P) Ltd. All rights reserved.</p>
 </div>
 <nav class="footer-links">
-<a href="#">Privacy Policy</a>
-<a href="#">Terms of Service</a>
-<a href="#">Sustainability Report</a>
+<a href="policy.html">Privacy Policy</a>
+<a href="policy.html">Terms of Service</a>
+<a href="clients.html">Our Clients</a>
 </nav>
 </div>
 </footer>
+<script src="js/api.js"></script>
 <script src="js/script.js"></script>
+<script>
+// Show admin link on desktop
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.btn-admin-link').forEach(el => {
+    if (window.innerWidth >= 1024) el.style.display = 'flex';
+  });
+});
+
+async function handleContactSubmit(e) {
+  e.preventDefault();
+  const form = e.target;
+  const btn = document.getElementById('contactBtn');
+  const errDiv = document.getElementById('contactError');
+  errDiv.style.display = 'none';
+  const data = {
+    name: form.name.value.trim(),
+    email: form.email.value.trim(),
+    phone: form.phone.value.trim(),
+    projectType: form.projectType.value,
+    message: form.message.value.trim()
+  };
+  btn.disabled = true;
+  btn.innerHTML = '<span class="material-symbols-outlined" style="animation:spin 1s linear infinite;">progress_activity</span> Sending...';
+  try {
+    const res = await postContact(data);
+    if (res.success) {
+      form.style.display = 'none';
+      document.getElementById('contactSuccess').style.display = 'block';
+    } else {
+      errDiv.textContent = res.error || 'Failed to send. Please try again.';
+      errDiv.style.display = 'block';
+    }
+  } catch {
+    errDiv.textContent = 'Network error. Please check your connection.';
+    errDiv.style.display = 'block';
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<span class="material-symbols-outlined">send</span> Send Project Inquiry';
+  }
+}
+</script>
+<style>@keyframes spin{to{transform:rotate(360deg)}}</style>
 </body></html>
