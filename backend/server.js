@@ -30,6 +30,7 @@ app.use('/api/projects', require('./routes/projects'));
 app.use('/api/clients', require('./routes/clients'));
 app.use('/api/admin', require('./routes/admin'));
 app.use('/api/careers', require('./routes/careers'));
+app.use('/api/upload', require('./routes/upload'));
 
 // Health check
 app.get('/api/health', (req, res) => {
@@ -40,7 +41,6 @@ app.get('/api/health', (req, res) => {
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`);
-  console.log(`🔑 Admin: ${process.env.ADMIN_USERNAME || 'admin'} / ${process.env.ADMIN_PASSWORD || 'bnr@admin2024'}`);
 });
 
 // Connect MongoDB (non-blocking)

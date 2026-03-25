@@ -130,7 +130,7 @@ tr:hover td{background:var(--sl50);}
 <!-- SIDEBAR -->
 <aside class="sidebar">
   <div class="sidebar-logo">
-    <img src="https://www.bnrinfra.com/wp-content/uploads/2021/05/logo.png" alt="BNR">
+    <img src="assets/logo/bnr-logo.jpg" alt="BNR">
   </div>
   <nav class="sidebar-nav">
     <div class="nav-section-label">Content</div>
@@ -271,9 +271,19 @@ tr:hover td{background:var(--sl50);}
       <div class="fg"><label>Project Title *</label><input type="text" name="title" placeholder="e.g. National Highway Widening" required></div>
       <div class="fg"><label>Description</label><textarea name="description" placeholder="Brief project description..."></textarea></div>
       <div class="fg">
-        <label>Image URL (paste a direct image link)</label>
-        <input type="url" name="image" placeholder="https://..." oninput="previewImg(this,'projImgPrev')">
-        <img id="projImgPrev" class="img-preview" alt="Preview">
+        <label>Project Image</label>
+        <div style="display:flex;flex-direction:column;gap:0.5rem;">
+          <input type="url" name="image" id="projImageUrl" placeholder="Paste image URL, or upload a file below..." oninput="previewImg(this,'projImgPrev')" style="width:100%;padding:0.75rem 1rem;border:1.5px solid var(--sl200);border-radius:0.625rem;font-family:'Inter',sans-serif;font-size:0.9375rem;color:var(--sl900);outline:none;background:var(--bg);">
+          <div style="display:flex;align-items:center;gap:0.75rem;margin-top:0.25rem;">
+            <label for="projImageFile" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.5rem 1rem;background:var(--sl100);border:1.5px solid var(--sl200);border-radius:0.5rem;cursor:pointer;font-size:0.8125rem;font-weight:600;color:var(--sl700);transition:all 0.2s;margin:0;" onmouseover="this.style.borderColor='var(--primary)';this.style.color='var(--primary)'" onmouseout="this.style.borderColor='var(--sl200)';this.style.color='var(--sl700)'">
+              <span class="material-symbols-outlined" style="font-size:1rem;">upload</span>
+              Upload Image
+            </label>
+            <input type="file" id="projImageFile" accept="image/*" style="display:none;" onchange="handleProjectImageUpload(this)">
+            <span id="projUploadStatus" style="font-size:0.8125rem;color:var(--sl500);"></span>
+          </div>
+          <img id="projImgPrev" class="img-preview" alt="Preview">
+        </div>
       </div>
       <div class="fg"><label>Category</label>
         <select name="category">
@@ -414,6 +424,46 @@ function previewImg(input, previewId) {
   }
 }
 
+// ── FILE UPLOAD FOR PROJECT IMAGE ──
+async function handleProjectImageUpload(input) {
+  if (!input.files || !input.files[0]) return;
+  const statusEl = document.getElementById('projUploadStatus');
+  const urlInput = document.getElementById('projImageUrl');
+  const prevImg  = document.getElementById('projImgPrev');
+
+  statusEl.textContent = 'Uploading...';
+  statusEl.style.color = 'var(--sl500)';
+
+  const formData = new FormData();
+  formData.append('image', input.files[0]);
+
+  try {
+    const res = await fetch(`${API_BASE}/upload`, {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${getToken()}` },
+      body: formData
+    });
+    const data = await res.json();
+    if (data.success && data.url) {
+      // Fill the URL field with the full backend URL for preview, store relative for DB
+      const fullUrl = `http://localhost:5000${data.url}`;
+      urlInput.value = fullUrl;
+      prevImg.src = fullUrl;
+      prevImg.style.display = 'block';
+      prevImg.onerror = () => prevImg.style.display = 'none';
+      statusEl.textContent = '✓ Uploaded';
+      statusEl.style.color = '#16a34a';
+    } else {
+      statusEl.textContent = data.error || 'Upload failed';
+      statusEl.style.color = '#dc2626';
+    }
+  } catch {
+    statusEl.textContent = 'Network error during upload';
+    statusEl.style.color = '#dc2626';
+  }
+}
+
+
 // ── FORMAT DATE ──
 function fmtDate(d) { return new Date(d).toLocaleDateString('en-IN', { day:'2-digit', month:'short', year:'numeric' }); }
 
@@ -437,7 +487,14 @@ async function submitProject(e) {
   const data = Object.fromEntries(new FormData(e.target).entries());
   try {
     const res = await createProject(data);
-    if (res.success || res._id || res.title) { showToast('Project added!'); closeModal('project'); e.target.reset(); document.getElementById('projImgPrev').style.display='none'; await loadProjects(); }
+    if (res.success || res._id || res.title) {
+      showToast('Project added!');
+      closeModal('project');
+      e.target.reset();
+      document.getElementById('projImgPrev').style.display = 'none';
+      document.getElementById('projUploadStatus').textContent = '';
+      await loadProjects();
+    }
     else showToast(res.error || 'Failed. Is MongoDB connected?', 'error');
   } catch { showToast('Network error.', 'error'); }
 }

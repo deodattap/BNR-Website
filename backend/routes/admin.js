@@ -10,8 +10,8 @@ router.post('/login', (req, res) => {
     return res.status(400).json({ error: 'Username and password are required.' });
   }
 
-  const validUsername = process.env.ADMIN_USERNAME || 'admin';
-  const validPassword = process.env.ADMIN_PASSWORD || 'bnr@admin2024';
+  const validUsername = process.env.ADMIN_USERNAME;
+  const validPassword = process.env.ADMIN_PASSWORD;
 
   if (username !== validUsername || password !== validPassword) {
     return res.status(401).json({ error: 'Invalid credentials.' });
