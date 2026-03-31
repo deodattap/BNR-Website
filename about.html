@@ -9,6 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/style.css">
 <style>:root {
     --primary: #144bb8;
     --background-light: #f6f6f8;
@@ -609,18 +610,33 @@ body {
 <a class="nav-link" href="index.html">Home</a>
 <a class="nav-link" href="projects.html">Projects</a>
 <a class="nav-link" href="services.html">Services</a>
-<a class="nav-link active" href="about.html">About</a>
+<a class="nav-link" href="about.html">About</a>
 <a class="nav-link" href="clients.html">Clients</a>
 <a class="nav-link" href="careers.html">Careers</a>
 <a class="nav-link" href="contact.html">Contact</a>
 <a class="nav-link" href="policy.html">Policy</a>
 </nav>
-<div class="header-actions" style="display:flex;align-items:center;gap:0.75rem;">
-<a href="admin-login.html" style="display:none;padding:0.5rem 1rem;border:1.5px solid #cbd5e1;color:#475569;border-radius:0.5rem;font-weight:600;font-size:0.8rem;text-decoration:none;align-items:center;gap:0.3rem;" class="btn-adm"><span class="material-symbols-outlined" style="font-size:0.9rem;">admin_panel_settings</span> Admin</a>
+<div class="header-actions">
+<a href="admin-login.html" class="btn-admin"><span class="material-symbols-outlined" style="font-size:0.9rem;">admin_panel_settings</span> Admin</a>
 <a href="quote.html" class="btn-header">Get a Quote</a>
+<button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+  <span></span><span></span><span></span>
+</button>
 </div>
 </div>
 </header>
+<!-- Mobile Menu -->
+<nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+  <a class="nav-link" href="index.html">Home</a>
+  <a class="nav-link" href="projects.html">Projects</a>
+  <a class="nav-link" href="services.html">Services</a>
+  <a class="nav-link" href="about.html">About</a>
+  <a class="nav-link" href="clients.html">Clients</a>
+  <a class="nav-link" href="careers.html">Careers</a>
+  <a class="nav-link" href="contact.html">Contact</a>
+  <a class="nav-link" href="policy.html">Policy</a>
+  <a href="quote.html" class="btn-header">Get a Quote</a>
+</nav>
 <!-- Hero Section -->
 <section class="hero">
 <div class="hero-bg">
@@ -756,9 +772,9 @@ body {
 <div class="footer-grid">
 <div class="footer-logo-wrap">
 <div class="footer-logo">
-<img src="assets/logo/bnr-logo.jpg" alt="BNR Infrastructure Logo" style="max-height: 40px; width: auto; filter: brightness(0) invert(1);">
+<img src="assets/logo/bnr-logo.jpg" alt="BNR Infrastructure Logo" style="max-height:38px;width:auto;filter:brightness(0) invert(1);">
 </div>
-<p style="font-size: 0.875rem; line-height: 1.6; margin-bottom: 1.5rem;">Defining structural engineering excellence since 1974. Headquartered in Chennai, operating Pan-India.</p>
+<p class="footer-tagline">Defining structural engineering excellence since 1974. Headquartered in Chennai, operating Pan-India.</p>
 <div class="social-links">
 <a class="social-btn" href="#"><span class="material-symbols-outlined">share</span></a>
 <a class="social-btn" href="#"><span class="material-symbols-outlined">public</span></a>
@@ -803,4 +819,5 @@ body {
 </footer>
 <script src="js/script.js"></script>
 <script>document.addEventListener('DOMContentLoaded',()=>{document.querySelectorAll('.btn-adm').forEach(el=>{if(window.innerWidth>=1024)el.style.display='flex';});});</script>
+<button id="scrollTopBtn" aria-label="Back to top"><span class="material-symbols-outlined">arrow_upward</span></button>
 </body></html>

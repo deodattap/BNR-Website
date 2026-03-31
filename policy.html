@@ -7,6 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/style.css">
 <style>
 :root { --primary:#144bb8; --primary-dark:#0D337B; --bg-light:#f6f6f8; --white:#ffffff; --slate-200:#e2e8f0; --slate-400:#94a3b8; --slate-500:#64748b; --slate-600:#475569; --slate-800:#1e293b; --slate-900:#0f172a; }
 * { margin:0; padding:0; box-sizing:border-box; }
@@ -92,13 +93,29 @@ body { font-family:'Inter',sans-serif; background:var(--bg-light); color:var(--s
     <a class="nav-link" href="clients.html">Clients</a>
     <a class="nav-link" href="careers.html">Careers</a>
     <a class="nav-link" href="contact.html">Contact</a>
+    <a class="nav-link" href="policy.html">Policy</a>
   </nav>
   <div class="header-actions">
     <a href="admin-login.html" class="btn-admin"><span class="material-symbols-outlined" style="font-size:0.9rem;">admin_panel_settings</span> Admin</a>
     <a href="quote.html" class="btn-header">Get a Quote</a>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </div>
 </header>
+<!-- Mobile Menu -->
+<nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+  <a class="nav-link" href="index.html">Home</a>
+  <a class="nav-link" href="projects.html">Projects</a>
+  <a class="nav-link" href="services.html">Services</a>
+  <a class="nav-link" href="about.html">About</a>
+  <a class="nav-link" href="clients.html">Clients</a>
+  <a class="nav-link" href="careers.html">Careers</a>
+  <a class="nav-link" href="contact.html">Contact</a>
+  <a class="nav-link" href="policy.html">Policy</a>
+  <a href="quote.html" class="btn-header">Get a Quote</a>
+</nav>
 
 <section class="page-hero">
   <div class="container page-hero-content">
@@ -263,5 +280,6 @@ function showPolicy(id, btn) {
   btn.classList.add('active');
 }
 </script>
+<button id="scrollTopBtn" aria-label="Back to top"><span class="material-symbols-outlined">arrow_upward</span></button>
 </body>
 </html>

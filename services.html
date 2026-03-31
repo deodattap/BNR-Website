@@ -9,6 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/style.css">
 <style>
         :root {
             --primary-color: #144bb8;
@@ -450,135 +451,10 @@
             border-color: var(--white);
         }
 
-        /* Footer */
-        .site-footer {
-            background: var(--white);
-            border-top: 1px solid var(--border-color);
-            padding: 4rem 0 2rem;
-        }
-
-        .footer-grid {
-            display: grid;
-            gap: 3rem;
-        }
-
-        @media (min-width: 768px) {
-            .footer-grid {
-                grid-template-columns: 2fr 1fr 1fr;
-            }
-        }
-
-        .footer-brand h2 {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-        }
-
-        .footer-desc {
-            color: var(--text-muted);
-            font-size: 0.875rem;
-            max-width: 24rem;
-            margin-bottom: 2rem;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-btn {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(20, 75, 184, 0.05);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-dark);
-            transition: all 0.3s;
-        }
-
-        .social-btn:hover {
-            background: var(--primary-color);
-            color: var(--white);
-        }
-
-        .footer-heading {
-            font-size: 0.875rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 1.5rem;
-        }
-
-        .footer-nav {
-            list-style: none;
-        }
-
-        .footer-nav li {
-            margin-bottom: 1rem;
-        }
-
-        .footer-nav a {
-            text-decoration: none;
-            color: var(--text-muted);
-            font-size: 0.875rem;
-            font-weight: 500;
-        }
-
-        .footer-nav a:hover {
-            color: var(--primary-color);
-        }
-
-        .contact-info {
-            list-style: none;
-        }
-
-        .contact-item {
-            display: flex;
-            gap: 0.75rem;
-            margin-bottom: 1rem;
-            color: var(--text-muted);
-            font-size: 0.875rem;
-        }
-
-        .contact-item .material-symbols-outlined {
-            color: var(--primary-color);
-        }
-
-        .footer-bottom {
-            margin-top: 4rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border-color);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1rem;
-            color: #94a3b8;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-
-        @media (min-width: 768px) {
-            .footer-bottom {
-                flex-direction: row;
-                justify-content: space-between;
-            }
-        }
-
-        .footer-legal {
-            display: flex;
-            gap: 1.5rem;
-        }
-
-        .footer-legal a {
-            text-decoration: none;
-            color: inherit;
-        }
-
         .footer-legal a:hover {
             color: var(--primary-color);
         }
+    /* NOTE: .site-footer background handled by shared css/style.css */
     </style>
 </head>
 <body class="bg-background-light dark:bg-background-dark text-[#0e121b]">
@@ -591,19 +467,34 @@
 <nav class="nav-links">
 <a class="nav-link" href="index.html">Home</a>
 <a class="nav-link" href="projects.html">Projects</a>
-<a class="nav-link active" href="services.html">Services</a>
+<a class="nav-link" href="services.html">Services</a>
 <a class="nav-link" href="about.html">About</a>
 <a class="nav-link" href="clients.html">Clients</a>
 <a class="nav-link" href="careers.html">Careers</a>
 <a class="nav-link" href="contact.html">Contact</a>
 <a class="nav-link" href="policy.html">Policy</a>
 </nav>
-<div class="header-actions" style="display:flex;align-items:center;gap:0.75rem;">
-<a href="admin-login.html" style="display:none;padding:0.5rem 1rem;border:1.5px solid #cbd5e1;color:#475569;border-radius:0.5rem;font-weight:600;font-size:0.8rem;text-decoration:none;align-items:center;gap:0.3rem;" class="btn-adms"><span class="material-symbols-outlined" style="font-size:0.9rem;">admin_panel_settings</span> Admin</a>
+<div class="header-actions">
+<a href="admin-login.html" class="btn-admin"><span class="material-symbols-outlined" style="font-size:0.9rem;">admin_panel_settings</span> Admin</a>
 <a href="quote.html" class="btn-header">Get a Quote</a>
+<button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+  <span></span><span></span><span></span>
+</button>
 </div>
 </div>
 </header>
+<!-- Mobile Menu -->
+<nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+  <a class="nav-link" href="index.html">Home</a>
+  <a class="nav-link" href="projects.html">Projects</a>
+  <a class="nav-link" href="services.html">Services</a>
+  <a class="nav-link" href="about.html">About</a>
+  <a class="nav-link" href="clients.html">Clients</a>
+  <a class="nav-link" href="careers.html">Careers</a>
+  <a class="nav-link" href="contact.html">Contact</a>
+  <a class="nav-link" href="policy.html">Policy</a>
+  <a href="quote.html" class="btn-header">Get a Quote</a>
+</nav>
 <main>
 <!-- Hero Section -->
 <section class="hero reveal">
@@ -770,4 +661,5 @@
 </footer>
 <script src="js/script.js"></script>
 <script>document.addEventListener('DOMContentLoaded',()=>{document.querySelectorAll('.btn-adms').forEach(el=>{if(window.innerWidth>=1024)el.style.display='flex';});});</script>
+<button id="scrollTopBtn" aria-label="Back to top"><span class="material-symbols-outlined">arrow_upward</span></button>
 </body></html>

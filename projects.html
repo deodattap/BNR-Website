@@ -9,6 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/style.css">
 <style>
         :root {
             --primary: #144bb8;
@@ -578,7 +579,7 @@
 </a>
 <nav class="nav-links">
 <a class="nav-link" href="index.html">Home</a>
-<a class="nav-link active" href="projects.html">Projects</a>
+<a class="nav-link" href="projects.html">Projects</a>
 <a class="nav-link" href="services.html">Services</a>
 <a class="nav-link" href="about.html">About</a>
 <a class="nav-link" href="clients.html">Clients</a>
@@ -587,11 +588,26 @@
 <a class="nav-link" href="policy.html">Policy</a>
 </nav>
 <div class="header-actions" style="display:flex;align-items:center;gap:0.75rem;">
-<a href="admin-login.html" style="display:none;padding:0.5rem 1rem;border:1.5px solid #cbd5e1;color:#475569;border-radius:0.5rem;font-weight:600;font-size:0.8rem;text-decoration:none;align-items:center;gap:0.3rem;" class="btn-admp"><span class="material-symbols-outlined" style="font-size:0.9rem;">admin_panel_settings</span> Admin</a>
+<a href="admin-login.html" class="btn-admin btn-admp"><span class="material-symbols-outlined" style="font-size:0.9rem;">admin_panel_settings</span> Admin</a>
 <a href="quote.html" class="btn-header">Get a Quote</a>
+<button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+  <span></span><span></span><span></span>
+</button>
 </div>
 </div>
 </header>
+<!-- Mobile Menu -->
+<nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+  <a class="nav-link" href="index.html">Home</a>
+  <a class="nav-link" href="projects.html">Projects</a>
+  <a class="nav-link" href="services.html">Services</a>
+  <a class="nav-link" href="about.html">About</a>
+  <a class="nav-link" href="clients.html">Clients</a>
+  <a class="nav-link" href="careers.html">Careers</a>
+  <a class="nav-link" href="contact.html">Contact</a>
+  <a class="nav-link" href="policy.html">Policy</a>
+  <a href="quote.html" class="btn-header">Get a Quote</a>
+</nav>
 <main class="main-content reveal">
 <div class="container">
 <!-- Page Header -->
@@ -780,4 +796,5 @@ Load More Projects
 </div>
 <script src="js/script.js"></script>
 <script>document.addEventListener('DOMContentLoaded',()=>{document.querySelectorAll('.btn-admp').forEach(el=>{if(window.innerWidth>=1024)el.style.display='flex';});});</script>
+<button id="scrollTopBtn" aria-label="Back to top"><span class="material-symbols-outlined">arrow_upward</span></button>
 </body></html>

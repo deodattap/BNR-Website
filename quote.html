@@ -7,6 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/style.css">
 <style>
     :root {
         --primary: #144bb8;
@@ -291,31 +292,7 @@
     }
     .trust-item .material-symbols-outlined { color: var(--primary); font-size: 1.25rem; }
 
-    /* ── FOOTER ── */
-    .site-footer {
-        background: var(--white);
-        border-top: 1px solid var(--slate-200);
-        padding: 3rem 0 2rem;
-    }
-    .footer-grid {
-        display: grid; gap: 2.5rem;
-    }
-    @media (min-width: 768px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr; } }
-    .footer-brand p { font-size: 0.875rem; color: var(--text-muted); margin-top: 1rem; max-width: 22rem; }
-    .footer-title { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #94a3b8; margin-bottom: 1rem; }
-    .footer-links-list { list-style: none; display: flex; flex-direction: column; gap: 0.625rem; }
-    .footer-links-list a { font-size: 0.875rem; font-weight: 500; color: var(--text-muted); text-decoration: none; transition: var(--transition); }
-    .footer-links-list a:hover { color: var(--primary); }
-    .footer-bottom {
-        margin-top: 3rem; padding-top: 1.5rem;
-        border-top: 1px solid var(--slate-100);
-        display: flex; flex-direction: column; gap: 0.75rem;
-        font-size: 0.75rem; color: #94a3b8;
-    }
-    @media (min-width: 640px) { .footer-bottom { flex-direction: row; justify-content: space-between; } }
-    .footer-legal { display: flex; gap: 1.5rem; }
-    .footer-legal a { color: inherit; text-decoration: none; }
-    .footer-legal a:hover { color: var(--primary); }
+    /* ── FOOTER — handled by shared css/style.css ── */
 </style>
 </head>
 <body>
@@ -336,11 +313,26 @@
 <a class="nav-link" href="policy.html">Policy</a>
 </nav>
 <div class="header-actions" style="display:flex;align-items:center;gap:0.75rem;">
-<a href="admin-login.html" style="display:none;padding:0.5rem 1rem;border:1.5px solid #cbd5e1;color:#475569;border-radius:0.5rem;font-weight:600;font-size:0.8rem;text-decoration:none;transition:all 0.2s;" class="btn-admin-lnk"><span class="material-symbols-outlined" style="font-size:0.9rem;vertical-align:middle;">admin_panel_settings</span> Admin</a>
+<a href="admin-login.html" class="btn-admin btn-admin-lnk"><span class="material-symbols-outlined" style="font-size:0.9rem;vertical-align:middle;">admin_panel_settings</span> Admin</a>
 <a href="quote.html" class="btn-header">Get a Quote</a>
+<button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+  <span></span><span></span><span></span>
+</button>
 </div>
 </div>
 </header>
+<!-- Mobile Menu -->
+<nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+  <a class="nav-link" href="index.html">Home</a>
+  <a class="nav-link" href="projects.html">Projects</a>
+  <a class="nav-link" href="services.html">Services</a>
+  <a class="nav-link" href="about.html">About</a>
+  <a class="nav-link" href="clients.html">Clients</a>
+  <a class="nav-link" href="careers.html">Careers</a>
+  <a class="nav-link" href="contact.html">Contact</a>
+  <a class="nav-link" href="policy.html">Policy</a>
+  <a href="quote.html" class="btn-header">Get a Quote</a>
+</nav>
 
 <!-- ── HERO ── -->
 <section class="hero reveal">
@@ -598,6 +590,6 @@ async function handleSubmit(e) {
 }
 </script>
 <style>@keyframes spin{to{transform:rotate(360deg)}}</style>
-
+<button id="scrollTopBtn" aria-label="Back to top"><span class="material-symbols-outlined">arrow_upward</span></button>
 </body>
 </html>

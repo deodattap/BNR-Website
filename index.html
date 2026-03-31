@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 
 <html lang="en"><head>
 <meta charset="utf-8"/>
@@ -8,6 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/style.css">
 <style>body {
             font-family: 'Inter', sans-serif;
             margin: 0;
@@ -866,7 +867,7 @@
 <img src="assets/logo/bnr-logo.jpg" alt="BNR Infrastructure Logo" style="max-height: 50px; width: auto;">
 </a>
 <nav class="nav-links">
-<a class="nav-link active" href="index.html">Home</a>
+<a class="nav-link" href="index.html">Home</a>
 <a class="nav-link" href="projects.html">Projects</a>
 <a class="nav-link" href="services.html">Services</a>
 <a class="nav-link" href="about.html">About</a>
@@ -875,12 +876,27 @@
 <a class="nav-link" href="contact.html">Contact</a>
 <a class="nav-link" href="policy.html">Policy</a>
 </nav>
-<div class="header-actions" style="display:flex;align-items:center;gap:0.75rem;">
-<a href="admin-login.html" style="display:none;padding:0.5rem 1rem;border:1.5px solid #cbd5e1;color:#475569;border-radius:0.5rem;font-weight:600;font-size:0.8rem;text-decoration:none;align-items:center;gap:0.3rem;transition:all 0.2s;" id="adminNavBtn"><span class="material-symbols-outlined" style="font-size:0.9rem;">admin_panel_settings</span> Admin</a>
+<div class="header-actions">
+<a href="admin-login.html" class="btn-admin"><span class="material-symbols-outlined" style="font-size:0.9rem;">admin_panel_settings</span> Admin</a>
 <a href="quote.html" class="btn-header">Get a Quote</a>
+<button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+  <span></span><span></span><span></span>
+</button>
 </div>
 </div>
 </header>
+<!-- Mobile Menu -->
+<nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+  <a class="nav-link" href="index.html">Home</a>
+  <a class="nav-link" href="projects.html">Projects</a>
+  <a class="nav-link" href="services.html">Services</a>
+  <a class="nav-link" href="about.html">About</a>
+  <a class="nav-link" href="clients.html">Clients</a>
+  <a class="nav-link" href="careers.html">Careers</a>
+  <a class="nav-link" href="contact.html">Contact</a>
+  <a class="nav-link" href="policy.html">Policy</a>
+  <a href="quote.html" class="btn-header">Get a Quote</a>
+</nav>
 <!-- Hero Section -->
 <section class="hero-section">
 <div class="hero-bg" style="background-image: url('hero-bg.jpg');"></div>
@@ -1174,4 +1190,5 @@ const STATIC_CLIENT_LOGOS = [
   }
 })();
 </script>
+<button id="scrollTopBtn" aria-label="Back to top"><span class="material-symbols-outlined">arrow_upward</span></button>
 </body></html>

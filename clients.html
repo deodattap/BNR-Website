@@ -7,6 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/style.css">
 <style>
 :root {
   --primary: #144bb8;
@@ -140,16 +141,31 @@ body { font-family: 'Inter', sans-serif; background: var(--bg-light); color: var
     <a class="nav-link" href="projects.html">Projects</a>
     <a class="nav-link" href="services.html">Services</a>
     <a class="nav-link" href="about.html">About</a>
-    <a class="nav-link active" href="clients.html">Clients</a>
+    <a class="nav-link" href="clients.html">Clients</a>
     <a class="nav-link" href="careers.html">Careers</a>
     <a class="nav-link" href="contact.html">Contact</a>
   </nav>
   <div class="header-actions">
     <a href="admin-login.html" class="btn-admin"><span class="material-symbols-outlined" style="font-size:0.9rem;">admin_panel_settings</span> Admin</a>
     <a href="quote.html" class="btn-header">Get a Quote</a>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </div>
 </header>
+<!-- Mobile Menu -->
+<nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+  <a class="nav-link" href="index.html">Home</a>
+  <a class="nav-link" href="projects.html">Projects</a>
+  <a class="nav-link" href="services.html">Services</a>
+  <a class="nav-link" href="about.html">About</a>
+  <a class="nav-link" href="clients.html">Clients</a>
+  <a class="nav-link" href="careers.html">Careers</a>
+  <a class="nav-link" href="contact.html">Contact</a>
+  <a class="nav-link" href="policy.html">Policy</a>
+  <a href="quote.html" class="btn-header">Get a Quote</a>
+</nav>
 
 <!-- Page Hero -->
 <section class="page-hero">
@@ -266,6 +282,7 @@ body { font-family: 'Inter', sans-serif; background: var(--bg-light); color: var
 
 <script src="js/script.js"></script>
 <script src="js/api.js"></script>
+<button id="scrollTopBtn" aria-label="Back to top"><span class="material-symbols-outlined">arrow_upward</span></button>
 <script>
 // Static fallback client logos from BNR site
 const STATIC_CLIENTS = [
@@ -277,10 +294,14 @@ const STATIC_CLIENTS = [
   { name: 'GMR Group', logo: 'https://www.bnrinfra.com/wp-content/uploads/2021/05/l6.png' },
   { name: 'RITES Ltd.', logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/6/6e/RITES_Limited_logo.svg/200px-RITES_Limited_logo.svg.png' },
   { name: 'IRCON International', logo: 'https://upload.wikimedia.org/wikipedia/en/7/7d/Ircon_International.png' },
-  { name: 'NITI Aayog', logo: '' },
+  { name: 'Chennai Metro Rail', logo: '' },
   { name: 'PWD Tamil Nadu', logo: '' },
   { name: 'MMRDA', logo: '' },
-  { name: 'HDFC Infrastructure', logo: '' }
+  { name: 'NHIDCL', logo: '' },
+  { name: 'DMRC', logo: '' },
+  { name: 'NLC India', logo: '' },
+  { name: 'TANGEDCO', logo: '' },
+  { name: 'Indian Railways', logo: '' },
 ];
 
 function renderClientCard(client) {
