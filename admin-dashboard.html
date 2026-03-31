@@ -353,6 +353,21 @@ tr:hover td{background:var(--sl50);}
   </div>
 </div>
 
+<!-- ── DELETE CONFIRMATION MODAL ── -->
+<div class="modal-overlay" id="modal-confirm">
+  <div class="modal" style="max-width:400px;">
+    <h3 style="margin-bottom:0.5rem;">Confirm Delete</h3>
+    <p id="confirmMsg" style="color:var(--sl600);font-size:0.9375rem;margin-bottom:1.75rem;">Are you sure you want to delete this item? This cannot be undone.</p>
+    <div class="modal-actions">
+      <button class="btn-sm btn-sec" onclick="closeConfirm()">Cancel</button>
+      <button class="btn-sm" id="confirmOkBtn" style="background:#dc2626;color:white;padding:0.5rem 1.25rem;"
+        onclick="_confirmCallback && _confirmCallback()">
+        <span class="material-symbols-outlined" style="font-size:0.95rem;">delete</span> Delete
+      </button>
+    </div>
+  </div>
+</div>
+
 <script src="js/api.js"></script>
 <script>
 // ── AUTH GUARD ──
@@ -473,7 +488,7 @@ async function loadProjects() {
   document.getElementById('statProj').textContent = data.length;
   const tbody = document.getElementById('projectsTable');
   if (!data.length) { tbody.innerHTML = `<tr><td colspan="6"><div class="empty-state"><span class="material-symbols-outlined">construction</span>No projects yet. Click "Add Project" to start.</div></td></tr>`; return; }
-  tbody.innerHTML = data.map(p => `<tr>
+  tbody.innerHTML = data.map(p => `<tr data-id="${p._id}">
     <td>${p.image ? `<img class="proj-img" src="${p.image}" alt="" onerror="this.style.opacity=0.3">` : `<div style="width:64px;height:48px;background:var(--sl100);border-radius:0.5rem;display:flex;align-items:center;justify-content:center"><span class="material-symbols-outlined" style="color:var(--sl300)">image</span></div>`}</td>
     <td class="td-name">${p.title}</td>
     <td><span class="badge badge-blue">${p.category||'–'}</span></td>
@@ -499,8 +514,17 @@ async function submitProject(e) {
   } catch { showToast('Network error.', 'error'); }
 }
 async function delProject(id) {
-  if (!confirm('Delete this project?')) return;
-  await deleteProject(id); showToast('Deleted.'); loadProjects();
+  confirmDelete('Delete this project? This cannot be undone.', async () => {
+    try {
+      const res = await deleteProject(id);
+      if (res.success || res.ok !== false) {
+        const row = document.querySelector(`#projectsTable tr[data-id="${id}"]`);
+        if (row) { row.style.opacity = '0'; row.style.transition = 'opacity 0.25s'; setTimeout(() => row.remove(), 250); }
+        updateStatCount('statProj', -1);
+        showToast('Project deleted.');
+      } else { showToast(res.error || 'Delete failed.', 'error'); }
+    } catch { showToast('Network error.', 'error'); }
+  });
 }
 
 // ── CLIENTS ──
@@ -509,7 +533,7 @@ async function loadClients() {
   document.getElementById('statClients').textContent = data.length;
   const grid = document.getElementById('clientsGrid');
   if (!data.length) { grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><span class="material-symbols-outlined">groups</span>No clients yet. Click "Add Client" to start.</div>`; return; }
-  grid.innerHTML = data.map(c => `<div class="client-admin-card">
+  grid.innerHTML = data.map(c => `<div class="client-admin-card" data-id="${c._id}">
     <button class="card-del" onclick="delClient('${c._id}')" title="Delete"><span class="material-symbols-outlined">delete</span></button>
     <img src="${c.logo}" alt="${c.name}" onerror="this.replaceWith(document.createTextNode(''))">
     <span class="c-name">${c.name}</span>
@@ -525,8 +549,17 @@ async function submitClient(e) {
   } catch { showToast('Network error.', 'error'); }
 }
 async function delClient(id) {
-  if (!confirm('Remove client?')) return;
-  await deleteClient(id); showToast('Removed.'); loadClients();
+  confirmDelete('Remove this client? This cannot be undone.', async () => {
+    try {
+      const res = await deleteClient(id);
+      if (res.success || res.ok !== false) {
+        const card = document.querySelector(`#clientsGrid [data-id="${id}"]`);
+        if (card) { card.style.opacity = '0'; card.style.transition = 'opacity 0.25s'; setTimeout(() => card.remove(), 250); }
+        updateStatCount('statClients', -1);
+        showToast('Client removed.');
+      } else { showToast(res.error || 'Delete failed.', 'error'); }
+    } catch { showToast('Network error.', 'error'); }
+  });
 }
 
 // ── CAREERS ──
@@ -535,7 +568,7 @@ async function loadCareers() {
   document.getElementById('statCareers').textContent = data.length;
   const tbody = document.getElementById('careersTable');
   if (!data.length) { tbody.innerHTML = `<tr><td colspan="5"><div class="empty-state"><span class="material-symbols-outlined">work</span>No job openings yet. Click "Add Opening" to post roles.</div></td></tr>`; return; }
-  tbody.innerHTML = data.map(j => `<tr>
+  tbody.innerHTML = data.map(j => `<tr data-id="${j._id}">
     <td class="td-name">${j.title}</td>
     <td><span class="badge badge-blue">${j.department||'Engineering'}</span></td>
     <td>${j.location||'–'}</td>
@@ -553,8 +586,17 @@ async function submitCareer(e) {
   } catch { showToast('Network error.', 'error'); }
 }
 async function delJob(id) {
-  if (!confirm('Delete this job opening?')) return;
-  await deleteCareer(id); showToast('Deleted.'); loadCareers();
+  confirmDelete('Delete this job opening? This cannot be undone.', async () => {
+    try {
+      const res = await deleteCareer(id);
+      if (res.success || res.ok !== false) {
+        const row = document.querySelector(`#careersTable tr[data-id="${id}"]`);
+        if (row) { row.style.opacity = '0'; row.style.transition = 'opacity 0.25s'; setTimeout(() => row.remove(), 250); }
+        updateStatCount('statCareers', -1);
+        showToast('Job opening deleted.');
+      } else { showToast(res.error || 'Delete failed.', 'error'); }
+    } catch { showToast('Network error.', 'error'); }
+  });
 }
 
 // ── MESSAGES ──
@@ -564,7 +606,7 @@ async function loadMessages() {
   if (data.length > 0) { const b = document.getElementById('msgBadge'); b.style.display='inline'; b.textContent=data.length; }
   const tbody = document.getElementById('messagesTable');
   if (!data.length) { tbody.innerHTML = `<tr><td colspan="7"><div class="empty-state"><span class="material-symbols-outlined">mark_email_read</span>No messages yet.</div></td></tr>`; return; }
-  tbody.innerHTML = data.map(m => `<tr>
+  tbody.innerHTML = data.map(m => `<tr data-id="${m._id}">
     <td>${fmtDate(m.createdAt)}</td>
     <td class="td-name">${m.name}</td>
     <td><a href="mailto:${m.email}" style="color:var(--primary)">${m.email}</a></td>
@@ -575,9 +617,21 @@ async function loadMessages() {
   </tr>`).join('');
 }
 async function delMsg(id) {
-  if (!confirm('Delete message?')) return;
-  await fetch(`${API_BASE}/contact/${id}`, { method:'DELETE', headers:{'Authorization':`Bearer ${getToken()}`} });
-  showToast('Deleted.'); loadMessages();
+  confirmDelete('Delete this message? This cannot be undone.', async () => {
+    try {
+      const res = await fetch(`${API_BASE}/contact/${id}`, { method:'DELETE', headers:{'Authorization':`Bearer ${getToken()}`} });
+      const data = await res.json();
+      if (data.success || res.ok) {
+        const row = document.querySelector(`#messagesTable tr[data-id="${id}"]`);
+        if (row) { row.style.opacity = '0'; row.style.transition = 'opacity 0.25s'; setTimeout(() => row.remove(), 250); }
+        updateStatCount('statMsg', -1);
+        const badge = document.getElementById('msgBadge');
+        const newCount = parseInt(badge.textContent || '1') - 1;
+        badge.textContent = newCount; if (newCount <= 0) badge.style.display = 'none';
+        showToast('Message deleted.');
+      } else { showToast(data.error || 'Delete failed.', 'error'); }
+    } catch { showToast('Network error.', 'error'); }
+  });
 }
 
 // ── QUOTES ──
@@ -587,7 +641,7 @@ async function loadQuotes() {
   if (data.length > 0) { const b = document.getElementById('qtBadge'); b.style.display='inline'; b.textContent=data.length; }
   const tbody = document.getElementById('quotesTable');
   if (!data.length) { tbody.innerHTML = `<tr><td colspan="7"><div class="empty-state"><span class="material-symbols-outlined">request_quote</span>No quote requests yet.</div></td></tr>`; return; }
-  tbody.innerHTML = data.map(q => `<tr>
+  tbody.innerHTML = data.map(q => `<tr data-id="${q._id}">
     <td>${fmtDate(q.createdAt)}</td>
     <td class="td-name">${q.name}${q.company?`<br><span style="font-size:0.75rem;color:var(--sl400)">${q.company}</span>`:''}</td>
     <td><a href="mailto:${q.email}" style="color:var(--primary)">${q.email}</a></td>
@@ -598,9 +652,43 @@ async function loadQuotes() {
   </tr>`).join('');
 }
 async function delQuote(id) {
-  if (!confirm('Delete quote?')) return;
-  await fetch(`${API_BASE}/quote/${id}`, { method:'DELETE', headers:{'Authorization':`Bearer ${getToken()}`} });
-  showToast('Deleted.'); loadQuotes();
+  confirmDelete('Delete this quote request? This cannot be undone.', async () => {
+    try {
+      const res = await fetch(`${API_BASE}/quote/${id}`, { method:'DELETE', headers:{'Authorization':`Bearer ${getToken()}`} });
+      const data = await res.json();
+      if (data.success || res.ok) {
+        const row = document.querySelector(`#quotesTable tr[data-id="${id}"]`);
+        if (row) { row.style.opacity = '0'; row.style.transition = 'opacity 0.25s'; setTimeout(() => row.remove(), 250); }
+        updateStatCount('statQt', -1);
+        const badge = document.getElementById('qtBadge');
+        const newCount = parseInt(badge.textContent || '1') - 1;
+        badge.textContent = newCount; if (newCount <= 0) badge.style.display = 'none';
+        showToast('Quote deleted.');
+      } else { showToast(data.error || 'Delete failed.', 'error'); }
+    } catch { showToast('Network error.', 'error'); }
+  });
+}
+
+// ── CONFIRM DELETE MODAL ──
+let _confirmCallback = null;
+function confirmDelete(msg, callback) {
+  document.getElementById('confirmMsg').textContent = msg;
+  _confirmCallback = async () => { closeConfirm(); await callback(); };
+  document.getElementById('modal-confirm').classList.add('open');
+}
+function closeConfirm() {
+  document.getElementById('modal-confirm').classList.remove('open');
+  _confirmCallback = null;
+}
+document.getElementById('modal-confirm').addEventListener('click', e => {
+  if (e.target === document.getElementById('modal-confirm')) closeConfirm();
+});
+
+// ── STAT COUNTER HELPER ──
+function updateStatCount(id, delta) {
+  const el = document.getElementById(id);
+  const cur = parseInt(el.textContent) || 0;
+  el.textContent = Math.max(0, cur + delta);
 }
 
 // ── LOGOUT ──
