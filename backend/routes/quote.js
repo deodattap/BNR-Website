@@ -4,6 +4,7 @@ const Quote = require('../models/Quote');
 const auth = require('../middleware/auth');
 const { body } = require('express-validator');
 const validate = require('../middleware/validate');
+const { sendMail } = require('../utils/mailer');
 
 // Validation rules for quote request
 const quoteRules = [
@@ -35,6 +36,25 @@ router.post('/', quoteRules, validate, async (req, res) => {
 
     const quote = new Quote({ name, company, email, phone, projectType, location, budget, description });
     await quote.save();
+
+    // Send email notification (non-blocking, errors are logged not thrown)
+    await sendMail({
+      subject: `📋 New Quote Request from ${name}`,
+      html: `
+        <h2 style="color:#1a3a5c;">New Quote Request</h2>
+        <table style="border-collapse:collapse;width:100%;font-family:Arial,sans-serif;">
+          <tr><td style="padding:8px;border:1px solid #ddd;"><b>Name</b></td><td style="padding:8px;border:1px solid #ddd;">${name}</td></tr>
+          <tr><td style="padding:8px;border:1px solid #ddd;"><b>Company</b></td><td style="padding:8px;border:1px solid #ddd;">${company || '—'}</td></tr>
+          <tr><td style="padding:8px;border:1px solid #ddd;"><b>Email</b></td><td style="padding:8px;border:1px solid #ddd;">${email}</td></tr>
+          <tr><td style="padding:8px;border:1px solid #ddd;"><b>Phone</b></td><td style="padding:8px;border:1px solid #ddd;">${phone}</td></tr>
+          <tr><td style="padding:8px;border:1px solid #ddd;"><b>Project Type</b></td><td style="padding:8px;border:1px solid #ddd;">${projectType}</td></tr>
+          <tr><td style="padding:8px;border:1px solid #ddd;"><b>Location</b></td><td style="padding:8px;border:1px solid #ddd;">${location}</td></tr>
+          <tr><td style="padding:8px;border:1px solid #ddd;"><b>Budget</b></td><td style="padding:8px;border:1px solid #ddd;">${budget}</td></tr>
+          <tr><td style="padding:8px;border:1px solid #ddd;"><b>Description</b></td><td style="padding:8px;border:1px solid #ddd;">${description || '—'}</td></tr>
+        </table>
+        <p style="color:#888;font-size:12px;margin-top:16px;">Submitted via BNR Infrastructure website</p>
+      `,
+    });
 
     res.status(201).json({ success: true, message: 'Quote request submitted! Our team will contact you within 24 hours.' });
   } catch (err) {
