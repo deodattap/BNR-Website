@@ -2,6 +2,15 @@ const express = require('express');
 const router = express.Router();
 const Project = require('../models/Project');
 const auth = require('../middleware/auth');
+const { body } = require('express-validator');
+const validate = require('../middleware/validate');
+
+// Validation rules for adding a project
+const projectRules = [
+  body('title')
+    .trim()
+    .notEmpty().withMessage('Project title is required.'),
+];
 
 // GET /api/projects — Get all projects (public)
 router.get('/', async (req, res) => {
@@ -14,13 +23,9 @@ router.get('/', async (req, res) => {
 });
 
 // POST /api/projects — Add a project (admin only)
-router.post('/', auth, async (req, res) => {
+router.post('/', auth, projectRules, validate, async (req, res) => {
   try {
     const { title, description, image, location, year, category } = req.body;
-
-    if (!title) {
-      return res.status(400).json({ error: 'Project title is required.' });
-    }
 
     const project = new Project({ title, description, image, location, year, category });
     await project.save();

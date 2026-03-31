@@ -2,15 +2,31 @@ const express = require('express');
 const router = express.Router();
 const Contact = require('../models/Contact');
 const auth = require('../middleware/auth');
+const { body } = require('express-validator');
+const validate = require('../middleware/validate');
+
+// Validation rules for contact form
+const contactRules = [
+  body('name')
+    .trim()
+    .notEmpty().withMessage('Name is required.'),
+  body('email')
+    .trim()
+    .notEmpty().withMessage('Email is required.')
+    .isEmail().withMessage('Please provide a valid email address.'),
+  body('message')
+    .trim()
+    .notEmpty().withMessage('Message is required.')
+    .isLength({ min: 10 }).withMessage('Message must be at least 10 characters.'),
+  body('phone')
+    .optional({ checkFalsy: true })
+    .isMobilePhone().withMessage('Please provide a valid phone number.'),
+];
 
 // POST /api/contact — Submit contact form
-router.post('/', async (req, res) => {
+router.post('/', contactRules, validate, async (req, res) => {
   try {
     const { name, email, phone, projectType, message } = req.body;
-
-    if (!name || !email || !message) {
-      return res.status(400).json({ error: 'Name, email, and message are required.' });
-    }
 
     const contact = new Contact({ name, email, phone, projectType, message });
     await contact.save();

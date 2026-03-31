@@ -1,19 +1,37 @@
 const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+const { body } = require('express-validator');
+const validate = require('../middleware/validate');
+
+// Validation rules for admin login
+const loginRules = [
+  body('username')
+    .trim()
+    .notEmpty().withMessage('Username is required.'),
+  body('password')
+    .notEmpty().withMessage('Password is required.'),
+];
 
 // POST /api/admin/login
-router.post('/login', (req, res) => {
+router.post('/login', loginRules, validate, (req, res) => {
   const { username, password } = req.body;
 
-  if (!username || !password) {
-    return res.status(400).json({ error: 'Username and password are required.' });
+  const validUsername = process.env.ADMIN_USERNAME;
+  const validPasswordHash = process.env.ADMIN_PASSWORD_HASH;
+
+  // Username check
+  if (username !== validUsername) {
+    return res.status(401).json({ error: 'Invalid credentials.' });
   }
 
-  const validUsername = process.env.ADMIN_USERNAME;
-  const validPassword = process.env.ADMIN_PASSWORD;
+  // Secure bcrypt password comparison
+  const passwordMatch = validPasswordHash
+    ? bcrypt.compareSync(password, validPasswordHash)
+    : password === process.env.ADMIN_PASSWORD; // fallback for legacy .env
 
-  if (username !== validUsername || password !== validPassword) {
+  if (!passwordMatch) {
     return res.status(401).json({ error: 'Invalid credentials.' });
   }
 

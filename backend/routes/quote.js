@@ -2,15 +2,36 @@ const express = require('express');
 const router = express.Router();
 const Quote = require('../models/Quote');
 const auth = require('../middleware/auth');
+const { body } = require('express-validator');
+const validate = require('../middleware/validate');
+
+// Validation rules for quote request
+const quoteRules = [
+  body('name')
+    .trim()
+    .notEmpty().withMessage('Name is required.'),
+  body('email')
+    .trim()
+    .notEmpty().withMessage('Email is required.')
+    .isEmail().withMessage('Please provide a valid email address.'),
+  body('phone')
+    .trim()
+    .notEmpty().withMessage('Phone number is required.'),
+  body('projectType')
+    .trim()
+    .notEmpty().withMessage('Project type is required.'),
+  body('location')
+    .trim()
+    .notEmpty().withMessage('Location is required.'),
+  body('budget')
+    .trim()
+    .notEmpty().withMessage('Budget is required.'),
+];
 
 // POST /api/quote — Submit quote request
-router.post('/', async (req, res) => {
+router.post('/', quoteRules, validate, async (req, res) => {
   try {
     const { name, company, email, phone, projectType, location, budget, description } = req.body;
-
-    if (!name || !email || !phone || !projectType || !location || !budget) {
-      return res.status(400).json({ error: 'Please fill all required fields.' });
-    }
 
     const quote = new Quote({ name, company, email, phone, projectType, location, budget, description });
     await quote.save();

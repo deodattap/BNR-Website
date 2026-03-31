@@ -1,9 +1,18 @@
 const express = require('express');
 const router = express.Router();
 const auth = require('../middleware/auth');
+const { body } = require('express-validator');
+const validate = require('../middleware/validate');
 
 let Career;
 try { Career = require('../models/Career'); } catch(e) {}
+
+// Validation rules for adding a career opening
+const careerRules = [
+  body('title')
+    .trim()
+    .notEmpty().withMessage('Job title is required.'),
+];
 
 // GET /api/careers — Public: list all active openings
 router.get('/', async (req, res) => {
@@ -28,11 +37,10 @@ router.get('/all', auth, async (req, res) => {
 });
 
 // POST /api/careers — Admin: add new opening
-router.post('/', auth, async (req, res) => {
+router.post('/', auth, careerRules, validate, async (req, res) => {
   try {
     if (!Career) return res.status(503).json({ error: 'Database not connected.' });
     const { title, department, location, type, description } = req.body;
-    if (!title) return res.status(400).json({ error: 'Title is required.' });
     const job = new Career({ title, department, location, type, description });
     await job.save();
     res.status(201).json({ success: true, job });

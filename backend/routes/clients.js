@@ -2,6 +2,18 @@ const express = require('express');
 const router = express.Router();
 const Client = require('../models/Client');
 const auth = require('../middleware/auth');
+const { body } = require('express-validator');
+const validate = require('../middleware/validate');
+
+// Validation rules for adding a client
+const clientRules = [
+  body('name')
+    .trim()
+    .notEmpty().withMessage('Client name is required.'),
+  body('logo')
+    .trim()
+    .notEmpty().withMessage('Client logo URL is required.'),
+];
 
 // GET /api/clients — Get all clients (public)
 router.get('/', async (req, res) => {
@@ -14,13 +26,9 @@ router.get('/', async (req, res) => {
 });
 
 // POST /api/clients — Add a client (admin only)
-router.post('/', auth, async (req, res) => {
+router.post('/', auth, clientRules, validate, async (req, res) => {
   try {
     const { name, logo } = req.body;
-
-    if (!name || !logo) {
-      return res.status(400).json({ error: 'Client name and logo URL are required.' });
-    }
 
     const client = new Client({ name, logo });
     await client.save();
