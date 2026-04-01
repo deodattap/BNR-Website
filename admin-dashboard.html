@@ -461,7 +461,7 @@ async function handleProjectImageUpload(input) {
     const data = await res.json();
     if (data.success && data.url) {
       // Fill the URL field with the full backend URL for preview, store relative for DB
-      const fullUrl = `http://localhost:5000${data.url}`;
+      const fullUrl = `https://bnr-backend-93y5.onrender.com${data.url}`;
       urlInput.value = fullUrl;
       prevImg.src = fullUrl;
       prevImg.style.display = 'block';

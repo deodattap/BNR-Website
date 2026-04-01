@@ -1,11 +1,11 @@
 /**
  * BNR Infrastructure – Shared API Helper
- * Detects localhost vs production automatically.
+ * Centralized API base URL for deployed backend on Render.
  */
 
 const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
   ? 'http://localhost:5000/api'
-  : 'https://bnr-infrastructure.onrender.com/api'; // Replace with your Render URL after deployment
+  : 'https://bnr-backend-93y5.onrender.com/api';
 
 // Admin token helper
 const getToken = () => localStorage.getItem('bnr_admin_token');
