@@ -83,7 +83,7 @@ body { font-family: 'Inter', sans-serif; background: var(--bg-light); color: var
   box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
 .client-card:hover { border-color: rgba(20,75,184,0.3); transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
-.client-card img { max-height: 60px; max-width: 150px; object-fit: contain; filter: grayscale(100%) opacity(0.5); transition: filter 0.35s; }
+.client-card img { max-height: 120px; max-width: 120px; object-fit: contain; filter: none; transition: filter 0.35s; }
 .client-card:hover img { filter: grayscale(0%) opacity(1); }
 .client-card .client-name { font-size: 0.8125rem; font-weight: 600; color: var(--slate-500); text-align: center; transition: color 0.3s; }
 .client-card:hover .client-name { color: var(--primary); }
@@ -286,22 +286,24 @@ body { font-family: 'Inter', sans-serif; background: var(--bg-light); color: var
 <script>
 // Static fallback client logos from BNR site
 const STATIC_CLIENTS = [
-  { name: 'L&T Construction', logo: 'https://www.bnrinfra.com/wp-content/uploads/2021/05/l1.png' },
-  { name: 'NHAI', logo: 'https://www.bnrinfra.com/wp-content/uploads/2021/05/l2.png' },
-  { name: 'Reliance Industries', logo: 'https://www.bnrinfra.com/wp-content/uploads/2021/05/l3.png' },
-  { name: 'Adani Group', logo: 'https://www.bnrinfra.com/wp-content/uploads/2021/05/l4.png' },
-  { name: 'Tata Projects', logo: 'https://www.bnrinfra.com/wp-content/uploads/2021/05/l5.png' },
-  { name: 'GMR Group', logo: 'https://www.bnrinfra.com/wp-content/uploads/2021/05/l6.png' },
-  { name: 'RITES Ltd.', logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/6/6e/RITES_Limited_logo.svg/200px-RITES_Limited_logo.svg.png' },
-  { name: 'IRCON International', logo: 'https://upload.wikimedia.org/wikipedia/en/7/7d/Ircon_International.png' },
-  { name: 'Chennai Metro Rail', logo: '' },
-  { name: 'PWD Tamil Nadu', logo: '' },
-  { name: 'MMRDA', logo: '' },
-  { name: 'NHIDCL', logo: '' },
-  { name: 'DMRC', logo: '' },
-  { name: 'NLC India', logo: '' },
-  { name: 'TANGEDCO', logo: '' },
-  { name: 'Indian Railways', logo: '' },
+   { name: '', logo: 'images/c01.jpg' },
+  { name: '', logo: 'images/c02.jpg' },
+  { name: '', logo: 'images/c03.jpg' },
+  { name: '', logo: 'images/c04.jpg' },
+  { name: '', logo: 'images/c05.jpg' },
+  { name: '', logo: 'images/c06.jpg' },
+  { name: '', logo: 'images/c07.jpg' },
+  { name: '', logo: 'images/c08.jpg' },
+  { name: '', logo: 'images/c09.jpg' },
+  { name: '', logo: 'images/c10.jpg' },
+  { name: '', logo: 'images/c11.jpg' },
+  { name: '', logo: 'images/c12.jpg' },
+  { name: '', logo: 'images/c13.jpg' },
+  { name: '', logo: 'images/c14.jpg' },
+  { name: '', logo: 'images/c15.jpg' },
+  { name: '', logo: 'images/c16.jpg' },
+  { name: '', logo: 'images/c17.jpg' },
+  { name: '', logo: 'images/c18.jpg' }
 ];
 
 function renderClientCard(client) {
