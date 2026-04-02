@@ -4,12 +4,11 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Projects | BNR Infrastructure</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="css/animations.css">
-<link rel="stylesheet" href="css/style.css">
+<link href="css/animations.css" rel="stylesheet"/>
+<link href="css/style.css" rel="stylesheet"/>
 <style>
         :root {
             --primary: #144bb8;
@@ -575,7 +574,7 @@
 <header class="site-header">
 <div class="container header-content">
 <a class="logo" href="index.html">
-<img src="assets/logo/bnr-logo.jpg" alt="BNR Infrastructure Logo" style="max-height: 50px; width: auto;">
+<img alt="BNR Infrastructure Logo" src="assets/logo/bnr-logo.jpg" style="max-height: 50px; width: auto;"/>
 </a>
 <nav class="nav-links">
 <a class="nav-link" href="index.html">Home</a>
@@ -587,26 +586,26 @@
 <a class="nav-link" href="contact.html">Contact</a>
 <a class="nav-link" href="policy.html">Policy</a>
 </nav>
-<div class="header-actions" style="display:flex;align-items:center;gap:0.75rem;">
-<a href="admin-login.html" class="btn-admin btn-admp"><span class="material-symbols-outlined" style="font-size:0.9rem;">admin_panel_settings</span> Admin</a>
-<a href="quote.html" class="btn-header">Get a Quote</a>
-<button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
-  <span></span><span></span><span></span>
+<div class="header-actions">
+<a class="btn-admin" href="admin-login.html"><span class="material-symbols-outlined" style="font-size:0.9rem;">admin_panel_settings</span> Admin</a>
+<a class="btn-header" href="quote.html">Get a Quote</a>
+<button aria-expanded="false" aria-label="Toggle menu" class="hamburger" id="hamburger">
+<span></span><span></span><span></span>
 </button>
 </div>
 </div>
 </header>
 <!-- Mobile Menu -->
-<nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
-  <a class="nav-link" href="index.html">Home</a>
-  <a class="nav-link" href="projects.html">Projects</a>
-  <a class="nav-link" href="services.html">Services</a>
-  <a class="nav-link" href="about.html">About</a>
-  <a class="nav-link" href="clients.html">Clients</a>
-  <a class="nav-link" href="careers.html">Careers</a>
-  <a class="nav-link" href="contact.html">Contact</a>
-  <a class="nav-link" href="policy.html">Policy</a>
-  <a href="quote.html" class="btn-header">Get a Quote</a>
+<nav aria-label="Mobile navigation" class="mobile-menu" id="mobileMenu">
+<a class="nav-link" href="index.html">Home</a>
+<a class="nav-link" href="projects.html">Projects</a>
+<a class="nav-link" href="services.html">Services</a>
+<a class="nav-link" href="about.html">About</a>
+<a class="nav-link" href="clients.html">Clients</a>
+<a class="nav-link" href="careers.html">Careers</a>
+<a class="nav-link" href="contact.html">Contact</a>
+<a class="nav-link" href="policy.html">Policy</a>
+<a class="btn-header" href="quote.html">Get a Quote</a>
 </nav>
 <main class="main-content reveal">
 <div class="container">
@@ -634,7 +633,7 @@
 <div class="projects-grid">
 <!-- Project Card 1 -->
 <div class="project-card reveal">
-<img alt="Bridge pillars with rebar under construction" class="project-img" src="images/proj-bridge.jpg"/>
+<img alt="Bridge pillars with rebar under construction" class="project-img" src="images/proj-bridge.jpg">
 <div class="project-overlay">
 <span class="project-tag">Bridges</span>
 <h3 class="project-title">Tapi River Viaduct</h3>
@@ -647,7 +646,7 @@
 <span class="material-symbols-outlined icon-arrow">arrow_forward</span>
 </div>
 </div>
-</div>
+</img></div>
 <!-- Project Card 2 -->
 <div class="project-card reveal">
 <img alt="Elevated highway viaduct with heavy machinery" class="project-img" src="images/proj-highway.jpg"/>
@@ -748,7 +747,7 @@ Load More Projects
 <div class="footer-grid">
 <div class="footer-logo-wrap">
 <div class="footer-logo">
-<img src="assets/logo/bnr-logo.jpg" alt="BNR Infrastructure Logo" style="max-height: 40px; width: auto; filter: brightness(0) invert(1);">
+<img alt="BNR Infrastructure Logo" src="assets/logo/bnr-logo.jpg" style="max-height: 40px; width: auto; filter: brightness(0) invert(1);"/>
 </div>
 <p style="font-size: 0.875rem; line-height: 1.6; margin-bottom: 1.5rem;">Defining structural engineering excellence since 1974. Headquartered in Chennai, operating Pan-India.</p>
 <div class="social-links">
@@ -796,5 +795,5 @@ Load More Projects
 </div>
 <script src="js/script.js"></script>
 <script>document.addEventListener('DOMContentLoaded',()=>{document.querySelectorAll('.btn-admp').forEach(el=>{if(window.innerWidth>=1024)el.style.display='flex';});});</script>
-<button id="scrollTopBtn" aria-label="Back to top"><span class="material-symbols-outlined">arrow_upward</span></button>
+<button aria-label="Back to top" id="scrollTopBtn"><span class="material-symbols-outlined">arrow_upward</span></button>
 </body></html>

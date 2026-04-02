@@ -1,13 +1,14 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Our Clients | BNR Infrastructure</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="css/animations.css">
-<link rel="stylesheet" href="css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="css/animations.css" rel="stylesheet"/>
+<link href="css/style.css" rel="stylesheet"/>
 <style>
 :root {
   --primary: #144bb8;
@@ -129,112 +130,107 @@ body { font-family: 'Inter', sans-serif; background: var(--bg-light); color: var
 </style>
 </head>
 <body>
-
 <!-- Navigation -->
 <header class="site-header">
 <div class="container header-content">
-  <a class="logo" href="index.html">
-    <img src="assets/logo/bnr-logo.jpg" alt="BNR Infrastructure Logo" style="max-height:50px;width:auto;">
-  </a>
-  <nav class="nav-links">
-    <a class="nav-link" href="index.html">Home</a>
-    <a class="nav-link" href="projects.html">Projects</a>
-    <a class="nav-link" href="services.html">Services</a>
-    <a class="nav-link" href="about.html">About</a>
-    <a class="nav-link" href="clients.html">Clients</a>
-    <a class="nav-link" href="careers.html">Careers</a>
-    <a class="nav-link" href="contact.html">Contact</a>
-  </nav>
-  <div class="header-actions">
-    <a href="admin-login.html" class="btn-admin"><span class="material-symbols-outlined" style="font-size:0.9rem;">admin_panel_settings</span> Admin</a>
-    <a href="quote.html" class="btn-header">Get a Quote</a>
-    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
+<a class="logo" href="index.html">
+<img alt="BNR Infrastructure Logo" src="assets/logo/bnr-logo.jpg" style="max-height: 50px; width: auto;"/>
+</a>
+<nav class="nav-links">
+<a class="nav-link" href="index.html">Home</a>
+<a class="nav-link" href="projects.html">Projects</a>
+<a class="nav-link" href="services.html">Services</a>
+<a class="nav-link" href="about.html">About</a>
+<a class="nav-link" href="clients.html">Clients</a>
+<a class="nav-link" href="careers.html">Careers</a>
+<a class="nav-link" href="contact.html">Contact</a>
+<a class="nav-link" href="policy.html">Policy</a>
+</nav>
+<div class="header-actions">
+<a class="btn-admin" href="admin-login.html"><span class="material-symbols-outlined" style="font-size:0.9rem;">admin_panel_settings</span> Admin</a>
+<a class="btn-header" href="quote.html">Get a Quote</a>
+<button aria-expanded="false" aria-label="Toggle menu" class="hamburger" id="hamburger">
+<span></span><span></span><span></span>
+</button>
+</div>
 </div>
 </header>
 <!-- Mobile Menu -->
-<nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
-  <a class="nav-link" href="index.html">Home</a>
-  <a class="nav-link" href="projects.html">Projects</a>
-  <a class="nav-link" href="services.html">Services</a>
-  <a class="nav-link" href="about.html">About</a>
-  <a class="nav-link" href="clients.html">Clients</a>
-  <a class="nav-link" href="careers.html">Careers</a>
-  <a class="nav-link" href="contact.html">Contact</a>
-  <a class="nav-link" href="policy.html">Policy</a>
-  <a href="quote.html" class="btn-header">Get a Quote</a>
+<nav aria-label="Mobile navigation" class="mobile-menu" id="mobileMenu">
+<a class="nav-link" href="index.html">Home</a>
+<a class="nav-link" href="projects.html">Projects</a>
+<a class="nav-link" href="services.html">Services</a>
+<a class="nav-link" href="about.html">About</a>
+<a class="nav-link" href="clients.html">Clients</a>
+<a class="nav-link" href="careers.html">Careers</a>
+<a class="nav-link" href="contact.html">Contact</a>
+<a class="nav-link" href="policy.html">Policy</a>
+<a class="btn-header" href="quote.html">Get a Quote</a>
 </nav>
-
 <!-- Page Hero -->
 <section class="page-hero">
-  <div class="container page-hero-content">
-    <span class="section-label">Our Partners</span>
-    <h1>Trusted By Industry Leaders</h1>
-    <p>We are proud to partner with India's most respected government bodies, infrastructure giants, and private enterprises.</p>
-  </div>
+<div class="container page-hero-content">
+<span class="section-label">Our Partners</span>
+<h1>Trusted By Industry Leaders</h1>
+<p>We are proud to partner with India's most respected government bodies, infrastructure giants, and private enterprises.</p>
+</div>
 </section>
-
 <!-- Clients Grid Section -->
 <section class="clients-section">
-  <div class="container">
-    <div class="section-header reveal">
-      <span class="section-label">Clientele</span>
-      <h2 class="section-title">Who We Work With</h2>
-      <p class="section-desc">Our portfolio spans government authorities, public-sector undertakings, and leading private developers across India.</p>
-    </div>
-    <div class="clients-grid reveal" id="clientsGrid">
-      <!-- Loaded by JS; static fallbacks below -->
-    </div>
-  </div>
+<div class="container">
+<div class="section-header reveal">
+<span class="section-label">Clientele</span>
+<h2 class="section-title">Who We Work With</h2>
+<p class="section-desc">Our portfolio spans government authorities, public-sector undertakings, and leading private developers across India.</p>
+</div>
+<div class="clients-grid reveal" id="clientsGrid">
+<!-- Loaded by JS; static fallbacks below -->
+</div>
+</div>
 </section>
-
 <!-- Stats Strip -->
 <section class="stats-strip reveal">
-  <div class="container">
-    <div class="stats-grid">
-      <div>
-        <div class="stat-val">50+</div>
-        <div class="stat-lbl">Years of Excellence</div>
-      </div>
-      <div>
-        <div class="stat-val">120+</div>
-        <div class="stat-lbl">Projects Completed</div>
-      </div>
-      <div>
-        <div class="stat-val">25+</div>
-        <div class="stat-lbl">Major Clients</div>
-      </div>
-      <div>
-        <div class="stat-val">15+</div>
-        <div class="stat-lbl">States Covered</div>
-      </div>
-    </div>
-  </div>
+<div class="container">
+<div class="stats-grid">
+<div>
+<div class="stat-val">50+</div>
+<div class="stat-lbl">Years of Excellence</div>
+</div>
+<div>
+<div class="stat-val">120+</div>
+<div class="stat-lbl">Projects Completed</div>
+</div>
+<div>
+<div class="stat-val">25+</div>
+<div class="stat-lbl">Major Clients</div>
+</div>
+<div>
+<div class="stat-val">15+</div>
+<div class="stat-lbl">States Covered</div>
+</div>
+</div>
+</div>
 </section>
-
 <!-- CTA -->
 <section class="cta-section reveal">
-  <div class="container">
-    <div class="cta-box">
-      <h2 class="cta-title">Ready to Join Our Esteemed Clientele?</h2>
-      <p class="cta-text">Partner with BNR Infrastructure for your next landmark project.</p>
-      <a href="quote.html" class="btn-cta">
-        <span class="material-symbols-outlined">request_quote</span>
+<div class="container">
+<div class="cta-box">
+<h2 class="cta-title">Ready to Join Our Esteemed Clientele?</h2>
+<p class="cta-text">Partner with BNR Infrastructure for your next landmark project.</p>
+<a class="btn-cta" href="quote.html">
+<span class="material-symbols-outlined">request_quote</span>
         Request a Quote
       </a>
-    </div>
-  </div>
+</div>
+</div>
 </section>
-
 <!-- Footer -->
 <footer class="site-footer reveal">
 <div class="container">
 <div class="footer-grid">
 <div class="footer-logo-wrap">
 <div class="footer-logo">
-<img src="assets/logo/bnr-logo.jpg" alt="BNR Infrastructure Logo" style="max-height: 40px; width: auto; filter: brightness(0) invert(1);">
+<img alt="BNR Infrastructure Logo" src="assets/logo/bnr-logo.jpg" style="max-height: 40px; width: auto; filter: brightness(0) invert(1);"/>
 </div>
 <p style="font-size: 0.875rem; line-height: 1.6; margin-bottom: 1.5rem;">Defining structural engineering excellence since 1974. Headquartered in Chennai, operating Pan-India.</p>
 <div class="social-links">
@@ -279,10 +275,9 @@ body { font-family: 'Inter', sans-serif; background: var(--bg-light); color: var
 </div>
 </div>
 </footer>
-
 <script src="js/script.js"></script>
 <script src="js/api.js"></script>
-<button id="scrollTopBtn" aria-label="Back to top"><span class="material-symbols-outlined">arrow_upward</span></button>
+<button aria-label="Back to top" id="scrollTopBtn"><span class="material-symbols-outlined">arrow_upward</span></button>
 <script>
 // Static fallback client logos from BNR site
 const STATIC_CLIENTS = [

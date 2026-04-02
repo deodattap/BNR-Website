@@ -6,8 +6,8 @@
 <title>Contact BNR Infrastructure</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="css/animations.css">
-<link rel="stylesheet" href="css/style.css">
+<link href="css/animations.css" rel="stylesheet"/>
+<link href="css/style.css" rel="stylesheet"/>
 <style>
 :root {
     --primary: #144bb8;
@@ -533,7 +533,7 @@ body {
 <header class="site-header">
 <div class="container header-content">
 <a class="logo" href="index.html">
-<img src="assets/logo/bnr-logo.jpg" alt="BNR Infrastructure Logo" style="max-height: 50px; width: auto;">
+<img alt="BNR Infrastructure Logo" src="assets/logo/bnr-logo.jpg" style="max-height: 50px; width: auto;"/>
 </a>
 <nav class="nav-links">
 <a class="nav-link" href="index.html">Home</a>
@@ -545,26 +545,26 @@ body {
 <a class="nav-link" href="contact.html">Contact</a>
 <a class="nav-link" href="policy.html">Policy</a>
 </nav>
-<div class="header-actions" style="display:flex;align-items:center;gap:0.75rem;">
-<a href="admin-login.html" class="btn-admin btn-admin-link"><span class="material-symbols-outlined" style="font-size:0.9rem;">admin_panel_settings</span> Admin</a>
-<a href="quote.html" class="btn-header">Get a Quote</a>
-<button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
-  <span></span><span></span><span></span>
+<div class="header-actions">
+<a class="btn-admin" href="admin-login.html"><span class="material-symbols-outlined" style="font-size:0.9rem;">admin_panel_settings</span> Admin</a>
+<a class="btn-header" href="quote.html">Get a Quote</a>
+<button aria-expanded="false" aria-label="Toggle menu" class="hamburger" id="hamburger">
+<span></span><span></span><span></span>
 </button>
 </div>
 </div>
 </header>
 <!-- Mobile Menu -->
-<nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
-  <a class="nav-link" href="index.html">Home</a>
-  <a class="nav-link" href="projects.html">Projects</a>
-  <a class="nav-link" href="services.html">Services</a>
-  <a class="nav-link" href="about.html">About</a>
-  <a class="nav-link" href="clients.html">Clients</a>
-  <a class="nav-link" href="careers.html">Careers</a>
-  <a class="nav-link" href="contact.html">Contact</a>
-  <a class="nav-link" href="policy.html">Policy</a>
-  <a href="quote.html" class="btn-header">Get a Quote</a>
+<nav aria-label="Mobile navigation" class="mobile-menu" id="mobileMenu">
+<a class="nav-link" href="index.html">Home</a>
+<a class="nav-link" href="projects.html">Projects</a>
+<a class="nav-link" href="services.html">Services</a>
+<a class="nav-link" href="about.html">About</a>
+<a class="nav-link" href="clients.html">Clients</a>
+<a class="nav-link" href="careers.html">Careers</a>
+<a class="nav-link" href="contact.html">Contact</a>
+<a class="nav-link" href="policy.html">Policy</a>
+<a class="btn-header" href="quote.html">Get a Quote</a>
 </nav>
 <main>
 <!-- Hero Section -->
@@ -586,28 +586,28 @@ body {
 <p>Fill out the form below and our team will respond within 24 hours.</p>
 </div>
 <div id="contactSuccess" style="display:none;text-align:center;padding:2.5rem 1rem;">
-  <div style="width:64px;height:64px;background:rgba(20,75,184,0.1);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;">
-    <span class="material-symbols-outlined" style="font-size:2.5rem;color:var(--primary);">check_circle</span>
-  </div>
-  <h3 style="font-size:1.5rem;font-weight:800;margin-bottom:0.75rem;">Message Sent!</h3>
-  <p style="color:var(--text-muted);">Thank you! We'll get back to you within 24 hours.</p>
-  <button onclick="document.getElementById('contactSuccess').style.display='none';document.getElementById('contactForm').style.display='block';" style="margin-top:1.5rem;padding:0.625rem 1.5rem;background:var(--primary);color:white;border:none;border-radius:0.5rem;font-weight:700;cursor:pointer;">Send Another</button>
+<div style="width:64px;height:64px;background:rgba(20,75,184,0.1);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;">
+<span class="material-symbols-outlined" style="font-size:2.5rem;color:var(--primary);">check_circle</span>
+</div>
+<h3 style="font-size:1.5rem;font-weight:800;margin-bottom:0.75rem;">Message Sent!</h3>
+<p style="color:var(--text-muted);">Thank you! We'll get back to you within 24 hours.</p>
+<button onclick="document.getElementById('contactSuccess').style.display='none';document.getElementById('contactForm').style.display='block';" style="margin-top:1.5rem;padding:0.625rem 1.5rem;background:var(--primary);color:white;border:none;border-radius:0.5rem;font-weight:700;cursor:pointer;">Send Another</button>
 </div>
 <form class="contact-form" id="contactForm" onsubmit="handleContactSubmit(event)">
 <div class="form-group-row">
 <div class="input-field">
 <label>Full Name *</label>
-<input placeholder="Your Name" type="text" name="name" required/>
+<input name="name" placeholder="Your Name" required="" type="text"/>
 </div>
 <div class="input-field">
 <label>Email Address *</label>
-<input placeholder="your@email.com" type="email" name="email" required/>
+<input name="email" placeholder="your@email.com" required="" type="email"/>
 </div>
 </div>
 <div class="form-group-row">
 <div class="input-field">
 <label>Phone Number</label>
-<input placeholder="+91 00000-00000" type="tel" name="phone"/>
+<input name="phone" placeholder="+91 00000-00000" type="tel"/>
 </div>
 <div class="input-field">
 <label>Project Type</label>
@@ -622,10 +622,10 @@ body {
 </div>
 <div class="input-field">
 <label>Message *</label>
-<textarea placeholder="How can we help with your next project?" rows="5" name="message" required></textarea>
+<textarea name="message" placeholder="How can we help with your next project?" required="" rows="5"></textarea>
 </div>
 <div id="contactError" style="display:none;background:#fef2f2;border:1px solid #fecaca;color:#dc2626;padding:0.75rem 1rem;border-radius:0.5rem;font-size:0.875rem;font-weight:600;margin-top:1rem;"></div>
-<button class="btn-submit" type="submit" id="contactBtn">
+<button class="btn-submit" id="contactBtn" type="submit">
 <span class="material-symbols-outlined">send</span>
 Send Project Inquiry
 </button>
@@ -687,7 +687,7 @@ Send Project Inquiry
 <p>Visit our headquarters in Chennai.</p>
 </div>
 <div class="map-container" style="height: 450px;">
-<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3886.130386266099!2d80.1873723!3d13.0847222!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a52641040404041%3A0x4040404040404040!2s1018%2C%2042nd%20St%2C%20TVS%20Colony%2C%20Anna%20Nagar%20West%20Extension%2C%20Chennai%2C%20Tamil%20Nadu%20600101!5e0!3m2!1sen!2sin!4v1710500000000!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+<iframe allowfullscreen="" height="100%" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3886.130386266099!2d80.1873723!3d13.0847222!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a52641040404041%3A0x4040404040404040!2s1018%2C%2042nd%20St%2C%20TVS%20Colony%2C%20Anna%20Nagar%20West%20Extension%2C%20Chennai%2C%20Tamil%20Nadu%20600101!5e0!3m2!1sen!2sin!4v1710500000000!5m2!1sen!2sin" style="border:0;" width="100%"></iframe>
 </div>
 </div>
 </section>
@@ -698,7 +698,7 @@ Send Project Inquiry
 <div class="footer-grid">
 <div class="footer-logo-wrap">
 <div class="footer-logo">
-<img src="assets/logo/bnr-logo.jpg" alt="BNR Infrastructure Logo" style="max-height: 40px; width: auto; filter: brightness(0) invert(1);">
+<img alt="BNR Infrastructure Logo" src="assets/logo/bnr-logo.jpg" style="max-height: 40px; width: auto; filter: brightness(0) invert(1);"/>
 </div>
 <p style="font-size: 0.875rem; line-height: 1.6; margin-bottom: 1.5rem;">Defining structural engineering excellence since 1974. Headquartered in Chennai, operating Pan-India.</p>
 <div class="social-links">
@@ -787,5 +787,5 @@ async function handleContactSubmit(e) {
 }
 </script>
 <style>@keyframes spin{to{transform:rotate(360deg)}}</style>
-<button id="scrollTopBtn" aria-label="Back to top"><span class="material-symbols-outlined">arrow_upward</span></button>
+<button aria-label="Back to top" id="scrollTopBtn"><span class="material-symbols-outlined">arrow_upward</span></button>
 </body></html>
