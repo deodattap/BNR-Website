@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html lang="en"><head>
 <meta charset="utf-8"/>
@@ -623,6 +623,59 @@
             letter-spacing: -0.05em;
         }
 
+        /* ── Logo Ticker ── */
+        .bnr-ticker-outer {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            padding: 1.25rem 0;
+            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+            mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+        }
+        .bnr-ticker-track {
+            display: flex;
+            width: max-content;
+            animation: bnr-scroll 38s linear infinite;
+            will-change: transform;
+        }
+        .bnr-ticker-outer:hover .bnr-ticker-track {
+            animation-play-state: paused;
+        }
+        .bnr-ticker-set {
+            display: flex;
+            align-items: center;
+            gap: 3.5rem;
+            padding-right: 3.5rem;
+            flex-shrink: 0;
+        }
+        .bnr-client-logo {
+            height: 100px;
+            width: 180px;
+            max-width: 150px;
+            object-fit: contain;
+            flex-shrink: 0;
+            display: block;
+            filter: none;
+            transition: filter 0.35s ease, transform 0.35s ease;
+            border-radius: 6px;
+        }
+        .bnr-client-logo:hover {
+            transform: scale(1.08);
+        }
+        @keyframes bnr-scroll {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        @media (max-width: 600px) {
+            .bnr-client-logo { height: 46px; max-width: 100px; }
+            .bnr-ticker-set  { gap: 2rem; padding-right: 2rem; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .bnr-ticker-track { animation: none; }
+            .bnr-ticker-set   { flex-wrap: wrap; padding: 0; gap: 2rem; }
+            .bnr-ticker-outer { -webkit-mask-image: none; mask-image: none; }
+        }
+
         /* CTA Section */
         .cta-box {
             background-color: #0D337B;
@@ -1074,9 +1127,54 @@
 <h2 class="section-title">Trusted By Leading Organizations</h2>
 </div>
 </div>
-<div id="clientLogosWrap" style="display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:3rem;">
-<!-- loaded by JS -->
+<!-- ── Scrolling logo ticker ── -->
+<div class="bnr-ticker-outer">
+  <div class="bnr-ticker-track">
+    <!-- Set 1 -->
+    <div class="bnr-ticker-set">
+      <img src="images/c01.jpg" alt="CPWD" class="bnr-client-logo">
+      <img src="images/c02.jpg" alt="Taj Hotels" class="bnr-client-logo">
+      <img src="images/c03.jpg" alt="Public Works Department Tamil Nadu" class="bnr-client-logo">
+      <img src="images/c04.jpg" alt="Sri Venkateswara University" class="bnr-client-logo">
+      <img src="images/c05.jpg" alt="NCSM India" class="bnr-client-logo">
+      <img src="images/c06.jpg" alt="Bhartiya Vidya Bhavan" class="bnr-client-logo">
+      <img src="images/c07.jpg" alt="Client 7" class="bnr-client-logo">
+      <img src="images/c08.jpg" alt="CMDA" class="bnr-client-logo">
+      <img src="images/c09.jpg" alt="Client 9" class="bnr-client-logo">
+      <img src="images/c10.jpg" alt="NSIC" class="bnr-client-logo">
+      <img src="images/c11.jpg" alt="Tamil Nadu Slum Clearance Board" class="bnr-client-logo">
+      <img src="images/c12.jpg" alt="Tamil Nadu Housing Board" class="bnr-client-logo">
+      <img src="images/c13.jpg" alt="Sri City" class="bnr-client-logo">
+      <img src="images/c14.jpg" alt="Heritage Foods" class="bnr-client-logo">
+      <img src="images/c15.jpg" alt="Port of Chennai" class="bnr-client-logo">
+      <img src="images/c16.jpg" alt="Mahindra" class="bnr-client-logo">
+      <img src="images/c17.jpg" alt="Client 17" class="bnr-client-logo">
+      <img src="images/c18.jpg" alt="Tirumala Tirupati Devasthanams" class="bnr-client-logo">
+    </div>
+    <!-- Set 2 — exact duplicate for seamless loop -->
+    <div class="bnr-ticker-set" aria-hidden="true">
+      <img src="images/c01.jpg" alt="" class="bnr-client-logo">
+      <img src="images/c02.jpg" alt="" class="bnr-client-logo">
+      <img src="images/c03.jpg" alt="" class="bnr-client-logo">
+      <img src="images/c04.jpg" alt="" class="bnr-client-logo">
+      <img src="images/c05.jpg" alt="" class="bnr-client-logo">
+      <img src="images/c06.jpg" alt="" class="bnr-client-logo">
+      <img src="images/c07.jpg" alt="" class="bnr-client-logo">
+      <img src="images/c08.jpg" alt="" class="bnr-client-logo">
+      <img src="images/c09.jpg" alt="" class="bnr-client-logo">
+      <img src="images/c10.jpg" alt="" class="bnr-client-logo">
+      <img src="images/c11.jpg" alt="" class="bnr-client-logo">
+      <img src="images/c12.jpg" alt="" class="bnr-client-logo">
+      <img src="images/c13.jpg" alt="" class="bnr-client-logo">
+      <img src="images/c14.jpg" alt="" class="bnr-client-logo">
+      <img src="images/c15.jpg" alt="" class="bnr-client-logo">
+      <img src="images/c16.jpg" alt="" class="bnr-client-logo">
+      <img src="images/c17.jpg" alt="" class="bnr-client-logo">
+      <img src="images/c18.jpg" alt="" class="bnr-client-logo">
+    </div>
+  </div>
 </div>
+
 <div style="text-align:center;margin-top:2.5rem;">
 <a href="clients.html" style="color:var(--primary);font-weight:700;text-decoration:none;font-size:0.9375rem;display:inline-flex;align-items:center;gap:0.4rem;">View All Clients <span class="material-symbols-outlined">chevron_right</span></a>
 </div>
