@@ -97,3 +97,23 @@ async function adminLogin(username, password) {
   });
   return res.json();
 }
+
+// ── Applications ──
+async function postApplication(formData) {
+  // formData is a FormData object (multipart — includes resume file)
+  try {
+    const res = await fetch(`${API_BASE}/applications`, { method: 'POST', body: formData });
+    return res.json();
+  } catch { return { error: 'Network error. Check your connection.' }; }
+}
+async function fetchApplications() {
+  try {
+    const res = await fetch(`${API_BASE}/applications`, { headers: { 'Authorization': `Bearer ${getToken()}` } });
+    if (!res.ok) return [];
+    return res.json();
+  } catch { return []; }
+}
+async function deleteApplication(id) {
+  const res = await fetch(`${API_BASE}/applications/${id}`, { method: 'DELETE', headers: { 'Authorization': `Bearer ${getToken()}` } });
+  return res.json();
+}

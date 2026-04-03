@@ -867,79 +867,13 @@
 </select>
 </div>
 </div>
-<div class="jobs-grid">
-<article class="job-card reveal">
-<div class="job-card-top">
-<span class="tag tag-blue">Engineering</span>
-<span class="location"><span class="material-symbols-outlined">location_on</span> Chennai, TN</span>
+<!-- Jobs Grid — populated by API -->
+<div class="jobs-grid" id="jobsGrid">
+  <div id="jobsLoading" style="grid-column:1/-1;text-align:center;padding:4rem 1rem;color:#64748b;">
+    <span class="material-symbols-outlined" style="font-size:3rem;display:block;margin-bottom:1rem;animation:spin 1s linear infinite;">progress_activity</span>
+    Loading open positions...
+  </div>
 </div>
-<h3>Senior Structural Engineer</h3>
-<p class="job-desc">Lead high-rise structural design teams and coordinate with architectural partners for iconic skyline projects.</p>
-<div class="job-card-footer">
-<div class="job-type"><span class="material-symbols-outlined">schedule</span> Full-time</div>
-<button class="btn-apply">Apply Now <span class="material-symbols-outlined">arrow_forward</span></button>
-</div>
-</article>
-<article class="job-card reveal">
-<div class="job-card-top">
-<span class="tag tag-emerald">Project Management</span>
-<span class="location"><span class="material-symbols-outlined">location_on</span> Mumbai, MH</span>
-</div>
-<h3>Infrastructure Project Manager</h3>
-<p class="job-desc">Oversee large-scale highway and bridge projects from inception to completion, ensuring quality and safety.</p>
-<div class="job-card-footer">
-<div class="job-type"><span class="material-symbols-outlined">schedule</span> Full-time</div>
-<button class="btn-apply">Apply Now <span class="material-symbols-outlined">arrow_forward</span></button>
-</div>
-</article>
-<article class="job-card reveal">
-<div class="job-card-top">
-<span class="tag tag-purple">Architecture</span>
-<span class="location"><span class="material-symbols-outlined">location_on</span> Bangalore, KA</span>
-</div>
-<h3>Urban Planning Lead</h3>
-<p class="job-desc">Design sustainable urban ecosystems and smart city infrastructure for the next generation of living.</p>
-<div class="job-card-footer">
-<div class="job-type"><span class="material-symbols-outlined">schedule</span> Full-time</div>
-<button class="btn-apply">Apply Now <span class="material-symbols-outlined">arrow_forward</span></button>
-</div>
-</article>
-<article class="job-card reveal">
-<div class="job-card-top">
-<span class="tag tag-amber">Sustainability</span>
-<span class="location"><span class="material-symbols-outlined">location_on</span> Hyderabad, TS</span>
-</div>
-<h3>Environmental Specialist</h3>
-<p class="job-desc">Implement zero-carbon construction strategies and ensure compliance with global environmental standards.</p>
-<div class="job-card-footer">
-<div class="job-type"><span class="material-symbols-outlined">schedule</span> Contract</div>
-<button class="btn-apply">Apply Now <span class="material-symbols-outlined">arrow_forward</span></button>
-</div>
-</article>
-<article class="job-card reveal">
-<div class="job-card-top">
-<span class="tag tag-indigo">Operations</span>
-<span class="location"><span class="material-symbols-outlined">location_on</span> Delhi, NCR</span>
-</div>
-<h3>Site Operations Supervisor</h3>
-<p class="job-desc">Manage daily on-site operations, workforce safety, and equipment logistics for heavy civil engineering works.</p>
-<div class="job-card-footer">
-<div class="job-type"><span class="material-symbols-outlined">schedule</span> Full-time</div>
-<button class="btn-apply">Apply Now <span class="material-symbols-outlined">arrow_forward</span></button>
-</div>
-</article>
-<article class="job-card reveal">
-<div class="job-card-top">
-<span class="tag tag-blue">Engineering</span>
-<span class="location"><span class="material-symbols-outlined">location_on</span> Pune, MH</span>
-</div>
-<h3>BIM Modeler (Civil)</h3>
-<p class="job-desc">Create high-precision 3D models for complex structural components using advanced BIM software.</p>
-<div class="job-card-footer">
-<div class="job-type"><span class="material-symbols-outlined">schedule</span> Full-time</div>
-<button class="btn-apply">Apply Now <span class="material-symbols-outlined">arrow_forward</span></button>
-</div>
-</article>
 </div>
 </div>
 </section>
@@ -1017,7 +951,163 @@
 </div>
 </div>
 </footer>
+<!-- Apply Now Modal -->
+<div id="applyModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:500;align-items:center;justify-content:center;padding:1rem;">
+  <div style="background:white;border-radius:1.25rem;padding:2rem;width:100%;max-width:480px;max-height:90vh;overflow-y:auto;box-shadow:0 25px 50px rgba(0,0,0,0.25);position:relative;animation:applyIn 0.25s ease;">
+    <button onclick="closeApplyModal()" style="position:absolute;top:1rem;right:1rem;background:none;border:none;cursor:pointer;font-size:1.5rem;color:#94a3b8;line-height:1;">×</button>
+    <div id="applyFormView">
+      <h3 style="font-size:1.25rem;font-weight:800;margin-bottom:0.375rem;">Apply for Position</h3>
+      <p id="applyJobTitle" style="color:#144bb8;font-weight:600;font-size:0.9375rem;margin-bottom:1.5rem;"></p>
+      <form id="applyForm" onsubmit="handleApply(event)">
+        <div style="margin-bottom:1.125rem;">
+          <label style="display:block;font-size:0.8125rem;font-weight:600;margin-bottom:0.35rem;color:#1e293b;">Full Name *</label>
+          <input name="name" type="text" required placeholder="Your full name" style="width:100%;padding:0.75rem 1rem;border:1.5px solid #e2e8f0;border-radius:0.625rem;font-family:inherit;font-size:0.9375rem;outline:none;transition:border 0.2s;" onfocus="this.style.borderColor='#144bb8'" onblur="this.style.borderColor='#e2e8f0'">
+        </div>
+        <div style="margin-bottom:1.125rem;">
+          <label style="display:block;font-size:0.8125rem;font-weight:600;margin-bottom:0.35rem;color:#1e293b;">Email Address *</label>
+          <input name="email" type="email" required placeholder="you@email.com" style="width:100%;padding:0.75rem 1rem;border:1.5px solid #e2e8f0;border-radius:0.625rem;font-family:inherit;font-size:0.9375rem;outline:none;transition:border 0.2s;" onfocus="this.style.borderColor='#144bb8'" onblur="this.style.borderColor='#e2e8f0'">
+        </div>
+        <div style="margin-bottom:1.125rem;">
+          <label style="display:block;font-size:0.8125rem;font-weight:600;margin-bottom:0.35rem;color:#1e293b;">Phone Number</label>
+          <input name="phone" type="tel" placeholder="+91 98765-43210" style="width:100%;padding:0.75rem 1rem;border:1.5px solid #e2e8f0;border-radius:0.625rem;font-family:inherit;font-size:0.9375rem;outline:none;transition:border 0.2s;" onfocus="this.style.borderColor='#144bb8'" onblur="this.style.borderColor='#e2e8f0'">
+        </div>
+        <div style="margin-bottom:1.5rem;">
+          <label style="display:block;font-size:0.8125rem;font-weight:600;margin-bottom:0.35rem;color:#1e293b;">Resume (PDF / DOC / DOCX, max 5 MB)</label>
+          <input name="resume" id="resumeInput" type="file" accept=".pdf,.doc,.docx" style="width:100%;padding:0.625rem 0.875rem;border:1.5px dashed #e2e8f0;border-radius:0.625rem;font-family:inherit;font-size:0.875rem;background:#f8fafc;cursor:pointer;">
+          <p id="resumeNote" style="font-size:0.75rem;color:#64748b;margin-top:0.35rem;">Accepted: PDF, DOC, DOCX up to 5 MB</p>
+        </div>
+        <div id="applyError" style="display:none;background:#fef2f2;border:1px solid #fecaca;color:#dc2626;padding:0.75rem 1rem;border-radius:0.5rem;font-size:0.875rem;font-weight:600;margin-bottom:1rem;"></div>
+        <button type="submit" id="applySubmitBtn" style="width:100%;display:flex;align-items:center;justify-content:center;gap:0.5rem;background:#144bb8;color:white;font-weight:700;font-size:1rem;padding:0.875rem;border:none;border-radius:0.625rem;cursor:pointer;transition:all 0.2s;">
+          <span class="material-symbols-outlined">send</span> Submit Application
+        </button>
+      </form>
+    </div>
+    <div id="applySuccessView" style="display:none;text-align:center;padding:2rem 1rem;">
+      <div style="width:72px;height:72px;background:rgba(20,75,184,0.1);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;">
+        <span class="material-symbols-outlined" style="font-size:2.5rem;color:#144bb8;">check_circle</span>
+      </div>
+      <h3 style="font-size:1.375rem;font-weight:800;margin-bottom:0.75rem;">Application Submitted!</h3>
+      <p style="color:#64748b;line-height:1.6;margin-bottom:1.5rem;">Thank you for applying! Our HR team will review your application and reach out within 5–7 business days.</p>
+      <button onclick="closeApplyModal()" style="padding:0.75rem 2rem;background:#144bb8;color:white;border:none;border-radius:0.625rem;font-weight:700;cursor:pointer;">Close</button>
+    </div>
+  </div>
+</div>
+<style>@keyframes applyIn{from{opacity:0;transform:scale(0.95)}to{opacity:1;transform:scale(1)}}@keyframes spin{to{transform:rotate(360deg)}}</style>
+
+<script src="js/api.js"></script>
 <script src="js/script.js"></script>
-<script>document.addEventListener('DOMContentLoaded',()=>{document.querySelectorAll('.btn-admc').forEach(el=>{if(window.innerWidth>=1024)el.style.display='flex';});});</script>
+<script>
+/* ── Careers Page: API-driven job listings + Apply Now modal ── */
+const DEPT_TAG_MAP = {
+  'Engineering':        'tag-blue',
+  'Project Management': 'tag-emerald',
+  'Architecture':       'tag-purple',
+  'Sustainability':     'tag-amber',
+  'Operations':         'tag-indigo',
+  'Finance':            'tag-blue',
+  'HR':                 'tag-emerald'
+};
+
+let _applyJobTitle = '';
+let _applyJobId    = null;
+
+function openApplyModal(title, id) {
+  _applyJobTitle = title;
+  _applyJobId    = id;
+  document.getElementById('applyJobTitle').textContent = title;
+  document.getElementById('applyFormView').style.display = 'block';
+  document.getElementById('applySuccessView').style.display = 'none';
+  document.getElementById('applyError').style.display = 'none';
+  document.getElementById('applyForm').reset();
+  const modal = document.getElementById('applyModal');
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeApplyModal() {
+  document.getElementById('applyModal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+document.getElementById('applyModal').addEventListener('click', e => {
+  if (e.target === document.getElementById('applyModal')) closeApplyModal();
+});
+
+async function handleApply(e) {
+  e.preventDefault();
+  const form    = e.target;
+  const btn     = document.getElementById('applySubmitBtn');
+  const errDiv  = document.getElementById('applyError');
+  errDiv.style.display = 'none';
+
+  const fd = new FormData();
+  fd.append('name',     form.name.value.trim());
+  fd.append('email',    form.email.value.trim());
+  fd.append('phone',    form.phone.value.trim());
+  fd.append('jobTitle', _applyJobTitle);
+  if (_applyJobId) fd.append('jobId', _applyJobId);
+  const resumeFile = document.getElementById('resumeInput').files[0];
+  if (resumeFile) fd.append('resume', resumeFile);
+
+  btn.disabled = true;
+  btn.innerHTML = '<span class="material-symbols-outlined" style="animation:spin 1s linear infinite;">progress_activity</span> Submitting...';
+
+  try {
+    const res = await postApplication(fd);
+    if (res.success) {
+      document.getElementById('applyFormView').style.display = 'none';
+      document.getElementById('applySuccessView').style.display = 'block';
+    } else {
+      const msg = res.errors ? res.errors.join(', ') : (res.error || 'Submission failed. Please try again.');
+      errDiv.textContent = msg;
+      errDiv.style.display = 'block';
+    }
+  } catch {
+    errDiv.textContent = 'Network error. Please check your connection.';
+    errDiv.style.display = 'block';
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<span class="material-symbols-outlined">send</span> Submit Application';
+  }
+}
+
+function buildJobCard(job) {
+  const tagClass = DEPT_TAG_MAP[job.department] || 'tag-blue';
+  return `<article class="job-card reveal">
+    <div class="job-card-top">
+      <span class="tag ${tagClass}">${job.department || 'Engineering'}</span>
+      <span class="location"><span class="material-symbols-outlined">location_on</span> ${job.location || 'India'}</span>
+    </div>
+    <h3>${job.title}</h3>
+    <p class="job-desc">${job.description || 'An exciting opportunity to join the BNR Infrastructure team.'}</p>
+    <div class="job-card-footer">
+      <div class="job-type"><span class="material-symbols-outlined">schedule</span> ${job.type || 'Full-time'}</div>
+      <button class="btn-apply" onclick="openApplyModal('${job.title.replace(/'/g, "\\'")}', '${job._id}')">
+        Apply Now <span class="material-symbols-outlined">arrow_forward</span>
+      </button>
+    </div>
+  </article>`;
+}
+
+(async () => {
+  const grid = document.getElementById('jobsGrid');
+  try {
+    const jobs = await fetchCareers();
+    const loader = document.getElementById('jobsLoading');
+    if (loader) loader.remove();
+    if (!jobs || jobs.length === 0) {
+      grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:4rem 1rem;color:#64748b;">
+        <span class="material-symbols-outlined" style="font-size:3rem;display:block;margin-bottom:1rem;">work_off</span>
+        No open positions at this time. Please check back soon.</div>`;
+      return;
+    }
+    grid.innerHTML = jobs.map(buildJobCard).join('');
+    grid.querySelectorAll('.reveal').forEach(el => el.classList.add('reveal-active'));
+  } catch {
+    const loader = document.getElementById('jobsLoading');
+    if (loader) loader.innerHTML = '<span class="material-symbols-outlined" style="font-size:3rem;display:block;margin-bottom:1rem;">error</span>Unable to load jobs. Please try again later.';
+  }
+})();
+</script>
 <button aria-label="Back to top" id="scrollTopBtn"><span class="material-symbols-outlined">arrow_upward</span></button>
 </body></html>

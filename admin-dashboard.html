@@ -152,6 +152,10 @@ tr:hover td{background:var(--sl50);}
       <span class="material-symbols-outlined">request_quote</span> Quotes
       <span class="nav-badge" id="qtBadge" style="display:none">0</span>
     </button>
+    <button class="nav-item" onclick="showSection('applications',this)" id="nav-applications">
+      <span class="material-symbols-outlined">description</span> Applications
+      <span class="nav-badge" id="appBadge" style="display:none">0</span>
+    </button>
   </nav>
   <div class="sidebar-footer">
     <div class="sidebar-user">
@@ -197,6 +201,7 @@ tr:hover td{background:var(--sl50);}
       <div class="stat-card"><div class="stat-icon"><span class="material-symbols-outlined">work</span></div><div><div class="stat-value" id="statCareers">–</div><div class="stat-label">Job Openings</div></div></div>
       <div class="stat-card"><div class="stat-icon"><span class="material-symbols-outlined">mail</span></div><div><div class="stat-value" id="statMsg">–</div><div class="stat-label">Messages</div></div></div>
       <div class="stat-card"><div class="stat-icon"><span class="material-symbols-outlined">request_quote</span></div><div><div class="stat-value" id="statQt">–</div><div class="stat-label">Quotes</div></div></div>
+      <div class="stat-card"><div class="stat-icon"><span class="material-symbols-outlined">description</span></div><div><div class="stat-value" id="statApps">–</div><div class="stat-label">Applications</div></div></div>
     </div>
 
     <!-- ── PROJECTS ── -->
@@ -255,6 +260,20 @@ tr:hover td{background:var(--sl50);}
         <table>
           <thead><tr><th>Date</th><th>Name</th><th>Email</th><th>Project Type</th><th>Location</th><th>Budget</th><th>Del</th></tr></thead>
           <tbody id="quotesTable"><tr><td colspan="7"><div class="empty-state"><span class="material-symbols-outlined">hourglass_empty</span>Loading...</div></td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ── APPLICATIONS ── -->
+    <div class="section-panel" id="sec-applications">
+      <div class="sec-hdr">
+        <h2>Job Applications</h2>
+        <span style="font-size:0.875rem;color:var(--sl500);">Submitted via the Careers page. Click Resume to download.</span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Date</th><th>Name</th><th>Email</th><th>Phone</th><th>Position Applied</th><th>Resume</th><th>Del</th></tr></thead>
+          <tbody id="applicationsTable"><tr><td colspan="7"><div class="empty-state"><span class="material-symbols-outlined">hourglass_empty</span>Loading...</div></td></tr></tbody>
         </table>
       </div>
     </div>
@@ -420,6 +439,7 @@ function showSection(name, btn) {
   if (name === 'quotes') loadQuotes();
   if (name === 'clients') loadClients();
   if (name === 'careers') loadCareers();
+  if (name === 'applications') loadApplications();
 }
 
 // ── MODAL ──
@@ -691,6 +711,46 @@ function updateStatCount(id, delta) {
   el.textContent = Math.max(0, cur + delta);
 }
 
+// ── APPLICATIONS ──
+const BACKEND_BASE_ADMIN = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+  ? 'http://localhost:5000'
+  : 'https://bnr-backend-93y5.onrender.com';
+
+async function loadApplications() {
+  const data = await fetchApplications();
+  document.getElementById('statApps').textContent = data.length;
+  if (data.length > 0) { const b = document.getElementById('appBadge'); b.style.display='inline'; b.textContent=data.length; }
+  const tbody = document.getElementById('applicationsTable');
+  if (!data.length) { tbody.innerHTML = `<tr><td colspan="7"><div class="empty-state"><span class="material-symbols-outlined">description</span>No applications yet.</div></td></tr>`; return; }
+  tbody.innerHTML = data.map(a => `<tr data-id="${a._id}">
+    <td>${fmtDate(a.createdAt)}</td>
+    <td class="td-name">${a.name}</td>
+    <td><a href="mailto:${a.email}" style="color:var(--primary)">${a.email}</a></td>
+    <td>${a.phone||'–'}</td>
+    <td><span class="badge badge-blue">${a.jobTitle}</span></td>
+    <td>${a.resumeUrl
+      ? `<a href="${BACKEND_BASE_ADMIN}${a.resumeUrl}" target="_blank" style="display:inline-flex;align-items:center;gap:0.3rem;color:var(--primary);font-weight:600;font-size:0.8125rem;"><span class="material-symbols-outlined" style="font-size:1rem;">download</span>${a.resumeOriginalName||'Resume'}</a>`
+      : '<span style="color:var(--sl400)">No file</span>'}</td>
+    <td><button class="btn-sm btn-danger" onclick="delApplication('${a._id}')"><span class="material-symbols-outlined" style="font-size:0.9rem">delete</span></button></td>
+  </tr>`).join('');
+}
+async function delApplication(id) {
+  confirmDelete('Delete this application? This cannot be undone.', async () => {
+    try {
+      const res = await deleteApplication(id);
+      if (res.success || res.ok !== false) {
+        const row = document.querySelector(`#applicationsTable tr[data-id="${id}"]`);
+        if (row) { row.style.opacity='0'; row.style.transition='opacity 0.25s'; setTimeout(()=>row.remove(),250); }
+        updateStatCount('statApps',-1);
+        const badge=document.getElementById('appBadge');
+        const nc=parseInt(badge.textContent||'1')-1;
+        badge.textContent=nc; if(nc<=0) badge.style.display='none';
+        showToast('Application deleted.');
+      } else { showToast(res.error||'Delete failed.','error'); }
+    } catch { showToast('Network error.','error'); }
+  });
+}
+
 // ── LOGOUT ──
 function logout() { if (confirm('Sign out?')) { localStorage.removeItem('bnr_admin_token'); window.location.href = 'admin-login.html'; } }
 
@@ -701,11 +761,13 @@ loadClients();
 loadCareers();
 // Pre-fetch counts
 (async () => {
-  const [msgs, qts] = await Promise.all([fetchMessages(), fetchQuotes()]);
+  const [msgs, qts, apps] = await Promise.all([fetchMessages(), fetchQuotes(), fetchApplications()]);
   document.getElementById('statMsg').textContent = msgs.length;
   document.getElementById('statQt').textContent = qts.length;
+  document.getElementById('statApps').textContent = apps.length;
   if (msgs.length > 0) { const b = document.getElementById('msgBadge'); b.style.display='inline'; b.textContent=msgs.length; }
-  if (qts.length > 0) { const b = document.getElementById('qtBadge'); b.style.display='inline'; b.textContent=qts.length; }
+  if (qts.length > 0)  { const b = document.getElementById('qtBadge');  b.style.display='inline'; b.textContent=qts.length; }
+  if (apps.length > 0) { const b = document.getElementById('appBadge'); b.style.display='inline'; b.textContent=apps.length; }
 })();
 </script>
 </body>

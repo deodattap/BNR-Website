@@ -461,7 +461,7 @@
 </div>
 <div class="projects-count">
 <span class="material-symbols-outlined">filter_list</span>
-<span>Showing 24 Projects</span>
+<span id="projectsCountLabel">Loading...</span>
 </div>
 </div>
 <!-- Filters -->
@@ -473,115 +473,21 @@
 <button class="filter-btn"><span class="material-symbols-outlined">train</span> Railways</button>
 <button class="filter-btn"><span class="material-symbols-outlined">apartment</span> Urban Planning</button>
 </div>
-<!-- Projects Grid -->
-<div class="projects-grid">
-<!-- Project Card 1 -->
-<div class="project-card reveal">
-<img alt="Bridge pillars with rebar under construction" class="project-img" src="images/proj-bridge.jpg">
-<div class="project-overlay">
-<span class="project-tag">Bridges</span>
-<h3 class="project-title">Tapi River Viaduct</h3>
-<div class="project-meta">
-<p class="meta-item"><span class="material-symbols-outlined">location_on</span> Surat, Gujarat</p>
-<p class="meta-item"><span class="material-symbols-outlined">calendar_today</span> Completed 2023</p>
+<!-- Projects Grid — populated by JS from API -->
+<div class="projects-grid" id="projectsGrid">
+  <div id="projectsLoading" style="grid-column:1/-1;text-align:center;padding:4rem 1rem;color:#64748b;">
+    <span class="material-symbols-outlined" style="font-size:3rem;display:block;margin-bottom:1rem;animation:spin 1s linear infinite;">progress_activity</span>
+    Loading projects...
+  </div>
 </div>
-<div class="project-footer">
-<button class="btn-details">View Details</button>
-<span class="material-symbols-outlined icon-arrow">arrow_forward</span>
-</div>
-</div>
-</img></div>
-<!-- Project Card 2 -->
-<div class="project-card reveal">
-<img alt="Elevated highway viaduct with heavy machinery" class="project-img" src="images/proj-highway.jpg"/>
-<div class="project-overlay">
-<span class="project-tag">Highways</span>
-<h3 class="project-title">Mumbai Coastal Expressway</h3>
-<div class="project-meta">
-<p class="meta-item"><span class="material-symbols-outlined">location_on</span> Mumbai, Maharashtra</p>
-<p class="meta-item"><span class="material-symbols-outlined">calendar_today</span> In Progress</p>
-</div>
-<div class="project-footer">
-<button class="btn-details">View Details</button>
-<span class="material-symbols-outlined icon-arrow">arrow_forward</span>
-</div>
-</div>
-</div>
-<!-- Project Card 3 -->
-<div class="project-card reveal">
-<img alt="Multi-storey industrial building under construction with cranes" class="project-img" src="images/proj-industrial.jpg"/>
-<div class="project-overlay">
-<span class="project-tag">Industrial</span>
-<h3 class="project-title">Chennai Port Logistics Hub</h3>
-<div class="project-meta">
-<p class="meta-item"><span class="material-symbols-outlined">location_on</span> Chennai, Tamil Nadu</p>
-<p class="meta-item"><span class="material-symbols-outlined">calendar_today</span> Completed 2022</p>
-</div>
-<div class="project-footer">
-<button class="btn-details">View Details</button>
-<span class="material-symbols-outlined icon-arrow">arrow_forward</span>
-</div>
-</div>
-</div>
-<!-- Project Card 4 -->
-<div class="project-card reveal">
-<img alt="Underground metro tunnel excavation with workers" class="project-img" src="images/proj-tunnel.jpg"/>
-<div class="project-overlay">
-<span class="project-tag">Railways</span>
-<h3 class="project-title">Hyderabad Metro Phase III</h3>
-<div class="project-meta">
-<p class="meta-item"><span class="material-symbols-outlined">location_on</span> Hyderabad, Telangana</p>
-<p class="meta-item"><span class="material-symbols-outlined">calendar_today</span> Phase II Complete</p>
-</div>
-<div class="project-footer">
-<button class="btn-details">View Details</button>
-<span class="material-symbols-outlined icon-arrow">arrow_forward</span>
-</div>
-</div>
-</div>
-<!-- Project Card 5 -->
-<div class="project-card reveal">
-<img alt="Glass skyscraper under construction with cranes" class="project-img" src="images/proj-urban-building.jpg"/>
-<div class="project-overlay">
-<span class="project-tag">Urban Planning</span>
-<h3 class="project-title">Kochi Smart Tower</h3>
-<div class="project-meta">
-<p class="meta-item"><span class="material-symbols-outlined">location_on</span> Kochi, Kerala</p>
-<p class="meta-item"><span class="material-symbols-outlined">calendar_today</span> Completed 2024</p>
-</div>
-<div class="project-footer">
-<button class="btn-details">View Details</button>
-<span class="material-symbols-outlined icon-arrow">arrow_forward</span>
-</div>
-</div>
-</div>
-<!-- Project Card 6 -->
-<div class="project-card reveal">
-<img alt="Dam with open floodgates and rushing water, Pune" class="project-img" src="images/proj-dam.jpg"/>
-<div class="project-overlay">
-<span class="project-tag">Water Infrastructure</span>
-<h3 class="project-title">Pavana Dam Expansion</h3>
-<div class="project-meta">
-<p class="meta-item"><span class="material-symbols-outlined">location_on</span> Pune, Maharashtra</p>
-<p class="meta-item"><span class="material-symbols-outlined">calendar_today</span> Completed 2021</p>
-</div>
-<div class="project-footer">
-<button class="btn-details">View Details</button>
-<span class="material-symbols-outlined icon-arrow">arrow_forward</span>
-</div>
-</div>
-</div>
-</div>
-<!-- Load More Section -->
-<div class="pagination-section reveal">
-<p class="viewing-text">Viewing 6 of 24 projects</p>
-<div class="progress-bar">
-<div class="progress-fill"></div>
-</div>
-<button class="btn-load-more">
-Load More Projects
-<span class="material-symbols-outlined">refresh</span>
-</button>
+<!-- View More Section -->
+<div class="pagination-section reveal" id="paginationSection" style="display:none;">
+  <p class="viewing-text" id="viewingText"></p>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <button class="btn-load-more" id="viewMoreBtn" onclick="expandAllProjects()">
+    View All Projects
+    <span class="material-symbols-outlined">expand_more</span>
+  </button>
 </div>
 </div>
 </main>
@@ -633,7 +539,128 @@ Load More Projects
 </div>
 </footer>
 </div>
+<script src="js/api.js"></script>
 <script src="js/script.js"></script>
-<script>document.addEventListener('DOMContentLoaded',()=>{document.querySelectorAll('.btn-admp').forEach(el=>{if(window.innerWidth>=1024)el.style.display='flex';});});</script>
+<script>
+/* ── Projects Page: API-driven rendering with category filter + View More ── */
+const ITEMS_PER_PAGE = 6;
+let allProjects   = [];  // full fetched list
+let filteredProjects = []; // after category filter
+let showingAll    = false;
+let activeFilter  = 'all';
+
+/* Map filter button text to category values stored in DB */
+const FILTER_MAP = {
+  'all projects': 'all',
+  'bridges':      'Bridge Engineering',
+  'highways':     'Highway & Roads',
+  'industrial':   'Industrial',
+  'railways':     'Railway',
+  'urban planning': 'Urban Transit'
+};
+
+const BACKEND_BASE = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+  ? 'http://localhost:5000'
+  : 'https://bnr-backend-93y5.onrender.com';
+
+function buildProjectCard(p) {
+  const imgSrc = p.image
+    ? (p.image.startsWith('http') ? p.image : BACKEND_BASE + p.image)
+    : '';
+  const imgEl = imgSrc
+    ? `<img class="project-img" src="${imgSrc}" alt="${p.title}" loading="lazy" onerror="this.style.opacity=0.3">`
+    : `<div class="project-img" style="background:linear-gradient(135deg,#144bb8,#0d337b);display:flex;align-items:center;justify-content:center;"><span class="material-symbols-outlined" style="font-size:3rem;color:rgba(255,255,255,0.4);">construction</span></div>`;
+  return `<div class="project-card reveal" data-category="${(p.category||'').toLowerCase()}">
+    ${imgEl}
+    <div class="project-overlay">
+      <span class="project-tag">${p.category || 'Project'}</span>
+      <h3 class="project-title">${p.title}</h3>
+      <div class="project-meta">
+        ${p.location ? `<p class="meta-item"><span class="material-symbols-outlined">location_on</span> ${p.location}</p>` : ''}
+        ${p.year     ? `<p class="meta-item"><span class="material-symbols-outlined">calendar_today</span> ${p.year}</p>` : ''}
+      </div>
+      ${p.description ? `<p style="font-size:0.8125rem;line-height:1.5;opacity:0.85;margin-top:0.5rem;">${p.description.substring(0,100)}${p.description.length>100?'...':''}</p>` : ''}
+    </div>
+  </div>`;
+}
+
+function renderProjects() {
+  const grid    = document.getElementById('projectsGrid');
+  const pageSec = document.getElementById('paginationSection');
+  const viewTxt = document.getElementById('viewingText');
+  const fill    = document.getElementById('progressFill');
+  const total   = filteredProjects.length;
+
+  if (total === 0) {
+    grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:4rem 1rem;color:#64748b;"><span class="material-symbols-outlined" style="font-size:3rem;display:block;margin-bottom:1rem;">construction</span>No projects found${activeFilter !== 'all' ? ' for this category.' : ' yet. Check back soon.'}</div>`;
+    pageSec.style.display = 'none';
+    return;
+  }
+
+  const toShow  = showingAll ? filteredProjects : filteredProjects.slice(0, ITEMS_PER_PAGE);
+  grid.innerHTML = toShow.map(buildProjectCard).join('');
+
+  // Re-observe newly added reveal elements
+  grid.querySelectorAll('.reveal').forEach(el => {
+    el.classList.add('reveal-active');
+  });
+
+  const showing = toShow.length;
+  viewTxt.textContent = `Showing ${showing} of ${total} project${total !== 1 ? 's' : ''}`;
+  fill.style.width = `${Math.round((showing / total) * 100)}%`;
+
+  if (total > ITEMS_PER_PAGE && !showingAll) {
+    pageSec.style.display = 'block';
+    document.getElementById('viewMoreBtn').style.display = 'inline-flex';
+  } else if (total <= ITEMS_PER_PAGE) {
+    pageSec.style.display = 'block';
+    document.getElementById('viewMoreBtn').style.display = 'none';
+  } else {
+    pageSec.style.display = 'block';
+    document.getElementById('viewMoreBtn').style.display = 'none';
+  }
+
+  document.getElementById('projectsCountLabel').textContent =
+    `Showing ${showing} of ${total} Project${total !== 1 ? 's' : ''}`;
+}
+
+function expandAllProjects() {
+  showingAll = true;
+  renderProjects();
+}
+
+function applyFilter(filterKey) {
+  activeFilter  = filterKey;
+  showingAll    = false;
+  filteredProjects = filterKey === 'all'
+    ? allProjects
+    : allProjects.filter(p => (p.category || '').toLowerCase().includes(filterKey));
+  renderProjects();
+}
+
+/* Wire up filter buttons */
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const key = btn.textContent.trim().replace(/[^a-z ]/gi,'').trim().toLowerCase();
+    const mapped = FILTER_MAP[key] || 'all';
+    applyFilter(mapped === 'all' ? 'all' : mapped.toLowerCase());
+  });
+});
+
+/* Fetch and render on load */
+(async () => {
+  try {
+    allProjects      = await fetchProjects();
+    filteredProjects = allProjects;
+    document.getElementById('projectsLoading').remove();
+    renderProjects();
+  } catch {
+    document.getElementById('projectsLoading').innerHTML =
+      '<span class="material-symbols-outlined" style="font-size:3rem;display:block;margin-bottom:1rem;">error</span>Unable to load projects. Please try again later.';
+  }
+})();
+</script>
 <button aria-label="Back to top" id="scrollTopBtn"><span class="material-symbols-outlined">arrow_upward</span></button>
 </body></html>

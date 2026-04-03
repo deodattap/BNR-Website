@@ -275,28 +275,6 @@ body { font-family: 'Inter', sans-serif; background: var(--bg-light); color: var
 <script src="js/api.js"></script>
 <button aria-label="Back to top" id="scrollTopBtn"><span class="material-symbols-outlined">arrow_upward</span></button>
 <script>
-// Static fallback client logos from BNR site
-const STATIC_CLIENTS = [
-   { name: '', logo: 'images/c01.jpg' },
-  { name: '', logo: 'images/c02.jpg' },
-  { name: '', logo: 'images/c03.jpg' },
-  { name: '', logo: 'images/c04.jpg' },
-  { name: '', logo: 'images/c05.jpg' },
-  { name: '', logo: 'images/c06.jpg' },
-  { name: '', logo: 'images/c07.jpg' },
-  { name: '', logo: 'images/c08.jpg' },
-  { name: '', logo: 'images/c09.jpg' },
-  { name: '', logo: 'images/c10.jpg' },
-  { name: '', logo: 'images/c11.jpg' },
-  { name: '', logo: 'images/c12.jpg' },
-  { name: '', logo: 'images/c13.jpg' },
-  { name: '', logo: 'images/c14.jpg' },
-  { name: '', logo: 'images/c15.jpg' },
-  { name: '', logo: 'images/c16.jpg' },
-  { name: '', logo: 'images/c17.jpg' },
-  { name: '', logo: 'images/c18.jpg' }
-];
-
 function renderClientCard(client) {
   if (!client.logo) {
     return `<div class="client-card">
@@ -314,13 +292,16 @@ function renderClientCard(client) {
 
 async function loadClients() {
   const grid = document.getElementById('clientsGrid');
+  grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:3rem;color:#64748b;"><span class="material-symbols-outlined" style="font-size:2.5rem;display:block;margin-bottom:0.75rem;animation:spin 1s linear infinite;">progress_activity</span>Loading clients...</div>`;
   try {
     const clients = await fetchClients();
-    if (clients.length === 0) throw new Error('empty');
+    if (!clients || clients.length === 0) {
+      grid.innerHTML = `<div class="state-message" style="grid-column:1/-1;"><span class="material-symbols-outlined">groups</span><p>No clients listed yet. Check back soon.</p></div>`;
+      return;
+    }
     grid.innerHTML = clients.map(renderClientCard).join('');
   } catch {
-    // Fallback to static logos
-    grid.innerHTML = STATIC_CLIENTS.map(renderClientCard).join('');
+    grid.innerHTML = `<div class="state-message" style="grid-column:1/-1;"><span class="material-symbols-outlined">error</span><p>Unable to load clients. Please try again later.</p></div>`;
   }
 }
 
