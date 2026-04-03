@@ -362,10 +362,9 @@ body.menu-open {
 }
 
 .footer-logo img {
-    max-height: 38px;
+    max-height: 45px;
     width: auto;
     object-fit: contain;
-    filter: brightness(0) invert(1);
 }
 
 .footer-tagline {
