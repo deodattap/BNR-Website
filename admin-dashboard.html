@@ -327,18 +327,27 @@ tr:hover td{background:var(--sl50);}
   <div class="modal">
     <button class="btn-close-modal" onclick="closeModal('client')">&times;</button>
     <h3>Add New Client</h3>
-    <form id="clientForm" onsubmit="submitClient(event)">
-      <div class="fg"><label>Client / Organization Name *</label><input type="text" name="name" placeholder="e.g. L&T Construction" required></div>
+    <div id="clientForm">
+      <div class="fg"><label>Client / Organization Name</label><input type="text" id="clientName" placeholder="e.g. L&amp;T Construction"></div>
       <div class="fg">
-        <label>Logo URL *</label>
-        <input type="url" name="logo" placeholder="https://..." required oninput="previewImg(this,'clientImgPrev')">
-        <img id="clientImgPrev" class="img-preview" alt="Logo Preview">
+        <label>Client Logo <span style="color:#dc2626;">*</span></label>
+        <div style="display:flex;flex-direction:column;gap:0.5rem;">
+          <div style="display:flex;align-items:center;gap:0.75rem;">
+            <label for="clientLogoFile" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.5rem 1rem;background:var(--sl100);border:1.5px solid var(--sl200);border-radius:0.5rem;cursor:pointer;font-size:0.8125rem;font-weight:600;color:var(--sl700);transition:all 0.2s;margin:0;" onmouseover="this.style.borderColor='var(--primary)';this.style.color='var(--primary)'" onmouseout="this.style.borderColor='var(--sl200)';this.style.color='var(--sl700)'">
+              <span class="material-symbols-outlined" style="font-size:1rem;">upload</span>
+              Upload Logo
+            </label>
+            <input type="file" id="clientLogoFile" accept="image/*" style="display:none;" onchange="handleClientLogoSelect(this)">
+            <span id="clientUploadStatus" style="font-size:0.8125rem;color:var(--sl500);"></span>
+          </div>
+          <img id="clientImgPrev" class="img-preview" alt="Logo Preview" style="object-fit:contain;">
+        </div>
       </div>
       <div class="modal-actions">
         <button type="button" class="btn-sm btn-sec" onclick="closeModal('client')">Cancel</button>
-        <button type="submit" class="btn-add"><span class="material-symbols-outlined">save</span> Save Client</button>
+        <button type="button" id="clientSaveBtn" class="btn-add" onclick="doClientSave()"><span class="material-symbols-outlined">save</span> Save Client</button>
       </div>
-    </form>
+    </div>
   </div>
 </div>
 
@@ -630,21 +639,122 @@ async function loadClients() {
   const data = await fetchClients();
   document.getElementById('statClients').textContent = data.length;
   const grid = document.getElementById('clientsGrid');
-  if (!data.length) { grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><span class="material-symbols-outlined">groups</span>No clients yet. Click "Add Client" to start.</div>`; return; }
-  grid.innerHTML = data.map(c => `<div class="client-admin-card" data-id="${c._id}">
-    <button class="card-del" onclick="delClient('${c._id}')" title="Delete"><span class="material-symbols-outlined">delete</span></button>
-    <img src="${c.logo}" alt="${c.name}" onerror="this.replaceWith(document.createTextNode(''))">
-    <span class="c-name">${c.name}</span>
-  </div>`).join('');
+  if (!data.length) {
+    grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1"><span class="material-symbols-outlined">groups</span>No clients yet. Click “Add Client” to start.</div>';
+    return;
+  }
+  grid.innerHTML = data.map(function(c) {
+    // Handle both absolute URLs (legacy) and relative /uploads/... paths (new uploads)
+    var logoSrc = c.logo ? (c.logo.startsWith('http') ? c.logo : BACKEND_BASE + c.logo) : '';
+    var imgTag  = logoSrc
+      ? '<img src="' + logoSrc + '" alt="' + (c.name||'') + '" style="max-height:48px;max-width:110px;object-fit:contain;" onerror="this.replaceWith(document.createTextNode(\'\'))">'
+      : '<span class="material-symbols-outlined" style="font-size:2rem;color:var(--sl300)">apartment</span>';
+    return '<div class="client-admin-card" data-id="' + c._id + '">'
+         + '<button class="card-del" onclick="delClient(\'' + c._id + '\')" title="Delete"><span class="material-symbols-outlined">delete</span></button>'
+         + imgTag
+         + '<span class="c-name">' + (c.name || '\u2013') + '</span>'
+         + '</div>';
+  }).join('');
 }
-async function submitClient(e) {
-  e.preventDefault();
-  const data = Object.fromEntries(new FormData(e.target).entries());
+
+// ── CLIENT IMAGE SELECT (preview only — no upload yet) ──
+function handleClientLogoSelect(input) {
+  const prev     = document.getElementById('clientImgPrev');
+  const statusEl = document.getElementById('clientUploadStatus');
+  if (!input.files || !input.files[0]) return;
+  const objectUrl = URL.createObjectURL(input.files[0]);
+  prev.src           = objectUrl;
+  prev.style.display = 'block';
+  prev.onerror       = function() { prev.style.display = 'none'; };
+  statusEl.textContent = input.files[0].name;
+  statusEl.style.color = 'var(--sl500)';
+}
+
+// ── doClientSave: the ONLY path for saving a client ─────────────────────────
+async function doClientSave() {
+  console.log('[BNR] CLIENT SAVE START');
+
+  const nameInput  = document.getElementById('clientName');
+  const fileInput  = document.getElementById('clientLogoFile');
+  const statusEl   = document.getElementById('clientUploadStatus');
+  const saveBtn    = document.getElementById('clientSaveBtn');
+  const name       = nameInput ? nameInput.value.trim() : '';
+  const file       = fileInput && fileInput.files && fileInput.files[0];
+
+  // Validate: logo file is required
+  if (!file) {
+    showToast('Please select a logo image to upload.', 'error');
+    return;
+  }
+
+  // Disable button, show spinner
+  const origHTML = saveBtn.innerHTML;
+  saveBtn.disabled      = true;
+  saveBtn.style.opacity = '0.6';
+  saveBtn.innerHTML     = '<span class="material-symbols-outlined" style="font-size:1rem;animation:spin 1s linear infinite">progress_activity</span> Uploading…';
+
   try {
-    const res = await createClient(data);
-    if (res.success || res._id) { showToast('Client added!'); closeModal('client'); e.target.reset(); document.getElementById('clientImgPrev').style.display='none'; await loadClients(); }
-    else showToast(res.error || 'Failed. Is MongoDB connected?', 'error');
-  } catch { showToast('Network error.', 'error'); }
+    // 1. Upload image
+    console.log('[BNR] CLIENT UPLOAD START');
+    statusEl.textContent = 'Uploading…';
+    statusEl.style.color = 'var(--sl500)';
+
+    const fd = new FormData();
+    fd.append('image', file);
+
+    const upRes  = await fetch(API_BASE + '/upload', {
+      method: 'POST',
+      headers: { 'Authorization': 'Bearer ' + getToken() },
+      body: fd
+    });
+    const upData = await upRes.json();
+    console.log('[BNR] CLIENT UPLOAD DONE', upData);
+
+    if (!upData.success || !upData.url) {
+      const err = upData.error || 'Logo upload failed.';
+      statusEl.textContent = err;
+      statusEl.style.color = '#dc2626';
+      showToast(err, 'error');
+      return;
+    }
+
+    // Build full URL for storage (absolute — works for both admin display and clients.html)
+    const logoUrl = upData.url.startsWith('http') ? upData.url : BACKEND_BASE + upData.url;
+    statusEl.textContent = '✓ Uploaded';
+    statusEl.style.color = '#16a34a';
+
+    // 2. Save client via API
+    saveBtn.innerHTML = '<span class="material-symbols-outlined" style="font-size:1rem;animation:spin 1s linear infinite">progress_activity</span> Saving…';
+    console.log('[BNR] CLIENT SAVE posting:', { name, logo: logoUrl });
+
+    const res = await createClient({ name: name, logo: logoUrl });
+    console.log('[BNR] CLIENT SAVE DONE', res);
+
+    if (res && (res.success || res._id)) {
+      showToast('Client added!');
+
+      // 3. Reset modal
+      closeModal('client');
+      if (nameInput)  nameInput.value       = '';
+      if (fileInput)  fileInput.value        = '';
+      const prev = document.getElementById('clientImgPrev');
+      if (prev)       { prev.src = ''; prev.style.display = 'none'; }
+      statusEl.textContent = '';
+
+      // 4. Refresh client grid immediately
+      updateStatCount('statClients', 1);
+      await loadClients();
+    } else {
+      showToast((res && res.error) || 'Save failed. Is MongoDB connected?', 'error');
+    }
+  } catch(err) {
+    console.error('[BNR] Client save error:', err);
+    showToast('Network error — client not saved.', 'error');
+  } finally {
+    saveBtn.disabled      = false;
+    saveBtn.style.opacity = '';
+    saveBtn.innerHTML     = origHTML;
+  }
 }
 async function delClient(id) {
   confirmDelete('Remove this client? This cannot be undone.', async () => {
@@ -850,16 +960,23 @@ loadCareers();
 // ── DOMContentLoaded backstop: catches any submit event that slips through ───
 document.addEventListener('DOMContentLoaded', function() {
   var pf = document.getElementById('projectForm');
-  if (!pf) return;
-  pf.addEventListener('submit', function(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    console.log('[BNR] Backstop caught submit event');
-    doProjectSave();
-    return false;
-  });
-  console.log('[BNR] Project form backstop ready');
+  if (pf) {
+    pf.addEventListener('submit', function(e) {
+      e.preventDefault(); e.stopPropagation();
+      console.log('[BNR] Backstop caught project submit event');
+      doProjectSave();
+      return false;
+    });
+    console.log('[BNR] Project form backstop ready');
+  }
 });
+
+// ── GLOBAL SUBMIT BLOCKER — covers all modals (projects + clients) ───────────
+window.addEventListener('submit', function(e) {
+  e.preventDefault();
+  e.stopPropagation();
+  console.warn('[BNR] Global: native form submit blocked');
+}, true);
 </script>
 </body>
 </html>
