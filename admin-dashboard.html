@@ -822,13 +822,36 @@ async function delJob(id) {
 
 // ── MESSAGE VIEW MODAL ──
 function viewMsg(name, email, phone, type, date, message) {
+  // Build meta grid using DOM manipulation so all values are text-safe
   var meta = document.getElementById('msgViewMeta');
-  meta.innerHTML =
-    '<span style="font-weight:700;color:var(--sl500);">From</span>' +
-    '<span><strong>' + name + '</strong> &lt;<a href="mailto:' + email + '" style="color:var(--primary)">' + email + '</a>&gt;</span>' +
-    '<span style="font-weight:700;color:var(--sl500);">Phone</span><span>' + (phone || '\u2013') + '</span>' +
-    '<span style="font-weight:700;color:var(--sl500);">Type</span><span>' + (type || '\u2013') + '</span>' +
-    '<span style="font-weight:700;color:var(--sl500);">Date</span><span>' + date + '</span>';
+  function metaRow(label, value, isLink) {
+    var lbl = document.createElement('span');
+    lbl.style.cssText = 'font-weight:700;color:var(--sl500);';
+    lbl.textContent = label;
+    var val = document.createElement('span');
+    if (isLink && value) {
+      var strong = document.createElement('strong');
+      strong.textContent = name;
+      val.appendChild(strong);
+      val.appendChild(document.createTextNode(' <'));
+      var a = document.createElement('a');
+      a.href = 'mailto:' + value;
+      a.style.color = 'var(--primary)';
+      a.textContent = value;
+      val.appendChild(a);
+      val.appendChild(document.createTextNode('>'));
+    } else {
+      val.textContent = value || '–';
+    }
+    meta.appendChild(lbl);
+    meta.appendChild(val);
+  }
+  meta.innerHTML = '';
+  metaRow('From', email, true);
+  metaRow('Phone', phone);
+  metaRow('Type', type);
+  metaRow('Date', date);
+  // Use textContent for message body — preserves newlines via white-space:pre-wrap
   document.getElementById('msgViewBody').textContent = message;
   document.getElementById('modal-msg-view').classList.add('open');
 }
@@ -843,20 +866,50 @@ async function loadMessages() {
   if (data.length > 0) { const b = document.getElementById('msgBadge'); b.style.display='inline'; b.textContent=data.length; }
   const tbody = document.getElementById('messagesTable');
   if (!data.length) { tbody.innerHTML = `<tr><td colspan="8"><div class="empty-state"><span class="material-symbols-outlined">mark_email_read</span>No messages yet.</div></td></tr>`; return; }
-  tbody.innerHTML = data.map(m => {
-    const preview = m.message.length > 60 ? m.message.substring(0, 60) + '…' : m.message;
-    const esc = s => (s||''). replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
-    return `<tr data-id="${m._id}">
-    <td>${fmtDate(m.createdAt)}</td>
-    <td class="td-name">${m.name}</td>
-    <td><a href="mailto:${m.email}" style="color:var(--primary)">${m.email}</a></td>
-    <td>${m.phone||'\u2013'}</td>
-    <td><span class="badge badge-blue">${m.projectType||'\u2013'}</span></td>
-    <td style="max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--sl500);" title="${esc(m.message)}">${preview}</td>
-    <td><button class="btn-sm btn-sec" style="white-space:nowrap;" onclick="viewMsg(${JSON.stringify(m.name)},${JSON.stringify(m.email)},${JSON.stringify(m.phone||'')},${JSON.stringify(m.projectType||'')} ,${JSON.stringify(fmtDate(m.createdAt))},${JSON.stringify(m.message)})"><span class="material-symbols-outlined" style="font-size:0.9rem">open_in_new</span> View</button></td>
-    <td><button class="btn-sm btn-danger" onclick="delMsg('${m._id}')"><span class="material-symbols-outlined" style="font-size:0.9rem">delete</span></button></td>
-  </tr>`;
-  }).join('');
+  // Build rows using data-* attributes for safe storage of arbitrary text.
+  // WHY: JSON.stringify() in onclick="" breaks on any double-quote in the data
+  // because the surrounding onclick="..." attribute uses double-quotes as delimiters.
+  // Using dataset.* avoids all encoding issues — the browser handles it natively.
+  const rows = data.map(m => {
+    const preview = (m.message || '').length > 60
+      ? m.message.substring(0, 60) + '\u2026'
+      : (m.message || '');
+    const esc = s => (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+    const tr = document.createElement('tr');
+    tr.dataset.id      = m._id;
+    tr.dataset.name    = m.name    || '';
+    tr.dataset.email   = m.email   || '';
+    tr.dataset.phone   = m.phone   || '';
+    tr.dataset.type    = m.projectType || '';
+    tr.dataset.date    = fmtDate(m.createdAt);
+    tr.dataset.message = m.message || '';
+    tr.innerHTML =
+      `<td>${fmtDate(m.createdAt)}</td>` +
+      `<td class="td-name">${esc(m.name)}</td>` +
+      `<td><a href="mailto:${esc(m.email)}" style="color:var(--primary)">${esc(m.email)}</a></td>` +
+      `<td>${esc(m.phone||'\u2013')}</td>` +
+      `<td><span class="badge badge-blue">${esc(m.projectType||'\u2013')}</span></td>` +
+      `<td style="max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--sl500);" title="${esc(m.message)}">${esc(preview)}</td>` +
+      `<td><button class="btn-sm btn-sec view-msg-btn" style="white-space:nowrap;"><span class="material-symbols-outlined" style="font-size:0.9rem">open_in_new</span> View</button></td>` +
+      `<td><button class="btn-sm btn-danger" onclick="delMsg('${m._id}')"><span class="material-symbols-outlined" style="font-size:0.9rem">delete</span></button></td>`;
+    return tr;
+  });
+  tbody.innerHTML = '';
+  rows.forEach(tr => tbody.appendChild(tr));
+  // Attach View button listeners after rows are in the DOM
+  tbody.querySelectorAll('.view-msg-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const tr = this.closest('tr');
+      viewMsg(
+        tr.dataset.name,
+        tr.dataset.email,
+        tr.dataset.phone,
+        tr.dataset.type,
+        tr.dataset.date,
+        tr.dataset.message
+      );
+    });
+  });
 }
 async function delMsg(id) {
   confirmDelete('Delete this message? This cannot be undone.', async () => {
