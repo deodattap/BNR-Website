@@ -286,37 +286,54 @@ tr:hover td{background:var(--sl50);}
   <div class="modal">
     <button class="btn-close-modal" onclick="closeModal('project')">&times;</button>
     <h3>Add New Project</h3>
-    <form id="projectForm">
-      <div class="fg"><label>Project Title *</label><input type="text" name="title" placeholder="e.g. National Highway Widening" required></div>
-      <div class="fg"><label>Description</label><textarea name="description" placeholder="Brief project description..."></textarea></div>
+    <!-- onsubmit=false: absolute guard — no native submission under any circumstance -->
+    <form id="projectForm" onsubmit="return false;" autocomplete="off">
+      <div class="fg">
+        <label>Project Title <span style="color:#dc2626;">*</span></label>
+        <!-- No `required` — we validate manually to avoid browser constraint-validation side-effects -->
+        <input type="text" id="projTitle" name="title" placeholder="e.g. National Highway Widening">
+      </div>
+      <div class="fg">
+        <label>Description</label>
+        <textarea id="projDesc" name="description" placeholder="Brief project description..."></textarea>
+      </div>
       <div class="fg">
         <label>Project Image</label>
         <div style="display:flex;flex-direction:column;gap:0.5rem;">
-          <input type="url" name="image" id="projImageUrl" placeholder="Paste image URL, or upload a file below..." oninput="previewImg(this,'projImgPrev')" style="width:100%;padding:0.75rem 1rem;border:1.5px solid var(--sl200);border-radius:0.625rem;font-family:'Inter',sans-serif;font-size:0.9375rem;color:var(--sl900);outline:none;background:var(--bg);">
+          <!-- type=text, NO name attr — keeps it out of FormData/reset, we read by id -->
+          <input type="text" id="projImageUrl" placeholder="Paste image URL, or upload below..."
+            oninput="previewImg(this,'projImgPrev')"
+            style="width:100%;padding:0.75rem 1rem;border:1.5px solid var(--sl200);border-radius:0.625rem;font-family:'Inter',sans-serif;font-size:0.9375rem;color:var(--sl900);outline:none;background:var(--bg);">
           <div style="display:flex;align-items:center;gap:0.75rem;margin-top:0.25rem;">
-            <label for="projImageFile" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.5rem 1rem;background:var(--sl100);border:1.5px solid var(--sl200);border-radius:0.5rem;cursor:pointer;font-size:0.8125rem;font-weight:600;color:var(--sl700);transition:all 0.2s;margin:0;" onmouseover="this.style.borderColor='var(--primary)';this.style.color='var(--primary)'" onmouseout="this.style.borderColor='var(--sl200)';this.style.color='var(--sl700)'">
+            <label for="projImageFile"
+              style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.5rem 1rem;background:var(--sl100);border:1.5px solid var(--sl200);border-radius:0.5rem;cursor:pointer;font-size:0.8125rem;font-weight:600;color:var(--sl700);transition:all 0.2s;margin:0;"
+              onmouseover="this.style.borderColor='var(--primary)';this.style.color='var(--primary)'"
+              onmouseout="this.style.borderColor='var(--sl200)';this.style.color='var(--sl700)'">
               <span class="material-symbols-outlined" style="font-size:1rem;">upload</span>
               Upload Image
             </label>
-            <input type="file" id="projImageFile" accept="image/*" style="display:none;" onchange="handleProjectImageUpload(this)">
+            <input type="file" id="projImageFile" accept="image/*" style="display:none;"
+              onchange="handleProjectImageUpload(this)">
             <span id="projUploadStatus" style="font-size:0.8125rem;color:var(--sl500);"></span>
           </div>
           <img id="projImgPrev" class="img-preview" alt="Preview">
         </div>
       </div>
       <div class="fg"><label>Category</label>
-        <select name="category">
-          <option>Highway & Roads</option><option>Bridge Engineering</option><option>Urban Transit</option>
+        <select id="projCategory" name="category">
+          <option>Highway &amp; Roads</option><option>Bridge Engineering</option><option>Urban Transit</option>
           <option>Industrial</option><option>Railway</option><option>Water Infrastructure</option>
         </select>
       </div>
       <div class="row-2">
-        <div class="fg"><label>Location</label><input type="text" name="location" placeholder="City, State"></div>
-        <div class="fg"><label>Year</label><input type="text" name="year" placeholder="2024"></div>
+        <div class="fg"><label>Location</label><input type="text" id="projLocation" name="location" placeholder="City, State"></div>
+        <div class="fg"><label>Year</label><input type="text" id="projYear" name="year" placeholder="2024"></div>
       </div>
       <div class="modal-actions">
         <button type="button" class="btn-sm btn-sec" onclick="closeModal('project')">Cancel</button>
-        <button type="button" id="projSaveBtn" class="btn-add" onclick="doProjectSave()"><span class="material-symbols-outlined">save</span> Save Project</button>
+        <button type="button" id="projSaveBtn" class="btn-add" onclick="doProjectSave()">
+          <span class="material-symbols-outlined">save</span> Save Project
+        </button>
       </div>
     </form>
   </div>
@@ -356,7 +373,7 @@ tr:hover td{background:var(--sl50);}
   <div class="modal">
     <button class="btn-close-modal" onclick="closeModal('career')">&times;</button>
     <h3>Add Job Opening</h3>
-    <form id="careerForm" onsubmit="submitCareer(event)">
+    <form id="careerForm" onsubmit="return false;">
       <div class="fg"><label>Job Title *</label><input type="text" name="title" placeholder="e.g. Senior Structural Engineer" required></div>
       <div class="row-2">
         <div class="fg"><label>Department</label>
@@ -375,7 +392,7 @@ tr:hover td{background:var(--sl50);}
       <div class="fg"><label>Description</label><textarea name="description" placeholder="Role responsibilities and requirements..."></textarea></div>
       <div class="modal-actions">
         <button type="button" class="btn-sm btn-sec" onclick="closeModal('career')">Cancel</button>
-        <button type="submit" class="btn-add"><span class="material-symbols-outlined">save</span> Post Opening</button>
+        <button type="button" id="careerSaveBtn" class="btn-add" onclick="doCareerSave()"><span class="material-symbols-outlined">save</span> Post Opening</button>
       </div>
     </form>
   </div>
@@ -467,7 +484,19 @@ function showSection(name, btn) {
 // ── MODAL ──
 function openModal(name) { document.getElementById('modal-' + name).classList.add('open'); }
 function closeModal(name) { document.getElementById('modal-' + name).classList.remove('open'); }
-document.querySelectorAll('.modal-overlay').forEach(m => m.addEventListener('click', e => { if (e.target === m) m.classList.remove('open'); }));
+// Close modal only when the full press (mousedown→click) started AND ended on
+// the bare backdrop — prevents the OS file-picker dialog from accidentally
+// dismissing the modal when it closes (which fires a synthetic click event).
+document.querySelectorAll('.modal-overlay').forEach(function (overlay) {
+  var _downOnOverlay = false;
+  overlay.addEventListener('mousedown', function (e) {
+    _downOnOverlay = (e.target === overlay);
+  });
+  overlay.addEventListener('click', function (e) {
+    if (_downOnOverlay && e.target === overlay) overlay.classList.remove('open');
+    _downOnOverlay = false;
+  });
+});
 
 // ── IMAGE PREVIEW ──
 function previewImg(input, previewId) {
@@ -481,10 +510,7 @@ function previewImg(input, previewId) {
   }
 }
 
-// ── BACKEND BASE (localhost vs Render) ───────────────────────────────────────
-const BACKEND_BASE = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
-  ? 'http://localhost:5000'
-  : 'https://bnr-backend-93y5.onrender.com';
+// BACKEND_BASE and resolveImageUrl() are provided by js/api.js (loaded above).
 
 // Tracks whether an image upload is currently in flight
 let _uploadInProgress = false;
@@ -517,7 +543,7 @@ function handleProjectImageUpload(input) {
   .then(function(r) { return r.json(); })
   .then(function(data) {
     if (data.success && data.url) {
-      var fullUrl = data.url.startsWith('http') ? data.url : BACKEND_BASE + data.url;
+      var fullUrl = resolveImageUrl(data.url);
       urlInput.value        = fullUrl;
       prevImg.src           = fullUrl;
       prevImg.style.display = 'block';
@@ -556,7 +582,7 @@ async function loadProjects() {
     return;
   }
   tbody.innerHTML = data.map(function(p) {
-    var imgSrc  = p.image ? (p.image.startsWith('http') ? p.image : BACKEND_BASE + p.image) : '';
+    var imgSrc  = p.image ? resolveImageUrl(p.image) : '';
     var imgCell = imgSrc
       ? '<img class="proj-img" src="' + imgSrc + '" alt="" onerror="this.style.opacity=0.3">'
       : '<div style="width:64px;height:48px;background:var(--sl100);border-radius:0.5rem;display:flex;align-items:center;justify-content:center"><span class="material-symbols-outlined" style="color:var(--sl300)">image</span></div>';
@@ -572,61 +598,105 @@ async function loadProjects() {
   }).join('');
 }
 
-// ── doProjectSave: the ONLY path for saving a project ────────────────────────
-// Called by the Save button onclick. Never depends on form submit events.
+// ═══════════════════════════════════════════════════════════════════════════════
+// doProjectSave — complete, self-contained project save handler
+// Called ONLY from the Save button's onclick. No form submit events involved.
 async function doProjectSave() {
-  console.log('[BNR] Form submit triggered');
+  console.log('[BNR] ── doProjectSave START ──');
 
+  // ── Guard: block if file upload is still in progress ──
   if (_uploadInProgress) {
-    showToast('Please wait \u2014 image is still uploading.', 'info');
+    showToast('Please wait \u2014 image upload is still in progress.', 'info');
     return;
   }
 
-  var form    = document.getElementById('projectForm');
-  var saveBtn = document.getElementById('projSaveBtn');
+  // ── Read all field values by ID (never via form.elements, immune to form state) ──
+  var title       = (document.getElementById('projTitle')    || {value:''}).value.trim();
+  var description = (document.getElementById('projDesc')     || {value:''}).value.trim();
+  var image       = (document.getElementById('projImageUrl') || {value:''}).value.trim();
+  var category    = (document.getElementById('projCategory') || {value:''}).value.trim();
+  var location    = (document.getElementById('projLocation') || {value:''}).value.trim();
+  var year        = (document.getElementById('projYear')     || {value:''}).value.trim();
 
-  var title       = form.querySelector('[name="title"]').value.trim();
-  var description = form.querySelector('[name="description"]').value.trim();
-  var image       = document.getElementById('projImageUrl').value.trim();
-  var category    = form.querySelector('[name="category"]').value;
-  var location    = form.querySelector('[name="location"]').value.trim();
-  var year        = form.querySelector('[name="year"]').value.trim();
+  console.log('[BNR] Fields:', { title, category, location, year, image: image ? '(set)' : '(empty)' });
 
-  if (!title) { showToast('Project title is required.', 'error'); return; }
+  // ── Validate ──
+  if (!title) {
+    showToast('Project title is required.', 'error');
+    document.getElementById('projTitle').focus();
+    return;
+  }
 
+  // ── Disable button and show spinner ──
+  var saveBtn  = document.getElementById('projSaveBtn');
   var origHTML = saveBtn.innerHTML;
   saveBtn.disabled      = true;
   saveBtn.style.opacity = '0.6';
   saveBtn.innerHTML     = '<span class="material-symbols-outlined" style="font-size:1rem;animation:spin 1s linear infinite">progress_activity</span> Saving\u2026';
 
   try {
-    var res = await createProject({ title: title, description: description, image: image, category: category, location: location, year: year });
-    if (res.success || res.project || res._id) {
+    console.log('[BNR] Calling createProject API...');
+    var res = await createProject({
+      title:       title,
+      description: description,
+      image:       image,
+      category:    category,
+      location:    location,
+      year:        year
+    });
+    console.log('[BNR] API response:', res);
+
+    if (res && (res.success || res.project || res._id)) {
+      // ── SUCCESS ──
+      console.log('[BNR] Project saved successfully');
       showToast('Project added successfully!');
-      closeModal('project');
-      form.reset();
-      document.getElementById('projImageUrl').value          = '';
-      document.getElementById('projImgPrev').style.display   = 'none';
-      document.getElementById('projUploadStatus').textContent = '';
-      var fi = document.getElementById('projImageFile');
-      if (fi) fi.value = '';
       updateStatCount('statProj', 1);
-      await loadProjects();
+
+      // Restore button immediately so modal close looks clean
+      saveBtn.disabled      = false;
+      saveBtn.style.opacity = '';
+      saveBtn.innerHTML     = origHTML;
+
+      // Close modal first, THEN clear fields (avoids visible flash of empty form)
+      setTimeout(function () {
+        closeModal('project');
+        // Reset fields by ID — not form.reset() which can behave inconsistently
+        document.getElementById('projTitle').value          = '';
+        document.getElementById('projDesc').value           = '';
+        document.getElementById('projImageUrl').value       = '';
+        document.getElementById('projCategory').selectedIndex = 0;
+        document.getElementById('projLocation').value       = '';
+        document.getElementById('projYear').value           = '';
+        document.getElementById('projImgPrev').style.display     = 'none';
+        document.getElementById('projUploadStatus').textContent  = '';
+        var fi = document.getElementById('projImageFile');
+        if (fi) fi.value = '';
+        // Reload the table to reflect the new project
+        loadProjects();
+      }, 1200); // 1.2s — enough time to read the success toast
+
     } else {
-      showToast(res.error || 'Save failed. Is MongoDB connected?', 'error');
+      // ── API returned an error ──
+      console.warn('[BNR] API error:', res);
+      showToast(res.error || 'Save failed \u2014 is the database connected?', 'error');
+      saveBtn.disabled      = false;
+      saveBtn.style.opacity = '';
+      saveBtn.innerHTML     = origHTML;
     }
-  } catch(err) {
-    console.error('[BNR] Save error:', err);
-    showToast('Network error \u2014 project not saved.', 'error');
-  } finally {
+
+  } catch (err) {
+    // ── Network / parse error ──
+    console.error('[BNR] Network error:', err);
+    showToast('Network error \u2014 project not saved. Check your connection.', 'error');
     saveBtn.disabled      = false;
     saveBtn.style.opacity = '';
     saveBtn.innerHTML     = origHTML;
   }
+
+  console.log('[BNR] ── doProjectSave END ──');
 }
 
-// ── submitProject: synchronous backstop wrapper ───────────────────────────────
-// If any code path fires a submit event, this stops it and delegates to doProjectSave.
+// submitProject: legacy backstop — not called by any current UI element
 function submitProject(e) {
   if (e && e.preventDefault)  e.preventDefault();
   if (e && e.stopPropagation) e.stopPropagation();
@@ -657,8 +727,7 @@ async function loadClients() {
     return;
   }
   grid.innerHTML = data.map(function(c) {
-    // Handle both absolute URLs (legacy) and relative /uploads/... paths (new uploads)
-    var logoSrc = c.logo ? (c.logo.startsWith('http') ? c.logo : BACKEND_BASE + c.logo) : '';
+    var logoSrc = c.logo ? resolveImageUrl(c.logo) : '';
     var imgTag  = logoSrc
       ? '<img src="' + logoSrc + '" alt="' + (c.name||'') + '" style="max-height:48px;max-width:110px;object-fit:contain;" onerror="this.replaceWith(document.createTextNode(\'\'))">'
       : '<span class="material-symbols-outlined" style="font-size:2rem;color:var(--sl300)">apartment</span>';
@@ -731,8 +800,7 @@ async function doClientSave() {
       return;
     }
 
-    // Build full URL for storage (absolute — works for both admin display and clients.html)
-    const logoUrl = upData.url.startsWith('http') ? upData.url : BACKEND_BASE + upData.url;
+    const logoUrl = resolveImageUrl(upData.url);
     statusEl.textContent = '✓ Uploaded';
     statusEl.style.color = '#16a34a';
 
@@ -797,14 +865,54 @@ async function loadCareers() {
     <td><button class="btn-sm btn-danger" onclick="delJob('${j._id}')"><span class="material-symbols-outlined" style="font-size:0.9rem">delete</span> Del</button></td>
   </tr>`).join('');
 }
-async function submitCareer(e) {
-  e.preventDefault();
-  const data = Object.fromEntries(new FormData(e.target).entries());
+// ── doCareerSave: the ONLY path for saving a job opening ─────────────────────
+async function doCareerSave() {
+  console.log('[BNR] doCareerSave called');
+
+  var form    = document.getElementById('careerForm');
+  var saveBtn = document.getElementById('careerSaveBtn');
+
+  var title       = form.querySelector('[name="title"]').value.trim();
+  var department  = form.querySelector('[name="department"]').value;
+  var type        = form.querySelector('[name="type"]').value;
+  var location    = form.querySelector('[name="location"]').value.trim();
+  var description = form.querySelector('[name="description"]').value.trim();
+
+  if (!title) { showToast('Job title is required.', 'error'); return; }
+
+  var origHTML = saveBtn.innerHTML;
+  saveBtn.disabled      = true;
+  saveBtn.style.opacity = '0.6';
+  saveBtn.innerHTML     = '<span class="material-symbols-outlined" style="font-size:1rem;animation:spin 1s linear infinite">progress_activity</span> Posting\u2026';
+
   try {
-    const res = await createCareer(data);
-    if (res.success || res._id || res.job) { showToast('Job opening posted!'); closeModal('career'); e.target.reset(); await loadCareers(); }
-    else showToast(res.error || 'Failed. Is MongoDB connected?', 'error');
-  } catch { showToast('Network error.', 'error'); }
+    var res = await createCareer({ title: title, department: department, type: type, location: location, description: description });
+    if (res.success || res._id || res.job) {
+      showToast('Job opening posted!');
+      updateStatCount('statCareers', 1);
+      setTimeout(function () {
+        closeModal('career');
+        form.reset();
+        loadCareers();
+      }, 1200);
+    } else {
+      showToast(res.error || 'Failed. Is MongoDB connected?', 'error');
+    }
+  } catch(err) {
+    console.error('[BNR] Career save error:', err);
+    showToast('Network error \u2014 job not posted.', 'error');
+  } finally {
+    saveBtn.disabled      = false;
+    saveBtn.style.opacity = '';
+    saveBtn.innerHTML     = origHTML;
+  }
+}
+
+// submitCareer kept for backward compatibility (not currently called)
+function submitCareer(e) {
+  if (e && e.preventDefault) e.preventDefault();
+  doCareerSave();
+  return false;
 }
 async function delJob(id) {
   confirmDelete('Delete this job opening? This cannot be undone.', async () => {
@@ -987,9 +1095,7 @@ function updateStatCount(id, delta) {
 }
 
 // ── APPLICATIONS ──
-const BACKEND_BASE_ADMIN = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
-  ? 'http://localhost:5000'
-  : 'https://bnr-backend-93y5.onrender.com';
+// BACKEND_BASE (from api.js) is used below for resume download links.
 
 async function loadApplications() {
   const data = await fetchApplications();
@@ -1004,7 +1110,7 @@ async function loadApplications() {
     <td>${a.phone||'–'}</td>
     <td><span class="badge badge-blue">${a.jobTitle}</span></td>
     <td>${a.resumeUrl
-      ? `<a href="${BACKEND_BASE_ADMIN}${a.resumeUrl}" target="_blank" style="display:inline-flex;align-items:center;gap:0.3rem;color:var(--primary);font-weight:600;font-size:0.8125rem;"><span class="material-symbols-outlined" style="font-size:1rem;">download</span>${a.resumeOriginalName||'Resume'}</a>`
+      ? `<a href="${resolveImageUrl(a.resumeUrl)}" target="_blank" style="display:inline-flex;align-items:center;gap:0.3rem;color:var(--primary);font-weight:600;font-size:0.8125rem;"><span class="material-symbols-outlined" style="font-size:1rem;">download</span>${a.resumeOriginalName||'Resume'}</a>`
       : '<span style="color:var(--sl400)">No file</span>'}</td>
     <td><button class="btn-sm btn-danger" onclick="delApplication('${a._id}')"><span class="material-symbols-outlined" style="font-size:0.9rem">delete</span></button></td>
   </tr>`).join('');
@@ -1044,26 +1150,22 @@ loadCareers();
   if (qts.length > 0)  { const b = document.getElementById('qtBadge');  b.style.display='inline'; b.textContent=qts.length; }
   if (apps.length > 0) { const b = document.getElementById('appBadge'); b.style.display='inline'; b.textContent=apps.length; }
 })();
-// ── DOMContentLoaded backstop: catches any submit event that slips through ───
-document.addEventListener('DOMContentLoaded', function() {
+// ── Form submit guards (attached immediately — DOM is ready at this point) ────
+// These are safety nets only. All real submit logic goes through onclick handlers.
+(function attachFormGuards() {
   var pf = document.getElementById('projectForm');
-  if (pf) {
-    pf.addEventListener('submit', function(e) {
-      e.preventDefault(); e.stopPropagation();
-      console.log('[BNR] Backstop caught project submit event');
-      doProjectSave();
-      return false;
-    });
-    console.log('[BNR] Project form backstop ready');
-  }
-});
-
-// ── GLOBAL SUBMIT BLOCKER — covers all modals (projects + clients) ───────────
-window.addEventListener('submit', function(e) {
-  e.preventDefault();
-  e.stopPropagation();
-  console.warn('[BNR] Global: native form submit blocked');
-}, true);
+  if (pf) pf.addEventListener('submit', function(e) {
+    e.preventDefault(); e.stopPropagation();
+    console.warn('[BNR] projectForm submit event blocked by guard');
+    return false;
+  });
+  var cf = document.getElementById('careerForm');
+  if (cf) cf.addEventListener('submit', function(e) {
+    e.preventDefault(); e.stopPropagation();
+    console.warn('[BNR] careerForm submit event blocked by guard');
+    return false;
+  });
+}());
 </script>
 </body>
 </html>

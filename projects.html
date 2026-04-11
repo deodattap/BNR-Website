@@ -548,14 +548,10 @@ const FILTER_MAP = {
   'urban planning': 'Urban Transit'
 };
 
-const BACKEND_BASE = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
-  ? 'http://localhost:5000'
-  : 'https://bnr-backend-93y5.onrender.com';
+// BACKEND_BASE and resolveImageUrl() are provided by js/api.js (loaded above).
 
 function buildProjectCard(p) {
-  const imgSrc = p.image
-    ? (p.image.startsWith('http') ? p.image : BACKEND_BASE + p.image)
-    : '';
+  const imgSrc = resolveImageUrl(p.image);
   const imgEl = imgSrc
     ? `<img class="project-img" src="${imgSrc}" alt="${p.title}" loading="lazy" onerror="this.style.opacity=0.3">`
     : `<div class="project-img" style="background:linear-gradient(135deg,#144bb8,#0d337b);display:flex;align-items:center;justify-content:center;"><span class="material-symbols-outlined" style="font-size:3rem;color:rgba(255,255,255,0.4);">construction</span></div>`;

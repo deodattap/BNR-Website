@@ -3,9 +3,11 @@
  * Centralized API base URL for deployed backend on Render.
  */
 
-const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-  ? 'http://localhost:5000/api'
-  : 'https://bnr-backend-93y5.onrender.com/api';
+const _isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+
+const API_BASE     = _isLocal ? 'http://localhost:5000/api' : 'https://bnr-backend-93y5.onrender.com/api';
+/** Backend root (without /api) — used to resolve relative /uploads/... image paths */
+const BACKEND_BASE = _isLocal ? 'http://localhost:5000'     : 'https://bnr-backend-93y5.onrender.com';
 
 // Admin token helper
 const getToken = () => localStorage.getItem('bnr_admin_token');
@@ -117,3 +119,25 @@ async function deleteApplication(id) {
   const res = await fetch(`${API_BASE}/applications/${id}`, { method: 'DELETE', headers: { 'Authorization': `Bearer ${getToken()}` } });
   return res.json();
 }
+
+/**
+ * resolveImageUrl — safely prepend BACKEND_BASE when a stored image path
+ * is relative (e.g. /uploads/file.jpg).  Absolute URLs are returned as-is.
+ * @param {string} url
+ * @returns {string}
+ */
+function resolveImageUrl(url) {
+  if (!url) return '';
+  return url.startsWith('http') ? url : BACKEND_BASE + url;
+}
+
+// ── Keep-alive ping ──────────────────────────────────────────────────────────
+// Pings the health endpoint every 5 minutes so the Render free-tier backend
+// does not go to sleep between user visits.
+(function startKeepAlive() {
+  // Only ping the production backend (not localhost)
+  if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') return;
+  setInterval(function () {
+    fetch(API_BASE + '/health').catch(function () { /* silent — best-effort */ });
+  }, 300000); // every 5 minutes
+}());

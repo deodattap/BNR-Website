@@ -275,15 +275,10 @@ body { font-family: 'Inter', sans-serif; background: var(--bg-light); color: var
 <script src="js/api.js"></script>
 <button aria-label="Back to top" id="scrollTopBtn"><span class="material-symbols-outlined">arrow_upward</span></button>
 <script>
-// Handle both absolute URLs (legacy data) and relative /uploads/... paths (new uploads)
-const BACKEND_BASE_CL = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
-  ? 'http://localhost:5000'
-  : 'https://bnr-backend-93y5.onrender.com';
+// BACKEND_BASE and resolveImageUrl() are provided by js/api.js (loaded above).
 
 function renderClientCard(client) {
-  const logoSrc = client.logo
-    ? (client.logo.startsWith('http') ? client.logo : BACKEND_BASE_CL + client.logo)
-    : '';
+  const logoSrc = resolveImageUrl(client.logo);
   if (!logoSrc) {
     return `<div class="client-card">
       <div style="width:60px;height:60px;background:rgba(20,75,184,0.1);border-radius:0.75rem;display:flex;align-items:center;justify-content:center;">

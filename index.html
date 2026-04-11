@@ -1273,7 +1273,7 @@ const STATIC_CLIENT_LOGOS = [
     wrap.addEventListener('mouseover', () => { wrap.style.opacity='1'; wrap.style.filter='grayscale(0%)'; });
     wrap.addEventListener('mouseleave', () => { wrap.style.opacity='0.55'; wrap.style.filter='grayscale(100%)'; });
     wrap.innerHTML = src.slice(0, 6).map(c => c.logo
-      ? `<img src="${c.logo}" alt="${c.name}" style="max-height:48px;max-width:130px;object-fit:contain;" onerror="this.style.display='none'">`
+      ? `<img src="${resolveImageUrl(c.logo)}" alt="${c.name}" style="max-height:48px;max-width:130px;object-fit:contain;" onerror="this.style.display='none'">`
       : ''
     ).join('');
   } catch {

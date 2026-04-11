@@ -37,8 +37,9 @@ router.post('/', quoteRules, validate, async (req, res) => {
     const quote = new Quote({ name, company, email, phone, projectType, location, budget, description });
     await quote.save();
 
-    // Send email notification (non-blocking, errors are logged not thrown)
-    await sendMail({
+    // Send email notification — fire-and-forget so SMTP errors never
+    // cause a 500 response to the user (the DB record is already saved).
+    sendMail({
       subject: `📋 New Quote Request from ${name}`,
       html: `
         <h2 style="color:#1a3a5c;">New Quote Request</h2>
@@ -54,7 +55,7 @@ router.post('/', quoteRules, validate, async (req, res) => {
         </table>
         <p style="color:#888;font-size:12px;margin-top:16px;">Submitted via BNR Infrastructure website</p>
       `,
-    });
+    }).catch(mailErr => console.error('Quote mail error (non-fatal):', mailErr.message));
 
     res.status(201).json({ success: true, message: 'Quote request submitted! Our team will contact you within 24 hours.' });
   } catch (err) {

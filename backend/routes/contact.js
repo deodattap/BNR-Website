@@ -32,8 +32,9 @@ router.post('/', contactRules, validate, async (req, res) => {
     const contact = new Contact({ name, email, phone, projectType, message });
     await contact.save();
 
-    // Send email notification (non-blocking, errors are logged not thrown)
-    await sendMail({
+    // Send email notification — fire-and-forget so SMTP errors never
+    // cause a 500 response to the user (the DB record is already saved).
+    sendMail({
       subject: `📩 New Contact Message from ${name}`,
       html: `
         <h2 style="color:#1a3a5c;">New Contact Form Submission</h2>
@@ -46,7 +47,7 @@ router.post('/', contactRules, validate, async (req, res) => {
         </table>
         <p style="color:#888;font-size:12px;margin-top:16px;">Submitted via BNR Infrastructure website</p>
       `,
-    });
+    }).catch(mailErr => console.error('Contact mail error (non-fatal):', mailErr.message));
 
     res.status(201).json({ success: true, message: 'Message received! We will get back to you within 24 hours.' });
   } catch (err) {
