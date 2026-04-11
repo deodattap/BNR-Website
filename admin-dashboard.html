@@ -286,25 +286,19 @@ tr:hover td{background:var(--sl50);}
   <div class="modal">
     <button class="btn-close-modal" onclick="closeModal('project')">&times;</button>
     <h3>Add New Project</h3>
-    <!-- onsubmit=false: absolute guard — no native submission under any circumstance -->
-    <form id="projectForm" onsubmit="return false;" autocomplete="off">
+    <div id="projectForm">
       <div class="fg">
         <label>Project Title <span style="color:#dc2626;">*</span></label>
-        <!-- No `required` — we validate manually to avoid browser constraint-validation side-effects -->
-        <input type="text" id="projTitle" name="title" placeholder="e.g. National Highway Widening">
+        <input type="text" id="projTitle" placeholder="e.g. National Highway Widening">
       </div>
       <div class="fg">
         <label>Description</label>
-        <textarea id="projDesc" name="description" placeholder="Brief project description..."></textarea>
+        <textarea id="projDesc" placeholder="Brief project description..."></textarea>
       </div>
       <div class="fg">
         <label>Project Image</label>
         <div style="display:flex;flex-direction:column;gap:0.5rem;">
-          <!-- type=text, NO name attr — keeps it out of FormData/reset, we read by id -->
-          <input type="text" id="projImageUrl" placeholder="Paste image URL, or upload below..."
-            oninput="previewImg(this,'projImgPrev')"
-            style="width:100%;padding:0.75rem 1rem;border:1.5px solid var(--sl200);border-radius:0.625rem;font-family:'Inter',sans-serif;font-size:0.9375rem;color:var(--sl900);outline:none;background:var(--bg);">
-          <div style="display:flex;align-items:center;gap:0.75rem;margin-top:0.25rem;">
+          <div style="display:flex;align-items:center;gap:0.75rem;">
             <label for="projImageFile"
               style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.5rem 1rem;background:var(--sl100);border:1.5px solid var(--sl200);border-radius:0.5rem;cursor:pointer;font-size:0.8125rem;font-weight:600;color:var(--sl700);transition:all 0.2s;margin:0;"
               onmouseover="this.style.borderColor='var(--primary)';this.style.color='var(--primary)'"
@@ -313,21 +307,21 @@ tr:hover td{background:var(--sl50);}
               Upload Image
             </label>
             <input type="file" id="projImageFile" accept="image/*" style="display:none;"
-              onchange="handleProjectImageUpload(this)">
+              onchange="handleProjectImageSelect(this)">
             <span id="projUploadStatus" style="font-size:0.8125rem;color:var(--sl500);"></span>
           </div>
           <img id="projImgPrev" class="img-preview" alt="Preview">
         </div>
       </div>
       <div class="fg"><label>Category</label>
-        <select id="projCategory" name="category">
+        <select id="projCategory">
           <option>Highway &amp; Roads</option><option>Bridge Engineering</option><option>Urban Transit</option>
           <option>Industrial</option><option>Railway</option><option>Water Infrastructure</option>
         </select>
       </div>
       <div class="row-2">
-        <div class="fg"><label>Location</label><input type="text" id="projLocation" name="location" placeholder="City, State"></div>
-        <div class="fg"><label>Year</label><input type="text" id="projYear" name="year" placeholder="2024"></div>
+        <div class="fg"><label>Location</label><input type="text" id="projLocation" placeholder="City, State"></div>
+        <div class="fg"><label>Year</label><input type="text" id="projYear" placeholder="2024"></div>
       </div>
       <div class="modal-actions">
         <button type="button" class="btn-sm btn-sec" onclick="closeModal('project')">Cancel</button>
@@ -335,7 +329,7 @@ tr:hover td{background:var(--sl50);}
           <span class="material-symbols-outlined">save</span> Save Project
         </button>
       </div>
-    </form>
+    </div>
   </div>
 </div>
 
@@ -496,6 +490,11 @@ document.querySelectorAll('.modal-overlay').forEach(function (overlay) {
     if (_downOnOverlay && e.target === overlay) overlay.classList.remove('open');
     _downOnOverlay = false;
   });
+  // Belt-and-suspenders: stop any click inside .modal from ever reaching the overlay handler
+  var inner = overlay.querySelector('.modal');
+  if (inner) {
+    inner.addEventListener('click', function (e) { e.stopPropagation(); });
+  }
 });
 
 // ── IMAGE PREVIEW ──
@@ -512,61 +511,17 @@ function previewImg(input, previewId) {
 
 // BACKEND_BASE and resolveImageUrl() are provided by js/api.js (loaded above).
 
-// Tracks whether an image upload is currently in flight
-let _uploadInProgress = false;
-
-// ── FILE UPLOAD FOR PROJECT IMAGE ────────────────────────────────────────────
-// Plain (non-async) function — uses .then() chains so it never returns a Promise
-// that could confuse any submit-event path.
-function handleProjectImageUpload(input) {
-  console.log('[BNR] Upload started');
-  if (!input.files || !input.files[0]) return;
-
+// ── FILE SELECT FOR PROJECT IMAGE (preview only — upload happens on Save) ────
+function handleProjectImageSelect(input) {
+  const prev     = document.getElementById('projImgPrev');
   const statusEl = document.getElementById('projUploadStatus');
-  const urlInput = document.getElementById('projImageUrl');
-  const prevImg  = document.getElementById('projImgPrev');
-  const saveBtn  = document.getElementById('projSaveBtn');
-
-  _uploadInProgress = true;
-  if (saveBtn) { saveBtn.disabled = true; saveBtn.style.opacity = '0.55'; }
-  statusEl.textContent = 'Uploading\u2026';
+  if (!input.files || !input.files[0]) return;
+  const objectUrl = URL.createObjectURL(input.files[0]);
+  prev.src           = objectUrl;
+  prev.style.display = 'block';
+  prev.onerror       = function() { prev.style.display = 'none'; };
+  statusEl.textContent = input.files[0].name;
   statusEl.style.color = 'var(--sl500)';
-
-  const fd = new FormData();
-  fd.append('image', input.files[0]);
-
-  fetch(API_BASE + '/upload', {
-    method: 'POST',
-    headers: { 'Authorization': 'Bearer ' + getToken() },
-    body: fd
-  })
-  .then(function(r) { return r.json(); })
-  .then(function(data) {
-    if (data.success && data.url) {
-      var fullUrl = resolveImageUrl(data.url);
-      urlInput.value        = fullUrl;
-      prevImg.src           = fullUrl;
-      prevImg.style.display = 'block';
-      prevImg.onerror       = function() { prevImg.style.display = 'none'; };
-      statusEl.textContent  = '\u2713 Uploaded';
-      statusEl.style.color  = '#16a34a';
-      console.log('[BNR] Upload completed:', fullUrl);
-    } else {
-      statusEl.textContent = data.error || 'Upload failed';
-      statusEl.style.color = '#dc2626';
-      urlInput.value = '';
-    }
-  })
-  .catch(function(err) {
-    statusEl.textContent = 'Network error \u2014 upload failed';
-    statusEl.style.color = '#dc2626';
-    urlInput.value = '';
-    console.error('[BNR] Upload error:', err);
-  })
-  .finally(function() {
-    _uploadInProgress = false;
-    if (saveBtn) { saveBtn.disabled = false; saveBtn.style.opacity = ''; }
-  });
 }
 
 // ── FORMAT DATE ──────────────────────────────────────────────────────────────
@@ -598,110 +553,105 @@ async function loadProjects() {
   }).join('');
 }
 
-// ═══════════════════════════════════════════════════════════════════════════════
-// doProjectSave — complete, self-contained project save handler
-// Called ONLY from the Save button's onclick. No form submit events involved.
+// ── doProjectSave: mirrors doClientSave — upload + save in one flow ──────────
 async function doProjectSave() {
-  console.log('[BNR] ── doProjectSave START ──');
+  console.log('[BNR] PROJECT SAVE START');
 
-  // ── Guard: block if file upload is still in progress ──
-  if (_uploadInProgress) {
-    showToast('Please wait \u2014 image upload is still in progress.', 'info');
-    return;
-  }
+  const titleInput = document.getElementById('projTitle');
+  const fileInput  = document.getElementById('projImageFile');
+  const statusEl   = document.getElementById('projUploadStatus');
+  const saveBtn    = document.getElementById('projSaveBtn');
 
-  // ── Read all field values by ID (never via form.elements, immune to form state) ──
-  var title       = (document.getElementById('projTitle')    || {value:''}).value.trim();
-  var description = (document.getElementById('projDesc')     || {value:''}).value.trim();
-  var image       = (document.getElementById('projImageUrl') || {value:''}).value.trim();
-  var category    = (document.getElementById('projCategory') || {value:''}).value.trim();
-  var location    = (document.getElementById('projLocation') || {value:''}).value.trim();
-  var year        = (document.getElementById('projYear')     || {value:''}).value.trim();
+  const title       = titleInput ? titleInput.value.trim() : '';
+  const description = (document.getElementById('projDesc')     || {value:''}).value.trim();
+  const category    = (document.getElementById('projCategory') || {value:''}).value.trim();
+  const location    = (document.getElementById('projLocation') || {value:''}).value.trim();
+  const year        = (document.getElementById('projYear')     || {value:''}).value.trim();
+  const file        = fileInput && fileInput.files && fileInput.files[0];
 
-  console.log('[BNR] Fields:', { title, category, location, year, image: image ? '(set)' : '(empty)' });
-
-  // ── Validate ──
   if (!title) {
     showToast('Project title is required.', 'error');
-    document.getElementById('projTitle').focus();
+    if (titleInput) titleInput.focus();
     return;
   }
 
-  // ── Disable button and show spinner ──
-  var saveBtn  = document.getElementById('projSaveBtn');
-  var origHTML = saveBtn.innerHTML;
+  // Disable button, show spinner
+  const origHTML = saveBtn.innerHTML;
   saveBtn.disabled      = true;
   saveBtn.style.opacity = '0.6';
-  saveBtn.innerHTML     = '<span class="material-symbols-outlined" style="font-size:1rem;animation:spin 1s linear infinite">progress_activity</span> Saving\u2026';
+  saveBtn.innerHTML     = '<span class="material-symbols-outlined" style="font-size:1rem;animation:spin 1s linear infinite">progress_activity</span> Uploading\u2026';
 
   try {
-    console.log('[BNR] Calling createProject API...');
-    var res = await createProject({
-      title:       title,
-      description: description,
-      image:       image,
-      category:    category,
-      location:    location,
-      year:        year
-    });
-    console.log('[BNR] API response:', res);
+    let imageUrl = '';
+
+    // 1. Upload image if a file was selected
+    if (file) {
+      console.log('[BNR] PROJECT UPLOAD START');
+      statusEl.textContent = 'Uploading\u2026';
+      statusEl.style.color = 'var(--sl500)';
+
+      const fd = new FormData();
+      fd.append('image', file);
+
+      const upRes  = await fetch(API_BASE + '/upload', {
+        method: 'POST',
+        headers: { 'Authorization': 'Bearer ' + getToken() },
+        body: fd
+      });
+      const upData = await upRes.json();
+      console.log('[BNR] PROJECT UPLOAD DONE', upData);
+
+      if (!upData.success || !upData.url) {
+        const err = upData.error || 'Image upload failed.';
+        statusEl.textContent = err;
+        statusEl.style.color = '#dc2626';
+        showToast(err, 'error');
+        return;
+      }
+
+      imageUrl = resolveImageUrl(upData.url);
+      statusEl.textContent = '\u2713 Uploaded';
+      statusEl.style.color = '#16a34a';
+    }
+
+    // 2. Save project via API
+    saveBtn.innerHTML = '<span class="material-symbols-outlined" style="font-size:1rem;animation:spin 1s linear infinite">progress_activity</span> Saving\u2026';
+    console.log('[BNR] PROJECT SAVE posting:', { title, category, location, year });
+
+    const res = await createProject({ title, description, image: imageUrl, category, location, year });
+    console.log('[BNR] PROJECT SAVE DONE', res);
 
     if (res && (res.success || res.project || res._id)) {
-      // ── SUCCESS ──
-      console.log('[BNR] Project saved successfully');
       showToast('Project added successfully!');
+
+      // 3. Reset and close modal
+      closeModal('project');
+      if (titleInput) titleInput.value = '';
+      document.getElementById('projDesc').value           = '';
+      document.getElementById('projCategory').selectedIndex = 0;
+      document.getElementById('projLocation').value       = '';
+      document.getElementById('projYear').value           = '';
+      document.getElementById('projImgPrev').style.display    = 'none';
+      document.getElementById('projImgPrev').src              = '';
+      document.getElementById('projUploadStatus').textContent = '';
+      if (fileInput) fileInput.value = '';
+
+      // 4. Refresh table
       updateStatCount('statProj', 1);
-
-      // Restore button immediately so modal close looks clean
-      saveBtn.disabled      = false;
-      saveBtn.style.opacity = '';
-      saveBtn.innerHTML     = origHTML;
-
-      // Close modal first, THEN clear fields (avoids visible flash of empty form)
-      setTimeout(function () {
-        closeModal('project');
-        // Reset fields by ID — not form.reset() which can behave inconsistently
-        document.getElementById('projTitle').value          = '';
-        document.getElementById('projDesc').value           = '';
-        document.getElementById('projImageUrl').value       = '';
-        document.getElementById('projCategory').selectedIndex = 0;
-        document.getElementById('projLocation').value       = '';
-        document.getElementById('projYear').value           = '';
-        document.getElementById('projImgPrev').style.display     = 'none';
-        document.getElementById('projUploadStatus').textContent  = '';
-        var fi = document.getElementById('projImageFile');
-        if (fi) fi.value = '';
-        // Reload the table to reflect the new project
-        loadProjects();
-      }, 1200); // 1.2s — enough time to read the success toast
+      await loadProjects();
 
     } else {
-      // ── API returned an error ──
-      console.warn('[BNR] API error:', res);
-      showToast(res.error || 'Save failed \u2014 is the database connected?', 'error');
-      saveBtn.disabled      = false;
-      saveBtn.style.opacity = '';
-      saveBtn.innerHTML     = origHTML;
+      showToast((res && res.error) || 'Save failed. Is MongoDB connected?', 'error');
     }
 
   } catch (err) {
-    // ── Network / parse error ──
-    console.error('[BNR] Network error:', err);
-    showToast('Network error \u2014 project not saved. Check your connection.', 'error');
+    console.error('[BNR] Project save error:', err);
+    showToast('Network error \u2014 project not saved.', 'error');
+  } finally {
     saveBtn.disabled      = false;
     saveBtn.style.opacity = '';
     saveBtn.innerHTML     = origHTML;
   }
-
-  console.log('[BNR] ── doProjectSave END ──');
-}
-
-// submitProject: legacy backstop — not called by any current UI element
-function submitProject(e) {
-  if (e && e.preventDefault)  e.preventDefault();
-  if (e && e.stopPropagation) e.stopPropagation();
-  doProjectSave();
-  return false;
 }
 async function delProject(id) {
   confirmDelete('Delete this project? This cannot be undone.', async () => {
@@ -1150,20 +1100,12 @@ loadCareers();
   if (qts.length > 0)  { const b = document.getElementById('qtBadge');  b.style.display='inline'; b.textContent=qts.length; }
   if (apps.length > 0) { const b = document.getElementById('appBadge'); b.style.display='inline'; b.textContent=apps.length; }
 })();
-// ── Form submit guards (attached immediately — DOM is ready at this point) ────
-// These are safety nets only. All real submit logic goes through onclick handlers.
+// ── Form submit guard ────────────────────────────────────────────────────────
 (function attachFormGuards() {
-  var pf = document.getElementById('projectForm');
-  if (pf) pf.addEventListener('submit', function(e) {
-    e.preventDefault(); e.stopPropagation();
-    console.warn('[BNR] projectForm submit event blocked by guard');
-    return false;
-  });
   var cf = document.getElementById('careerForm');
   if (cf) cf.addEventListener('submit', function(e) {
     e.preventDefault(); e.stopPropagation();
     console.warn('[BNR] careerForm submit event blocked by guard');
-    return false;
   });
 }());
 </script>
